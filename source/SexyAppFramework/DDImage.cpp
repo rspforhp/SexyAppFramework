@@ -1,5 +1,5 @@
+#include "AutoCrit.h"
 #include "DDImage.h"
-#include <Math.h>
 #include "DDInterface.h"
 #include "D3DInterface.h"
 #include "Rect.h"
@@ -7,6 +7,8 @@
 #include "SexyAppBase.h"
 #include "Debug.h"
 #include "PerfTimer.h"
+
+#include <Math.h>
 
 #pragma warning(disable:4005) // macro redefinition
 #pragma warning(disable:4244) // conversion possible loss of data

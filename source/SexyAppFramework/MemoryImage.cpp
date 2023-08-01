@@ -7,6 +7,8 @@
 #include "Quantize.h"
 #include "PerfTimer.h"
 #include "SWTri.h"
+#include "DDInterface.h"
+#include "D3DInterface.h"
 
 #include <math.h>
 

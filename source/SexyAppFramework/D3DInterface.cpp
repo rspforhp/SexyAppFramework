@@ -1,3 +1,4 @@
+#include "AutoCrit.h"
 #include "D3DInterface.h"
 #include "DDInterface.h"
 #include "Graphics.h"
@@ -5,6 +6,7 @@
 #include "SexyMatrix.h"
 #include "SexyAppBase.h"
 #include "TriVertex.h"
+
 #include <assert.h>
 #include <algorithm>
 

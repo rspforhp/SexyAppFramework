@@ -3,6 +3,7 @@
 #include "DirectXErrorString.h"
 #include "Common.h"
 #include "D3DInterface.h"
+#include "DDInterface.h"
 #include "SexyAppBase.h"
 
 

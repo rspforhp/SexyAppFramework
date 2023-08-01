@@ -4,8 +4,10 @@
 #include "Graphics.h"
 #include "ImageFont.h"
 #include "MemoryImage.h"
+#include "DDInterface.h"
 #include "D3DInterface.h"
 #include "WidgetManager.h"
+
 #include <stdlib.h>
 
 using namespace Sexy;

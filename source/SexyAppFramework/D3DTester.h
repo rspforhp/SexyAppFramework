@@ -1,8 +1,11 @@
 #ifndef __D3DTESTER_H__
 #define __D3DTESTER_H__
+
 #include <d3d.h>
 #include <exception>
 #include <string>
+#include <windows.h>
+#include <stdio.h>
 
 namespace Sexy
 {
