@@ -579,7 +579,6 @@
     <ClCompile Include="..\ImageLib\jpeg\jcmaster.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcomapi.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcparam.c" />
-    <ClCompile Include="..\ImageLib\jpeg\jcphuff.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcprepct.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcsample.c" />
     <ClCompile Include="..\ImageLib\jpeg\jctrans.c" />
@@ -596,7 +595,6 @@
     <ClCompile Include="..\ImageLib\jpeg\jdmarker.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdmaster.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdmerge.c" />
-    <ClCompile Include="..\ImageLib\jpeg\jdphuff.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdpostct.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdsample.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdtrans.c" />
@@ -607,7 +605,6 @@
     <ClCompile Include="..\ImageLib\jpeg\jidctflt.c" />
     <ClCompile Include="..\ImageLib\jpeg\jidctfst.c" />
     <ClCompile Include="..\ImageLib\jpeg\jidctint.c" />
-    <ClCompile Include="..\ImageLib\jpeg\jidctred.c" />
     <ClCompile Include="..\ImageLib\jpeg\jmemmgr.c" />
     <ClCompile Include="..\ImageLib\jpeg\jmemnobs.c" />
     <ClCompile Include="..\ImageLib\jpeg\jquant1.c" />
@@ -1439,10 +1436,8 @@
     </CustomBuild>
     <ClInclude Include="..\ImageLib\jpeg\cderror.h" />
     <ClInclude Include="..\ImageLib\jpeg\cdjpeg.h" />
-    <ClInclude Include="..\ImageLib\jpeg\jchuff.h" />
     <ClInclude Include="..\ImageLib\jpeg\jconfig.h" />
     <ClInclude Include="..\ImageLib\jpeg\jdct.h" />
-    <ClInclude Include="..\ImageLib\jpeg\jdhuff.h" />
     <ClInclude Include="..\ImageLib\jpeg\jerror.h" />
     <ClInclude Include="..\ImageLib\jpeg\jinclude.h" />
     <ClInclude Include="..\ImageLib\jpeg\jmemsys.h" />

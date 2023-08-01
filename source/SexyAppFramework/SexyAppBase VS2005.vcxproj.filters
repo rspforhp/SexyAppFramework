@@ -198,9 +198,6 @@
     <ClCompile Include="..\ImageLib\jpeg\jcparam.c">
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
-    <ClCompile Include="..\ImageLib\jpeg\jcphuff.c">
-      <Filter>ImageLib\JPEG</Filter>
-    </ClCompile>
     <ClCompile Include="..\ImageLib\jpeg\jcprepct.c">
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
@@ -249,9 +246,6 @@
     <ClCompile Include="..\ImageLib\jpeg\jdmerge.c">
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
-    <ClCompile Include="..\ImageLib\jpeg\jdphuff.c">
-      <Filter>ImageLib\JPEG</Filter>
-    </ClCompile>
     <ClCompile Include="..\ImageLib\jpeg\jdpostct.c">
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
@@ -280,9 +274,6 @@
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
     <ClCompile Include="..\ImageLib\jpeg\jidctint.c">
-      <Filter>ImageLib\JPEG</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ImageLib\jpeg\jidctred.c">
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
     <ClCompile Include="..\ImageLib\jpeg\jmemmgr.c">
@@ -729,16 +720,10 @@
     <ClInclude Include="..\ImageLib\jpeg\cdjpeg.h">
       <Filter>ImageLib\JPEG</Filter>
     </ClInclude>
-    <ClInclude Include="..\ImageLib\jpeg\jchuff.h">
-      <Filter>ImageLib\JPEG</Filter>
-    </ClInclude>
     <ClInclude Include="..\ImageLib\jpeg\jconfig.h">
       <Filter>ImageLib\JPEG</Filter>
     </ClInclude>
     <ClInclude Include="..\ImageLib\jpeg\jdct.h">
-      <Filter>ImageLib\JPEG</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ImageLib\jpeg\jdhuff.h">
       <Filter>ImageLib\JPEG</Filter>
     </ClInclude>
     <ClInclude Include="..\ImageLib\jpeg\jerror.h">
