@@ -185,7 +185,7 @@ bool DSoundManager::LoadWAVSound(unsigned int theSfxID, const std::string& theFi
 
 	fp = p_fopen(theFilename.c_str(), "rb");
 
-	if (fp <= 0)
+	if (fp == nullptr)
 		return false;	
 
 	char aChunkType[5];	
@@ -193,12 +193,12 @@ bool DSoundManager::LoadWAVSound(unsigned int theSfxID, const std::string& theFi
 	ulong aChunkSize;
 
 	p_fread(aChunkType, 1, 4, fp);	
-	if (!strcmp(aChunkType, "RIFF") == 0)
+	if (~strcmp(aChunkType, "RIFF") == 0)
 		return false;
 	p_fread(&aChunkSize, 4, 1, fp);
 
 	p_fread(aChunkType, 1, 4, fp);	
-	if (!strcmp(aChunkType, "WAVE") == 0)
+	if (~strcmp(aChunkType, "WAVE") == 0)
 		return false;
 
 	ushort aBitCount = 16;
@@ -552,13 +552,13 @@ bool DSoundManager::LoadAUSound(unsigned int theSfxID, const std::string& theFil
 
 	fp = p_fopen(theFilename.c_str(), "rb");	
 
-	if (fp <= 0)
+	if (fp == nullptr)
 		return false;	
 
 	char aHeaderId[5];	
 	aHeaderId[4] = '\0';	
 	p_fread(aHeaderId, 1, 4, fp);	
-	if (!strcmp(aHeaderId, ".snd") == 0)
+	if (~strcmp(aHeaderId, ".snd") == 0)
 		return false;
 
 	ulong aHeaderSize;	
@@ -865,7 +865,7 @@ bool DSoundManager::WriteWAV(unsigned int theSfxID, const std::string& theFilena
 	FILE* fp;
 	fp = fopen(theFilename.c_str(), "wb");
 
-	if (fp <= 0)
+	if (fp == nullptr)
 	{
 		mSourceSounds[theSfxID]->Unlock(lpvPtr, dwBytes, NULL, NULL);
 		return false;

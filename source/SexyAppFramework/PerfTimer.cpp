@@ -277,12 +277,14 @@ void SexyPerf::EndPerf()
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-void SexyPerf::StartTiming(const char *theName)
+void SexyPerf::StartTiming(const char* theName)
 {
+	PerfRecord aRecord = PerfRecord(theName, true);
+
 	if(gPerfOn)
 	{
 		++gStartCount;
-		PushPerfRecord(PerfRecord(theName,true));
+		PushPerfRecord(aRecord);
 	}
 }
 
@@ -291,9 +293,11 @@ void SexyPerf::StartTiming(const char *theName)
 ///////////////////////////////////////////////////////////////////////////////
 void SexyPerf::StopTiming(const char *theName)
 {
+	PerfRecord aRecord = PerfRecord(theName, true);
+
 	if(gPerfOn)
 	{
-		PushPerfRecord(PerfRecord(theName,false));
+		PushPerfRecord(aRecord);
 		if(--gStartCount==0)
 			CollatePerfRecords();
 	}

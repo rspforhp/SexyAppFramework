@@ -37,7 +37,7 @@ public:
 	static void EndPerf();
 	static bool IsPerfOn();
 
-	static void StartTiming(const char *theName);
+	static void StartTiming(const char* theName);
 	static void StopTiming(const char *theName);
 
 	static std::string GetResults();
