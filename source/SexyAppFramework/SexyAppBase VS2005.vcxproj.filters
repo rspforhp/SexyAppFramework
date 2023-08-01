@@ -658,6 +658,48 @@
       <Filter>PakLib</Filter>
     </ClCompile>
     <ClCompile Include="SexyAppBase.cpp" />
+    <ClCompile Include="..\ImageLib\jpeg\jaricom.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jdarith.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\cjpeg.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\cjpegalt.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\ckconfig.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\djpeg.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\djpegalt.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\example.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jcarith.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jmemansi.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jmemname.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jpegtran.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\rdjpgcom.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\wrjpgcom.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h">
@@ -1055,6 +1097,9 @@
     </None>
     <None Include="MI_SlowStretchBlt.inc">
       <Filter>Graphics\Inc Routines</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jmemdosa.asm">
+      <Filter>ImageLib\JPEG</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

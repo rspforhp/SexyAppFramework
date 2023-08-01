@@ -567,8 +567,16 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\ImageLib\jpeg\cdjpeg.c" />
+    <ClCompile Include="..\ImageLib\jpeg\cjpeg.c" />
+    <ClCompile Include="..\ImageLib\jpeg\cjpegalt.c" />
+    <ClCompile Include="..\ImageLib\jpeg\ckconfig.c" />
+    <ClCompile Include="..\ImageLib\jpeg\djpeg.c" />
+    <ClCompile Include="..\ImageLib\jpeg\djpegalt.c" />
+    <ClCompile Include="..\ImageLib\jpeg\example.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jaricom.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcapimin.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcapistd.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jcarith.c" />
     <ClCompile Include="..\ImageLib\jpeg\jccoefct.c" />
     <ClCompile Include="..\ImageLib\jpeg\jccolor.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcdctmgr.c" />
@@ -584,6 +592,7 @@
     <ClCompile Include="..\ImageLib\jpeg\jctrans.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdapimin.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdapistd.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jdarith.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdatadst.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdatasrc.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdcoefct.c" />
@@ -605,14 +614,18 @@
     <ClCompile Include="..\ImageLib\jpeg\jidctflt.c" />
     <ClCompile Include="..\ImageLib\jpeg\jidctfst.c" />
     <ClCompile Include="..\ImageLib\jpeg\jidctint.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jmemansi.c" />
     <ClCompile Include="..\ImageLib\jpeg\jmemmgr.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jmemname.c" />
     <ClCompile Include="..\ImageLib\jpeg\jmemnobs.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jpegtran.c" />
     <ClCompile Include="..\ImageLib\jpeg\jquant1.c" />
     <ClCompile Include="..\ImageLib\jpeg\jquant2.c" />
     <ClCompile Include="..\ImageLib\jpeg\jutils.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdbmp.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdcolmap.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdgif.c" />
+    <ClCompile Include="..\ImageLib\jpeg\rdjpgcom.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdppm.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdrle.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdswitch.c" />
@@ -620,6 +633,7 @@
     <ClCompile Include="..\ImageLib\jpeg\transupp.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrbmp.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrgif.c" />
+    <ClCompile Include="..\ImageLib\jpeg\wrjpgcom.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrppm.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrrle.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrtarga.c" />
@@ -1551,6 +1565,7 @@
     <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\ImageLib\jpeg\jmemdosa.asm" />
     <None Include="BltRotatedHelper.inc" />
     <None Include="DDI_Additive.inc" />
     <None Include="DDI_AlphaBlt.inc" />
