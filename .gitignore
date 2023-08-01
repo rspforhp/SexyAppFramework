@@ -332,6 +332,9 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# Mapping file
+*.map
+
 # OpenCover UI analysis results
 OpenCover/
 
