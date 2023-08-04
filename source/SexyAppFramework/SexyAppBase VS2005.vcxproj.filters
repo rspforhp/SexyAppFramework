@@ -144,9 +144,6 @@
     <ClCompile Include="..\ImageLib\png\pngtrans.c">
       <Filter>ImageLib\PNG</Filter>
     </ClCompile>
-    <ClCompile Include="..\ImageLib\png\pngvcrd.c">
-      <Filter>ImageLib\PNG</Filter>
-    </ClCompile>
     <ClCompile Include="..\ImageLib\png\pngwio.c">
       <Filter>ImageLib\PNG</Filter>
     </ClCompile>
@@ -753,9 +750,6 @@
     <ClInclude Include="..\ImageLib\png\png.h">
       <Filter>ImageLib\PNG</Filter>
     </ClInclude>
-    <ClInclude Include="..\ImageLib\png\pngasmrd.h">
-      <Filter>ImageLib\PNG</Filter>
-    </ClInclude>
     <ClInclude Include="..\ImageLib\png\pngconf.h">
       <Filter>ImageLib\PNG</Filter>
     </ClInclude>
@@ -1050,6 +1044,21 @@
     </ClInclude>
     <ClInclude Include="..\ImageLib\zlib\inflate.h">
       <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\png\pngdebug.h">
+      <Filter>ImageLib\PNG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\png\pnginfo.h">
+      <Filter>ImageLib\PNG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\png\pngpriv.h">
+      <Filter>ImageLib\PNG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\png\pngstruct.h">
+      <Filter>ImageLib\PNG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\png\pnglibconf.h">
+      <Filter>ImageLib\PNG</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

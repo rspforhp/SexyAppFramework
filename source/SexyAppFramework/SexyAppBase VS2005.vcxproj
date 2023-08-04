@@ -648,7 +648,6 @@
     <ClCompile Include="..\ImageLib\png\pngrutil.c" />
     <ClCompile Include="..\ImageLib\png\pngset.c" />
     <ClCompile Include="..\ImageLib\png\pngtrans.c" />
-    <ClCompile Include="..\ImageLib\png\pngvcrd.c" />
     <ClCompile Include="..\ImageLib\png\pngwio.c" />
     <ClCompile Include="..\ImageLib\png\pngwrite.c" />
     <ClCompile Include="..\ImageLib\png\pngwtran.c" />
@@ -1462,8 +1461,12 @@
     <ClInclude Include="..\ImageLib\jpeg\jversion.h" />
     <ClInclude Include="..\ImageLib\jpeg\transupp.h" />
     <ClInclude Include="..\ImageLib\png\png.h" />
-    <ClInclude Include="..\ImageLib\png\pngasmrd.h" />
     <ClInclude Include="..\ImageLib\png\pngconf.h" />
+    <ClInclude Include="..\ImageLib\png\pngdebug.h" />
+    <ClInclude Include="..\ImageLib\png\pnginfo.h" />
+    <ClInclude Include="..\ImageLib\png\pnglibconf.h" />
+    <ClInclude Include="..\ImageLib\png\pngpriv.h" />
+    <ClInclude Include="..\ImageLib\png\pngstruct.h" />
     <ClInclude Include="..\ImageLib\zlib\crc32.h" />
     <ClInclude Include="..\ImageLib\zlib\deflate.h" />
     <ClInclude Include="..\ImageLib\zlib\gzguts.h" />

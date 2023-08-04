@@ -1,19 +1,18 @@
 #define XMD_H
 
-#include <windows.h>
 #include "ImageLib.h"
 #include "png\png.h"
+#include "..\PakLib\PakInterface.h"
+
+#include <windows.h>
 #include <math.h>
 #include <tchar.h>
-#include "..\PakLib\PakInterface.h"
 
 extern "C"
 {
 #include "jpeg\jpeglib.h"
 #include "jpeg\jerror.h"
 }
-
-//#include "jpeg2000/jasper.h"
 
 using namespace ImageLib;
 
@@ -55,7 +54,7 @@ static void png_pak_read_data(png_structp png_ptr, png_bytep data, png_size_t le
 	* instead of an int, which is what fread() actually returns.
 	*/
 	check = (png_size_t)p_fread(data, (png_size_t)1, length,
-		(PFILE*)png_ptr->io_ptr);
+		(PFILE*)png_get_io_ptr(png_ptr));
 
 	if (check != length)
 	{
@@ -98,7 +97,7 @@ Image* GetPNGImage(const std::string& theFileName)
     * the normal method of doing things with libpng).  REQUIRED unless you
     * set up your own error handlers in the png_create_read_struct() earlier.
     */
-	if (setjmp(png_ptr->jmpbuf))
+	if (setjmp(png_jmpbuf(png_ptr)))
 	{
 		/* Free all of the memory associated with the png_ptr and info_ptr */
 		png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
@@ -107,10 +106,6 @@ Image* GetPNGImage(const std::string& theFileName)
 		return NULL;
 	}
 
-	//png_init_io(png_ptr, fp);
-
-	//png_ptr->io_ptr = (png_voidp)fp;
-
 	png_read_info(png_ptr, info_ptr);
 	png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type,
        &interlace_type, NULL, NULL);
@@ -118,12 +113,10 @@ Image* GetPNGImage(const std::string& theFileName)
 	/* Add filler (or alpha) byte (before/after each RGB triplet) */
 	png_set_expand(png_ptr);
 	png_set_filler(png_ptr, 0xff, PNG_FILLER_AFTER);
-	//png_set_gray_1_2_4_to_8(png_ptr);
 	png_set_palette_to_rgb(png_ptr);
 	png_set_gray_to_rgb(png_ptr);
 	png_set_bgr(png_ptr);
 
-//	int aNumBytes = png_get_rowbytes(png_ptr, info_ptr) * height / 4;
 	unsigned long* aBits = new unsigned long[width*height];
 	unsigned long* anAddr = aBits;
 	for (int i = 0; i < height; i++)
@@ -893,7 +886,7 @@ bool ImageLib::WritePNGImage(const std::string& theFileName, Image* theImage)
    // the normal method of doing things with libpng).  REQUIRED unless you
    // set up your own error handlers in the png_create_write_struct() earlier.
 
-	if (setjmp(png_ptr->jmpbuf))
+	if (setjmp(png_jmpbuf(png_ptr)))
 	{
 		// Free all of the memory associated with the png_ptr and info_ptr
 		png_destroy_write_struct(&png_ptr, &info_ptr);
@@ -915,13 +908,6 @@ bool ImageLib::WritePNGImage(const std::string& theFileName, Image* theImage)
 
 	png_set_IHDR(png_ptr, info_ptr, theImage->mWidth, theImage->mHeight, 8, PNG_COLOR_TYPE_RGB_ALPHA,
        PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
-
-	// Add filler (or alpha) byte (before/after each RGB triplet)
-	//png_set_expand(png_ptr);
-	//png_set_filler(png_ptr, 0xff, PNG_FILLER_AFTER);
-	//png_set_gray_1_2_4_to_8(png_ptr);
-	//png_set_palette_to_rgb(png_ptr);
-	//png_set_gray_to_rgb(png_ptr);
 
 	png_write_info(png_ptr, info_ptr);
 
@@ -1055,7 +1041,6 @@ METHODDEF(boolean) fill_input_buffer (j_decompress_ptr cinfo)
 	size_t nbytes;
 
 	nbytes = p_fread(src->buffer, 1, INPUT_BUF_SIZE, src->infile);
-	//((size_t) fread((void *) (buf), (size_t) 1, (size_t) (sizeofbuf), (file)))
 
 	if (nbytes <= 0) {
 		if (src->start_of_file)	/* Treat empty input file as fatal error */
