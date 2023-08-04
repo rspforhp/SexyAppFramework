@@ -342,15 +342,6 @@
     <ClCompile Include="..\ImageLib\zlib\deflate.c">
       <Filter>ImageLib\ZLIB</Filter>
     </ClCompile>
-    <ClCompile Include="..\ImageLib\zlib\gzio.c">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ImageLib\zlib\infblock.c">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ImageLib\zlib\infcodes.c">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClCompile>
     <ClCompile Include="..\ImageLib\zlib\inffast.c">
       <Filter>ImageLib\ZLIB</Filter>
     </ClCompile>
@@ -358,9 +349,6 @@
       <Filter>ImageLib\ZLIB</Filter>
     </ClCompile>
     <ClCompile Include="..\ImageLib\zlib\inftrees.c">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ImageLib\zlib\infutil.c">
       <Filter>ImageLib\ZLIB</Filter>
     </ClCompile>
     <ClCompile Include="..\ImageLib\zlib\trees.c">
@@ -700,6 +688,21 @@
     <ClCompile Include="..\ImageLib\jpeg\wrjpgcom.c">
       <Filter>ImageLib\JPEG</Filter>
     </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\gzclose.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\gzlib.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\gzread.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\gzwrite.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\infback.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h">
@@ -795,12 +798,6 @@
     <ClInclude Include="..\ImageLib\zlib\deflate.h">
       <Filter>ImageLib\ZLIB</Filter>
     </ClInclude>
-    <ClInclude Include="..\ImageLib\zlib\infblock.h">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ImageLib\zlib\infcodes.h">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClInclude>
     <ClInclude Include="..\ImageLib\zlib\inffast.h">
       <Filter>ImageLib\ZLIB</Filter>
     </ClInclude>
@@ -808,9 +805,6 @@
       <Filter>ImageLib\ZLIB</Filter>
     </ClInclude>
     <ClInclude Include="..\ImageLib\zlib\inftrees.h">
-      <Filter>ImageLib\ZLIB</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ImageLib\zlib\infutil.h">
       <Filter>ImageLib\ZLIB</Filter>
     </ClInclude>
     <ClInclude Include="..\ImageLib\zlib\trees.h">
@@ -1048,6 +1042,15 @@
       <Filter>PakLib</Filter>
     </ClInclude>
     <ClInclude Include="SexyAppBase.h" />
+    <ClInclude Include="..\ImageLib\zlib\crc32.h">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\zlib\gzguts.h">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\zlib\inflate.h">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BltRotatedHelper.inc">
