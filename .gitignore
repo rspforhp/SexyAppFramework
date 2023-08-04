@@ -365,12 +365,20 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-SexyAppFramework/Debug/
+# Shitty folder
+Debug/
 
-SexyAppFramework/Release/
+Release/
 
 DebugVS2005/
 
 ReleaseVS2005/
 
 Assets/
+
+# Archive files
+*.zip
+*.tar.xz
+*.tar.gz
+*.rar
+*.7z
