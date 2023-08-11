@@ -2,6 +2,10 @@
 #include <windows.h>
 #include <direct.h>
 
+#include "../SexyAppFramework/SexyAppBase.h"
+
+using namespace Sexy;
+
 typedef unsigned char uchar;
 typedef unsigned short ushort;
 typedef unsigned long ulong;
@@ -67,7 +71,7 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 	aPakCollection->mMappingHandle = aFileMapping;
 	aPakCollection->mDataPtr = aPtr;
 	
-	PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(StringToUpper(theFileName), PakRecord())).first;
+	PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(Sexy::StringToUpper(theFileName), PakRecord())).first;
 	PakRecord* aPakRecord = &(aRecordItr->second);
 	aPakRecord->mCollection = aPakCollection;
 	aPakRecord->mFileName = theFileName;
@@ -116,7 +120,7 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 		FILETIME aFileTime;
 		FRead(&aFileTime, sizeof(FILETIME), 1, aFP);
 
-		PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(StringToUpper(aName), PakRecord())).first;
+		PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(Sexy::StringToUpper(aName), PakRecord())).first;
 		PakRecord* aPakRecord = &(aRecordItr->second);
 		aPakRecord->mCollection = aPakCollection;
 		aPakRecord->mFileName = aName;
