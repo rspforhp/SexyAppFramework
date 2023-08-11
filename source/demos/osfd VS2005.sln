@@ -20,6 +20,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XMLDemo", "XMLDemo\XMLDemo 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "V12Demo", "V12Demo\V12Demo VS2005.vcxproj", "{9A062D6E-B4A5-44F6-8D4D-84F19BCBF4FF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PopPak", "..\PopPak\PopPak.vcxproj", "{E619BB35-0951-47FB-9900-AEB09C3BF4C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DA08CABA-92AC-40F0-B63D-6ACE7814D600} = {DA08CABA-92AC-40F0-B63D-6ACE7814D600}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -62,6 +67,10 @@ Global
 		{9A062D6E-B4A5-44F6-8D4D-84F19BCBF4FF}.Debug|Win32.Build.0 = Debug|Win32
 		{9A062D6E-B4A5-44F6-8D4D-84F19BCBF4FF}.Release|Win32.ActiveCfg = Release|Win32
 		{9A062D6E-B4A5-44F6-8D4D-84F19BCBF4FF}.Release|Win32.Build.0 = Release|Win32
+		{E619BB35-0951-47FB-9900-AEB09C3BF4C6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E619BB35-0951-47FB-9900-AEB09C3BF4C6}.Debug|Win32.Build.0 = Debug|Win32
+		{E619BB35-0951-47FB-9900-AEB09C3BF4C6}.Release|Win32.ActiveCfg = Release|Win32
+		{E619BB35-0951-47FB-9900-AEB09C3BF4C6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
