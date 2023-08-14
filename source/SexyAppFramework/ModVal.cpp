@@ -3,23 +3,23 @@
 #include <fstream>
 
 struct ModStorage
-{		
+{
 	bool					mChanged;
-	int						mInt; 
-	double					mDouble;	
+	int						mInt;
+	double					mDouble;
 	std::string				mString;
 };
 
 struct ModPointer
 {
-	const char *mStrPtr;
+	const char* mStrPtr;
 	int mLineNum;
 
 	ModPointer() : mStrPtr(NULL), mLineNum(0) {}
-	ModPointer(const char *theStrPtr, int theLineNum) : mStrPtr(theStrPtr), mLineNum(theLineNum) {}
+	ModPointer(const char* theStrPtr, int theLineNum) : mStrPtr(theStrPtr), mLineNum(theLineNum) {}
 };
 
-typedef std::map<int,ModPointer> ModStorageMap; // stores counters
+typedef std::map<int, ModPointer> ModStorageMap; // stores counters
 
 struct FileMod
 {
@@ -34,7 +34,7 @@ typedef std::map<std::string, FileMod> FileModMap;
 
 static StringToIntMap gStringToIntMap;
 time_t gLastFileTime = 0;
-const char *gSampleString = NULL; // for finding the others
+const char* gSampleString = NULL; // for finding the others
 
 static FileModMap& GetFileModMap()
 {
@@ -42,18 +42,18 @@ static FileModMap& GetFileModMap()
 	return aMap;
 }
 
-static const char* FindFileInStringTable(const std::string &theSearch, const char *theMem, DWORD theLength, const char *theStartPos)
+static const char* FindFileInStringTable(const std::string& theSearch, const char* theMem, DWORD theLength, const char* theStartPos)
 {
-	const char *aFind = NULL;
+	const char* aFind = NULL;
 	try
 	{
-		aFind = std::search(theStartPos,theMem+theLength,theSearch.c_str(),theSearch.c_str()+theSearch.length());
-		if (aFind>=theMem+theLength)
+		aFind = std::search(theStartPos, theMem + theLength, theSearch.c_str(), theSearch.c_str() + theSearch.length());
+		if (aFind >= theMem + theLength)
 			return NULL;
 		else
 			return aFind;
 	}
-	catch(...)
+	catch (...)
 	{
 		return NULL;
 	}
@@ -61,13 +61,13 @@ static const char* FindFileInStringTable(const std::string &theSearch, const cha
 	return NULL;
 }
 
-static bool ParseModValString(std::string &theStr, int *theCounter = NULL, int *theLineNum = NULL)
+static bool ParseModValString(std::string& theStr, int* theCounter = NULL, int* theLineNum = NULL)
 {
-	int aPos = theStr.length()-1;
+	int aPos = theStr.length() - 1;
 	bool foundComma = false;
-	while (aPos>0)
+	while (aPos > 0)
 	{
-		if (!foundComma && theStr[aPos]==',')
+		if (!foundComma && theStr[aPos] == ',')
 		{
 			aPos--;
 			foundComma = true;
@@ -78,12 +78,12 @@ static bool ParseModValString(std::string &theStr, int *theCounter = NULL, int *
 			break;
 	}
 
-	if (aPos==theStr.length()-1 || aPos==0) // no number,number to erase... or empty file
+	if (aPos == theStr.length() - 1 || aPos == 0) // no number,number to erase... or empty file
 		return false;
 
 	aPos++;
 	int aCounterVal = -1, aLineNum = -1;
-	if (sscanf(theStr.c_str()+aPos,"%d,%d",&aCounterVal,&aLineNum)!=2) // couldn't parse out the numbers
+	if (sscanf(theStr.c_str() + aPos, "%d,%d", &aCounterVal, &aLineNum) != 2) // couldn't parse out the numbers
 		return false;
 
 	theStr.resize(aPos);
@@ -92,29 +92,29 @@ static bool ParseModValString(std::string &theStr, int *theCounter = NULL, int *
 	return true;
 }
 
-static bool FindModValsInMemoryHelper(const char *theMem, DWORD theLength)
+static bool FindModValsInMemoryHelper(const char* theMem, DWORD theLength)
 {
 	std::string aSearchStr = "SEXYMODVAL";
 
-	FileModMap &aMap = GetFileModMap();
+	FileModMap& aMap = GetFileModMap();
 
 	bool foundOne = false;
-	const char *aPtr = theMem;
+	const char* aPtr = theMem;
 	while (true)
 	{
-		aPtr = FindFileInStringTable(aSearchStr,theMem,theLength,aPtr);
-		if (aPtr==NULL)
+		aPtr = FindFileInStringTable(aSearchStr, theMem, theLength, aPtr);
+		if (aPtr == NULL)
 			break;
 
 		int aCounter, aLineNum;
-		std::string aFileName = aPtr+10; // skip SEXYMODVAL
-		if (ParseModValString(aFileName,&aCounter,&aLineNum))
+		std::string aFileName = aPtr + 10; // skip SEXYMODVAL
+		if (ParseModValString(aFileName, &aCounter, &aLineNum))
 		{
-			if (aLineNum==4105)
+			if (aLineNum == 4105)
 				_asm nop;
 
-			FileMod &aFileMod = aMap[aFileName];
-			aFileMod.mMap[aCounter] = ModPointer(aPtr-5,aLineNum);
+			FileMod& aFileMod = aMap[aFileName];
+			aFileMod.mMap[aCounter] = ModPointer(aPtr - 5, aLineNum);
 			foundOne = true;
 		}
 		aPtr++;
@@ -125,30 +125,30 @@ static bool FindModValsInMemoryHelper(const char *theMem, DWORD theLength)
 
 static void FindModValsInMemory()
 {
-	MEMORY_BASIC_INFORMATION mbi; 
-	PVOID      pvAddress = 0; 
+	MEMORY_BASIC_INFORMATION mbi;
+	PVOID      pvAddress = 0;
 
-	const char *aMem = NULL;
+	const char* aMem = NULL;
 	DWORD aMemLength = 0;
 
 	int aFound = 0;
 	int aTotal = 0;
-	memset(&mbi, 0, sizeof(MEMORY_BASIC_INFORMATION)); 
-	for (; VirtualQuery(pvAddress, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) == sizeof(MEMORY_BASIC_INFORMATION); pvAddress = ((BYTE*)mbi.BaseAddress) + mbi.RegionSize) 
-	{ 	
-		const char *anAddress = (const char*)mbi.BaseAddress;
-		if (mbi.State==MEM_COMMIT && mbi.Type==MEM_IMAGE)
+	memset(&mbi, 0, sizeof(MEMORY_BASIC_INFORMATION));
+	for (; VirtualQuery(pvAddress, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) == sizeof(MEMORY_BASIC_INFORMATION); pvAddress = ((BYTE*)mbi.BaseAddress) + mbi.RegionSize)
+	{
+		const char* anAddress = (const char*)mbi.BaseAddress;
+		if (mbi.State == MEM_COMMIT && mbi.Type == MEM_IMAGE)
 		{
 			aTotal++;
-			if (aMem!=NULL && aMem+aMemLength==anAddress) // compact these two
+			if (aMem != NULL && aMem + aMemLength == anAddress) // compact these two
 			{
 				aMemLength += mbi.RegionSize;
 				continue;
 			}
-			
-			if (aMem!=NULL) // do find in old section
+
+			if (aMem != NULL) // do find in old section
 			{
-				if (FindModValsInMemoryHelper(aMem,aMemLength))
+				if (FindModValsInMemoryHelper(aMem, aMemLength))
 				{
 					aFound++;
 					return;
@@ -160,51 +160,51 @@ static void FindModValsInMemory()
 			aMem = anAddress;
 			aMemLength = mbi.RegionSize;
 		}
-	} 
+	}
 
-	if (aMem!=NULL)
+	if (aMem != NULL)
 	{
-		if (FindModValsInMemoryHelper(aMem,aMemLength))
+		if (FindModValsInMemoryHelper(aMem, aMemLength))
 			aFound++;
 	}
 }
 
 static ModStorage* CreateFileModsHelper(const char* theFileName)
 {
-	ModStorage *aModStorage = new ModStorage;
+	ModStorage* aModStorage = new ModStorage;
 	aModStorage->mChanged = false;
 
 	// Change this thinggie
 	DWORD anOldProtect;
-	VirtualProtect((LPVOID) theFileName, 5, PAGE_READWRITE, &anOldProtect);
-	*((char*) theFileName) = 0;
-	*((ModStorage**) (theFileName+1)) = aModStorage;
-	VirtualProtect((LPVOID) theFileName, 5, anOldProtect, &anOldProtect);
-	
-	return aModStorage;	
+	VirtualProtect((LPVOID)theFileName, 5, PAGE_READWRITE, &anOldProtect);
+	*((char*)theFileName) = 0;
+	*((ModStorage**)(theFileName + 1)) = aModStorage;
+	VirtualProtect((LPVOID)theFileName, 5, anOldProtect, &anOldProtect);
+
+	return aModStorage;
 }
 
 
 static ModStorage* CreateFileMods(const char* theFileName)
-{	
-	if (gSampleString==NULL)
+{
+	if (gSampleString == NULL)
 		gSampleString = theFileName;
 
-	std::string aFileName = theFileName+15; // skip SEXY_SEXYMODVAL
+	std::string aFileName = theFileName + 15; // skip SEXY_SEXYMODVAL
 	ParseModValString(aFileName);
 
-	FileModMap &aMap = GetFileModMap();
-	aMap[aFileName].mHasMods = true; 
+	FileModMap& aMap = GetFileModMap();
+	aMap[aFileName].mHasMods = true;
 
 	return CreateFileModsHelper(theFileName);
 }
 
 int Sexy::ModVal(int theAreaNum, const char* theFileName, int theInt)
-{	
+{
 	if (*theFileName != 0)
-		CreateFileMods(theFileName);	
+		CreateFileMods(theFileName);
 
-	ModStorage* aModStorage = *(ModStorage**)(theFileName+1);
+	ModStorage* aModStorage = *(ModStorage**)(theFileName + 1);
 	if (aModStorage->mChanged)
 		return aModStorage->mInt;
 	else
@@ -214,9 +214,9 @@ int Sexy::ModVal(int theAreaNum, const char* theFileName, int theInt)
 double Sexy::ModVal(int theAreaNum, const char* theFileName, double theDouble)
 {
 	if (*theFileName != 0)
-		CreateFileMods(theFileName);	
-			
-	ModStorage* aModStorage = *(ModStorage**)(theFileName+1);
+		CreateFileMods(theFileName);
+
+	ModStorage* aModStorage = *(ModStorage**)(theFileName + 1);
 	if (aModStorage->mChanged)
 		return aModStorage->mDouble;
 	else
@@ -225,15 +225,15 @@ double Sexy::ModVal(int theAreaNum, const char* theFileName, double theDouble)
 
 float Sexy::ModVal(int theAreaNum, const char* theFileName, float theFloat)
 {
-	return (float) ModVal(theAreaNum, theFileName, (double) theFloat);
+	return (float)ModVal(theAreaNum, theFileName, (double)theFloat);
 }
 
-const char*	Sexy::ModVal(int theAreaNum, const char* theFileName, const char *theStr)
+const char* Sexy::ModVal(int theAreaNum, const char* theFileName, const char* theStr)
 {
 	if (*theFileName != 0)
-		CreateFileMods(theFileName);	
+		CreateFileMods(theFileName);
 
-	ModStorage* aModStorage = *(ModStorage**)(theFileName+1);
+	ModStorage* aModStorage = *(ModStorage**)(theFileName + 1);
 	if (aModStorage->mChanged)
 		return aModStorage->mString.c_str();
 	else
@@ -241,7 +241,7 @@ const char*	Sexy::ModVal(int theAreaNum, const char* theFileName, const char *th
 }
 
 
-void Sexy::AddModValEnum(const std::string &theEnumName, int theVal)
+void Sexy::AddModValEnum(const std::string& theEnumName, int theVal)
 {
 	gStringToIntMap[theEnumName] = theVal;
 }
@@ -255,18 +255,18 @@ static bool ModStringToInteger(const char* theString, int* theIntVal)
 
 	unsigned i = 0;
 
-	if (isalpha((unsigned char)theString[i]) || theString[i]=='_') // enum
+	if (isalpha((unsigned char)theString[i]) || theString[i] == '_') // enum
 	{
-		
+
 		std::string aStr;
-		while (isalnum((unsigned char)theString[i]) || theString[i]=='_')
+		while (isalnum((unsigned char)theString[i]) || theString[i] == '_')
 		{
 			aStr += theString[i];
 			i++;
 		}
 
 		StringToIntMap::iterator anItr = gStringToIntMap.find(aStr);
-		if (anItr!=gStringToIntMap.end())
+		if (anItr != gStringToIntMap.end())
 		{
 			*theIntVal = anItr->second;
 			return true;
@@ -274,7 +274,7 @@ static bool ModStringToInteger(const char* theString, int* theIntVal)
 
 		i = 0;
 	}
-		
+
 	if (theString[i] == '-')
 	{
 		isNeg = true;
@@ -284,14 +284,14 @@ static bool ModStringToInteger(const char* theString, int* theIntVal)
 	for (;;)
 	{
 		char aChar = theString[i];
-		
+
 		if ((theRadix == 10) && (aChar >= '0') && (aChar <= '9'))
 			*theIntVal = (*theIntVal * 10) + (aChar - '0');
-		else if ((theRadix == 0x10) && 
-			(((aChar >= '0') && (aChar <= '9')) || 
-			 ((aChar >= 'A') && (aChar <= 'F')) || 
-			 ((aChar >= 'a') && (aChar <= 'f'))))
-		{			
+		else if ((theRadix == 0x10) &&
+			(((aChar >= '0') && (aChar <= '9')) ||
+				((aChar >= 'A') && (aChar <= 'F')) ||
+				((aChar >= 'a') && (aChar <= 'f'))))
+		{
 			if (aChar <= '9')
 				*theIntVal = (*theIntVal * 0x10) + (aChar - '0');
 			else if (aChar <= 'F')
@@ -316,7 +316,7 @@ static bool ModStringToInteger(const char* theString, int* theIntVal)
 		}
 
 		i++;
-	}		
+	}
 }
 
 static bool ModStringToDouble(const char* theString, double* theDoubleVal)
@@ -342,8 +342,8 @@ static bool ModStringToDouble(const char* theString, double* theDoubleVal)
 		{
 			i++;
 			break;
-		}		
-		else if ((aChar == ')') || ((aChar == 'f') && (theString[i+1] == ')'))) // At end
+		}
+		else if ((aChar == ')') || ((aChar == 'f') && (theString[i + 1] == ')'))) // At end
 		{
 			if (isNeg)
 				*theDoubleVal = -*theDoubleVal;
@@ -365,10 +365,10 @@ static bool ModStringToDouble(const char* theString, double* theDoubleVal)
 
 		if ((aChar >= '0') && (aChar <= '9'))
 		{
-			*theDoubleVal += (aChar - '0') * aMult;	
+			*theDoubleVal += (aChar - '0') * aMult;
 			aMult /= 10.0;
 		}
-		else if ((aChar == ')') || ((aChar == 'f') && (theString[i+1] == ')'))) // At end
+		else if ((aChar == ')') || ((aChar == 'f') && (theString[i + 1] == ')'))) // At end
 		{
 			if (isNeg)
 				*theDoubleVal = -*theDoubleVal;
@@ -384,18 +384,18 @@ static bool ModStringToDouble(const char* theString, double* theDoubleVal)
 	}
 }
 
-static bool ModStringToString(const char* theString, std::string &theStrVal)
+static bool ModStringToString(const char* theString, std::string& theStrVal)
 {
-	if (theString[0]!='"')
+	if (theString[0] != '"')
 		return false;
 
-	std::string &aStr = theStrVal;
+	std::string& aStr = theStrVal;
 	aStr.erase();
 
-	int i=1;
+	int i = 1;
 	while (true)
 	{
-		if (theString[i]=='\\')
+		if (theString[i] == '\\')
 		{
 			i++;
 			switch (theString[i++])
@@ -407,18 +407,18 @@ static bool ModStringToString(const char* theString, std::string &theStrVal)
 			default: return false;
 			}
 		}
-		else if (theString[i]=='"')
+		else if (theString[i] == '"')
 		{
 			i++;
 			while (isspace((unsigned char)theString[i]))
 				i++;
 
-			if (theString[i]!='"') // continued string
+			if (theString[i] != '"') // continued string
 				return true;
 			else
 				break;
 		}
-		else if (theString[i]=='\0')
+		else if (theString[i] == '\0')
 			return false;
 		else
 			aStr += theString[i++];
@@ -434,7 +434,7 @@ bool Sexy::ReparseModValues()
 		char anEXEName[256];
 		GetModuleFileNameA(NULL, anEXEName, 256);
 		gLastFileTime = GetFileDate(anEXEName);
-		
+
 		FindModValsInMemory();
 	}
 
@@ -442,15 +442,15 @@ bool Sexy::ReparseModValues()
 	std::string aFileList;
 
 	// Process each file one at a time
-	FileModMap &aMap = GetFileModMap();
+	FileModMap& aMap = GetFileModMap();
 	FileModMap::iterator aFileModItr;
 	for (aFileModItr = aMap.begin(); aFileModItr != aMap.end(); ++aFileModItr)
 	{
-		FileMod &aFileMod = aFileModItr->second;
+		FileMod& aFileMod = aFileModItr->second;
 		if (!aFileMod.mHasMods)
 			continue;
 
-		ModStorageMap &aModMap = aFileMod.mMap;
+		ModStorageMap& aModMap = aFileMod.mMap;
 		std::string aFileName = aFileModItr->first;
 
 		time_t aThisTime = GetFileDate(aFileName);
@@ -484,7 +484,7 @@ bool Sexy::ReparseModValues()
 				{
 					aLastChar = aChar;
 					aChar = aString[aCharIdx];
-					
+
 					if (aChar == '"')  // Skip strings
 					{
 						while (true)
@@ -492,13 +492,13 @@ bool Sexy::ReparseModValues()
 							aLastChar = aChar;
 							aChar = aString[++aCharIdx];
 
-							if (aChar=='\\' && aLastChar=='\\') // so we don't interpret \\" as an escaped quote
+							if (aChar == '\\' && aLastChar == '\\') // so we don't interpret \\" as an escaped quote
 								aChar = 0;
-							else if (aChar=='"' && aLastChar!='\\')
+							else if (aChar == '"' && aLastChar != '\\')
 								break;
-							else if (aChar==0)
+							else if (aChar == 0)
 							{
-								if (aLastChar=='\\') // continuation
+								if (aLastChar == '\\') // continuation
 								{
 									aCharIdx = -1;
 									aChar = 0;
@@ -506,7 +506,7 @@ bool Sexy::ReparseModValues()
 									aLineNum++;
 
 									aStream.getline(aString, 8192);
-									if (aString[0]!=0 || !aStream.eof()) // got valid new line
+									if (aString[0] != 0 || !aStream.eof()) // got valid new line
 										continue;
 								}
 
@@ -517,18 +517,18 @@ bool Sexy::ReparseModValues()
 							}
 						}
 					}
-					else if (aChar=='/') // Skip C++ comments
+					else if (aChar == '/') // Skip C++ comments
 					{
-						if (aLastChar=='/') 
+						if (aLastChar == '/')
 						{
 
 							while (true)
 							{
 								aLastChar = aChar;
 								aChar = aString[++aCharIdx];
-								if (aChar==0) // line continuation
+								if (aChar == 0) // line continuation
 								{
-									if (aLastChar=='\\') // continuation
+									if (aLastChar == '\\') // continuation
 									{
 										aCharIdx = -1;
 										aChar = 0;
@@ -536,7 +536,7 @@ bool Sexy::ReparseModValues()
 										aLineNum++;
 
 										aStream.getline(aString, 8192);
-										if (aString[0]!=0 || !aStream.eof()) // got valid new line
+										if (aString[0] != 0 || !aStream.eof()) // got valid new line
 											continue;
 									}
 									else
@@ -553,17 +553,17 @@ bool Sexy::ReparseModValues()
 							}
 						}
 					}
-					else if (aChar=='*') // skip C comments
+					else if (aChar == '*') // skip C comments
 					{
-						if (aLastChar=='/') 
+						if (aLastChar == '/')
 						{
 							while (true)
 							{
 								aLastChar = aChar;
 								aChar = aString[++aCharIdx];
-								if (aChar=='/' && aLastChar=='*')
+								if (aChar == '/' && aLastChar == '*')
 									break;
-								else if (aChar==0) // line continuation
+								else if (aChar == 0) // line continuation
 								{
 									aCharIdx = -1;
 									aChar = 0;
@@ -571,7 +571,7 @@ bool Sexy::ReparseModValues()
 									aLineNum++;
 
 									aStream.getline(aString, 8192);
-									if (aString[0]!=0 || !aStream.eof()) // got valid new line
+									if (aString[0] != 0 || !aStream.eof()) // got valid new line
 										continue;
 
 									char aStr[512];
@@ -585,27 +585,27 @@ bool Sexy::ReparseModValues()
 					else if (aChar == '(')
 					{
 						int theAreaNum = -1;
-						if ((aCharIdx >= 2) && (aString[aCharIdx-1] == 'M') &&
-							(!isalpha((unsigned char) aString[aCharIdx-2])))
+						if ((aCharIdx >= 2) && (aString[aCharIdx - 1] == 'M') &&
+							(!isalpha((unsigned char)aString[aCharIdx - 2])))
 						{
-							theAreaNum = 0;							
+							theAreaNum = 0;
 						}
-						else if ((aCharIdx >= 3) && 
-							(aString[aCharIdx-1] >= '1') && (aString[aCharIdx-1] <= '9') &&
-							(aString[aCharIdx-2] == 'M') &&
-							(!isalpha((unsigned char) aString[aCharIdx-3])))
+						else if ((aCharIdx >= 3) &&
+							(aString[aCharIdx - 1] >= '1') && (aString[aCharIdx - 1] <= '9') &&
+							(aString[aCharIdx - 2] == 'M') &&
+							(!isalpha((unsigned char)aString[aCharIdx - 3])))
 						{
-							theAreaNum = aString[aCharIdx-1] - '0';
+							theAreaNum = aString[aCharIdx - 1] - '0';
 						}
 
 						if (theAreaNum != -1)
 						{
-							while (aModMapItr!=aModMap.end() && aModMapItr->second.mLineNum<aLineNum)
+							while (aModMapItr != aModMap.end() && aModMapItr->second.mLineNum < aLineNum)
 								++aModMapItr;
 
-							if (aModMapItr!=aModMap.end() && aModMapItr->second.mLineNum==aLineNum)
+							if (aModMapItr != aModMap.end() && aModMapItr->second.mLineNum == aLineNum)
 							{
-								const char *aPtr = aModMapItr->second.mStrPtr;
+								const char* aPtr = aModMapItr->second.mStrPtr;
 								aModMapItr++;
 
 								int anIntVal = 0;
@@ -616,13 +616,13 @@ bool Sexy::ReparseModValues()
 								if ((ModStringToString(aString + aCharIdx + 1, aStrVal)) ||
 									(ModStringToInteger(aString + aCharIdx + 1, &anIntVal)) ||
 									(ModStringToDouble(aString + aCharIdx + 1, &aDoubleVal)))
-								{						
+								{
 									// We found a mod value!
 
-									if (*aPtr!=0) // have stored something here
+									if (*aPtr != 0) // have stored something here
 										CreateFileMods(aPtr);
 
-									ModStorage* aModStorage = *(ModStorage**)(aPtr+1);
+									ModStorage* aModStorage = *(ModStorage**)(aPtr + 1);
 									aModStorage->mInt = anIntVal;
 									aModStorage->mDouble = aDoubleVal;
 									aModStorage->mString = aStrVal;
@@ -654,7 +654,7 @@ bool Sexy::ReparseModValues()
 		{
 			MessageBoxA(NULL, (std::string("ERROR: Unable to open ") + aFileName + " for reparsing.").c_str(), "MODVAL ERROR!", MB_OK | MB_ICONERROR);
 			return false;
-		}		
+		}
 	}
 
 	if (!hasNewFiles)

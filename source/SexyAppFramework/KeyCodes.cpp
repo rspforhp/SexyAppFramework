@@ -13,7 +13,7 @@ typedef struct
 KeyNameEntry aKeyCodeArray[] =
 {
 	{"UNKNOWN", KEYCODE_UNKNOWN},
-	{"LBUTTON", KEYCODE_LBUTTON},	
+	{"LBUTTON", KEYCODE_LBUTTON},
 	{"RBUTTON", KEYCODE_RBUTTON},
 	{"CANCEL", KEYCODE_CANCEL},
 	{"MBUTTON", KEYCODE_MBUTTON},
@@ -98,14 +98,14 @@ KeyNameEntry aKeyCodeArray[] =
 	{"F23", KEYCODE_F23},
 	{"F24", KEYCODE_F24},
 	{"NUMLOCK", KEYCODE_NUMLOCK},
-	{"SCROLL", KEYCODE_SCROLL}	
+	{"SCROLL", KEYCODE_SCROLL}
 };
 
 KeyCode	Sexy::GetKeyCodeFromName(const std::string& theKeyName)
 {
 	char aKeyName[MAX_KEYNAME_LEN];
 
-	if (theKeyName.length() >= MAX_KEYNAME_LEN-1)
+	if (theKeyName.length() >= MAX_KEYNAME_LEN - 1)
 		return KEYCODE_UNKNOWN;
 
 	strcpy(aKeyName, theKeyName.c_str());
@@ -115,16 +115,16 @@ KeyCode	Sexy::GetKeyCodeFromName(const std::string& theKeyName)
 	{
 		unsigned char aKeyNameChar = aKeyName[0];
 
-		if ((aKeyNameChar >= (unsigned char) KEYCODE_ASCIIBEGIN) && (aKeyNameChar <= (unsigned char) KEYCODE_ASCIIEND))
-			return (KeyCode) aKeyNameChar;
+		if ((aKeyNameChar >= (unsigned char)KEYCODE_ASCIIBEGIN) && (aKeyNameChar <= (unsigned char)KEYCODE_ASCIIEND))
+			return (KeyCode)aKeyNameChar;
 
-		if ((aKeyNameChar >= ((unsigned char) KEYCODE_ASCIIBEGIN2) - 0x80) && (aKeyNameChar <= ((unsigned char) KEYCODE_ASCIIEND2) - 0x80))
-			return (KeyCode) (aKeyNameChar + 0x80);
-	}	
+		if ((aKeyNameChar >= ((unsigned char)KEYCODE_ASCIIBEGIN2) - 0x80) && (aKeyNameChar <= ((unsigned char)KEYCODE_ASCIIEND2) - 0x80))
+			return (KeyCode)(aKeyNameChar + 0x80);
+	}
 
-	for (int i = 0; i < sizeof(aKeyCodeArray)/sizeof(aKeyCodeArray[0]); i++)	
+	for (int i = 0; i < sizeof(aKeyCodeArray) / sizeof(aKeyCodeArray[0]); i++)
 		if (strcmp(aKeyName, aKeyCodeArray[i].mKeyName) == 0)
-			return aKeyCodeArray[i].mKeyCode;	
+			return aKeyCodeArray[i].mKeyCode;
 
 	return KEYCODE_UNKNOWN;
 }
@@ -133,19 +133,19 @@ const std::string Sexy::GetKeyNameFromCode(const KeyCode& theKeyCode)
 {
 	if ((theKeyCode >= KEYCODE_ASCIIBEGIN) && (theKeyCode <= KEYCODE_ASCIIEND))
 	{
-		char aStr[2] = {(char) theKeyCode, 0};
+		char aStr[2] = { (char)theKeyCode, 0 };
 		return aStr;
 	}
 
 	if ((theKeyCode >= KEYCODE_ASCIIBEGIN2) && (theKeyCode <= KEYCODE_ASCIIEND2))
 	{
-		char aStr[2] = {((unsigned char) theKeyCode) - 0x80, 0};
+		char aStr[2] = { ((unsigned char)theKeyCode) - 0x80, 0 };
 		return aStr;
 	}
 
-	for (int i = 0; i < sizeof(aKeyCodeArray)/sizeof(aKeyCodeArray[0]); i++)	
+	for (int i = 0; i < sizeof(aKeyCodeArray) / sizeof(aKeyCodeArray[0]); i++)
 		if (theKeyCode == aKeyCodeArray[i].mKeyCode)
-			return aKeyCodeArray[i].mKeyName;	
+			return aKeyCodeArray[i].mKeyName;
 
 	return "UNKNOWN";
 }

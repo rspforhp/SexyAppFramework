@@ -71,13 +71,13 @@ int enc_fwrite(const void* theData, size_t theElemSize, size_t theCount, FILE* t
 	int aPos = ftell(theFP);
 	int aPWSize = gEncryptPassword.length();
 
-	int aSize = theElemSize*theCount;
+	int aSize = theElemSize * theCount;
 	char* aBuf = new char[aSize];
 
 	// Encrypt with a key from the Password using XOR, and then increment to the 
 	// next PW Key.
 	for (int i = 0; i < aSize; i++)
-		aBuf[i] = ((char*) theData)[i] ^ gEncryptPassword[(aPos++)%aPWSize]; // post increment
+		aBuf[i] = ((char*)theData)[i] ^ gEncryptPassword[(aPos++) % aPWSize]; // post increment
 
 	int aCount = fwrite(aBuf, theElemSize, theCount, theFP);
 	delete aBuf;
@@ -101,14 +101,14 @@ void AddFiles(const std::string& theDir, const std::string& theRelDir)
 {
 	WIN32_FIND_DATA aFindFileData;
 
-	HANDLE aFindHandle = FindFirstFile((theDir + "*.*").c_str(), &aFindFileData);	
+	HANDLE aFindHandle = FindFirstFile((theDir + "*.*").c_str(), &aFindFileData);
 
-	if (aFindHandle != INVALID_HANDLE_VALUE) 
+	if (aFindHandle != INVALID_HANDLE_VALUE)
 	{
-		do 
+		do
 		{
 			std::string aFileStr = aFindFileData.cFileName;
-			if ((aFindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0)			
+			if ((aFindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0)
 			{
 				std::string aFileName = theDir + aFindFileData.cFileName;
 				std::string aRelName = theRelDir + aFindFileData.cFileName;
@@ -126,8 +126,8 @@ void AddFiles(const std::string& theDir, const std::string& theRelDir)
 
 				uchar aFlags = 0;
 				enc_fwrite(&aFlags, 1, 1, gDestFP);
-				
-				uchar aNameWidth = (uchar) aRelName.length();
+
+				uchar aNameWidth = (uchar)aRelName.length();
 				enc_fwrite(&aNameWidth, 1, 1, gDestFP);
 				enc_fwrite(aRelName.c_str(), 1, aNameWidth, gDestFP);
 
@@ -143,7 +143,7 @@ void AddFiles(const std::string& theDir, const std::string& theRelDir)
 				fclose(aSrcFP);
 			}
 			else if (aFileStr != "." && aFileStr != "..")
-			{				
+			{
 				AddFiles(theDir + aFindFileData.cFileName + "\\", theRelDir + aFindFileData.cFileName + "\\");
 			}
 
@@ -169,7 +169,7 @@ int main(int argc, char* argv[])
 	while (argc >= anArgPos + 1)
 	{
 		if (argv[anArgPos][0] == '/')
-		{			
+		{
 			if (stricmp(argv[anArgPos], "/U") == 0)
 				unpackage = true;
 			else if (stricmp(argv[anArgPos], "/P") == 0)
@@ -179,7 +179,7 @@ int main(int argc, char* argv[])
 				anArgPos++;
 				gEncryptPassword = argv[anArgPos];
 
-				if(gEncryptPassword == "")
+				if (gEncryptPassword == "")
 				{
 					cerr << "Invalid Password:" << argv[anArgPos] << endl;
 					return 106;
@@ -224,10 +224,10 @@ int main(int argc, char* argv[])
 		return 103;
 	}
 
-	std::string aPackName = argv[anArgPos++];	
-	std::string aDirName = argv[anArgPos++];	
+	std::string aPackName = argv[anArgPos++];
+	std::string aDirName = argv[anArgPos++];
 
-	if ((aDirName[aDirName.length()-1] != '\\') && (aDirName[aDirName.length()-1] != '/'))
+	if ((aDirName[aDirName.length() - 1] != '\\') && (aDirName[aDirName.length() - 1] != '/'))
 		aDirName += "\\";
 
 	if (package)
@@ -250,8 +250,8 @@ int main(int argc, char* argv[])
 		uchar aFileFlags = FILEFLAGS_END;
 		enc_fwrite(&aFileFlags, 1, 1, gDestFP);
 
-		if (gDeferredFilesList.size() == 0)		
-			cout << "Warning: no files!" << endl;		
+		if (gDeferredFilesList.size() == 0)
+			cout << "Warning: no files!" << endl;
 
 		int aCount = 0;
 
@@ -274,7 +274,7 @@ int main(int argc, char* argv[])
 			while (!feof(aSrcFP))
 			{
 				uchar aBuffer[4096];
-				int aSize = (int) fread(aBuffer, 1, 4096, aSrcFP);
+				int aSize = (int)fread(aBuffer, 1, 4096, aSrcFP);
 
 				enc_fwrite(aBuffer, 1, aSize, gDestFP);
 				aTotalSize += aSize;
@@ -323,10 +323,10 @@ int main(int argc, char* argv[])
 
 			if (anItr->first == StringToUpper(GetFileName(aPackName)))
 				continue;
-			
+
 			std::string aFileName = aDirName + aRecord.mFileName;
 			MkDir(GetFileDir(aFileName));
-			FILE* fp = (FILE*) p_fopen(aFileName.c_str(), "wb");
+			FILE* fp = (FILE*)p_fopen(aFileName.c_str(), "wb");
 			if (!fp)
 			{
 				cerr << "Error: Unable to open " << aFileName << " for writing: " << errno << endl;
@@ -337,7 +337,7 @@ int main(int argc, char* argv[])
 			aFile.mFP = NULL;
 			aFile.mPos = 0;
 			aFile.mRecord = &aRecord;
-			
+
 			BYTE aByte;
 			while (aFile.mPos < aRecord.mSize && anInterface.FRead(&aByte, 1, 1, &aFile) > 0)
 			{
@@ -357,7 +357,7 @@ int main(int argc, char* argv[])
 			}
 
 			fclose(fp);
-			
+
 			aDoneFiles++;
 			cout << "Writing: " << ((aDoneFiles * 100) / aNumFiles) << "%\r";
 			cout.flush();
@@ -366,7 +366,7 @@ int main(int argc, char* argv[])
 		cout << "Writing: 100%\r";
 		cout.flush();
 	}
-	
+
 	return 0;
 }
 
