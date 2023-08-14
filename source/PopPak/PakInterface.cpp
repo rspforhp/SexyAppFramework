@@ -1,10 +1,9 @@
 #include "PakInterface.h"
+
 #include <windows.h>
 #include <direct.h>
 
 #include "../SexyAppFramework/SexyAppBase.h"
-
-using namespace Sexy;
 
 typedef unsigned char uchar;
 typedef unsigned short ushort;
@@ -70,14 +69,14 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 	aPakCollection->mFileHandle = aFileHandle;
 	aPakCollection->mMappingHandle = aFileMapping;
 	aPakCollection->mDataPtr = aPtr;
-	
-	PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(Sexy::StringToUpper(theFileName), PakRecord())).first;
+
+	PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(StringToUpper(theFileName), PakRecord())).first;
 	PakRecord* aPakRecord = &(aRecordItr->second);
 	aPakRecord->mCollection = aPakCollection;
 	aPakRecord->mFileName = theFileName;
 	aPakRecord->mStartPos = 0;
 	aPakRecord->mSize = aFileSize;
-	
+
 	PFILE* aFP = FOpen(theFileName.c_str(), "rb");
 	if (aFP == NULL)
 		return false;
@@ -86,7 +85,7 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 	FRead(&aMagic, sizeof(ulong), 1, aFP);
 	if (aMagic != 0xBAC04AC0)
 	{
-		mError = StrFormat(_S("Invalid File or Invalid Password: %s"), mDecryptPassword.c_str());
+		mError = Sexy::StrFormat(_S("Invalid File or Invalid Password: %s"), mDecryptPassword.c_str());
 		FClose(aFP);
 		return false;
 	}
@@ -95,7 +94,7 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 	FRead(&aVersion, sizeof(ulong), 1, aFP);
 	if (aVersion > 0)
 	{
-		mError = StrFormat(_S("Invalid Version or Invalid Password: %s"), mDecryptPassword.c_str());
+		mError = Sexy::StrFormat(_S("Invalid Version or Invalid Password: %s"), mDecryptPassword.c_str());
 		FClose(aFP);
 		return false;
 	}
@@ -120,7 +119,7 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 		FILETIME aFileTime;
 		FRead(&aFileTime, sizeof(FILETIME), 1, aFP);
 
-		PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(Sexy::StringToUpper(aName), PakRecord())).first;
+		PakRecordMap::iterator aRecordItr = mPakRecordMap.insert(PakRecordMap::value_type(StringToUpper(aName), PakRecord())).first;
 		PakRecord* aPakRecord = &(aRecordItr->second);
 		aPakRecord->mCollection = aPakCollection;
 		aPakRecord->mFileName = aName;
@@ -180,16 +179,16 @@ static void FixFileName(const char* theFileName, char* theUpperName)
 		{
 			// We have a '/..' on our hands
 			aDest--;
-			while ((aDest > theUpperName + 1) && (*(aDest-1) != '\\'))
+			while ((aDest > theUpperName + 1) && (*(aDest - 1) != '\\'))
 				--aDest;
 			aSrc++;
 		}
 		else
 		{
-			*(aDest++) = toupper((uchar) c);
+			*(aDest++) = toupper((uchar)c);
 			if (c == 0)
 				break;
-			lastSlash = false;				
+			lastSlash = false;
 		}
 	}
 }
@@ -200,10 +199,10 @@ PFILE* PakInterface::FOpen(const char* theFileName, const char* anAccess)
 	{
 		char anUpperName[256];
 		FixFileName(theFileName, anUpperName);
-		
+
 		PakRecordMap::iterator anItr = mPakRecordMap.find(anUpperName);
 		if (anItr != mPakRecordMap.end())
-		{			
+		{
 			PFILE* aPFP = new PFILE;
 			aPFP->mRecord = &anItr->second;
 			aPFP->mPos = 0;
@@ -253,29 +252,29 @@ int PakInterface::FTell(PFILE* theFile)
 	if (theFile->mRecord != NULL)
 		return theFile->mPos;
 	else
-		return ftell(theFile->mFP);	
+		return ftell(theFile->mFP);
 }
 
 size_t PakInterface::FRead(void* thePtr, int theElemSize, int theCount, PFILE* theFile)
 {
 	if (theFile->mRecord != NULL)
 	{
-		int aSizeBytes = min(theElemSize*theCount, theFile->mRecord->mSize - theFile->mPos);
+		int aSizeBytes = min(theElemSize * theCount, theFile->mRecord->mSize - theFile->mPos);
 
-		uchar* src = (uchar*) theFile->mRecord->mCollection->mDataPtr + theFile->mRecord->mStartPos + theFile->mPos;
-		uchar* dest = (uchar*) thePtr;		
+		uchar* src = (uchar*)theFile->mRecord->mCollection->mDataPtr + theFile->mRecord->mStartPos + theFile->mPos;
+		uchar* dest = (uchar*)thePtr;
 
 		int aPos = theFile->mRecord->mStartPos + theFile->mPos;
 		int aPWLength = mDecryptPassword.length();
 		aPos = aPos % aPWLength;
 
 		for (int i = 0; i < aSizeBytes; i++)
-			*(dest++) = (*src++) ^ mDecryptPassword[(aPos++)%aPWLength]; // 'Decrypt'
+			*(dest++) = (*src++) ^ mDecryptPassword[(aPos++) % aPWLength]; // 'Decrypt'
 		theFile->mPos += aSizeBytes;
 		return aSizeBytes / theElemSize;
 	}
-	
-	return fread(thePtr, theElemSize, theCount, theFile->mFP);	
+
+	return fread(thePtr, theElemSize, theCount, theFile->mFP);
 }
 
 int PakInterface::FGetC(PFILE* theFile)
@@ -285,15 +284,15 @@ int PakInterface::FGetC(PFILE* theFile)
 		for (;;)
 		{
 			if (theFile->mPos >= theFile->mRecord->mSize)
-				return EOF;		
+				return EOF;
 
 			int aPos = theFile->mRecord->mStartPos + theFile->mPos;
 			int aPWLength = mDecryptPassword.length();
 			aPos = aPos % aPWLength;
 
-			char aChar = *((char*) theFile->mRecord->mCollection->mDataPtr + theFile->mRecord->mStartPos + theFile->mPos++) ^ mDecryptPassword[(aPos++)%aPWLength];
+			char aChar = *((char*)theFile->mRecord->mCollection->mDataPtr + theFile->mRecord->mStartPos + theFile->mPos++) ^ mDecryptPassword[(aPos++) % aPWLength];
 			if (aChar != '\r')
-				return (uchar) aChar;
+				return (uchar)aChar;
 		}
 	}
 
@@ -330,7 +329,7 @@ char* PakInterface::FGetS(char* thePtr, int theSize, PFILE* theFile)
 			int aPWLength = mDecryptPassword.length();
 			aPos = aPos % aPWLength;
 
-			char aChar = *((char*) theFile->mRecord->mCollection->mDataPtr + theFile->mRecord->mStartPos + theFile->mPos++) ^ mDecryptPassword[(aPos++)%aPWLength];
+			char aChar = *((char*)theFile->mRecord->mCollection->mDataPtr + theFile->mRecord->mStartPos + theFile->mPos++) ^ mDecryptPassword[(aPos++) % aPWLength];
 			if (aChar != '\r')
 				thePtr[anIdx++] = aChar;
 			if (aChar == '\n')
@@ -368,21 +367,21 @@ bool PakInterface::PFindNext(PFindData* theFindData, LPWIN32_FIND_DATA lpFindFil
 		const char* aFileName = anItr->first.c_str();
 		PakRecord* aPakRecord = &anItr->second;
 
-		int aStarPos = (int) theFindData->mFindCriteria.find('*');
+		int aStarPos = (int)theFindData->mFindCriteria.find('*');
 		if (aStarPos != -1)
 		{
 			if (strncmp(theFindData->mFindCriteria.c_str(), aFileName, aStarPos) == 0)
-			{				
+			{
 				// First part matches
 				const char* anEndData = theFindData->mFindCriteria.c_str() + aStarPos + 1;
-				if ((*anEndData == 0) || (strcmp(anEndData, ".*") == 0) ||								
-					(strcmp(theFindData->mFindCriteria.c_str() + aStarPos + 1, 
-					aFileName + strlen(aFileName) - (theFindData->mFindCriteria.length() - aStarPos) + 1) == 0))
+				if ((*anEndData == 0) || (strcmp(anEndData, ".*") == 0) ||
+					(strcmp(theFindData->mFindCriteria.c_str() + aStarPos + 1,
+						aFileName + strlen(aFileName) - (theFindData->mFindCriteria.length() - aStarPos) + 1) == 0))
 				{
 					// Matches before and after star
 					memset(lpFindFileData, 0, sizeof(lpFindFileData));
-					
-					int aLastSlashPos = (int) anItr->second.mFileName.rfind('\\');
+
+					int aLastSlashPos = (int)anItr->second.mFileName.rfind('\\');
 					if (aLastSlashPos == -1)
 						strcpy(lpFindFileData->cFileName, anItr->second.mFileName.c_str());
 					else
@@ -419,11 +418,11 @@ HANDLE PakInterface::FindFirstFile(LPCTSTR lpFileName, LPWIN32_FIND_DATA lpFindF
 	aFindData->mWHandle = INVALID_HANDLE_VALUE;
 
 	if (PFindNext(aFindData, lpFindFileData))
-		return (HANDLE) aFindData;
+		return (HANDLE)aFindData;
 
 	aFindData->mWHandle = ::FindFirstFile(aFindData->mFindCriteria.c_str(), lpFindFileData);
 	if (aFindData->mWHandle != INVALID_HANDLE_VALUE)
-		return (HANDLE) aFindData;
+		return (HANDLE)aFindData;
 
 	delete aFindData;
 	return INVALID_HANDLE_VALUE;
@@ -431,7 +430,7 @@ HANDLE PakInterface::FindFirstFile(LPCTSTR lpFileName, LPWIN32_FIND_DATA lpFindF
 
 BOOL PakInterface::FindNextFile(HANDLE hFindFile, LPWIN32_FIND_DATA lpFindFileData)
 {
-	PFindData* aFindData = (PFindData*) hFindFile;
+	PFindData* aFindData = (PFindData*)hFindFile;
 
 	if (aFindData->mWHandle == INVALID_HANDLE_VALUE)
 	{
@@ -439,15 +438,15 @@ BOOL PakInterface::FindNextFile(HANDLE hFindFile, LPWIN32_FIND_DATA lpFindFileDa
 			return TRUE;
 
 		aFindData->mWHandle = ::FindFirstFile(aFindData->mFindCriteria.c_str(), lpFindFileData);
-		return (aFindData->mWHandle != INVALID_HANDLE_VALUE);			
+		return (aFindData->mWHandle != INVALID_HANDLE_VALUE);
 	}
-	
+
 	return ::FindNextFile(aFindData->mWHandle, lpFindFileData);
 }
 
 BOOL PakInterface::FindClose(HANDLE hFindFile)
 {
-	PFindData* aFindData = (PFindData*) hFindFile;
+	PFindData* aFindData = (PFindData*)hFindFile;
 
 	if (aFindData->mWHandle != INVALID_HANDLE_VALUE)
 		::FindClose(aFindData->mWHandle);
@@ -455,4 +454,3 @@ BOOL PakInterface::FindClose(HANDLE hFindFile)
 	delete aFindData;
 	return TRUE;
 }
-

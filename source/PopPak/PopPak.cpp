@@ -315,7 +315,6 @@ int main(int argc, char* argv[])
 
 		MkDir(aDirName);
 
-
 		int aNumFiles = (int)anInterface.mPakRecordMap.size();
 		int aDoneFiles = 0;
 		for (PakRecordMap::iterator anItr = anInterface.mPakRecordMap.begin(); anItr != anInterface.mPakRecordMap.end(); ++anItr)
@@ -327,7 +326,7 @@ int main(int argc, char* argv[])
 			
 			std::string aFileName = aDirName + aRecord.mFileName;
 			MkDir(GetFileDir(aFileName));
-			FILE* fp = fopen(aFileName.c_str(), "wb");
+			FILE* fp = (FILE*) p_fopen(aFileName.c_str(), "wb");
 			if (!fp)
 			{
 				cerr << "Error: Unable to open " << aFileName << " for writing: " << errno << endl;
