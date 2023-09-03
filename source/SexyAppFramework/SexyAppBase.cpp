@@ -15,7 +15,6 @@
 #include "MemoryImage.h"
 #include "HTTPTransfer.h"
 #include "Dialog.h"
-#include "..\ImageLib\ImageLib.h"
 #include "DSoundManager.h"
 #include "DSoundInstance.h"
 #include "Rect.h"
@@ -24,23 +23,27 @@
 #include "PerfTimer.h"
 #include "MTRand.h"
 #include "ModVal.h"
+#include "SysFont.h"
+#include "ResourceManager.h"
+#include "BassMusicInterface.h"
+#include "AutoCrit.h"
+#include "Debug.h"
+
+#include "../ImageLib/ImageLib.h"
+#include "../PakLib/PakInterface.h"
+
 #include <process.h>
 #include <direct.h>
 #include <fstream>
 #include <time.h>
 #include <math.h>
 #include <regstr.h>
-#include "SysFont.h"
-#include "ResourceManager.h"
-#include "BassMusicInterface.h"
-#include "AutoCrit.h"
-#include "Debug.h"
-#include "../PakLib/PakInterface.h"
 #include <string>
 #include <shlobj.h>
 
 #include "memmgr.h"
 
+using namespace std;
 using namespace Sexy;
 
 const int DEMO_FILE_ID = 0x42BEEF78;
@@ -54,7 +57,6 @@ HMODULE gDDrawDLL = NULL;
 HMODULE gDSoundDLL = NULL;
 HMODULE gVersionDLL = NULL;
 
-//typedef struct { UINT cbSize; DWORD dwTime; } LASTINPUTINFO;
 typedef BOOL(WINAPI* GetLastInputInfoFunc)(LASTINPUTINFO* plii);
 GetLastInputInfoFunc gGetLastInputInfoFunc = NULL;
 static bool gScreenSaverActive = false;
@@ -111,8 +113,6 @@ unsigned char gDraggingCursorData[] = {
 };
 static DDImage* gFPSImage = NULL;
 
-//////////////////////////////////////////////////////////////////////////
-
 typedef HRESULT(WINAPI* SHGetFolderPathFunc)(HWND, int, HANDLE, DWORD, LPTSTR);
 void* GetSHGetFolderPath(const char* theDLL, HMODULE* theMod)
 {
@@ -132,8 +132,6 @@ void* GetSHGetFolderPath(const char* theDLL, HMODULE* theMod)
 	*theMod = aMod;
 	return aFunc;
 }
-
-//////////////////////////////////////////////////////////////////////////
 
 SexyAppBase::SexyAppBase()
 {
@@ -295,7 +293,7 @@ SexyAppBase::SexyAppBase()
 	for (i = 256; i < 512; i++)
 		mAdd8BitMaxTable[i] = 255;
 
-	// Set default strings.  Init could read in overrides from partner.xml
+	// Set default strings. Init could read in overrides from partner.xml
 	SetString("DIALOG_BUTTON_OK", L"OK");
 	SetString("DIALOG_BUTTON_CANCEL", L"CANCEL");
 
@@ -337,30 +335,6 @@ SexyAppBase::SexyAppBase()
 		mTabletPC = false;
 
 	gSEHCatcher.mApp = this;
-
-	//std::wifstream stringsFile(_wfopen(L".\\properties\\fstrings", L"rb"));
-	//
-	//if(!stringsFile)
-	//{
-	//	MessageBox(NULL, "file missing: 'install-folder\\properties\\fstrings' Please re-install", "FATAL ERROR", MB_OK);
-	//	DoExit(1);
-	//}
-	//std::getline(stringsFile, mString_HardwareAccelSwitchedOn);
-	//std::getline(stringsFile, mString_HardwareAccelConfirm);
-	//std::getline(stringsFile, mString_HardwareAccelNotWorking);
-	//std::getline(stringsFile, mString_SetColorDepth);
-	//std::getline(stringsFile, mString_FailedInitDirectDrawColon);
-	//std::getline(stringsFile, mString_UnableOpenProperties);
-	//std::getline(stringsFile, mString_SigCheckFailed);
-	//std::getline(stringsFile, mString_InvalidCommandLineParam);
-	//std::getline(stringsFile, mString_RequiresDirectX);
-	//std::getline(stringsFile, mString_YouNeedDirectX);
-	//std::getline(stringsFile, mString_FailedInitDirectDraw);
-	//std::getline(stringsFile, mString_FatalError);
-	//std::getline(stringsFile, mString_UnexpectedErrorOccured);
-	//std::getline(stringsFile, mString_PleaseHelpBy);
-	//std::getline(stringsFile, mString_FailedConnectPopcap);
-	//stringsFile.close();
 }
 
 SexyAppBase::~SexyAppBase()
@@ -447,7 +421,6 @@ SexyAppBase::~SexyAppBase()
 	while (aSharedImageItr != mSharedImageMap.end())
 	{
 		SharedImage* aSharedImage = &aSharedImageItr->second;
-		//	DBG_ASSERTE(aSharedImage->mRefCount == 0);		// Possibly the stupidest thing ever, I'm tired of tripping this
 		delete aSharedImage->mImage;
 		mSharedImageMap.erase(aSharedImageItr++);
 	}
@@ -462,10 +435,6 @@ SexyAppBase::~SexyAppBase()
 		mHWnd = NULL;
 
 		SetWindowLong(aWindow, GWL_USERDATA, NULL);
-
-		/*char aStr[256];
-		sprintf(aStr, "HWND: %d\r\n", aWindow);
-		OutputDebugString(aStr);*/
 
 		DestroyWindow(aWindow);
 	}
@@ -489,7 +458,7 @@ SexyAppBase::~SexyAppBase()
 
 static BOOL CALLBACK ChangeDisplayWindowEnumProc(HWND hwnd, LPARAM lParam)
 {
-	typedef std::map<HWND, RECT> WindowMap;
+	typedef map<HWND, RECT> WindowMap;
 	static WindowMap aMap;
 
 	if (lParam == 0 && aMap.find(hwnd) == aMap.end()) // record
@@ -499,11 +468,6 @@ static BOOL CALLBACK ChangeDisplayWindowEnumProc(HWND hwnd, LPARAM lParam)
 		{
 			if (GetWindowRect(hwnd, &aRect))
 			{
-				//				char aBuf[4096];
-				//				GetWindowText(hwnd,aBuf,4000);
-				//				DWORD aProcessId = 0;
-				//				GetWindowThreadProcessId(hwnd,&aProcessId);
-				//				SEXY_TRACE(StrFormat("%s %d - %d %d %d %d",aBuf,aProcessId,aRect.left,aRect.top,aRect.right,aRect.bottom).c_str());
 				aMap[hwnd] = aRect;
 			}
 		}
@@ -539,7 +503,7 @@ bool SexyAppBase::AppCanRestore()
 	return !mIsDisabled;
 }
 
-bool SexyAppBase::ReadDemoBuffer(std::string& theError)
+bool SexyAppBase::ReadDemoBuffer(string& theError)
 {
 	FILE* aFP = fopen(mDemoFileName.c_str(), "rb");
 
@@ -562,7 +526,6 @@ bool SexyAppBase::ReadDemoBuffer(std::string& theError)
 		return false;
 	}
 
-
 	ulong aVersion;
 	fread(&aVersion, 4, 1, aFP);
 
@@ -571,8 +534,10 @@ bool SexyAppBase::ReadDemoBuffer(std::string& theError)
 
 	ushort aStrLen = 4;
 	fread(&aStrLen, 2, 1, aFP);
+
 	if (aStrLen > 255)
 		aStrLen = 255;
+
 	char aStr[256];
 	fread(aStr, 1, aStrLen, aFP);
 	aStr[aStrLen] = '\0';
@@ -580,12 +545,13 @@ bool SexyAppBase::ReadDemoBuffer(std::string& theError)
 	DBG_ASSERTE(mProductVersion == aStr);
 	if (mProductVersion != aStr)
 	{
-		theError = "This demo file appears to be for '" + std::string(aStr) + "'";
+		theError = "This demo file appears to be for '" + string(aStr) + "'";
 		return false;
 	}
 
 	int aFilePos = ftell(aFP);
 	fseek(aFP, 0, SEEK_END);
+
 	int aBytesLeft = ftell(aFP) - aFilePos;
 	fseek(aFP, aFilePos, SEEK_SET);
 
@@ -654,42 +620,42 @@ bool SexyAppBase::ReadDemoBuffer(std::string& theError)
 
 void SexyAppBase::WriteDemoBuffer()
 {
-	if (mRecordingDemoBuffer)
+	if (!mRecordingDemoBuffer) return;
+
+	FILE* aFP = fopen(mDemoFileName.c_str(), "w+b");
+
+	if (aFP == NULL) return;
+
+	ulong aFileID = DEMO_FILE_ID;
+	fwrite(&aFileID, 4, 1, aFP);
+
+	ulong aVersion = DEMO_VERSION;
+	fwrite(&aVersion, 4, 1, aFP);
+
+	fwrite(&mRandSeed, 4, 1, aFP);
+
+	ushort aStrLen = mProductVersion.length();
+	fwrite(&aStrLen, 2, 1, aFP);
+	fwrite(mProductVersion.c_str(), 1, mProductVersion.length(), aFP);
+
+	Buffer aMarkerBuffer;
+	aMarkerBuffer.WriteLong(mDemoMarkerList.size());
+
+	for (DemoMarkerList::iterator aMarkerItr = mDemoMarkerList.begin(); aMarkerItr != mDemoMarkerList.end(); ++aMarkerItr)
 	{
-		FILE* aFP = fopen(mDemoFileName.c_str(), "w+b");
-
-		if (aFP != NULL)
-		{
-			ulong aFileID = DEMO_FILE_ID;
-			fwrite(&aFileID, 4, 1, aFP);
-
-			ulong aVersion = DEMO_VERSION;
-			fwrite(&aVersion, 4, 1, aFP);
-
-			fwrite(&mRandSeed, 4, 1, aFP);
-
-			ushort aStrLen = mProductVersion.length();
-			fwrite(&aStrLen, 2, 1, aFP);
-			fwrite(mProductVersion.c_str(), 1, mProductVersion.length(), aFP);
-
-			Buffer aMarkerBuffer;
-			aMarkerBuffer.WriteLong(mDemoMarkerList.size());
-			for (DemoMarkerList::iterator aMarkerItr = mDemoMarkerList.begin(); aMarkerItr != mDemoMarkerList.end(); ++aMarkerItr)
-			{
-				aMarkerBuffer.WriteString(aMarkerItr->first);
-				aMarkerBuffer.WriteLong(aMarkerItr->second);
-			}
-			int aMarkerBufferSize = aMarkerBuffer.GetDataLen();
-			fwrite(&aMarkerBufferSize, 4, 1, aFP);
-			fwrite(aMarkerBuffer.GetDataPtr(), aMarkerBufferSize, 1, aFP);
-
-			ulong aDemoLength = mUpdateCount;
-			fwrite(&aDemoLength, 4, 1, aFP);
-
-			fwrite(mDemoBuffer.GetDataPtr(), 1, mDemoBuffer.GetDataLen(), aFP);
-			fclose(aFP);
-		}
+		aMarkerBuffer.WriteString(aMarkerItr->first);
+		aMarkerBuffer.WriteLong(aMarkerItr->second);
 	}
+
+	int aMarkerBufferSize = aMarkerBuffer.GetDataLen();
+	fwrite(&aMarkerBufferSize, 4, 1, aFP);
+	fwrite(aMarkerBuffer.GetDataPtr(), aMarkerBufferSize, 1, aFP);
+
+	ulong aDemoLength = mUpdateCount;
+	fwrite(&aDemoLength, 4, 1, aFP);
+
+	fwrite(mDemoBuffer.GetDataPtr(), 1, mDemoBuffer.GetDataLen(), aFP);
+	fclose(aFP);
 }
 
 void SexyAppBase::DemoSyncBuffer(Buffer* theBuffer)
@@ -710,18 +676,20 @@ void SexyAppBase::DemoSyncBuffer(Buffer* theBuffer)
 		theBuffer->Clear();
 		for (int i = 0; i < (int)aLen; i++)
 			theBuffer->WriteByte(mDemoBuffer.ReadByte());
+
+		return;
 	}
-	else if (mRecordingDemoBuffer)
-	{
-		WriteDemoTimingBlock();
-		mDemoBuffer.WriteNumBits(0, 1);
-		mDemoBuffer.WriteNumBits(DEMO_SYNC, 5);
-		mDemoBuffer.WriteLong(theBuffer->GetDataLen());
-		mDemoBuffer.WriteBytes((uchar*)theBuffer->GetDataPtr(), theBuffer->GetDataLen());
-	}
+	
+	if (!mRecordingDemoBuffer) return;
+
+	WriteDemoTimingBlock();
+	mDemoBuffer.WriteNumBits(0, 1);
+	mDemoBuffer.WriteNumBits(DEMO_SYNC, 5);
+	mDemoBuffer.WriteLong(theBuffer->GetDataLen());
+	mDemoBuffer.WriteBytes((uchar*)theBuffer->GetDataPtr(), theBuffer->GetDataLen());
 }
 
-void SexyAppBase::DemoSyncString(std::string* theString)
+void SexyAppBase::DemoSyncString(string* theString)
 {
 	Buffer aBuffer;
 	aBuffer.WriteString(*theString);
@@ -745,7 +713,7 @@ void SexyAppBase::DemoSyncBool(bool* theBool)
 	*theBool = aBuffer.ReadBoolean();
 }
 
-void SexyAppBase::DemoAssertStringEqual(const std::string& theString)
+void SexyAppBase::DemoAssertStringEqual(const string& theString)
 {
 	if (mPlayingDemoBuffer)
 	{
@@ -758,19 +726,21 @@ void SexyAppBase::DemoAssertStringEqual(const std::string& theString)
 		DBG_ASSERTE(!mDemoIsShortCmd);
 		DBG_ASSERTE(mDemoCmdNum == DEMO_ASSERT_STRING_EQUAL);
 
-		std::string aString = mDemoBuffer.ReadString();
+		string aString = mDemoBuffer.ReadString();
 		DBG_ASSERTE(aString == theString);
+
+		return;
 	}
-	else if (mRecordingDemoBuffer)
-	{
-		WriteDemoTimingBlock();
-		mDemoBuffer.WriteNumBits(0, 1);
-		mDemoBuffer.WriteNumBits(DEMO_ASSERT_STRING_EQUAL, 5);
-		mDemoBuffer.WriteString(theString);
-	}
+	
+	if (!mRecordingDemoBuffer) return;
+	
+	WriteDemoTimingBlock();
+	mDemoBuffer.WriteNumBits(0, 1);
+	mDemoBuffer.WriteNumBits(DEMO_ASSERT_STRING_EQUAL, 5);
+	mDemoBuffer.WriteString(theString);
 }
 
-void SexyAppBase::DemoAddMarker(const std::string& theString)
+void SexyAppBase::DemoAddMarker(const string& theString)
 {
 	if (mPlayingDemoBuffer)
 	{
@@ -784,28 +754,27 @@ void SexyAppBase::DemoAddMarker(const std::string& theString)
 
 void SexyAppBase::DemoRegisterHandle(HANDLE theHandle)
 {
-	if ((mRecordingDemoBuffer) || (mPlayingDemoBuffer))
-	{
-		// Insert the handle into a map with an auto-incrementing number so
-		//  we can match up the auto-incrementing numbers with the handle
-		//  later on, as handles may not be the same between executions
-		std::pair<HandleToIntMap::iterator, bool> aPair = mHandleToIntMap.insert(HandleToIntMap::value_type(theHandle, mCurHandleNum));
-		DBG_ASSERT(aPair.second);
-		mCurHandleNum++;
-	}
+	if ((!mRecordingDemoBuffer) && (!mPlayingDemoBuffer)) return;
+	
+	// Insert the handle into a map with an auto-incrementing number so
+	//  we can match up the auto-incrementing numbers with the handle
+	//  later on, as handles may not be the same between executions
+	pair<HandleToIntMap::iterator, bool> aPair = mHandleToIntMap.insert(HandleToIntMap::value_type(theHandle, mCurHandleNum));
+	DBG_ASSERT(aPair.second);
+
+	mCurHandleNum++;
 }
 
 void SexyAppBase::DemoWaitForHandle(HANDLE theHandle)
 {
 	WaitForSingleObject(theHandle, INFINITE);
 
-	if ((mRecordingDemoBuffer) || (mPlayingDemoBuffer))
-	{
-		// Remove the handle from our waiting map
-		HandleToIntMap::iterator anItr = mHandleToIntMap.find(theHandle);
-		DBG_ASSERT(anItr != mHandleToIntMap.end());
-		mHandleToIntMap.erase(anItr);
-	}
+	if ((!mRecordingDemoBuffer) && (!mPlayingDemoBuffer)) return;
+
+	// Remove the handle from our waiting map
+	HandleToIntMap::iterator anItr = mHandleToIntMap.find(theHandle);
+	DBG_ASSERT(anItr != mHandleToIntMap.end());
+	mHandleToIntMap.erase(anItr);
 }
 
 bool SexyAppBase::DemoCheckHandle(HANDLE theHandle)
@@ -848,29 +817,21 @@ bool SexyAppBase::DemoCheckHandle(HANDLE theHandle)
 
 		return false;
 	}
-	else
-	{
-		if (WaitForSingleObject(theHandle, 0) == WAIT_OBJECT_0)
-		{
-			if (mRecordingDemoBuffer)
-			{
-				// Find auto-incrementing handle num from handle
-				HandleToIntMap::iterator anItr = mHandleToIntMap.find(theHandle);
-				DBG_ASSERT(anItr != mHandleToIntMap.end());
 
-				gSexyAppBase->WriteDemoTimingBlock();
-				gSexyAppBase->mDemoBuffer.WriteNumBits(0, 1);
-				gSexyAppBase->mDemoBuffer.WriteNumBits(DEMO_HANDLE_COMPLETE, 5);
-				gSexyAppBase->mDemoBuffer.WriteLong(anItr->second);
+	if (WaitForSingleObject(theHandle, 0) != WAIT_OBJECT_0) return false;
+	if (!mRecordingDemoBuffer) return false;
 
-				mHandleToIntMap.erase(anItr);
-			}
+	// Find auto-incrementing handle num from handle
+	HandleToIntMap::iterator anItr = mHandleToIntMap.find(theHandle);
+	DBG_ASSERT(anItr != mHandleToIntMap.end());
 
-			return true;
-		}
+	gSexyAppBase->WriteDemoTimingBlock();
+	gSexyAppBase->mDemoBuffer.WriteNumBits(0, 1);
+	gSexyAppBase->mDemoBuffer.WriteNumBits(DEMO_HANDLE_COMPLETE, 5);
+	gSexyAppBase->mDemoBuffer.WriteLong(anItr->second);
 
-		return false;
-	}
+	mHandleToIntMap.erase(anItr);
+	return true;
 }
 
 void SexyAppBase::DemoAssertIntEqual(int theInt)
@@ -888,14 +849,16 @@ void SexyAppBase::DemoAssertIntEqual(int theInt)
 
 		int anInt = mDemoBuffer.ReadLong();
 		DBG_ASSERTE(anInt == theInt);
+
+		return;
 	}
-	else if (mRecordingDemoBuffer)
-	{
-		WriteDemoTimingBlock();
-		mDemoBuffer.WriteNumBits(0, 1);
-		mDemoBuffer.WriteNumBits(DEMO_ASSERT_INT_EQUAL, 5);
-		mDemoBuffer.WriteLong(theInt);
-	}
+
+	if (!mRecordingDemoBuffer) return;
+
+	WriteDemoTimingBlock();
+	mDemoBuffer.WriteNumBits(0, 1);
+	mDemoBuffer.WriteNumBits(DEMO_ASSERT_INT_EQUAL, 5);
+	mDemoBuffer.WriteLong(theInt);
 }
 
 Dialog* SexyAppBase::NewDialog(int theDialogId, bool isModal, const SexyString& theDialogHeader, const SexyString& theDialogLines, const SexyString& theDialogFooter, int theButtonMode)
@@ -930,37 +893,34 @@ bool SexyAppBase::KillDialog(int theDialogId, bool removeWidget, bool deleteWidg
 {
 	DialogMap::iterator anItr = mDialogMap.find(theDialogId);
 
-	if (anItr != mDialogMap.end())
+	if (anItr == mDialogMap.end()) return false;
+
+	Dialog* aDialog = anItr->second;
+
+	// set the result to something else so DoMainLoop knows that the dialog is gone 
+	// in case nobody else sets mResult		
+	if (aDialog->mResult == -1)
+		aDialog->mResult = 0;
+
+	DialogList::iterator aListItr = find(mDialogList.begin(), mDialogList.end(), aDialog);
+	if (aListItr != mDialogList.end())
+		mDialogList.erase(aListItr);
+
+	mDialogMap.erase(anItr);
+
+	if (removeWidget || deleteWidget)
+		mWidgetManager->RemoveWidget(aDialog);
+
+	if (aDialog->IsModal())
 	{
-		Dialog* aDialog = anItr->second;
-
-		// set the result to something else so DoMainLoop knows that the dialog is gone 
-		// in case nobody else sets mResult		
-		if (aDialog->mResult == -1)
-			aDialog->mResult = 0;
-
-		DialogList::iterator aListItr = std::find(mDialogList.begin(), mDialogList.end(), aDialog);
-		if (aListItr != mDialogList.end())
-			mDialogList.erase(aListItr);
-
-		mDialogMap.erase(anItr);
-
-		if (removeWidget || deleteWidget)
-			mWidgetManager->RemoveWidget(aDialog);
-
-		if (aDialog->IsModal())
-		{
-			ModalClose();
-			mWidgetManager->RemoveBaseModal(aDialog);
-		}
-
-		if (deleteWidget)
-			SafeDeleteWidget(aDialog);
-
-		return true;
+		ModalClose();
+		mWidgetManager->RemoveBaseModal(aDialog);
 	}
 
-	return false;
+	if (deleteWidget)
+		SafeDeleteWidget(aDialog);
+
+	return true;
 }
 
 bool SexyAppBase::KillDialog(int theDialogId)
@@ -993,6 +953,7 @@ void SexyAppBase::AddDialog(int theDialogId, Dialog* theDialog)
 	mDialogList.push_back(theDialog);
 
 	mWidgetManager->AddWidget(theDialog);
+
 	if (theDialog->IsModal())
 	{
 		mWidgetManager->AddBaseModal(theDialog);
@@ -1015,18 +976,28 @@ void SexyAppBase::ModalClose()
 
 void SexyAppBase::DialogButtonPress(int theDialogId, int theButtonId)
 {
-	if (theButtonId == Dialog::ID_YES)
-		ButtonPress(2000 + theDialogId);
-	else if (theButtonId == Dialog::ID_NO)
-		ButtonPress(3000 + theDialogId);
+	switch (theButtonId)
+	{
+		case Dialog::ID_YES:
+			ButtonPress(2000 + theDialogId);
+			break;
+		case Dialog::ID_NO:
+			ButtonPress(3000 + theDialogId);
+			break;
+	}
 }
 
 void SexyAppBase::DialogButtonDepress(int theDialogId, int theButtonId)
 {
-	if (theButtonId == Dialog::ID_YES)
-		ButtonDepress(2000 + theDialogId);
-	else if (theButtonId == Dialog::ID_NO)
-		ButtonDepress(3000 + theDialogId);
+	switch (theButtonId)
+	{
+		case Dialog::ID_YES:
+			ButtonDepress(2000 + theDialogId);
+			break;
+		case Dialog::ID_NO:
+			ButtonDepress(3000 + theDialogId);
+			break;
+	}
 }
 
 void SexyAppBase::GotFocus()
@@ -1037,12 +1008,12 @@ void SexyAppBase::LostFocus()
 {
 }
 
-void SexyAppBase::URLOpenFailed(const std::string& theURL)
+void SexyAppBase::URLOpenFailed(const string& theURL)
 {
 	mIsOpeningURL = false;
 }
 
-void SexyAppBase::URLOpenSucceeded(const std::string& theURL)
+void SexyAppBase::URLOpenSucceeded(const string& theURL)
 {
 	mIsOpeningURL = false;
 
@@ -1050,30 +1021,27 @@ void SexyAppBase::URLOpenSucceeded(const std::string& theURL)
 		Shutdown();
 }
 
-bool SexyAppBase::OpenURL(const std::string& theURL, bool shutdownOnOpen)
+bool SexyAppBase::OpenURL(const string& theURL, bool shutdownOnOpen)
 {
-	if ((!mIsOpeningURL) || (theURL != mOpeningURL))
+	if ((mIsOpeningURL) && (theURL == mOpeningURL)) return true;
+
+	mShutdownOnURLOpen = shutdownOnOpen;
+	mIsOpeningURL = true;
+	mOpeningURL = theURL;
+	mOpeningURLTime = GetTickCount();
+
+	if ((int)ShellExecuteA(NULL, "open", theURL.c_str(), NULL, NULL, SW_SHOWNORMAL) > 32)
 	{
-		mShutdownOnURLOpen = shutdownOnOpen;
-		mIsOpeningURL = true;
-		mOpeningURL = theURL;
-		mOpeningURLTime = GetTickCount();
-
-		if ((int)ShellExecuteA(NULL, "open", theURL.c_str(), NULL, NULL, SW_SHOWNORMAL) > 32)
-		{
-			return true;
-		}
-		else
-		{
-			URLOpenFailed(theURL);
-			return false;
-		}
+		return true;
 	}
-
-	return true;
+	else
+	{
+		URLOpenFailed(theURL);
+		return false;
+	}
 }
 
-std::string SexyAppBase::GetProductVersion(const std::string& thePath)
+string SexyAppBase::GetProductVersion(const string& thePath)
 {
 	// Dynamically Load Version.dll
 	typedef DWORD(APIENTRY* GetFileVersionInfoSizeFunc)(LPSTR lptstrFilename, LPDWORD lpdwHandle);
@@ -1092,7 +1060,7 @@ std::string SexyAppBase::GetProductVersion(const std::string& thePath)
 	}
 
 	// Get Product Version
-	std::string aProductVersion;
+	string aProductVersion;
 
 	uint aSize = aGetFileVersionInfoSizeFunc((char*)thePath.c_str(), 0);
 	if (aSize > 0)
@@ -1142,13 +1110,13 @@ void SexyAppBase::TakeScreenshot()
 		return;
 
 	// Get free image name
-	std::string anImageDir = GetAppDataFolder() + "_screenshots";
+	string anImageDir = GetAppDataFolder() + "_screenshots";
 	MkDir(anImageDir);
 	anImageDir += "/";
 
 	WIN32_FIND_DATAA aData;
 	int aMaxId = 0;
-	std::string anImagePrefix = "image";
+	string anImagePrefix = "image";
 	HANDLE aHandle = FindFirstFileA((anImageDir + "*.png").c_str(), &aData);
 	if (aHandle != INVALID_HANDLE_VALUE)
 	{
@@ -1163,7 +1131,7 @@ void SexyAppBase::TakeScreenshot()
 		} while (FindNextFileA(aHandle, &aData));
 		FindClose(aHandle);
 	}
-	std::string anImageName = anImageDir + anImagePrefix + StrFormat("%d.png", aMaxId + 1);
+	string anImageName = anImageDir + anImagePrefix + StrFormat("%d.png", aMaxId + 1);
 
 	// Capture screen
 	LPDIRECTDRAWSURFACE aSurface = mDDInterface->mDrawSurface;
@@ -1189,43 +1157,6 @@ void SexyAppBase::TakeScreenshot()
 	ImageLib::WritePNGImage(anImageName, &aSaveImage);
 	aSaveImage.mBits = NULL;
 
-
-	/*
-		keybd_event(VK_MENU,0,0,0);
-		keybd_event(VK_SNAPSHOT,0,0,0);
-		keybd_event(VK_MENU,0,KEYEVENTF_KEYUP,0);
-		if (OpenClipboard(mHWnd))
-		{
-			HBITMAP aBitmap = (HBITMAP)GetClipboardData(CF_BITMAP);
-			if (aBitmap!=NULL)
-			{
-				BITMAP anObject;
-				ZeroMemory(&anObject,sizeof(anObject));
-				GetObject(aBitmap,sizeof(anObject),&anObject);
-
-				BITMAPINFO anInfo;
-				ZeroMemory(&anInfo,sizeof(anInfo));
-				BITMAPINFOHEADER &aHeader = anInfo.bmiHeader;
-				aHeader.biBitCount = 32;
-				aHeader.biPlanes = 1;
-				aHeader.biHeight = -abs(anObject.bmHeight);
-				aHeader.biWidth = abs(anObject.bmWidth);
-				aHeader.biSize = sizeof(aHeader);
-				aHeader.biSizeImage = aHeader.biHeight*aHeader.biWidth*4;
-				ImageLib::Image aSaveImage;
-				aSaveImage.mBits = new DWORD[abs(anObject.bmWidth*anObject.bmHeight)];
-				aSaveImage.mWidth = abs(anObject.bmWidth);
-				aSaveImage.mHeight = abs(anObject.bmHeight);
-
-				HDC aDC = GetDC(NULL);
-				if (GetDIBits(aDC,aBitmap,0,aSaveImage.mHeight,aSaveImage.mBits,&anInfo,DIB_RGB_COLORS))
-					ImageLib::WritePNGImage(anImageName, &aSaveImage);
-
-				ReleaseDC(NULL,aDC);
-			}
-			CloseClipboard();
-		}*/
-
 	ClearUpdateBacklog();
 }
 
@@ -1240,13 +1171,13 @@ void SexyAppBase::DumpProgramInfo()
 		Sleep(100);
 	}
 
-	std::fstream aDumpStream((GetAppDataFolder() + "_dump\\imagelist.html").c_str(), std::ios::out);
+	fstream aDumpStream((GetAppDataFolder() + "_dump\\imagelist.html").c_str(), ios::out);
 
 	time_t aTime;
 	time(&aTime);
 	tm* aTM = localtime(&aTime);
 
-	aDumpStream << "<HTML><BODY BGCOLOR=EEEEFF><CENTER><FONT SIZE=+2><B>" << asctime(aTM) << "</B></FONT><BR>" << std::endl;
+	aDumpStream << "<HTML><BODY BGCOLOR=EEEEFF><CENTER><FONT SIZE=+2><B>" << asctime(aTM) << "</B></FONT><BR>" << endl;
 
 	int anImgNum = 0;
 
@@ -1258,7 +1189,7 @@ void SexyAppBase::DumpProgramInfo()
 	anImageLibImage.mHeight = aThumbHeight;
 	anImageLibImage.mBits = new unsigned long[aThumbWidth * aThumbHeight];
 
-	typedef std::multimap<int, MemoryImage*, std::greater<int> > SortedImageMap;
+	typedef multimap<int, MemoryImage*, greater<int> > SortedImageMap;
 
 	int aTotalMemory = 0;
 
@@ -1283,10 +1214,13 @@ void SexyAppBase::DumpProgramInfo()
 		int aMemorySize = 0;
 		if (aMemoryImage->mBits != NULL)
 			aBitsMemory = aNumPixels * 4;
+
 		if ((aDDImage != NULL) && (aDDImage->mSurface != NULL))
 			aSurfaceMemory = aNumPixels * 4; // Assume 32bit screen...
+
 		if (aMemoryImage->mColorTable != NULL)
 			aPalletizedMemory = aNumPixels + 256 * 4;
+
 		if (aMemoryImage->mNativeAlphaData != NULL)
 		{
 			if (aMemoryImage->mColorTable != NULL)
@@ -1294,10 +1228,13 @@ void SexyAppBase::DumpProgramInfo()
 			else
 				aNativeAlphaMemory = aNumPixels * 4;
 		}
+
 		if (aMemoryImage->mRLAlphaData != NULL)
 			aRLAlphaMemory = aNumPixels;
+
 		if (aMemoryImage->mRLAdditiveData != NULL)
 			aRLAdditiveMemory = aNumPixels;
+
 		if (aMemoryImage->mD3DData != NULL)
 			aTextureMemory += ((TextureData*)aMemoryImage->mD3DData)->mTexMemSize;
 
@@ -1332,9 +1269,9 @@ void SexyAppBase::DumpProgramInfo()
 		char aThumbName[256];
 		sprintf(aThumbName, "thumb%04d.jpg", anImgNum);
 
-		aDumpStream << "<TR>" << std::endl;
+		aDumpStream << "<TR>" << endl;
 
-		aDumpStream << "<TD><A HREF=" << anImageName << "><IMG SRC=" << aThumbName << " WIDTH=" << aThumbWidth << " HEIGHT=" << aThumbHeight << "></A></TD>" << std::endl;
+		aDumpStream << "<TD><A HREF=" << anImageName << "><IMG SRC=" << aThumbName << " WIDTH=" << aThumbWidth << " HEIGHT=" << aThumbHeight << "></A></TD>" << endl;
 
 		int aNumPixels = aMemoryImage->mWidth * aMemoryImage->mHeight;
 
@@ -1349,14 +1286,17 @@ void SexyAppBase::DumpProgramInfo()
 		int aRLAlphaMemory = 0;
 		int aRLAdditiveMemory = 0;
 		int aTextureMemory = 0;
-		std::string aTextureFormatName;
+		string aTextureFormatName;
 
 		if (aMemoryImage->mBits != NULL)
 			aBitsMemory = aNumPixels * 4;
+
 		if ((aDDImage != NULL) && (aDDImage->mSurface != NULL))
 			aSurfaceMemory = aNumPixels * 4; // Assume 32bit screen...
+
 		if (aMemoryImage->mColorTable != NULL)
 			aPalletizedMemory = aNumPixels + 256 * 4;
+
 		if (aMemoryImage->mNativeAlphaData != NULL)
 		{
 			if (aMemoryImage->mColorTable != NULL)
@@ -1364,20 +1304,27 @@ void SexyAppBase::DumpProgramInfo()
 			else
 				aNativeAlphaMemory = aNumPixels * 4;
 		}
+
 		if (aMemoryImage->mRLAlphaData != NULL)
 			aRLAlphaMemory = aNumPixels;
+
 		if (aMemoryImage->mRLAdditiveData != NULL)
 			aRLAdditiveMemory = aNumPixels;
+
 		if (aMemoryImage->mD3DData != NULL)
 		{
 			aTextureMemory += ((TextureData*)aMemoryImage->mD3DData)->mTexMemSize;
 
 			switch (((TextureData*)aMemoryImage->mD3DData)->mPixelFormat)
 			{
-			case PixelFormat_A8R8G8B8: aTextureFormatName = "A8R8G8B8"; break;
-			case PixelFormat_A4R4G4B4: aTextureFormatName = "A4R4G4B4"; break;
-			case PixelFormat_R5G6B5: aTextureFormatName = "R5G6B5"; break;
-			case PixelFormat_Palette8: aTextureFormatName = "Palette8"; break;
+				case PixelFormat_A8R8G8B8: aTextureFormatName = "A8R8G8B8"; 
+					break;
+				case PixelFormat_A4R4G4B4: aTextureFormatName = "A4R4G4B4"; 
+					break;
+				case PixelFormat_R5G6B5: aTextureFormatName = "R5G6B5"; 
+					break;
+				case PixelFormat_Palette8: aTextureFormatName = "Palette8"; 
+					break;
 			}
 		}
 
@@ -1394,23 +1341,23 @@ void SexyAppBase::DumpProgramInfo()
 
 		char aStr[256];
 		sprintf(aStr, "%d x %d<BR>%s bytes", aMemoryImage->mWidth, aMemoryImage->mHeight, CommaSeperate(aMemorySize).c_str());
-		aDumpStream << "<TD ALIGN=RIGHT>" << aStr << "</TD>" << std::endl;
+		aDumpStream << "<TD ALIGN=RIGHT>" << aStr << "</TD>" << endl;
 
-		aDumpStream << "<TD>" << SexyStringToString(((aBitsMemory != 0) ? _S("mBits<BR>") + CommaSeperate(aBitsMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aPalletizedMemory != 0) ? _S("Palletized<BR>") + CommaSeperate(aPalletizedMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aSurfaceMemory != 0) ? _S("DDSurface<BR>") + CommaSeperate(aSurfaceMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mD3DData != NULL) ? _S("Texture<BR>") + StringToSexyString(aTextureFormatName) + _S("<BR>") + CommaSeperate(aTextureMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aBitsMemory != 0) ? _S("mBits<BR>") + CommaSeperate(aBitsMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aPalletizedMemory != 0) ? _S("Palletized<BR>") + CommaSeperate(aPalletizedMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aSurfaceMemory != 0) ? _S("DDSurface<BR>") + CommaSeperate(aSurfaceMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mD3DData != NULL) ? _S("Texture<BR>") + StringToSexyString(aTextureFormatName) + _S("<BR>") + CommaSeperate(aTextureMemory) : _S("&nbsp;"))) << "</TD>" << endl;
 
-		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mIsVolatile) ? _S("Volatile") : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mForcedMode) ? _S("Forced") : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mHasAlpha) ? _S("HasAlpha") : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mHasTrans) ? _S("HasTrans") : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aNativeAlphaMemory != 0) ? _S("NativeAlpha<BR>") + CommaSeperate(aNativeAlphaMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aRLAlphaMemory != 0) ? _S("RLAlpha<BR>") + CommaSeperate(aRLAlphaMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aRLAdditiveMemory != 0) ? _S("RLAdditive<BR>") + CommaSeperate(aRLAdditiveMemory) : _S("&nbsp;"))) << "</TD>" << std::endl;
-		aDumpStream << "<TD>" << (aMemoryImage->mFilePath.empty() ? "&nbsp;" : aMemoryImage->mFilePath) << "</TD>" << std::endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mIsVolatile) ? _S("Volatile") : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mForcedMode) ? _S("Forced") : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mHasAlpha) ? _S("HasAlpha") : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mHasTrans) ? _S("HasTrans") : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aNativeAlphaMemory != 0) ? _S("NativeAlpha<BR>") + CommaSeperate(aNativeAlphaMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aRLAlphaMemory != 0) ? _S("RLAlpha<BR>") + CommaSeperate(aRLAlphaMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aRLAdditiveMemory != 0) ? _S("RLAdditive<BR>") + CommaSeperate(aRLAdditiveMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << (aMemoryImage->mFilePath.empty() ? "&nbsp;" : aMemoryImage->mFilePath) << "</TD>" << endl;
 
-		aDumpStream << "</TR>" << std::endl;
+		aDumpStream << "</TR>" << endl;
 
 		// Write thumb
 
@@ -1429,7 +1376,7 @@ void SexyAppBase::DumpProgramInfo()
 				*(aThumbBitsPtr++) = aBits[aSrcX + (aSrcY * aCopiedImage.mWidth)];
 			}
 
-		ImageLib::WriteJPEGImage((GetAppDataFolder() + std::string("_dump\\") + aThumbName).c_str(), &anImageLibImage);
+		ImageLib::WriteJPEGImage((GetAppDataFolder() + string("_dump\\") + aThumbName).c_str(), &anImageLibImage);
 
 		// Write high resolution image
 
@@ -1438,7 +1385,7 @@ void SexyAppBase::DumpProgramInfo()
 		anFullImage.mWidth = aCopiedImage.GetWidth();
 		anFullImage.mHeight = aCopiedImage.GetHeight();
 
-		ImageLib::WritePNGImage((GetAppDataFolder() + std::string("_dump\\") + anImageName).c_str(), &anFullImage);
+		ImageLib::WritePNGImage((GetAppDataFolder() + string("_dump\\") + anImageName).c_str(), &anFullImage);
 
 		anFullImage.mBits = NULL;
 
@@ -1447,36 +1394,39 @@ void SexyAppBase::DumpProgramInfo()
 		aSortedItr++;
 	}
 
-	aDumpStream << "<TD>Totals</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalMemorySize)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalBitsMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalPalletizedMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalSurfaceMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalTextureMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>&nbsp;</TD>" << std::endl;
-	aDumpStream << "<TD>&nbsp;</TD>" << std::endl;
-	aDumpStream << "<TD>&nbsp;</TD>" << std::endl;
-	aDumpStream << "<TD>&nbsp;</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalNativeAlphaMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalRLAlphaMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalRLAdditiveMemory)) << "</TD>" << std::endl;
-	aDumpStream << "<TD>&nbsp;</TD>" << std::endl;
+	aDumpStream << "<TD>Totals</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalMemorySize)) << "</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalBitsMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalPalletizedMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalSurfaceMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalTextureMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>&nbsp;</TD>" << endl;
+	aDumpStream << "<TD>&nbsp;</TD>" << endl;
+	aDumpStream << "<TD>&nbsp;</TD>" << endl;
+	aDumpStream << "<TD>&nbsp;</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalNativeAlphaMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalRLAlphaMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>" << SexyStringToString(CommaSeperate(aTotalRLAdditiveMemory)) << "</TD>" << endl;
+	aDumpStream << "<TD>&nbsp;</TD>" << endl;
 
-	aDumpStream << "</TABLE></CENTER></BODY></HTML>" << std::endl;
+	aDumpStream << "</TABLE></CENTER></BODY></HTML>" << endl;
 }
 
 double SexyAppBase::GetLoadingThreadProgress()
 {
 	if (mLoaded)
 		return 1.0;
+
 	if (!mLoadingThreadStarted)
 		return 0.0;
+
 	if (mNumLoadingThreadTasks == 0)
 		return 0.0;
+
 	return min(mCompletedLoadingThreadTasks / (double)mNumLoadingThreadTasks, 1.0);
 }
 
-bool SexyAppBase::RegistryWrite(const std::string& theValueName, ulong theType, const uchar* theValue, ulong theLength)
+bool SexyAppBase::RegistryWrite(const string& theValueName, ulong theType, const uchar* theValue, ulong theLength)
 {
 	if (mRegKey.length() == 0)
 		return false;
@@ -1497,8 +1447,8 @@ bool SexyAppBase::RegistryWrite(const std::string& theValueName, ulong theType, 
 
 	HKEY aGameKey;
 
-	std::string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
-	std::string aValueName;
+	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
+	string aValueName;
 
 	int aSlashPos = (int)theValueName.rfind('\\');
 	if (aSlashPos != -1)
@@ -1521,15 +1471,12 @@ bool SexyAppBase::RegistryWrite(const std::string& theValueName, ulong theType, 
 
 	if (aResult != ERROR_SUCCESS)
 	{
-		if (mRecordingDemoBuffer)
-		{
-			WriteDemoTimingBlock();
-			mDemoBuffer.WriteNumBits(0, 1);
-			mDemoBuffer.WriteNumBits(DEMO_REGISTRY_WRITE, 5);
-			mDemoBuffer.WriteNumBits(0, 1); // failure
-		}
+		if (!mRecordingDemoBuffer) return false;
 
-		return false;
+		WriteDemoTimingBlock();
+		mDemoBuffer.WriteNumBits(0, 1);
+		mDemoBuffer.WriteNumBits(DEMO_REGISTRY_WRITE, 5);
+		mDemoBuffer.WriteNumBits(0, 1); // failure
 	}
 
 	RegSetValueExA(aGameKey, aValueName.c_str(), 0, theType, theValue, theLength);
@@ -1546,23 +1493,23 @@ bool SexyAppBase::RegistryWrite(const std::string& theValueName, ulong theType, 
 	return true;
 }
 
-bool SexyAppBase::RegistryWriteString(const std::string& theValueName, const std::string& theString)
+bool SexyAppBase::RegistryWriteString(const string& theValueName, const string& theString)
 {
 	return RegistryWrite(theValueName, REG_SZ, (uchar*)theString.c_str(), theString.length());
 }
 
-bool SexyAppBase::RegistryWriteInteger(const std::string& theValueName, int theValue)
+bool SexyAppBase::RegistryWriteInteger(const string& theValueName, int theValue)
 {
 	return RegistryWrite(theValueName, REG_DWORD, (uchar*)&theValue, sizeof(int));
 }
 
-bool SexyAppBase::RegistryWriteBoolean(const std::string& theValueName, bool theValue)
+bool SexyAppBase::RegistryWriteBoolean(const string& theValueName, bool theValue)
 {
 	int aValue = theValue ? 1 : 0;
 	return RegistryWrite(theValueName, REG_DWORD, (uchar*)&aValue, sizeof(int));
 }
 
-bool SexyAppBase::RegistryWriteData(const std::string& theValueName, const uchar* theValue, ulong theLength)
+bool SexyAppBase::RegistryWriteData(const string& theValueName, const uchar* theValue, ulong theLength)
 {
 	return RegistryWrite(theValueName, REG_BINARY, (uchar*)theValue, theLength);
 }
@@ -1582,7 +1529,7 @@ void SexyAppBase::WriteToRegistry()
 
 bool SexyAppBase::RegistryEraseKey(const SexyString& _theKeyName)
 {
-	std::string theKeyName = SexyStringToStringFast(_theKeyName);
+	string theKeyName = SexyStringToStringFast(_theKeyName);
 	if (mRegKey.length() == 0)
 		return false;
 
@@ -1600,20 +1547,17 @@ bool SexyAppBase::RegistryEraseKey(const SexyString& _theKeyName)
 		return mDemoBuffer.ReadNumBits(1, false) != 0;
 	}
 
-	std::string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey) + "\\" + theKeyName;
+	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey) + "\\" + theKeyName;
 
 	int aResult = RegDeleteKeyA(HKEY_CURRENT_USER, aKeyName.c_str());
 	if (aResult != ERROR_SUCCESS)
 	{
-		if (mRecordingDemoBuffer)
-		{
-			WriteDemoTimingBlock();
-			mDemoBuffer.WriteNumBits(0, 1);
-			mDemoBuffer.WriteNumBits(DEMO_REGISTRY_ERASE, 5);
-			mDemoBuffer.WriteNumBits(0, 1); // failure
-		}
+		if (!mRecordingDemoBuffer) return false;
 
-		return false;
+		WriteDemoTimingBlock();
+		mDemoBuffer.WriteNumBits(0, 1);
+		mDemoBuffer.WriteNumBits(DEMO_REGISTRY_ERASE, 5);
+		mDemoBuffer.WriteNumBits(0, 1); // failure
 	}
 
 	if (mRecordingDemoBuffer)
@@ -1629,13 +1573,13 @@ bool SexyAppBase::RegistryEraseKey(const SexyString& _theKeyName)
 
 void SexyAppBase::RegistryEraseValue(const SexyString& _theValueName)
 {
-	std::string theValueName = SexyStringToStringFast(_theValueName);
+	string theValueName = SexyStringToStringFast(_theValueName);
 	if (mRegKey.length() == 0)
 		return;
 
 	HKEY aGameKey;
-	std::string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
-	std::string aValueName;
+	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
+	string aValueName;
 
 	int aSlashPos = (int)theValueName.rfind('\\');
 	if (aSlashPos != -1)
@@ -1656,7 +1600,7 @@ void SexyAppBase::RegistryEraseValue(const SexyString& _theValueName)
 	}
 }
 
-bool SexyAppBase::RegistryGetSubKeys(const std::string& theKeyName, StringVector* theSubKeys)
+bool SexyAppBase::RegistryGetSubKeys(const string& theKeyName, StringVector* theSubKeys)
 {
 	theSubKeys->clear();
 
@@ -1685,63 +1629,59 @@ bool SexyAppBase::RegistryGetSubKeys(const std::string& theKeyName, StringVector
 
 		return true;
 	}
-	else
+
+	HKEY aKey;
+
+	string aKeyName = RemoveTrailingSlash(RemoveTrailingSlash("SOFTWARE\\" + mRegKey) + "\\" + theKeyName);
+	int aResult = RegOpenKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, KEY_READ, &aKey);
+
+	if (aResult == ERROR_SUCCESS)
 	{
-		HKEY aKey;
-
-		std::string aKeyName = RemoveTrailingSlash(RemoveTrailingSlash("SOFTWARE\\" + mRegKey) + "\\" + theKeyName);
-		int aResult = RegOpenKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, KEY_READ, &aKey);
-
-		if (aResult == ERROR_SUCCESS)
+		for (int anIdx = 0; ; anIdx++)
 		{
-			for (int anIdx = 0; ; anIdx++)
-			{
-				char aStr[1024];
+			char aStr[1024];
 
-				aResult = RegEnumKeyA(aKey, anIdx, aStr, 1024);
-				if (aResult != ERROR_SUCCESS)
-					break;
+			aResult = RegEnumKeyA(aKey, anIdx, aStr, 1024);
+			if (aResult != ERROR_SUCCESS)
+				break;
 
-				theSubKeys->push_back(aStr);
-			}
-
-			RegCloseKey(aKey);
-
-			if (mRecordingDemoBuffer)
-			{
-				WriteDemoTimingBlock();
-				mDemoBuffer.WriteNumBits(0, 1);
-				mDemoBuffer.WriteNumBits(DEMO_REGISTRY_GETSUBKEYS, 5);
-				mDemoBuffer.WriteNumBits(1, 1); // success
-				mDemoBuffer.WriteLong(theSubKeys->size());
-
-				for (int i = 0; i < (int)theSubKeys->size(); i++)
-					mDemoBuffer.WriteString((*theSubKeys)[i]);
-			}
-
-			return true;
+			theSubKeys->push_back(aStr);
 		}
-		else
+
+		RegCloseKey(aKey);
+
+		if (mRecordingDemoBuffer)
 		{
-			if (mRecordingDemoBuffer)
-			{
-				WriteDemoTimingBlock();
-				mDemoBuffer.WriteNumBits(0, 1);
-				mDemoBuffer.WriteNumBits(DEMO_REGISTRY_GETSUBKEYS, 5);
-				mDemoBuffer.WriteNumBits(0, 1); // failure
-			}
+			WriteDemoTimingBlock();
+			mDemoBuffer.WriteNumBits(0, 1);
+			mDemoBuffer.WriteNumBits(DEMO_REGISTRY_GETSUBKEYS, 5);
+			mDemoBuffer.WriteNumBits(1, 1); // success
+			mDemoBuffer.WriteLong(theSubKeys->size());
 
-			return false;
+			for (int i = 0; i < (int)theSubKeys->size(); i++)
+				mDemoBuffer.WriteString((*theSubKeys)[i]);
 		}
+
+		return true;
 	}
+
+	if (mRecordingDemoBuffer)
+	{
+		WriteDemoTimingBlock();
+		mDemoBuffer.WriteNumBits(0, 1);
+		mDemoBuffer.WriteNumBits(DEMO_REGISTRY_GETSUBKEYS, 5);
+		mDemoBuffer.WriteNumBits(0, 1); // failure
+	}
+
+	return false;
 }
 
-bool SexyAppBase::RegistryRead(const std::string& theValueName, ulong* theType, uchar* theValue, ulong* theLength)
+bool SexyAppBase::RegistryRead(const string& theValueName, ulong* theType, uchar* theValue, ulong* theLength)
 {
 	return RegistryReadKey(theValueName, theType, theValue, theLength, HKEY_CURRENT_USER);
 }
 
-bool SexyAppBase::RegistryReadKey(const std::string& theValueName, ulong* theType, uchar* theValue, ulong* theLength, HKEY theKey)
+bool SexyAppBase::RegistryReadKey(const string& theValueName, ulong* theType, uchar* theValue, ulong* theLength, HKEY theKey)
 {
 	if (mRegKey.length() == 0)
 		return false;
@@ -1782,8 +1722,8 @@ bool SexyAppBase::RegistryReadKey(const std::string& theValueName, ulong* theTyp
 	{
 		HKEY aGameKey;
 
-		std::string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
-		std::string aValueName;
+		string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
+		string aValueName;
 
 		int aSlashPos = (int)theValueName.rfind('\\');
 		if (aSlashPos != -1)
@@ -1830,7 +1770,7 @@ bool SexyAppBase::RegistryReadKey(const std::string& theValueName, ulong* theTyp
 	}
 }
 
-bool SexyAppBase::RegistryReadString(const std::string& theKey, std::string* theString)
+bool SexyAppBase::RegistryReadString(const string& theKey, string* theString)
 {
 	char aStr[1024];
 
@@ -1848,7 +1788,7 @@ bool SexyAppBase::RegistryReadString(const std::string& theKey, std::string* the
 	return true;
 }
 
-bool SexyAppBase::RegistryReadInteger(const std::string& theKey, int* theValue)
+bool SexyAppBase::RegistryReadInteger(const string& theKey, int* theValue)
 {
 	ulong aType;
 	ulong aLong;
@@ -1863,7 +1803,7 @@ bool SexyAppBase::RegistryReadInteger(const std::string& theKey, int* theValue)
 	return true;
 }
 
-bool SexyAppBase::RegistryReadBoolean(const std::string& theKey, bool* theValue)
+bool SexyAppBase::RegistryReadBoolean(const string& theKey, bool* theValue)
 {
 	int aValue;
 	if (!RegistryReadInteger(theKey, &aValue))
@@ -1873,7 +1813,7 @@ bool SexyAppBase::RegistryReadBoolean(const std::string& theKey, bool* theValue)
 	return true;
 }
 
-bool SexyAppBase::RegistryReadData(const std::string& theKey, uchar* theValue, ulong* theLength)
+bool SexyAppBase::RegistryReadData(const string& theKey, uchar* theValue, ulong* theLength)
 {
 	ulong aType;
 	ulong aLen = *theLength;
@@ -1922,7 +1862,7 @@ void SexyAppBase::ReadFromRegistry()
 		RegistryWriteInteger("InProgress", 1);
 }
 
-bool SexyAppBase::WriteBytesToFile(const std::string& theFileName, const void* theData, unsigned long theDataLen)
+bool SexyAppBase::WriteBytesToFile(const string& theFileName, const void* theData, unsigned long theDataLen)
 {
 	if (mPlayingDemoBuffer)
 	{
@@ -1972,13 +1912,13 @@ bool SexyAppBase::WriteBytesToFile(const std::string& theFileName, const void* t
 	return true;
 }
 
-bool SexyAppBase::WriteBufferToFile(const std::string& theFileName, const Buffer* theBuffer)
+bool SexyAppBase::WriteBufferToFile(const string& theFileName, const Buffer* theBuffer)
 {
 	return WriteBytesToFile(theFileName, theBuffer->GetDataPtr(), theBuffer->GetDataLen());
 }
 
 
-bool SexyAppBase::ReadBufferFromFile(const std::string& theFileName, Buffer* theBuffer, bool dontWriteToDemo)
+bool SexyAppBase::ReadBufferFromFile(const string& theFileName, Buffer* theBuffer, bool dontWriteToDemo)
 {
 	if ((mPlayingDemoBuffer) && (!dontWriteToDemo))
 	{
@@ -2048,7 +1988,7 @@ bool SexyAppBase::ReadBufferFromFile(const std::string& theFileName, Buffer* the
 	}
 }
 
-bool SexyAppBase::FileExists(const std::string& theFileName)
+bool SexyAppBase::FileExists(const string& theFileName)
 {
 	if (mPlayingDemoBuffer)
 	{
@@ -2084,7 +2024,7 @@ bool SexyAppBase::FileExists(const std::string& theFileName)
 	}
 }
 
-bool SexyAppBase::EraseFile(const std::string& theFileName)
+bool SexyAppBase::EraseFile(const string& theFileName)
 {
 	if (mPlayingDemoBuffer)
 		return true;
@@ -2100,7 +2040,7 @@ void SexyAppBase::SEHOccured()
 	EnforceCursor();
 }
 
-std::string SexyAppBase::GetGameSEHInfo()
+string SexyAppBase::GetGameSEHInfo()
 {
 	int aSecLoaded = (GetTickCount() - mTimeLoaded) / 1000;
 
@@ -2110,13 +2050,13 @@ std::string SexyAppBase::GetGameSEHInfo()
 	char aThreadIdStr[16];
 	sprintf(aThreadIdStr, "%X", mPrimaryThreadId);
 
-	std::string anInfoString =
+	string anInfoString =
 		"Product: " + mProdName + "\r\n" +
 		"Version: " + mProductVersion + "\r\n";
 
 	anInfoString +=
-		"Time Loaded: " + std::string(aTimeStr) + "\r\n"
-		"Fullscreen: " + (mIsWindowed ? std::string("No") : std::string("Yes")) + "\r\n"
+		"Time Loaded: " + string(aTimeStr) + "\r\n"
+		"Fullscreen: " + (mIsWindowed ? string("No") : string("Yes")) + "\r\n"
 		"Primary ThreadId: " + aThreadIdStr + "\r\n";
 
 	return anInfoString;
@@ -2286,7 +2226,7 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 		gD3DInterfacePreDrawError = false; // this predraw error happens naturally when ddraw is failing
 		if (!gIsFailing)
 		{
-			//gDebugStream << GetTickCount() << " Redraw failed!" << std::endl;
+			//gDebugStream << GetTickCount() << " Redraw failed!" << endl;
 			gIsFailing = true;
 		}
 
@@ -2304,11 +2244,11 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 
 			int aResult = InitDDInterface();
 
-			//gDebugStream << GetTickCount() << " ReInit..." << std::endl;
+			//gDebugStream << GetTickCount() << " ReInit..." << endl;
 
 			if ((mIsWindowed) && (aResult == DDInterface::RESULT_INVALID_COLORDEPTH))
 			{
-				//gDebugStream << GetTickCount() << "ReInit Invalid Colordepth" << std::endl;
+				//gDebugStream << GetTickCount() << "ReInit Invalid Colordepth" << endl;
 				if (!mActive) // don't switch to full screen if not active app
 					return;
 
@@ -2323,7 +2263,7 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 			}
 			else if (aResult != DDInterface::RESULT_OK)
 			{
-				//gDebugStream << GetTickCount() << " ReInit Failed" << std::endl;
+				//gDebugStream << GetTickCount() << " ReInit Failed" << endl;
 				//Fail("Failed to initialize DirectDraw");
 				//Sleep(1000);				
 
@@ -2342,7 +2282,7 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 	{
 		if (gIsFailing)
 		{
-			//gDebugStream << GetTickCount() << " Redraw succeeded" << std::endl;
+			//gDebugStream << GetTickCount() << " Redraw succeeded" << endl;
 			gIsFailing = false;
 			aRetryTick = 0;
 		}
@@ -2668,7 +2608,7 @@ bool SexyAppBase::DrawDirtyStuff()
 	}
 }
 
-void SexyAppBase::LogScreenSaverError(const std::string& theError)
+void SexyAppBase::LogScreenSaverError(const string& theError)
 {
 	static bool firstTime = true;
 	char aBuf[512];
@@ -2711,7 +2651,7 @@ void SexyAppBase::EndPopup()
 	}
 }
 
-int SexyAppBase::MsgBox(const std::string& theText, const std::string& theTitle, int theFlags)
+int SexyAppBase::MsgBox(const string& theText, const string& theTitle, int theFlags)
 {
 	//	if (mDDInterface && mDDInterface->mDD)
 	//		mDDInterface->mDD->FlipToGDISurface();
@@ -2728,7 +2668,7 @@ int SexyAppBase::MsgBox(const std::string& theText, const std::string& theTitle,
 	return aResult;
 }
 
-int SexyAppBase::MsgBox(const std::wstring& theText, const std::wstring& theTitle, int theFlags)
+int SexyAppBase::MsgBox(const wstring& theText, const wstring& theTitle, int theFlags)
 {
 	//	if (mDDInterface && mDDInterface->mDD)
 	//		mDDInterface->mDD->FlipToGDISurface();
@@ -2745,7 +2685,7 @@ int SexyAppBase::MsgBox(const std::wstring& theText, const std::wstring& theTitl
 	return aResult;
 }
 
-void SexyAppBase::Popup(const std::string& theString)
+void SexyAppBase::Popup(const string& theString)
 {
 	if (IsScreenSaver())
 	{
@@ -2759,7 +2699,7 @@ void SexyAppBase::Popup(const std::string& theString)
 	EndPopup();
 }
 
-void SexyAppBase::Popup(const std::wstring& theString)
+void SexyAppBase::Popup(const wstring& theString)
 {
 	if (IsScreenSaver())
 	{
@@ -2965,7 +2905,7 @@ static INT_PTR CALLBACK JumpToTimeDialogProc(HWND hwnd, UINT msg, WPARAM wParam,
 	{
 		HWND anEdit = GetDlgItem(hwnd, 100);
 		HKEY aGameKey;
-		std::string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + gSexyAppBase->mRegKey);
+		string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + gSexyAppBase->mRegKey);
 		if (RegOpenKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, KEY_READ | KEY_WRITE, &aGameKey) == ERROR_SUCCESS)
 		{
 			char aBuf[1024];
@@ -2997,7 +2937,7 @@ static INT_PTR CALLBACK JumpToTimeDialogProc(HWND hwnd, UINT msg, WPARAM wParam,
 				GetWindowTextA(anEdit, aBuf, 500);
 
 				HKEY aGameKey;
-				std::string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + gSexyAppBase->mRegKey);
+				string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + gSexyAppBase->mRegKey);
 				if (RegOpenKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, KEY_READ | KEY_WRITE, &aGameKey) == ERROR_SUCCESS)
 				{
 					RegSetValueExA(aGameKey, "DemoJumpTime", 0, REG_SZ, (const BYTE*)aBuf, strlen(aBuf) + 1);
@@ -3955,8 +3895,8 @@ void SexyAppBase::ShowMemoryUsage()
 	}
 
 	MemoryImageSet::iterator anItr = mMemoryImageSet.begin();
-	typedef std::pair<int, int> FormatUsage;
-	typedef std::map<PixelFormat, FormatUsage> FormatMap;
+	typedef pair<int, int> FormatUsage;
+	typedef map<PixelFormat, FormatUsage> FormatMap;
 	FormatMap aFormatMap;
 	int aTextureMemory = 0;
 	while (anItr != mMemoryImageSet.end())
@@ -3975,7 +3915,7 @@ void SexyAppBase::ShowMemoryUsage()
 		++anItr;
 	}
 
-	std::string aStr;
+	string aStr;
 
 	const char* aDesc;
 	if (Is3DAccelerationRecommended())
@@ -4595,7 +4535,7 @@ void SexyAppBase::Done3dTesting()
 }
 
 // return file name that you want to upload
-std::string	SexyAppBase::NotifyCrashHook()
+string	SexyAppBase::NotifyCrashHook()
 {
 	return "";
 }
@@ -5648,13 +5588,13 @@ void SexyAppBase::Start()
 	WriteToRegistry();
 }
 
-bool SexyAppBase::CheckSignature(const Buffer& theBuffer, const std::string& theFileName)
+bool SexyAppBase::CheckSignature(const Buffer& theBuffer, const string& theFileName)
 {
 	// Add your own signature checking code here
 	return false;
 }
 
-bool SexyAppBase::LoadProperties(const std::string& theFileName, bool required, bool checkSig)
+bool SexyAppBase::LoadProperties(const string& theFileName, bool required, bool checkSig)
 {
 	Buffer aBuffer;
 	if (!ReadBufferFromFile(theFileName, &aBuffer))
@@ -5707,7 +5647,7 @@ void SexyAppBase::ShowResourceError(bool doExit)
 		DoExit(0);
 }
 
-bool SexyAppBase::GetBoolean(const std::string& theId)
+bool SexyAppBase::GetBoolean(const string& theId)
 {
 	StringBoolMap::iterator anItr = mBoolProperties.find(theId);
 	DBG_ASSERTE(anItr != mBoolProperties.end());
@@ -5718,7 +5658,7 @@ bool SexyAppBase::GetBoolean(const std::string& theId)
 		return false;
 }
 
-bool SexyAppBase::GetBoolean(const std::string& theId, bool theDefault)
+bool SexyAppBase::GetBoolean(const string& theId, bool theDefault)
 {
 	StringBoolMap::iterator anItr = mBoolProperties.find(theId);
 
@@ -5728,7 +5668,7 @@ bool SexyAppBase::GetBoolean(const std::string& theId, bool theDefault)
 		return theDefault;
 }
 
-int SexyAppBase::GetInteger(const std::string& theId)
+int SexyAppBase::GetInteger(const string& theId)
 {
 	StringIntMap::iterator anItr = mIntProperties.find(theId);
 	DBG_ASSERTE(anItr != mIntProperties.end());
@@ -5739,7 +5679,7 @@ int SexyAppBase::GetInteger(const std::string& theId)
 		return false;
 }
 
-int SexyAppBase::GetInteger(const std::string& theId, int theDefault)
+int SexyAppBase::GetInteger(const string& theId, int theDefault)
 {
 	StringIntMap::iterator anItr = mIntProperties.find(theId);
 
@@ -5749,7 +5689,7 @@ int SexyAppBase::GetInteger(const std::string& theId, int theDefault)
 		return theDefault;
 }
 
-double SexyAppBase::GetDouble(const std::string& theId)
+double SexyAppBase::GetDouble(const string& theId)
 {
 	StringDoubleMap::iterator anItr = mDoubleProperties.find(theId);
 	DBG_ASSERTE(anItr != mDoubleProperties.end());
@@ -5760,7 +5700,7 @@ double SexyAppBase::GetDouble(const std::string& theId)
 		return false;
 }
 
-double SexyAppBase::GetDouble(const std::string& theId, double theDefault)
+double SexyAppBase::GetDouble(const string& theId, double theDefault)
 {
 	StringDoubleMap::iterator anItr = mDoubleProperties.find(theId);
 
@@ -5770,7 +5710,7 @@ double SexyAppBase::GetDouble(const std::string& theId, double theDefault)
 		return theDefault;
 }
 
-SexyString SexyAppBase::GetString(const std::string& theId)
+SexyString SexyAppBase::GetString(const string& theId)
 {
 	StringWStringMap::iterator anItr = mStringProperties.find(theId);
 	DBG_ASSERTE(anItr != mStringProperties.end());
@@ -5781,7 +5721,7 @@ SexyString SexyAppBase::GetString(const std::string& theId)
 		return _S("");
 }
 
-SexyString SexyAppBase::GetString(const std::string& theId, const SexyString& theDefault)
+SexyString SexyAppBase::GetString(const string& theId, const SexyString& theDefault)
 {
 	StringWStringMap::iterator anItr = mStringProperties.find(theId);
 
@@ -5791,7 +5731,7 @@ SexyString SexyAppBase::GetString(const std::string& theId, const SexyString& th
 		return theDefault;
 }
 
-StringVector SexyAppBase::GetStringVector(const std::string& theId)
+StringVector SexyAppBase::GetStringVector(const string& theId)
 {
 	StringStringVectorMap::iterator anItr = mStringVectorProperties.find(theId);
 	DBG_ASSERTE(anItr != mStringVectorProperties.end());
@@ -5802,31 +5742,31 @@ StringVector SexyAppBase::GetStringVector(const std::string& theId)
 		return StringVector();
 }
 
-void SexyAppBase::SetString(const std::string& theId, const std::wstring& theValue)
+void SexyAppBase::SetString(const string& theId, const wstring& theValue)
 {
-	std::pair<StringWStringMap::iterator, bool> aPair = mStringProperties.insert(StringWStringMap::value_type(theId, theValue));
+	pair<StringWStringMap::iterator, bool> aPair = mStringProperties.insert(StringWStringMap::value_type(theId, theValue));
 	if (!aPair.second) // Found it, change value
 		aPair.first->second = theValue;
 }
 
 
-void SexyAppBase::SetBoolean(const std::string& theId, bool theValue)
+void SexyAppBase::SetBoolean(const string& theId, bool theValue)
 {
-	std::pair<StringBoolMap::iterator, bool> aPair = mBoolProperties.insert(StringBoolMap::value_type(theId, theValue));
+	pair<StringBoolMap::iterator, bool> aPair = mBoolProperties.insert(StringBoolMap::value_type(theId, theValue));
 	if (!aPair.second) // Found it, change value
 		aPair.first->second = theValue;
 }
 
-void SexyAppBase::SetInteger(const std::string& theId, int theValue)
+void SexyAppBase::SetInteger(const string& theId, int theValue)
 {
-	std::pair<StringIntMap::iterator, bool> aPair = mIntProperties.insert(StringIntMap::value_type(theId, theValue));
+	pair<StringIntMap::iterator, bool> aPair = mIntProperties.insert(StringIntMap::value_type(theId, theValue));
 	if (!aPair.second) // Found it, change value
 		aPair.first->second = theValue;
 }
 
-void SexyAppBase::SetDouble(const std::string& theId, double theValue)
+void SexyAppBase::SetDouble(const string& theId, double theValue)
 {
-	std::pair<StringDoubleMap::iterator, bool> aPair = mDoubleProperties.insert(StringDoubleMap::value_type(theId, theValue));
+	pair<StringDoubleMap::iterator, bool> aPair = mDoubleProperties.insert(StringDoubleMap::value_type(theId, theValue));
 	if (!aPair.second) // Found it, change value
 		aPair.first->second = theValue;
 }
@@ -5852,12 +5792,12 @@ void SexyAppBase::DoParseCmdLine()
 	mCmdLineParsed = true;
 }
 
-void SexyAppBase::ParseCmdLine(const std::string& theCmdLine)
+void SexyAppBase::ParseCmdLine(const string& theCmdLine)
 {
 	// Command line example:  -play -demofile="game demo.dmo"
 	// Results in HandleCmdLineParam("-play", ""); HandleCmdLineParam("-demofile", "game demo.dmo");
-	std::string aCurParamName;
-	std::string aCurParamValue;
+	string aCurParamName;
+	string aCurParamValue;
 
 	int aSpacePos = 0;
 	bool inQuote = false;
@@ -5897,14 +5837,14 @@ void SexyAppBase::ParseCmdLine(const std::string& theCmdLine)
 	}
 }
 
-static int GetMaxDemoFileNum(const std::string& theDemoPrefix, int theMaxToKeep, bool doErase)
+static int GetMaxDemoFileNum(const string& theDemoPrefix, int theMaxToKeep, bool doErase)
 {
 	WIN32_FIND_DATAA aData;
 	HANDLE aHandle = FindFirstFileA((theDemoPrefix + "*.dmo").c_str(), &aData);
 	if (aHandle == INVALID_HANDLE_VALUE)
 		return 0;
 
-	typedef std::set<int> IntSet;
+	typedef set<int> IntSet;
 	IntSet aSet;
 
 	do {
@@ -5927,7 +5867,7 @@ static int GetMaxDemoFileNum(const std::string& theDemoPrefix, int theMaxToKeep,
 	return (*anItr);
 }
 
-void SexyAppBase::HandleCmdLineParam(const std::string& theParamName, const std::string& theParamValue)
+void SexyAppBase::HandleCmdLineParam(const string& theParamName, const string& theParamValue)
 {
 	if (theParamName == "-play")
 	{
@@ -6060,7 +6000,7 @@ void SexyAppBase::Init()
 			char aPath[MAX_PATH];
 			aFunc(NULL, CSIDL_COMMON_APPDATA, NULL, SHGFP_TYPE_CURRENT, aPath);
 
-			std::string aDataPath = RemoveTrailingSlash(aPath) + "\\" + mFullCompanyName + "\\" + mProdName;
+			string aDataPath = RemoveTrailingSlash(aPath) + "\\" + mFullCompanyName + "\\" + mProdName;
 			SetAppDataFolder(aDataPath + "\\");
 			//MkDir(aDataPath);
 			//AllowAllAccess(aDataPath);
@@ -6103,7 +6043,7 @@ void SexyAppBase::Init()
 	// Set up demo recording stuff
 	if (mPlayingDemoBuffer)
 	{
-		std::string anError;
+		string anError;
 		if (!ReadDemoBuffer(anError))
 		{
 			mPlayingDemoBuffer = false;
@@ -6301,7 +6241,7 @@ void SexyAppBase::HandleGameAlreadyRunning()
 	}
 }
 
-void SexyAppBase::CopyToClipboard(const std::string& theString)
+void SexyAppBase::CopyToClipboard(const string& theString)
 {
 	if (mPlayingDemoBuffer)
 		return;
@@ -6334,10 +6274,10 @@ void SexyAppBase::CopyToClipboard(const std::string& theString)
 	}
 }
 
-std::string	SexyAppBase::GetClipboard()
+string	SexyAppBase::GetClipboard()
 {
 	HGLOBAL				aGlobalHandle;
-	std::string			aString;
+	string			aString;
 
 	if (!mPlayingDemoBuffer)
 	{
@@ -6380,7 +6320,7 @@ void SexyAppBase::EnableCustomCursors(bool enabled)
 	EnforceCursor();
 }
 
-Sexy::DDImage* SexyAppBase::GetImage(const std::string& theFileName, bool commitBits)
+Sexy::DDImage* SexyAppBase::GetImage(const string& theFileName, bool commitBits)
 {
 	ImageLib::Image* aLoadedImage = ImageLib::GetImage(theFileName, true);
 
@@ -7015,12 +6955,12 @@ void SexyAppBase::Set3DAcclerated(bool is3D, bool reinit)
 	}
 }
 
-SharedImageRef SexyAppBase::GetSharedImage(const std::string& theFileName, const std::string& theVariant, bool* isNew)
+SharedImageRef SexyAppBase::GetSharedImage(const string& theFileName, const string& theVariant, bool* isNew)
 {
-	std::string anUpperFileName = StringToUpper(theFileName);
-	std::string anUpperVariant = StringToUpper(theVariant);
+	string anUpperFileName = StringToUpper(theFileName);
+	string anUpperVariant = StringToUpper(theVariant);
 
-	std::pair<SharedImageMap::iterator, bool> aResultPair;
+	pair<SharedImageMap::iterator, bool> aResultPair;
 	SharedImageRef aSharedImageRef;
 
 	{
