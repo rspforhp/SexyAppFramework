@@ -670,6 +670,12 @@
     <ClCompile Include="..\ImageLib\zlib\infback.c">
       <Filter>ImageLib\ZLIB</Filter>
     </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg2000\jas_tmr.c">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg2000\jpc_cod.c">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h">
@@ -1030,6 +1036,24 @@
     <ClInclude Include="..\ImageLib\png\pnglibconf.h">
       <Filter>ImageLib\PNG</Filter>
     </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_compiler.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_dll.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_export_cmake.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_log.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_thread.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_tmr.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BltRotatedHelper.inc">
@@ -1086,9 +1110,6 @@
       <Filter>ImageLib\JPEG2000</Filter>
     </CustomBuild>
     <CustomBuild Include="..\ImageLib\jpeg2000\jas_config.h">
-      <Filter>ImageLib\JPEG2000</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\ImageLib\jpeg2000\jas_config2.h">
       <Filter>ImageLib\JPEG2000</Filter>
     </CustomBuild>
     <CustomBuild Include="..\ImageLib\jpeg2000\jas_debug.h">

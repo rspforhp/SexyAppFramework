@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 1999-2000 Image Power, Inc. and the University of
- *   British Columbia.
- * Copyright (c) 2001-2002 Michael David Adams.
- * All rights reserved.
- */
-
 /* __START_OF_JASPER_LICENSE__
  * 
  * JasPer License Version 2.0
@@ -61,22 +54,22 @@
  * __END_OF_JASPER_LICENSE__
  */
 
-/*
- * $Id$
+/*!
+ * @file jas_dll.h
+ * @brief Shared Library Macros
  */
 
-#ifndef JPC_COD_H
-#define JPC_COD_H
+#ifndef JAS_DLL_H
+#define JAS_DLL_H
 
-#include "jpc_t1cod.h"
+/* The configuration header file should be included first. */
+#include "jas_config.h"
 
-/******************************************************************************\
-* Constants.
-\******************************************************************************/
+#include "jas_export_cmake.h"
 
-/* The nominal word size used by this implementation. */
-#define	JPC_PREC	32
-
-void jpc_init(void);
+/* For backward compatibility only. */
+#define JAS_DLLEXPORT JAS_EXPORT
+/* For backward compatibility only. */
+#define JAS_DLLLOCAL JAS_LOCAL
 
 #endif

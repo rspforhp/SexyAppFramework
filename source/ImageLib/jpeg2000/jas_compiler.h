@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 1999-2000 Image Power, Inc. and the University of
- *   British Columbia.
- * Copyright (c) 2001-2002 Michael David Adams.
- * All rights reserved.
- */
-
 /* __START_OF_JASPER_LICENSE__
  * 
  * JasPer License Version 2.0
@@ -61,22 +54,94 @@
  * __END_OF_JASPER_LICENSE__
  */
 
-/*
- * $Id$
+/*!
+ * @file jas_compiler.h
+ * @brief Compiler-related macros.
  */
 
-#ifndef JPC_COD_H
-#define JPC_COD_H
+#ifndef JAS_COMPILER_H
+#define JAS_COMPILER_H
 
-#include "jpc_t1cod.h"
+/* The configuration header file should be included first. */
+#include "jas_config.h"
 
-/******************************************************************************\
-* Constants.
-\******************************************************************************/
+#ifdef _MSC_VER
+#	ifndef __cplusplus
+#		undef inline
+#		define inline __inline
+#	endif
+#endif
 
-/* The nominal word size used by this implementation. */
-#define	JPC_PREC	32
+#if defined(__GNUC__)
+#	define JAS_DEPRECATED __attribute__((deprecated))
+#else
+#	define JAS_DEPRECATED
+#endif
 
-void jpc_init(void);
+#if defined(__GNUC__)
+#	define JAS_ATTRIBUTE_CONST __attribute__((const))
+#else
+#	define JAS_ATTRIBUTE_CONST
+#endif
+
+#if defined(__GNUC__)
+#	define JAS_ATTRIBUTE_PURE __attribute__((pure))
+#else
+#	define JAS_ATTRIBUTE_PURE
+#endif
+
+#if defined(__GNUC__)
+#	define JAS_FORCE_INLINE inline __attribute__((always_inline))
+#else
+#	define JAS_FORCE_INLINE inline
+#endif
+
+#if defined(__GNUC__)
+#	if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
+#		define JAS_UNREACHABLE() __builtin_unreachable()
+#	else
+#		define JAS_UNREACHABLE()
+#	endif
+#elif defined(__clang__)
+#		define JAS_UNREACHABLE() __builtin_unreachable()
+#elif defined(_MSC_VER)
+#	define JAS_UNREACHABLE() __assume(0)
+#else
+#	define JAS_UNREACHABLE()
+#endif
+
+#if defined(__GNUC__)
+#	define JAS_LIKELY(x) __builtin_expect (!!(x), 1)
+#else
+#	define JAS_LIKELY(x) (x)
+#endif
+
+#if defined(__GNUC__)
+#	define JAS_UNLIKELY(x) __builtin_expect (!!(x), 0)
+#else
+#	define JAS_UNLIKELY(x) (x)
+#endif
+
+#if defined(__GNUC__) && __GNUC__ >= 6
+#	define JAS_ATTRIBUTE_DISABLE_UBSAN \
+	  __attribute__((no_sanitize_undefined))
+#elif defined(__clang__)
+#	define JAS_ATTRIBUTE_DISABLE_UBSAN \
+	  __attribute__((no_sanitize("undefined")))
+#else
+#	define JAS_ATTRIBUTE_DISABLE_UBSAN
+#endif
+
+#ifdef __has_builtin
+#define jas_has_builtin(x) __has_builtin(x)
+#else
+#define jas_has_builtin(x) 0
+#endif
+
+/*!
+@brief
+Indicate that a variable may be unused (in order to avoid a compiler warning).
+*/
+#define JAS_UNUSED(x) ((void) x)
 
 #endif

@@ -4,15 +4,17 @@
 #include "png\png.h"
 #include "..\PakLib\PakInterface.h"
 
-#include <windows.h>
-#include <math.h>
-#include <tchar.h>
-
 extern "C"
 {
 #include "jpeg\jpeglib.h"
 #include "jpeg\jerror.h"
 }
+
+#include "jpeg2000/jasper.h"
+
+#include <windows.h>
+#include <math.h>
+#include <tchar.h>
 
 using namespace ImageLib;
 
@@ -349,8 +351,7 @@ Image* GetGIFImage(const std::string& theFileName)
 			}
 			case 0xff:
 			{
-				int
-					loop;
+				int loop;
 
 				/*
 				Read Netscape Loop extension.
@@ -374,21 +375,6 @@ Image* GetGIFImage(const std::string& theFileName)
 		if (c != ',')
 			continue;
 
-		if (image_count != 0)
-		{
-			/*
-			Allocate next image structure.
-			*/
-
-			/*AllocateNextImage(image_info,image);
-			if (image->next == (Image *) NULL)
-			{
-			DestroyImages(image);
-			return((Image *) NULL);
-			}
-			image=image->next;
-			MagickMonitor(LoadImagesText,TellBlob(image),image->filesize);*/
-		}
 		image_count++;
 
 		short pagex;
@@ -412,22 +398,12 @@ Image* GetGIFImage(const std::string& theFileName)
 		delay = 0;
 		dispose = 0;
 		iterations = 1;
-		/*if (image_info->ping)
-		{
-		f (opacity >= 0)
-		/image->matte=true;
 
-		CloseBlob(image);
-		return(image);
-		}*/
 		if ((width == 0) || (height == 0))
 			return NULL;
 		/*
 		Inititialize colormap.
 		*/
-		/*if (!AllocateImageColormap(image,image->colors))
-		ThrowReaderException(ResourceLimitWarning,"Memory allocation failed",
-		image);*/
 		if (!BitSet(flag, 0x80))
 		{
 			/*
@@ -442,9 +418,6 @@ Image* GetGIFImage(const std::string& theFileName)
 
 				colortable[i] = 0xFF000000 | (r << 16) | (g << 8) | (b);
 			}
-
-			//image->background_color=
-			//image->colormap[Min(background,image->colors-1)];
 		}
 		else
 		{
@@ -471,31 +444,14 @@ Image* GetGIFImage(const std::string& theFileName)
 			delete colormap;
 		}
 
-		/*if (opacity >= (int) colors)
-		{
-		for (i=colors; i < (opacity+1); i++)
-		{
-		image->colormap[i].red=0;
-		image->colormap[i].green=0;
-		image->colormap[i].blue=0;
-		}
-		image->colors=opacity+1;
-		}*/
 		/*
 		Decode image.
 		*/
-		//status=DecodeImage(image,opacity,exception);
-
-		//if (global_colormap != (unsigned char *) NULL)
-		// LiberateMemory((void **) &global_colormap);
 		if (global_colormap != NULL)
 		{
 			delete[] global_colormap;
 			global_colormap = NULL;
 		}
-
-		//while (image->previous != (Image *) NULL)
-		//    image=image->previous;
 
 #define MaxStackSize  4096
 #define NullCode  (-1)
@@ -574,11 +530,6 @@ Image* GetGIFImage(const std::string& theFileName)
 
 		for (y = 0; y < (int)height; y++)
 		{
-			//q=SetImagePixels(image,0,offset,width,1);
-			//if (q == (PixelPacket *) NULL)
-			//break;
-			//indexes=GetIndexes(image);
-
 			unsigned long* q = aBits + offset * width;
 
 
@@ -730,10 +681,6 @@ Image* GetGIFImage(const std::string& theFileName)
 
 			if (x < width)
 				break;
-
-			/*if (image->previous == (Image *) NULL)
-			if (QuantumTick(y,image->rows))
-			MagickMonitor(LoadImageText,y,image->rows);*/
 		}
 		delete pixel_stack;
 		delete suffix;
@@ -741,9 +688,6 @@ Image* GetGIFImage(const std::string& theFileName)
 		delete packet;
 
 		delete colortable;
-
-		//if (y < image->rows)
-		//failed = true;
 
 		Image* anImage = new Image();
 
@@ -1191,7 +1135,169 @@ Image* GetJPEGImage(const std::string& theFileName)
 	return anImage;
 }
 
-#if 0
+#if _USE_J2K
+
+#include "j2k-codec\j2k-codec.h"
+
+HMODULE gJ2KCodec = NULL;
+std::string gJ2KCodecKey = "Your registration here";
+
+void ImageLib::InitJPEG2000()
+{
+	gJ2KCodec = ::LoadLibrary(_T("j2k-codec.dll"));
+}
+
+void ImageLib::CloseJPEG2000()
+{
+	if (gJ2KCodec != NULL)
+	{
+		::FreeLibrary(gJ2KCodec);
+		gJ2KCodec = NULL;
+	}
+}
+
+void ImageLib::SetJ2KCodecKey(const std::string& theKey)
+{
+	gJ2KCodecKey = theKey;
+}
+
+int __stdcall Pak_seek(void* data_source, int offset)
+{
+	return p_fseek((PFILE*)data_source, offset, SEEK_SET);
+}
+
+int __stdcall Pak_read(void* ptr, int size, void* data_source)
+{
+	return p_fread(ptr, 1, size, (PFILE*)data_source);
+}
+
+void __stdcall Pak_close(void* data_source)
+{
+}
+
+Image* GetJPEG2000Image(const std::string& theFileName)
+{
+	if (gJ2KCodec != NULL)
+	{
+		PFILE* aFP = p_fopen(theFileName.c_str(), "rb");
+		if (aFP == NULL)
+			return NULL;
+
+		static int(__stdcall * fJ2K_getVersion)() = NULL;
+		static void(__stdcall * fJ2K_Unlock)(const char*) = NULL;
+		static void* (__stdcall * fJ2K_OpenCustom)(void*, J2K_Callbacks*) = NULL;
+		static void* (__stdcall * fJ2K_OpenFile)(const char*) = NULL;
+		static void(__stdcall * fJ2K_Close)(void*) = NULL;
+		static int(__stdcall * fJ2K_GetInfo)(void*, int*, int*, int*) = NULL;
+		static int(__stdcall * fJ2K_GetResolutionDimensions)(void*, int, int*, int*) = NULL;
+		static int(__stdcall * fJ2K_Decode)(void*, unsigned char**, int*, char*, int*) = NULL;
+		static int(__stdcall * fJ2K_getLastError)() = NULL;
+		static const char* (__stdcall * fJ2K_getErrorStr)(int) = NULL;
+		static bool loadFuncs = true;
+
+		if (loadFuncs)
+		{
+			loadFuncs = false;
+			*((void**)&fJ2K_getVersion) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_getVersion@0");
+			*((void**)&fJ2K_Unlock) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_Unlock@4");
+			*((void**)&fJ2K_OpenCustom) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_OpenCustom@8");
+			*((void**)&fJ2K_OpenFile) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_OpenFile@4");
+			*((void**)&fJ2K_Close) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_Close@4");
+			*((void**)&fJ2K_GetInfo) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_GetInfo@16");
+			*((void**)&fJ2K_GetResolutionDimensions) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_GetResolutionDimensions@16");
+			*((void**)&fJ2K_Decode) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_Decode@20");
+			*((void**)&fJ2K_getLastError) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_getLastError@0");
+			*((void**)&fJ2K_getErrorStr) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_getErrorStr@4");
+
+			// j2k guys didn't use declare the export names. yay! now we have to update these mangled names any time the DLL changes.
+
+			if (!(fJ2K_getVersion != NULL &&
+				fJ2K_Unlock != NULL &&
+				fJ2K_OpenCustom != NULL &&
+				fJ2K_OpenFile != NULL &&
+				fJ2K_Close != NULL &&
+				fJ2K_GetInfo != NULL &&
+				fJ2K_GetResolutionDimensions != NULL &&
+				fJ2K_Decode != NULL &&
+				fJ2K_getLastError != NULL &&
+				fJ2K_getErrorStr != NULL))
+			{
+				CloseJPEG2000();
+				return NULL;
+			}
+
+			int aJ2kVer = (*fJ2K_getVersion)();
+			if (aJ2kVer < 0x120000)
+			{
+				CloseJPEG2000();
+				return NULL;
+			}
+
+			(*fJ2K_Unlock)(gJ2KCodecKey.c_str());
+		}
+
+		J2K_Callbacks aCallbacks;
+		aCallbacks.read = Pak_read;
+		aCallbacks.seek = Pak_seek;
+		aCallbacks.close = Pak_close;
+
+		//theFileName.c_str()
+		void* aJ2KImage = (*fJ2K_OpenCustom)(aFP, &aCallbacks);
+		if (aJ2KImage == NULL)
+		{
+			int anErrNum = (*fJ2K_getLastError)();
+			std::string anErrorMessage = (*fJ2K_getErrorStr)(anErrNum);
+			return NULL;
+		}
+
+		int aWidth, aHeight, aComponents;
+		if ((*fJ2K_GetInfo)(aJ2KImage, &aWidth, &aHeight, &aComponents) != J2KERR_SUCCESS)
+		{
+			(*fJ2K_Close)(aJ2KImage);
+			return NULL;
+		}
+
+		(*fJ2K_GetResolutionDimensions)(aJ2KImage, 0, &aWidth, &aHeight);
+
+		unsigned long* aBuffer = new unsigned long[aWidth * aHeight];
+		if (aBuffer == NULL)
+		{
+			(*fJ2K_Close)(aJ2KImage);
+			return NULL;
+		}
+
+		char anOptsBuffer[32];
+		strcpy(anOptsBuffer, "bpp=4,rl=0");
+
+		int aSize = aWidth * aHeight * 4;
+		int aPitch = aWidth * 4;
+		if ((*fJ2K_Decode)(aJ2KImage, (unsigned char**)&aBuffer, &aSize, anOptsBuffer, &aPitch) != J2KERR_SUCCESS)
+		{
+			(*fJ2K_Close)(aJ2KImage);
+			delete[] aBuffer;
+			return NULL;
+		}
+		(*fJ2K_Close)(aJ2KImage);
+
+		ImageLib::Image* anImage = new ImageLib::Image;
+		anImage->mBits = aBuffer;
+		anImage->mWidth = aWidth;
+		anImage->mHeight = aHeight;
+		if (gIgnoreJPEG2000Alpha)
+		{
+			DWORD* aPtr = anImage->mBits;
+			DWORD* anEnd = aPtr + anImage->mWidth * anImage->mHeight;
+			for (; aPtr != anEnd; ++aPtr)
+				*aPtr |= 0xFF000000;
+		}
+
+		p_fclose(aFP);
+
+		return anImage;
+	}
+	return NULL;
+}
+#else
 Image* GetJPEG2000Image(const std::string& theFileName)
 {
 	DWORD aTick = GetTickCount();
@@ -1366,169 +1472,6 @@ Image* GetJPEG2000Image(const std::string& theFileName)
 
 	return anImage;
 }
-#else
-
-#include "j2k-codec\j2k-codec.h"
-
-HMODULE gJ2KCodec = NULL;
-std::string gJ2KCodecKey = "Your registration here";
-
-void ImageLib::InitJPEG2000()
-{
-	gJ2KCodec = ::LoadLibrary(_T("j2k-codec.dll"));
-}
-
-void ImageLib::CloseJPEG2000()
-{
-	if (gJ2KCodec != NULL)
-	{
-		::FreeLibrary(gJ2KCodec);
-		gJ2KCodec = NULL;
-	}
-}
-
-void ImageLib::SetJ2KCodecKey(const std::string& theKey)
-{
-	gJ2KCodecKey = theKey;
-}
-
-int __stdcall Pak_seek(void* data_source, int offset)
-{
-	return p_fseek((PFILE*)data_source, offset, SEEK_SET);
-}
-
-int __stdcall Pak_read(void* ptr, int size, void* data_source)
-{
-	return p_fread(ptr, 1, size, (PFILE*)data_source);
-}
-
-void __stdcall Pak_close(void* data_source)
-{
-}
-
-Image* GetJPEG2000Image(const std::string& theFileName)
-{
-	if (gJ2KCodec != NULL)
-	{
-		PFILE* aFP = p_fopen(theFileName.c_str(), "rb");
-		if (aFP == NULL)
-			return NULL;
-
-		static int(__stdcall * fJ2K_getVersion)() = NULL;
-		static void(__stdcall * fJ2K_Unlock)(const char*) = NULL;
-		static void* (__stdcall * fJ2K_OpenCustom)(void*, J2K_Callbacks*) = NULL;
-		static void* (__stdcall * fJ2K_OpenFile)(const char*) = NULL;
-		static void(__stdcall * fJ2K_Close)(void*) = NULL;
-		static int(__stdcall * fJ2K_GetInfo)(void*, int*, int*, int*) = NULL;
-		static int(__stdcall * fJ2K_GetResolutionDimensions)(void*, int, int*, int*) = NULL;
-		static int(__stdcall * fJ2K_Decode)(void*, unsigned char**, int*, char*, int*) = NULL;
-		static int(__stdcall * fJ2K_getLastError)() = NULL;
-		static const char* (__stdcall * fJ2K_getErrorStr)(int) = NULL;
-		static bool loadFuncs = true;
-
-		if (loadFuncs)
-		{
-			loadFuncs = false;
-			*((void**)&fJ2K_getVersion) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_getVersion@0");
-			*((void**)&fJ2K_Unlock) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_Unlock@4");
-			*((void**)&fJ2K_OpenCustom) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_OpenCustom@8");
-			*((void**)&fJ2K_OpenFile) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_OpenFile@4");
-			*((void**)&fJ2K_Close) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_Close@4");
-			*((void**)&fJ2K_GetInfo) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_GetInfo@16");
-			*((void**)&fJ2K_GetResolutionDimensions) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_GetResolutionDimensions@16");
-			*((void**)&fJ2K_Decode) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_Decode@20");
-			*((void**)&fJ2K_getLastError) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_getLastError@0");
-			*((void**)&fJ2K_getErrorStr) = (void*)::GetProcAddress(gJ2KCodec, "_J2K_getErrorStr@4");
-
-			// j2k guys didn't use declare the export names. yay! now we have to update these mangled names any time the DLL changes.
-
-			if (!(fJ2K_getVersion != NULL &&
-				fJ2K_Unlock != NULL &&
-				fJ2K_OpenCustom != NULL &&
-				fJ2K_OpenFile != NULL &&
-				fJ2K_Close != NULL &&
-				fJ2K_GetInfo != NULL &&
-				fJ2K_GetResolutionDimensions != NULL &&
-				fJ2K_Decode != NULL &&
-				fJ2K_getLastError != NULL &&
-				fJ2K_getErrorStr != NULL))
-			{
-				CloseJPEG2000();
-				return NULL;
-			}
-
-			int aJ2kVer = (*fJ2K_getVersion)();
-			if (aJ2kVer < 0x120000)
-			{
-				CloseJPEG2000();
-				return NULL;
-			}
-
-			(*fJ2K_Unlock)(gJ2KCodecKey.c_str());
-		}
-
-		J2K_Callbacks aCallbacks;
-		aCallbacks.read = Pak_read;
-		aCallbacks.seek = Pak_seek;
-		aCallbacks.close = Pak_close;
-
-		//theFileName.c_str()
-		void* aJ2KImage = (*fJ2K_OpenCustom)(aFP, &aCallbacks);
-		if (aJ2KImage == NULL)
-		{
-			int anErrNum = (*fJ2K_getLastError)();
-			std::string anErrorMessage = (*fJ2K_getErrorStr)(anErrNum);
-			return NULL;
-		}
-
-		int aWidth, aHeight, aComponents;
-		if ((*fJ2K_GetInfo)(aJ2KImage, &aWidth, &aHeight, &aComponents) != J2KERR_SUCCESS)
-		{
-			(*fJ2K_Close)(aJ2KImage);
-			return NULL;
-		}
-
-		(*fJ2K_GetResolutionDimensions)(aJ2KImage, 0, &aWidth, &aHeight);
-
-		unsigned long* aBuffer = new unsigned long[aWidth * aHeight];
-		if (aBuffer == NULL)
-		{
-			(*fJ2K_Close)(aJ2KImage);
-			return NULL;
-		}
-
-		char anOptsBuffer[32];
-		strcpy(anOptsBuffer, "bpp=4,rl=0");
-
-		int aSize = aWidth * aHeight * 4;
-		int aPitch = aWidth * 4;
-		if ((*fJ2K_Decode)(aJ2KImage, (unsigned char**)&aBuffer, &aSize, anOptsBuffer, &aPitch) != J2KERR_SUCCESS)
-		{
-			(*fJ2K_Close)(aJ2KImage);
-			delete[] aBuffer;
-			return NULL;
-		}
-		(*fJ2K_Close)(aJ2KImage);
-
-		ImageLib::Image* anImage = new ImageLib::Image;
-		anImage->mBits = aBuffer;
-		anImage->mWidth = aWidth;
-		anImage->mHeight = aHeight;
-		if (gIgnoreJPEG2000Alpha)
-		{
-			DWORD* aPtr = anImage->mBits;
-			DWORD* anEnd = aPtr + anImage->mWidth * anImage->mHeight;
-			for (; aPtr != anEnd; ++aPtr)
-				*aPtr |= 0xFF000000;
-		}
-
-		p_fclose(aFP);
-
-		return anImage;
-	}
-	return NULL;
-}
-
 #endif
 
 
@@ -1587,8 +1530,6 @@ Image* ImageLib::GetImage(const std::string& theFilename, bool lookForAlphaImage
 		if (anAlphaImage == NULL)
 			anAlphaImage = GetImage(theFilename + "_", false);
 	}
-
-
 
 	// Compose alpha channel with image
 	if (anAlphaImage != NULL)

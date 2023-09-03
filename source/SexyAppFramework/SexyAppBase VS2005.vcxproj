@@ -31,7 +31,7 @@
     <ProjectName>SexyAppBase</ProjectName>
     <ProjectGuid>{DA08CABA-92AC-40F0-B63D-6ACE7814D600}</ProjectGuid>
     <RootNamespace>SexyAppBase</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release noop|Win32'" Label="Configuration">
@@ -379,6 +379,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release noop|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg2000\jas_tmr.c" />
     <ClCompile Include="..\ImageLib\jpeg2000\jas_tvp.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Incremental|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Zylom|Win32'">true</ExcludedFromBuild>
@@ -427,6 +428,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release noop|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg2000\jpc_cod.c" />
     <ClCompile Include="..\ImageLib\jpeg2000\jpc_cs.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Incremental|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Zylom|Win32'">true</ExcludedFromBuild>
@@ -1131,14 +1133,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release noop|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </CustomBuild>
-    <CustomBuild Include="..\ImageLib\jpeg2000\jas_config2.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Incremental|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Zylom|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release - Zylom|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release noop|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </CustomBuild>
     <CustomBuild Include="..\ImageLib\jpeg2000\jas_debug.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Incremental|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug - Zylom|Win32'">true</ExcludedFromBuild>
@@ -1443,6 +1437,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release noop|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </CustomBuild>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_compiler.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_dll.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_export_cmake.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_log.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_thread.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_tmr.h" />
     <ClInclude Include="..\ImageLib\jpeg\cderror.h" />
     <ClInclude Include="..\ImageLib\jpeg\cdjpeg.h" />
     <ClInclude Include="..\ImageLib\jpeg\jconfig.h" />

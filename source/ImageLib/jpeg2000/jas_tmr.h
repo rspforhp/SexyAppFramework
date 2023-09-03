@@ -1,7 +1,5 @@
 /*
- * Copyright (c) 1999-2000 Image Power, Inc. and the University of
- *   British Columbia.
- * Copyright (c) 2001-2002 Michael David Adams.
+ * Copyright (c) 2004 Michael David Adams.
  * All rights reserved.
  */
 
@@ -61,22 +59,80 @@
  * __END_OF_JASPER_LICENSE__
  */
 
-/*
- * $Id$
+/*!
+ * @file jas_tmr.h
+ * @brief Timer Code
  */
 
-#ifndef JPC_COD_H
-#define JPC_COD_H
+#ifndef JAS_TMR_H
+#define JAS_TMR_H
 
-#include "jpc_t1cod.h"
+/* The configuration header file should be included first. */
+#include "jas_config.h"
 
-/******************************************************************************\
-* Constants.
-\******************************************************************************/
+#if defined(JAS_HAVE_SYS_TIME_H)
+#include <sys/time.h>
+#else
+#include <time.h>
+#endif
 
-/* The nominal word size used by this implementation. */
-#define	JPC_PREC	32
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-void jpc_init(void);
+/*!
+ * @addtogroup module_timers
+ * @{
+ */
+
+/*!
+@struct jas_tmr_t
+@brief Timer type.
+*/
+#if defined(JAS_HAVE_GETTIMEOFDAY)
+
+typedef struct {
+	struct timeval start;
+	struct timeval stop;
+} jas_tmr_t;
+
+#elif defined(JAS_HAVE_GETRUSAGE)
+
+typedef struct {
+	struct rusage start;
+	struct rusage stop;
+} jas_tmr_t;
+
+#else
+
+typedef int jas_tmr_t;
+
+#endif
+
+/*!
+@brief Start a timer.
+*/
+JAS_EXPORT
+void jas_tmr_start(jas_tmr_t *tmr);
+
+/*!
+@brief Stop a timer.
+*/
+JAS_EXPORT
+void jas_tmr_stop(jas_tmr_t *tmr);
+
+/*!
+@brief Get the elapsed time for a timer.
+*/
+JAS_EXPORT
+double jas_tmr_get(jas_tmr_t *tmr);
+
+/*!
+ * @}
+ */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

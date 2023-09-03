@@ -7,105 +7,56 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer Software License
+ * JasPer License Version 2.0
  * 
- * IMAGE POWER JPEG-2000 PUBLIC LICENSE
- * ************************************
+ * Copyright (c) 2001-2006 Michael David Adams
+ * Copyright (c) 1999-2000 Image Power, Inc.
+ * Copyright (c) 1999-2000 The University of British Columbia
  * 
- * GRANT:
+ * All rights reserved.
  * 
- * Permission is hereby granted, free of charge, to any person (the "User")
- * obtaining a copy of this software and associated documentation, to deal
- * in the JasPer Software without restriction, including without limitation
- * the right to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the JasPer Software (in source and binary forms),
- * and to permit persons to whom the JasPer Software is furnished to do so,
- * provided further that the License Conditions below are met.
+ * Permission is hereby granted, free of charge, to any person (the
+ * "User") obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, and/or sell copies of the Software, and to permit
+ * persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
  * 
- * License Conditions
- * ******************
+ * 1.  The above copyright notices and this permission notice (which
+ * includes the disclaimer below) shall be included in all copies or
+ * substantial portions of the Software.
  * 
- * A.  Redistributions of source code must retain the above copyright notice,
- * and this list of conditions, and the following disclaimer.
+ * 2.  The name of a copyright holder shall not be used to endorse or
+ * promote products derived from the Software without specific prior
+ * written permission.
  * 
- * B.  Redistributions in binary form must reproduce the above copyright
- * notice, and this list of conditions, and the following disclaimer in
- * the documentation and/or other materials provided with the distribution.
- * 
- * C.  Neither the name of Image Power, Inc. nor any other contributor
- * (including, but not limited to, the University of British Columbia and
- * Michael David Adams) may be used to endorse or promote products derived
- * from this software without specific prior written permission.
- * 
- * D.  User agrees that it shall not commence any action against Image Power,
- * Inc., the University of British Columbia, Michael David Adams, or any
- * other contributors (collectively "Licensors") for infringement of any
- * intellectual property rights ("IPR") held by the User in respect of any
- * technology that User owns or has a right to license or sublicense and
- * which is an element required in order to claim compliance with ISO/IEC
- * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
- * rights worldwide arising under statutory or common law, and whether
- * or not perfected, including, without limitation, all (i) patents and
- * patent applications owned or licensable by User; (ii) rights associated
- * with works of authorship including copyrights, copyright applications,
- * copyright registrations, mask work rights, mask work applications,
- * mask work registrations; (iii) rights relating to the protection of
- * trade secrets and confidential information; (iv) any right analogous
- * to those set forth in subsections (i), (ii), or (iii) and any other
- * proprietary rights relating to intangible property (other than trademark,
- * trade dress, or service mark rights); and (v) divisions, continuations,
- * renewals, reissues and extensions of the foregoing (as and to the extent
- * applicable) now existing, hereafter filed, issued or acquired.
- * 
- * E.  If User commences an infringement action against any Licensor(s) then
- * such Licensor(s) shall have the right to terminate User's license and
- * all sublicenses that have been granted hereunder by User to other parties.
- * 
- * F.  This software is for use only in hardware or software products that
- * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
- * or right to this Software is granted for products that do not comply
- * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
- * from the ISO.
- * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
- * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
- * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
- * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
- * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
- * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
- * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
- * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
- * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
- * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
- * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
- * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
- * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
- * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
- * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
- * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
- * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
- * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
- * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
- * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
- * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
- * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
- * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
- * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
- * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
- * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
- * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
- * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
- * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
- * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
- * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
- * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
- * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
- * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
- * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
- * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
- * NOTICE SPECIFIED IN THIS SECTION.
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
+ * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
+ * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+ * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
+ * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
+ * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
+ * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+ * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
+ * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
+ * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
+ * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
+ * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
+ * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
+ * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
+ * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
+ * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
+ * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
+ * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
+ * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
+ * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
+ * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
+ * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
+ * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
  * 
  * __END_OF_JASPER_LICENSE__
  */
@@ -113,21 +64,23 @@
 /*
  * JPEG-2000 Code Stream Library
  *
- * $Id: jpc_cs.c,v 1.1 2003/05/15 01:30:32 ace Exp $
+ * $Id$
  */
 
 /******************************************************************************\
 * Includes.
 \******************************************************************************/
 
-#include <stdlib.h>
-#include <assert.h>
-#include <ctype.h>
+#include "jpc_cs.h"
 
 #include "jas_malloc.h"
 #include "jas_debug.h"
+#include "jas_image.h"
 
-#include "jpc_cs.h"
+#include <assert.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 
 /******************************************************************************\
 * Types.
@@ -136,7 +89,7 @@
 /* Marker segment table entry. */
 typedef struct {
 	int id;
-	char *name;
+	const char *name;
 	jpc_msops_t ops;
 } jpc_mstabent_t;
 
@@ -144,9 +97,9 @@ typedef struct {
 * Local prototypes.
 \******************************************************************************/
 
-static jpc_mstabent_t *jpc_mstab_lookup(int id);
+static const jpc_mstabent_t *jpc_mstab_lookup(int id);
 
-static int jpc_poc_dumpparms(jpc_ms_t *ms, FILE *out);
+static int jpc_poc_dumpparms(jpc_ms_t *ms);
 static int jpc_poc_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *out);
 static int jpc_poc_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in);
 static void jpc_poc_destroyparms(jpc_ms_t *ms);
@@ -179,19 +132,19 @@ static int jpc_ppt_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 static int jpc_crg_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *out);
 static int jpc_com_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *out);
 
-static int jpc_sot_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_siz_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_cod_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_coc_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_qcd_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_qcc_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_rgn_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_unk_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_sop_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_ppm_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_ppt_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_crg_dumpparms(jpc_ms_t *ms, FILE *out);
-static int jpc_com_dumpparms(jpc_ms_t *ms, FILE *out);
+static int jpc_sot_dumpparms(jpc_ms_t *ms);
+static int jpc_siz_dumpparms(jpc_ms_t *ms);
+static int jpc_cod_dumpparms(jpc_ms_t *ms);
+static int jpc_coc_dumpparms(jpc_ms_t *ms);
+static int jpc_qcd_dumpparms(jpc_ms_t *ms);
+static int jpc_qcc_dumpparms(jpc_ms_t *ms);
+static int jpc_rgn_dumpparms(jpc_ms_t *ms);
+static int jpc_unk_dumpparms(jpc_ms_t *ms);
+static int jpc_sop_dumpparms(jpc_ms_t *ms);
+static int jpc_ppm_dumpparms(jpc_ms_t *ms);
+static int jpc_ppt_dumpparms(jpc_ms_t *ms);
+static int jpc_crg_dumpparms(jpc_ms_t *ms);
+static int jpc_com_dumpparms(jpc_ms_t *ms);
 
 static void jpc_siz_destroyparms(jpc_ms_t *ms);
 static void jpc_qcd_destroyparms(jpc_ms_t *ms);
@@ -219,7 +172,7 @@ static int jpc_cox_putcompparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
 * Global data.
 \******************************************************************************/
 
-static jpc_mstabent_t jpc_mstab[] = {
+static const jpc_mstabent_t jpc_mstab[] = {
 	{JPC_MS_SOC, "SOC", {0, 0, 0, 0}},
 	{JPC_MS_SOT, "SOT", {0, jpc_sot_getparms, jpc_sot_putparms,
 	  jpc_sot_dumpparms}},
@@ -239,8 +192,8 @@ static jpc_mstabent_t jpc_mstab[] = {
 	  jpc_qcc_putparms, jpc_qcc_dumpparms}},
 	{JPC_MS_POC, "POC", {jpc_poc_destroyparms, jpc_poc_getparms,
 	  jpc_poc_putparms, jpc_poc_dumpparms}},
-	{JPC_MS_TLM, "TLM", {0, jpc_unk_getparms, jpc_unk_putparms, 0}},
-	{JPC_MS_PLM, "PLM", {0, jpc_unk_getparms, jpc_unk_putparms, 0}},
+	{JPC_MS_TLM, "TLM", {jpc_unk_destroyparms, jpc_unk_getparms, jpc_unk_putparms, 0}},
+	{JPC_MS_PLM, "PLM", {jpc_unk_destroyparms, jpc_unk_getparms, jpc_unk_putparms, 0}},
 	{JPC_MS_PPM, "PPM", {jpc_ppm_destroyparms, jpc_ppm_getparms,
 	  jpc_ppm_putparms, jpc_ppm_dumpparms}},
 	{JPC_MS_PPT, "PPT", {jpc_ppt_destroyparms, jpc_ppt_getparms,
@@ -248,8 +201,8 @@ static jpc_mstabent_t jpc_mstab[] = {
 	{JPC_MS_SOP, "SOP", {0, jpc_sop_getparms, jpc_sop_putparms,
 	  jpc_sop_dumpparms}},
 	{JPC_MS_EPH, "EPH", {0, 0, 0, 0}},
-	{JPC_MS_CRG, "CRG", {0, jpc_crg_getparms, jpc_crg_putparms,
-	  jpc_crg_dumpparms}},
+	{JPC_MS_CRG, "CRG", {jpc_crg_destroyparms, jpc_crg_getparms,
+	  jpc_crg_putparms, jpc_crg_dumpparms}},
 	{JPC_MS_COM, "COM", {jpc_com_destroyparms, jpc_com_getparms,
 	  jpc_com_putparms, jpc_com_dumpparms}},
 	{-1, "UNKNOWN",  {jpc_unk_destroyparms, jpc_unk_getparms,
@@ -281,7 +234,7 @@ void jpc_cstate_destroy(jpc_cstate_t *cstate)
 jpc_ms_t *jpc_getms(jas_stream_t *in, jpc_cstate_t *cstate)
 {
 	jpc_ms_t *ms;
-	jpc_mstabent_t *mstabent;
+	const jpc_mstabent_t *mstabent;
 	jas_stream_t *tmpstream;
 
 	if (!(ms = jpc_ms_create(0))) {
@@ -333,12 +286,12 @@ jpc_ms_t *jpc_getms(jas_stream_t *in, jpc_cstate_t *cstate)
 			return 0;
 		}
 
-		if (jas_getdbglevel() > 0) {
-			jpc_ms_dump(ms, stderr);
+		if (jas_get_debug_level() > 0) {
+			jpc_ms_dump(ms);
 		}
 
-		if (JAS_CAST(ulong, jas_stream_tell(tmpstream)) != ms->len) {
-			fprintf(stderr,
+		if (JAS_CAST(jas_ulong, jas_stream_tell(tmpstream)) != ms->len) {
+			jas_logwarnf(
 			  "warning: trailing garbage in marker segment (%ld bytes)\n",
 			  ms->len - jas_stream_tell(tmpstream));
 		}
@@ -350,8 +303,8 @@ jpc_ms_t *jpc_getms(jas_stream_t *in, jpc_cstate_t *cstate)
 		/* There are no marker segment parameters. */
 		ms->len = 0;
 
-		if (jas_getdbglevel() > 0) {
-			jpc_ms_dump(ms, stderr);
+		if (jas_get_debug_level() > 0) {
+			jpc_ms_dump(ms);
 		}
 	}
 
@@ -412,8 +365,8 @@ int jpc_putms(jas_stream_t *out, jpc_cstate_t *cstate, jpc_ms_t *ms)
 		cstate->numcomps = ms->parms.siz.numcomps;
 	}
 
-	if (jas_getdbglevel() > 0) {
-		jpc_ms_dump(ms, stderr);
+	if (jas_get_debug_level() > 0) {
+		jpc_ms_dump(ms);
 	}
 
 	return 0;
@@ -427,7 +380,7 @@ int jpc_putms(jas_stream_t *out, jpc_cstate_t *cstate, jpc_ms_t *ms)
 jpc_ms_t *jpc_ms_create(int type)
 {
 	jpc_ms_t *ms;
-	jpc_mstabent_t *mstabent;
+	const jpc_mstabent_t *mstabent;
 
 	if (!(ms = jas_malloc(sizeof(jpc_ms_t)))) {
 		return 0;
@@ -450,20 +403,20 @@ void jpc_ms_destroy(jpc_ms_t *ms)
 }
 
 /* Dump a marker segment to a stream for debugging. */
-void jpc_ms_dump(jpc_ms_t *ms, FILE *out)
+void jpc_ms_dump(jpc_ms_t *ms)
 {
-	jpc_mstabent_t *mstabent;
+	const jpc_mstabent_t *mstabent;
 	mstabent = jpc_mstab_lookup(ms->id);
-	fprintf(out, "type = 0x%04x (%s);", ms->id, mstabent->name);
+	jas_logprintf("type = 0x%04"PRIxFAST16" (%s);", ms->id, mstabent->name);
 	if (JPC_MS_HASPARMS(ms->id)) {
-		fprintf(out, " len = %d;", ms->len + 2);
+		jas_logprintf(" len = %"PRIuFAST16";", ms->len + 2);
 		if (ms->ops->dumpparms) {
-			(*ms->ops->dumpparms)(ms, out);
+			(*ms->ops->dumpparms)(ms);
 		} else {
-			fprintf(out, "\n");
+			jas_logprintf("\n");
 		}
 	} else {
-		fprintf(out, "\n");
+		jas_logprintf("\n");
 	}
 }
 
@@ -475,13 +428,15 @@ static int jpc_sot_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 {
 	jpc_sot_t *sot = &ms->parms.sot;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_getuint16(in, &sot->tileno) ||
 	  jpc_getuint32(in, &sot->len) ||
 	  jpc_getuint8(in, &sot->partno) ||
 	  jpc_getuint8(in, &sot->numparts)) {
+		return -1;
+	}
+	if (sot->tileno > 65534 || sot->len < 12 || sot->partno > 254) {
 		return -1;
 	}
 	if (jas_stream_eof(in)) {
@@ -494,8 +449,7 @@ static int jpc_sot_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 {
 	jpc_sot_t *sot = &ms->parms.sot;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_putuint16(out, sot->tileno) ||
 	  jpc_putuint32(out, sot->len) ||
@@ -506,10 +460,11 @@ static int jpc_sot_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_sot_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_sot_dumpparms(jpc_ms_t *ms)
 {
 	jpc_sot_t *sot = &ms->parms.sot;
-	fprintf(out, "tileno = %d; len = %d; partno = %d; numparts = %d\n",
+	jas_logprintf(
+	  "tileno = %"PRIuFAST16"; len = %"PRIuFAST32"; partno = %d; numparts = %d\n",
 	  sot->tileno, sot->len, sot->partno, sot->numparts);
 	return 0;
 }
@@ -533,8 +488,9 @@ static int jpc_siz_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
 	unsigned int i;
 	uint_fast8_t tmp;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	siz->comps = 0;
+
+	JAS_UNUSED(cstate);
 
 	if (jpc_getuint16(in, &siz->caps) ||
 	  jpc_getuint32(in, &siz->width) ||
@@ -546,30 +502,74 @@ static int jpc_siz_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
 	  jpc_getuint32(in, &siz->tilexoff) ||
 	  jpc_getuint32(in, &siz->tileyoff) ||
 	  jpc_getuint16(in, &siz->numcomps)) {
-		return -1;
+		goto error;
 	}
-	if (!siz->width || !siz->height || !siz->tilewidth ||
-	  !siz->tileheight || !siz->numcomps) {
-		return -1;
+	if (!siz->width || !siz->height) {
+		jas_logerrorf("reference grid cannot have zero area\n");
+		goto error;
 	}
-	if (!(siz->comps = jas_malloc(siz->numcomps * sizeof(jpc_sizcomp_t)))) {
-		return -1;
+	if (!siz->tilewidth || !siz->tileheight) {
+		jas_logerrorf("tile cannot have zero area\n");
+		goto error;
+	}
+	if (!siz->numcomps || siz->numcomps > 16384) {
+		jas_logerrorf("number of components not in permissible range\n");
+		goto error;
+	}
+	if (siz->xoff >= siz->width) {
+		jas_logerrorf("XOsiz not in permissible range\n");
+		goto error;
+	}
+	if (siz->yoff >= siz->height) {
+		jas_logerrorf("YOsiz not in permissible range\n");
+		goto error;
+	}
+	if (siz->tilexoff > siz->xoff || siz->tilexoff + siz->tilewidth <= siz->xoff) {
+		jas_logerrorf("XTOsiz not in permissible range\n");
+		goto error;
+	}
+	if (siz->tileyoff > siz->yoff || siz->tileyoff + siz->tileheight <= siz->yoff) {
+		jas_logerrorf("YTOsiz not in permissible range\n");
+		goto error;
+	}
+
+	if (!(siz->comps = jas_alloc2(siz->numcomps, sizeof(jpc_sizcomp_t)))) {
+		goto error;
 	}
 	for (i = 0; i < siz->numcomps; ++i) {
 		if (jpc_getuint8(in, &tmp) ||
 		  jpc_getuint8(in, &siz->comps[i].hsamp) ||
 		  jpc_getuint8(in, &siz->comps[i].vsamp)) {
-			jas_free(siz->comps);
-			return -1;
+			goto error;
+		}
+		if (siz->comps[i].hsamp == 0) {
+			jas_logerrorf("invalid XRsiz value %d\n", siz->comps[i].hsamp);
+			goto error;
+		}
+		if (siz->comps[i].vsamp == 0) {
+			jas_logerrorf("invalid YRsiz value %d\n", siz->comps[i].vsamp);
+			goto error;
 		}
 		siz->comps[i].sgnd = (tmp >> 7) & 1;
 		siz->comps[i].prec = (tmp & 0x7f) + 1;
+		/* we need at least 1 bit of precision for unsigned
+		   samples and 2 bits for signed samples */
+		if (siz->comps[i].prec < 1U + siz->comps[i].sgnd ||
+		    siz->comps[i].prec > 38) {
+			jas_logerrorf("invalid component bit depth %d\n", siz->comps[i].prec);
+			goto error;
+		}
 	}
 	if (jas_stream_eof(in)) {
-		jas_free(siz->comps);
-		return -1;
+		goto error;
 	}
 	return 0;
+
+error:
+	if (siz->comps) {
+		jas_free(siz->comps);
+	}
+	return -1;
 }
 
 static int jpc_siz_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *out)
@@ -577,8 +577,7 @@ static int jpc_siz_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	jpc_siz_t *siz = &ms->parms.siz;
 	unsigned int i;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	assert(siz->width && siz->height && siz->tilewidth &&
 	  siz->tileheight && siz->numcomps);
@@ -605,18 +604,19 @@ static int jpc_siz_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_siz_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_siz_dumpparms(jpc_ms_t *ms)
 {
 	jpc_siz_t *siz = &ms->parms.siz;
 	unsigned int i;
-	fprintf(out, "caps = 0x%02x;\n", siz->caps);
-	fprintf(out, "width = %d; height = %d; xoff = %d; yoff = %d;\n",
+	jas_logprintf("caps = 0x%02"PRIxFAST16";\n", siz->caps);
+	jas_logprintf("width = %"PRIuFAST32"; height = %"PRIuFAST32"; xoff = %"PRIuFAST32"; yoff = %" PRIuFAST32 ";\n",
 	  siz->width, siz->height, siz->xoff, siz->yoff);
-	fprintf(out, "tilewidth = %d; tileheight = %d; tilexoff = %d; "
-	  "tileyoff = %d;\n", siz->tilewidth, siz->tileheight, siz->tilexoff,
-	  siz->tileyoff);
+	jas_logprintf("tilewidth = %"PRIuFAST32"; tileheight = %"PRIuFAST32"; "
+	  "tilexoff = %"PRIuFAST32"; tileyoff = %" PRIuFAST32 ";\n",
+	  siz->tilewidth, siz->tileheight, siz->tilexoff, siz->tileyoff);
+	jas_logprintf("numcomps = %"PRIuFAST16";\n", siz->numcomps);
 	for (i = 0; i < siz->numcomps; ++i) {
-		fprintf(out, "prec[%d] = %d; sgnd[%d] = %d; hsamp[%d] = %d; "
+		jas_logprintf("prec[%d] = %d; sgnd[%d] = %d; hsamp[%d] = %d; "
 		  "vsamp[%d] = %d\n", i, siz->comps[i].prec, i,
 		  siz->comps[i].sgnd, i, siz->comps[i].hsamp, i,
 		  siz->comps[i].vsamp);
@@ -643,6 +643,9 @@ static int jpc_cod_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 	if (jpc_getuint8(in, &cod->prg) ||
 	  jpc_getuint16(in, &cod->numlyrs) ||
 	  jpc_getuint8(in, &cod->mctrans)) {
+		return -1;
+	}
+	if (cod->numlyrs < 1 || cod->numlyrs > 65535) {
 		return -1;
 	}
 	if (jpc_cox_getcompparms(ms, cstate, in,
@@ -674,21 +677,21 @@ static int jpc_cod_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_cod_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_cod_dumpparms(jpc_ms_t *ms)
 {
 	jpc_cod_t *cod = &ms->parms.cod;
 	int i;
-	fprintf(out, "csty = 0x%02x;\n", cod->compparms.csty);
-	fprintf(out, "numdlvls = %d; qmfbid = %d; mctrans = %d\n",
+	jas_logprintf("csty = 0x%02x;\n", cod->compparms.csty);
+	jas_logprintf("numdlvls = %d; qmfbid = %d; mctrans = %d\n",
 	  cod->compparms.numdlvls, cod->compparms.qmfbid, cod->mctrans);
-	fprintf(out, "prg = %d; numlyrs = %d;\n",
+	jas_logprintf("prg = %d; numlyrs = %"PRIuFAST16";\n",
 	  cod->prg, cod->numlyrs);
-	fprintf(out, "cblkwidthval = %d; cblkheightval = %d; "
+	jas_logprintf("cblkwidthval = %d; cblkheightval = %d; "
 	  "cblksty = 0x%02x;\n", cod->compparms.cblkwidthval, cod->compparms.cblkheightval,
 	  cod->compparms.cblksty);
 	if (cod->csty & JPC_COX_PRT) {
 		for (i = 0; i < cod->compparms.numrlvls; ++i) {
-			fprintf(stderr, "prcwidth[%d] = %d, prcheight[%d] = %d\n",
+			jas_logprintf("prcwidth[%d] = %d, prcheight[%d] = %d\n",
 			  i, cod->compparms.rlvls[i].parwidthval,
 			  i, cod->compparms.rlvls[i].parheightval);
 		}
@@ -756,12 +759,12 @@ static int jpc_coc_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_coc_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_coc_dumpparms(jpc_ms_t *ms)
 {
 	jpc_coc_t *coc = &ms->parms.coc;
-	fprintf(out, "compno = %d; csty = 0x%02x; numdlvls = %d;\n",
+	jas_logprintf("compno = %"PRIuFAST16"; csty = 0x%02x; numdlvls = %d;\n",
 	  coc->compno, coc->compparms.csty, coc->compparms.numdlvls);
-	fprintf(out, "cblkwidthval = %d; cblkheightval = %d; "
+	jas_logprintf("cblkwidthval = %d; cblkheightval = %d; "
 	  "cblksty = 0x%02x; qmfbid = %d;\n", coc->compparms.cblkwidthval,
 	  coc->compparms.cblkheightval, coc->compparms.cblksty, coc->compparms.qmfbid);
 	return 0;
@@ -772,8 +775,7 @@ static int jpc_coc_dumpparms(jpc_ms_t *ms, FILE *out)
 
 static void jpc_cox_destroycompparms(jpc_coxcp_t *compparms)
 {
-	/* Eliminate compiler warning about unused variables. */
-	compparms = 0;
+	JAS_UNUSED(compparms);
 }
 
 static int jpc_cox_getcompparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
@@ -782,9 +784,8 @@ static int jpc_cox_getcompparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
 	uint_fast8_t tmp;
 	int i;
 
-	/* Eliminate compiler warning about unused variables. */
-	ms = 0;
-	cstate = 0;
+	JAS_UNUSED(ms);
+	JAS_UNUSED(cstate);
 
 	if (jpc_getuint8(in, &compparms->numdlvls) ||
 	  jpc_getuint8(in, &compparms->cblkwidthval) ||
@@ -793,25 +794,35 @@ static int jpc_cox_getcompparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
 	  jpc_getuint8(in, &compparms->qmfbid)) {
 		return -1;
 	}
+	if (compparms->numdlvls > 32) {
+		goto error;
+	}
+	if (compparms->qmfbid != JPC_COX_INS &&
+	    compparms->qmfbid != JPC_COX_RFT)
+		goto error;
 	compparms->numrlvls = compparms->numdlvls + 1;
+	if (compparms->numrlvls > JPC_MAXRLVLS) {
+		goto error;
+	}
 	if (prtflag) {
 		for (i = 0; i < compparms->numrlvls; ++i) {
 			if (jpc_getuint8(in, &tmp)) {
-				jpc_cox_destroycompparms(compparms);
-				return -1;
+				goto error;
 			}
 			compparms->rlvls[i].parwidthval = tmp & 0xf;
 			compparms->rlvls[i].parheightval = (tmp >> 4) & 0xf;
 		}
-/* Sigh.  This bit should be in the same field in both COC and COD mrk segs. */
-compparms->csty |= JPC_COX_PRT;
-	} else {
+		/* Sigh.
+		This bit should be in the same field in both COC and COD mrk segs. */
+		compparms->csty |= JPC_COX_PRT;
 	}
 	if (jas_stream_eof(in)) {
-		jpc_cox_destroycompparms(compparms);
-		return -1;
+		goto error;
 	}
 	return 0;
+error:
+	jpc_cox_destroycompparms(compparms);
+	return -1;
 }
 
 static int jpc_cox_putcompparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
@@ -820,9 +831,8 @@ static int jpc_cox_putcompparms(jpc_ms_t *ms, jpc_cstate_t *cstate,
 	int i;
 	assert(compparms->numdlvls <= 32);
 
-	/* Eliminate compiler warning about unused variables. */
-	ms = 0;
-	cstate = 0;
+	JAS_UNUSED(ms);
+	JAS_UNUSED(cstate);
 
 	if (jpc_putuint8(out, compparms->numdlvls) ||
 	  jpc_putuint8(out, compparms->cblkwidthval) ||
@@ -887,10 +897,10 @@ static int jpc_rgn_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_rgn_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_rgn_dumpparms(jpc_ms_t *ms)
 {
 	jpc_rgn_t *rgn = &ms->parms.rgn;
-	fprintf(out, "compno = %d; roisty = %d; roishift = %d\n",
+	jas_logprintf("compno = %"PRIuFAST16"; roisty = %d; roishift = %d\n",
 	  rgn->compno, rgn->roisty, rgn->roishift);
 	return 0;
 }
@@ -917,16 +927,16 @@ static int jpc_qcd_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return jpc_qcx_putcompparms(compparms, cstate, out);
 }
 
-static int jpc_qcd_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_qcd_dumpparms(jpc_ms_t *ms)
 {
 	jpc_qcd_t *qcd = &ms->parms.qcd;
 	int i;
-	fprintf(out, "qntsty = %d; numguard = %d; numstepsizes = %d\n",
+	jas_logprintf("qntsty = %d; numguard = %d; numstepsizes = %d\n",
 	  (int) qcd->compparms.qntsty, qcd->compparms.numguard, qcd->compparms.numstepsizes);
 	for (i = 0; i < qcd->compparms.numstepsizes; ++i) {
-		fprintf(out, "expn[%d] = 0x%04x; mant[%d] = 0x%04x;\n",
-		  i, (unsigned) JPC_QCX_GETEXPN(qcd->compparms.stepsizes[i]),
-		  i, (unsigned) JPC_QCX_GETMANT(qcd->compparms.stepsizes[i]));
+		jas_logprintf("expn[%d] = 0x%04x; mant[%d] = 0x%04x;\n",
+		  i, JAS_CAST(unsigned, JPC_QCX_GETEXPN(qcd->compparms.stepsizes[i])),
+		  i, JAS_CAST(unsigned, JPC_QCX_GETMANT(qcd->compparms.stepsizes[i])));
 	}
 	return 0;
 }
@@ -948,11 +958,15 @@ static int jpc_qcc_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 	int len;
 	len = ms->len;
 	if (cstate->numcomps <= 256) {
-		jpc_getuint8(in, &tmp);
+		if (jpc_getuint8(in, &tmp)) {
+			return -1;
+		}
 		qcc->compno = tmp;
 		--len;
 	} else {
-		jpc_getuint16(in, &qcc->compno);
+		if (jpc_getuint16(in, &qcc->compno)) {
+			return -1;
+		}
 		len -= 2;
 	}
 	if (jpc_qcx_getcompparms(&qcc->compparms, cstate, in, len)) {
@@ -969,9 +983,13 @@ static int jpc_qcc_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 {
 	jpc_qcc_t *qcc = &ms->parms.qcc;
 	if (cstate->numcomps <= 256) {
-		jpc_putuint8(out, qcc->compno);
+		if (jpc_putuint8(out, qcc->compno)) {
+			return -1;
+		}
 	} else {
-		jpc_putuint16(out, qcc->compno);
+		if (jpc_putuint16(out, qcc->compno)) {
+			return -1;
+		}
 	}
 	if (jpc_qcx_putcompparms(&qcc->compparms, cstate, out)) {
 		return -1;
@@ -979,15 +997,15 @@ static int jpc_qcc_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_qcc_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_qcc_dumpparms(jpc_ms_t *ms)
 {
 	jpc_qcc_t *qcc = &ms->parms.qcc;
 	int i;
-	fprintf(out, "compno = %d; qntsty = %d; numguard = %d; "
+	jas_logprintf("compno = %"PRIuFAST16"; qntsty = %d; numguard = %d; "
 	  "numstepsizes = %d\n", qcc->compno, qcc->compparms.qntsty, qcc->compparms.numguard,
 	  qcc->compparms.numstepsizes);
 	for (i = 0; i < qcc->compparms.numstepsizes; ++i) {
-		fprintf(out, "expn[%d] = 0x%04x; mant[%d] = 0x%04x;\n",
+		jas_logprintf("expn[%d] = 0x%04x; mant[%d] = 0x%04x;\n",
 		  i, (unsigned) JPC_QCX_GETEXPN(qcc->compparms.stepsizes[i]),
 		  i, (unsigned) JPC_QCX_GETMANT(qcc->compparms.stepsizes[i]));
 	}
@@ -1012,11 +1030,12 @@ static int jpc_qcx_getcompparms(jpc_qcxcp_t *compparms, jpc_cstate_t *cstate,
 	int n;
 	int i;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	n = 0;
-	jpc_getuint8(in, &tmp);
+	if (jpc_getuint8(in, &tmp)) {
+		return -1;
+	}
 	++n;
 	compparms->qntsty = tmp & 0x1f;
 	compparms->numguard = (tmp >> 5) & 7;
@@ -1032,21 +1051,34 @@ static int jpc_qcx_getcompparms(jpc_qcxcp_t *compparms, jpc_cstate_t *cstate,
 		compparms->numstepsizes = (len - n) / 2;
 		break;
 	}
-if (compparms->numstepsizes > 0) {
-	compparms->stepsizes = jas_malloc(compparms->numstepsizes *
-	  sizeof(uint_fast32_t));
-	assert(compparms->stepsizes);
-	for (i = 0; i < compparms->numstepsizes; ++i) {
-		if (compparms->qntsty == JPC_QCX_NOQNT) {
-			jpc_getuint8(in, &tmp);
-			compparms->stepsizes[i] = JPC_QCX_EXPN(tmp >> 3);
-		} else {
-			jpc_getuint16(in, &compparms->stepsizes[i]);
-		}
+	/* Ensure that the step size array is sufficiently large. */
+	if (compparms->numstepsizes > 3 * JPC_MAXRLVLS + 1) {
+		jpc_qcx_destroycompparms(compparms);
+		return -1;
 	}
-} else {
-	compparms->stepsizes = 0;
-}
+	if (compparms->numstepsizes > 0) {
+		if (!(compparms->stepsizes = jas_alloc2(compparms->numstepsizes,
+		  sizeof(uint_fast16_t)))) {
+			jpc_qcx_destroycompparms(compparms);
+			return -1;
+		}
+		for (i = 0; i < compparms->numstepsizes; ++i) {
+			if (compparms->qntsty == JPC_QCX_NOQNT) {
+				if (jpc_getuint8(in, &tmp)) {
+					jpc_qcx_destroycompparms(compparms);
+					return -1;
+				}
+				compparms->stepsizes[i] = JPC_QCX_EXPN(tmp >> 3);
+			} else {
+				if (jpc_getuint16(in, &compparms->stepsizes[i])) {
+					jpc_qcx_destroycompparms(compparms);
+					return -1;
+				}
+			}
+		}
+	} else {
+		compparms->stepsizes = 0;
+	}
 	if (jas_stream_error(in) || jas_stream_eof(in)) {
 		jpc_qcx_destroycompparms(compparms);
 		return -1;
@@ -1059,16 +1091,21 @@ static int jpc_qcx_putcompparms(jpc_qcxcp_t *compparms, jpc_cstate_t *cstate,
 {
 	int i;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
-	jpc_putuint8(out, ((compparms->numguard & 7) << 5) | compparms->qntsty);
+	if (jpc_putuint8(out, ((compparms->numguard & 7) << 5) | compparms->qntsty)) {
+		return -1;
+	}
 	for (i = 0; i < compparms->numstepsizes; ++i) {
 		if (compparms->qntsty == JPC_QCX_NOQNT) {
-			jpc_putuint8(out, JPC_QCX_GETEXPN(
-			  compparms->stepsizes[i]) << 3);
+			if (jpc_putuint8(out, JPC_QCX_GETEXPN(
+			  compparms->stepsizes[i]) << 3)) {
+				return -1;
+			}
 		} else {
-			jpc_putuint16(out, compparms->stepsizes[i]);
+			if (jpc_putuint16(out, compparms->stepsizes[i])) {
+				return -1;
+			}
 		}
 	}
 	return 0;
@@ -1082,8 +1119,7 @@ static int jpc_sop_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 {
 	jpc_sop_t *sop = &ms->parms.sop;
 
-	/* Eliminate compiler warning about unused variable. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_getuint16(in, &sop->seqno)) {
 		return -1;
@@ -1095,8 +1131,7 @@ static int jpc_sop_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 {
 	jpc_sop_t *sop = &ms->parms.sop;
 
-	/* Eliminate compiler warning about unused variable. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_putuint16(out, sop->seqno)) {
 		return -1;
@@ -1104,10 +1139,10 @@ static int jpc_sop_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_sop_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_sop_dumpparms(jpc_ms_t *ms)
 {
 	jpc_sop_t *sop = &ms->parms.sop;
-	fprintf(out, "seqno = %d;\n", sop->seqno);
+	jas_logprintf("seqno = %"PRIuFAST16";\n", sop->seqno);
 	return 0;
 }
 
@@ -1127,8 +1162,7 @@ static int jpc_ppm_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 {
 	jpc_ppm_t *ppm = &ms->parms.ppm;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	ppm->data = 0;
 
@@ -1141,10 +1175,10 @@ static int jpc_ppm_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 
 	ppm->len = ms->len - 1;
 	if (ppm->len > 0) {
-		if (!(ppm->data = jas_malloc(ppm->len * sizeof(unsigned char)))) {
+		if (!(ppm->data = jas_malloc(ppm->len))) {
 			goto error;
 		}
-		if (JAS_CAST(uint, jas_stream_read(in, ppm->data, ppm->len)) != ppm->len) {
+		if (JAS_CAST(jas_uint, jas_stream_read(in, ppm->data, ppm->len)) != ppm->len) {
 			goto error;
 		}
 	} else {
@@ -1161,22 +1195,21 @@ static int jpc_ppm_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 {
 	jpc_ppm_t *ppm = &ms->parms.ppm;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
-	if (JAS_CAST(uint, jas_stream_write(out, (char *) ppm->data, ppm->len)) != ppm->len) {
+	if (JAS_CAST(jas_uint, jas_stream_write(out, (char *) ppm->data, ppm->len)) != ppm->len) {
 		return -1;
 	}
 	return 0;
 }
 
-static int jpc_ppm_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_ppm_dumpparms(jpc_ms_t *ms)
 {
 	jpc_ppm_t *ppm = &ms->parms.ppm;
-	fprintf(out, "ind=%d; len = %d;\n", ppm->ind, ppm->len);
+	jas_logprintf("ind=%d; len = %"PRIuFAST16";\n", ppm->ind, ppm->len);
 	if (ppm->len > 0) {
-		fprintf(out, "data =\n");
-		jas_memdump(out, ppm->data, ppm->len);
+		jas_logprintf("data =\n");
+		jas_logmemdump(ppm->data, ppm->len);
 	}
 	return 0;
 }
@@ -1197,8 +1230,7 @@ static int jpc_ppt_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 {
 	jpc_ppt_t *ppt = &ms->parms.ppt;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	ppt->data = 0;
 
@@ -1210,10 +1242,10 @@ static int jpc_ppt_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 	}
 	ppt->len = ms->len - 1;
 	if (ppt->len > 0) {
-		if (!(ppt->data = jas_malloc(ppt->len * sizeof(unsigned char)))) {
+		if (!(ppt->data = jas_malloc(ppt->len))) {
 			goto error;
 		}
-		if (jas_stream_read(in, (char *) ppt->data, ppt->len) != JAS_CAST(int, ppt->len)) {
+		if (jas_stream_read(in, (char *) ppt->data, ppt->len) != ppt->len) {
 			goto error;
 		}
 	} else {
@@ -1230,25 +1262,24 @@ static int jpc_ppt_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 {
 	jpc_ppt_t *ppt = &ms->parms.ppt;
 
-	/* Eliminate compiler warning about unused variable. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_putuint8(out, ppt->ind)) {
 		return -1;
 	}
-	if (jas_stream_write(out, (char *) ppt->data, ppt->len) != JAS_CAST(int, ppt->len)) {
+	if (jas_stream_write(out, (char *) ppt->data, ppt->len) != ppt->len) {
 		return -1;
 	}
 	return 0;
 }
 
-static int jpc_ppt_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_ppt_dumpparms(jpc_ms_t *ms)
 {
 	jpc_ppt_t *ppt = &ms->parms.ppt;
-	fprintf(out, "ind=%d; len = %d;\n", ppt->ind, ppt->len);
+	jas_logprintf("ind=%d; len = %"PRIuFAST32";\n", ppt->ind, ppt->len);
 	if (ppt->len > 0) {
-		fprintf(out, "data =\n");
-		jas_memdump(out, ppt->data, ppt->len);
+		jas_logprintf("data =\n");
+		jas_logmemdump(ppt->data, ppt->len);
 	}
 	return 0;
 }
@@ -1273,7 +1304,7 @@ static int jpc_poc_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 	uint_fast8_t tmp;
 	poc->numpchgs = (cstate->numcomps > 256) ? (ms->len / 9) :
 	  (ms->len / 7);
-	if (!(poc->pchgs = jas_malloc(poc->numpchgs * sizeof(jpc_pocpchg_t)))) {
+	if (!(poc->pchgs = jas_alloc2(poc->numpchgs, sizeof(jpc_pocpchg_t)))) {
 		goto error;
 	}
 	for (pchgno = 0, pchg = poc->pchgs; pchgno < poc->numpchgs; ++pchgno,
@@ -1343,19 +1374,19 @@ static int jpc_poc_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_poc_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_poc_dumpparms(jpc_ms_t *ms)
 {
 	jpc_poc_t *poc = &ms->parms.poc;
 	jpc_pocpchg_t *pchg;
 	int pchgno;
 	for (pchgno = 0, pchg = poc->pchgs; pchgno < poc->numpchgs;
 	  ++pchgno, ++pchg) {
-		fprintf(out, "po[%d] = %d; ", pchgno, pchg->prgord);
-		fprintf(out, "cs[%d] = %d; ce[%d] = %d; ",
+		jas_logprintf("po[%d] = %d; ", pchgno, pchg->prgord);
+		jas_logprintf("cs[%d] = %"PRIuFAST16"; ce[%d] = %"PRIuFAST16"; ",
 		  pchgno, pchg->compnostart, pchgno, pchg->compnoend);
-		fprintf(out, "rs[%d] = %d; re[%d] = %d; ",
+		jas_logprintf("rs[%d] = %d; re[%d] = %d; ",
 		  pchgno, pchg->rlvlnostart, pchgno, pchg->rlvlnoend);
-		fprintf(out, "le[%d] = %d\n", pchgno, pchg->lyrnoend);
+		jas_logprintf("le[%d] = %"PRIuFAST16"\n", pchgno, pchg->lyrnoend);
 	}
 	return 0;
 }
@@ -1378,7 +1409,7 @@ static int jpc_crg_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 	jpc_crgcomp_t *comp;
 	uint_fast16_t compno;
 	crg->numcomps = cstate->numcomps;
-	if (!(crg->comps = jas_malloc(cstate->numcomps * sizeof(uint_fast16_t)))) {
+	if (!(crg->comps = jas_alloc2(cstate->numcomps, sizeof(jpc_crgcomp_t)))) {
 		return -1;
 	}
 	for (compno = 0, comp = crg->comps; compno < cstate->numcomps;
@@ -1398,8 +1429,7 @@ static int jpc_crg_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	int compno;
 	jpc_crgcomp_t *comp;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	for (compno = 0, comp = crg->comps; compno < crg->numcomps; ++compno,
 	  ++comp) {
@@ -1411,15 +1441,15 @@ static int jpc_crg_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 	return 0;
 }
 
-static int jpc_crg_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_crg_dumpparms(jpc_ms_t *ms)
 {
 	jpc_crg_t *crg = &ms->parms.crg;
 	int compno;
 	jpc_crgcomp_t *comp;
 	for (compno = 0, comp = crg->comps; compno < crg->numcomps; ++compno,
 	  ++comp) {
-		fprintf(out, "hoff[%d] = %d; voff[%d] = %d\n", compno,
-		  comp->hoff, compno, comp->voff);
+		jas_logprintf("hoff[%d] = %"PRIuFAST16"; voff[%d] = %"PRIuFAST16"\n",
+		  compno, comp->hoff, compno, comp->voff);
 	}
 	return 0;
 }
@@ -1440,8 +1470,7 @@ static int jpc_com_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 {
 	jpc_com_t *com = &ms->parms.com;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_getuint16(in, &com->regid)) {
 		return -1;
@@ -1451,7 +1480,7 @@ static int jpc_com_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 		if (!(com->data = jas_malloc(com->len))) {
 			return -1;
 		}
-		if (jas_stream_read(in, com->data, com->len) != JAS_CAST(int, com->len)) {
+		if (jas_stream_read(in, com->data, com->len) != com->len) {
 			return -1;
 		}
 	} else {
@@ -1464,24 +1493,23 @@ static int jpc_com_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *ou
 {
 	jpc_com_t *com = &ms->parms.com;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	JAS_UNUSED(cstate);
 
 	if (jpc_putuint16(out, com->regid)) {
 		return -1;
 	}
-	if (jas_stream_write(out, com->data, com->len) != JAS_CAST(int, com->len)) {
+	if (jas_stream_write(out, com->data, com->len) != com->len) {
 		return -1;
 	}
 	return 0;
 }
 
-static int jpc_com_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_com_dumpparms(jpc_ms_t *ms)
 {
 	jpc_com_t *com = &ms->parms.com;
 	unsigned int i;
 	int printable;
-	fprintf(out, "regid = %d;\n", com->regid);
+	jas_logprintf("regid = %"PRIuFAST16";\n", com->regid);
 	printable = 1;
 	for (i = 0; i < com->len; ++i) {
 		if (!isprint(com->data[i])) {
@@ -1490,9 +1518,11 @@ static int jpc_com_dumpparms(jpc_ms_t *ms, FILE *out)
 		}
 	}
 	if (printable) {
-		fprintf(out, "data = ");
+		jas_logprintf("data = %.*s\n", com->len, com->data);
+/* FIXME: print the data
 		fwrite(com->data, sizeof(char), com->len, out);
-		fprintf(out, "\n");
+		jas_logprintf("\n");
+*/
 	}
 	return 0;
 }
@@ -1513,14 +1543,15 @@ static int jpc_unk_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 {
 	jpc_unk_t *unk = &ms->parms.unk;
 
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
+	unk->data = 0;
+
+	JAS_UNUSED(cstate);
 
 	if (ms->len > 0) {
-		if (!(unk->data = jas_malloc(ms->len * sizeof(unsigned char)))) {
+		if (!(unk->data = jas_alloc2(ms->len, sizeof(unsigned char)))) {
 			return -1;
 		}
-		if (jas_stream_read(in, (char *) unk->data, ms->len) != JAS_CAST(int, ms->len)) {
+		if (jas_stream_read(in, (char *) unk->data, ms->len) != ms->len) {
 			jas_free(unk->data);
 			return -1;
 		}
@@ -1534,22 +1565,21 @@ static int jpc_unk_getparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *in
 
 static int jpc_unk_putparms(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *out)
 {
-	/* Eliminate compiler warning about unused variables. */
-	cstate = 0;
-	ms = 0;
-	out = 0;
+	JAS_UNUSED(cstate);
+	JAS_UNUSED(ms);
+	JAS_UNUSED(out);
 
 	/* If this function is called, we are trying to write an unsupported
 	  type of marker segment.  Return with an error indication.  */
 	return -1;
 }
 
-static int jpc_unk_dumpparms(jpc_ms_t *ms, FILE *out)
+static int jpc_unk_dumpparms(jpc_ms_t *ms)
 {
 	unsigned int i;
 	jpc_unk_t *unk = &ms->parms.unk;
 	for (i = 0; i < unk->len; ++i) {
-		fprintf(out, "%02x ", unk->data[i]);
+		jas_logprintf("%02x ", unk->data[i]);
 	}
 	return 0;
 }
@@ -1580,19 +1610,10 @@ int jpc_putuint8(jas_stream_t *out, uint_fast8_t val)
 
 int jpc_getuint16(jas_stream_t *in, uint_fast16_t *val)
 {
-	uint_fast16_t v;
-	int c;
-	if ((c = jas_stream_getc(in)) == EOF) {
+	jas_uchar buffer[2];
+	if (jas_stream_read(in, buffer, sizeof(buffer)) != sizeof(buffer))
 		return -1;
-	}
-	v = c;
-	if ((c = jas_stream_getc(in)) == EOF) {
-		return -1;
-	}
-	v = (v << 8) | c;
-	if (val) {
-		*val = v;
-	}
+	*val = (uint_fast16_t)buffer[0] << 8 | (uint_fast16_t)buffer[1];
 	return 0;
 }
 
@@ -1607,27 +1628,11 @@ int jpc_putuint16(jas_stream_t *out, uint_fast16_t val)
 
 int jpc_getuint32(jas_stream_t *in, uint_fast32_t *val)
 {
-	uint_fast32_t v;
-	int c;
-	if ((c = jas_stream_getc(in)) == EOF) {
+	jas_uchar buffer[4];
+	if (jas_stream_read(in, buffer, sizeof(buffer)) != sizeof(buffer))
 		return -1;
-	}
-	v = c;
-	if ((c = jas_stream_getc(in)) == EOF) {
-		return -1;
-	}
-	v = (v << 8) | c;
-	if ((c = jas_stream_getc(in)) == EOF) {
-		return -1;
-	}
-	v = (v << 8) | c;
-	if ((c = jas_stream_getc(in)) == EOF) {
-		return -1;
-	}
-	v = (v << 8) | c;
-	if (val) {
-		*val = v;
-	}
+	*val = (uint_fast32_t)buffer[0] << 24 | (uint_fast32_t)buffer[1] << 16
+		| (uint_fast32_t)buffer[2] << 8 | (uint_fast32_t)buffer[3];
 	return 0;
 }
 
@@ -1646,9 +1651,9 @@ int jpc_putuint32(jas_stream_t *out, uint_fast32_t val)
 * Miscellany
 \******************************************************************************/
 
-static jpc_mstabent_t *jpc_mstab_lookup(int id)
+static const jpc_mstabent_t *jpc_mstab_lookup(int id)
 {
-	jpc_mstabent_t *mstabent;
+	const jpc_mstabent_t *mstabent;
 	for (mstabent = jpc_mstab;; ++mstabent) {
 		if (mstabent->id == id || mstabent->id < 0) {
 			return mstabent;
@@ -1660,23 +1665,19 @@ static jpc_mstabent_t *jpc_mstab_lookup(int id)
 
 int jpc_validate(jas_stream_t *in)
 {
-	int n;
-	int i;
 	unsigned char buf[2];
+
+	/*
+	Note: The validation operation does not require the initialization of the
+	JPC codec.  So, jpc_init is not called here.
+	jpc_init();
+	*/
 
 	assert(JAS_STREAM_MAXPUTBACK >= 2);
 
-	if ((n = jas_stream_read(in, (char *) buf, 2)) < 0) {
+	if (jas_stream_peek(in, buf, sizeof(buf)) != sizeof(buf))
 		return -1;
-	}
-	for (i = n - 1; i >= 0; --i) {
-		if (jas_stream_ungetc(in, buf[i]) == EOF) {
-			return -1;
-		}
-	}
-	if (n < 2) {
-		return -1;
-	}
+
 	if (buf[0] == (JPC_MS_SOC >> 8) && buf[1] == (JPC_MS_SOC & 0xff)) {
 		return 0;
 	}

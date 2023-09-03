@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 1999-2000 Image Power, Inc. and the University of
  *   British Columbia.
- * Copyright (c) 2001-2002 Michael David Adams.
+ * Copyright (c) 2001-2003 Michael David Adams.
  * All rights reserved.
  */
 
@@ -61,22 +61,49 @@
  * __END_OF_JASPER_LICENSE__
  */
 
-/*
- * $Id$
- */
-
-#ifndef JPC_COD_H
-#define JPC_COD_H
-
-#include "jpc_t1cod.h"
-
 /******************************************************************************\
-* Constants.
+* Includes.
 \******************************************************************************/
 
-/* The nominal word size used by this implementation. */
-#define	JPC_PREC	32
+#define JAS_FOR_INTERNAL_USE_ONLY
 
-void jpc_init(void);
+#include "jas_config.h"
+#include "jas_thread.h"
+#include "jas_debug.h"
 
+#include "jpc_cod.h"
+
+/******************************************************************************\
+*
+\******************************************************************************/
+
+static void jpc_init_helper(void);
+
+#if defined(JAS_THREADS)
+jas_once_flag_t jpc_init_once = JAS_ONCE_FLAG_INIT;
+#else
+int jpc_init_once = 0;
 #endif
+
+/******************************************************************************\
+*
+\******************************************************************************/
+
+void jpc_init(void)
+{
+#if defined(JAS_THREADS)
+	jas_call_once(&jpc_init_once, jpc_init_helper);
+#else
+	if (!jpc_init_once) {
+		jpc_init_helper();
+		jpc_init_once = 1;
+	}
+#endif
+}
+
+static void jpc_init_helper(void)
+{
+	JAS_LOGDEBUGF(10, "jpc_init_helper called\n");
+	jpc_initmqctxs();
+	jpc_initluts();
+}

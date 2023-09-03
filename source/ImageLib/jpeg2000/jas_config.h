@@ -1,241 +1,120 @@
-/* src/libjasper/include/jasper/jas_config.h.  Generated automatically by configure.  */
-/* src/libjasper/include/jasper/jas_config.h.in.  Generated automatically from configure.in by autoheader.  */
-
-/*
- * Copyright (c) 2003 Michael David Adams.
- * All rights reserved.
- */
-
-/* __START_OF_JASPER_LICENSE__
- * 
- * JasPer Software License
- * 
- * IMAGE POWER JPEG-2000 PUBLIC LICENSE
- * ************************************
- * 
- * GRANT:
- * 
- * Permission is hereby granted, free of charge, to any person (the "User")
- * obtaining a copy of this software and associated documentation, to deal
- * in the JasPer Software without restriction, including without limitation
- * the right to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the JasPer Software (in source and binary forms),
- * and to permit persons to whom the JasPer Software is furnished to do so,
- * provided further that the License Conditions below are met.
- * 
- * License Conditions
- * ******************
- * 
- * A.  Redistributions of source code must retain the above copyright notice,
- * and this list of conditions, and the following disclaimer.
- * 
- * B.  Redistributions in binary form must reproduce the above copyright
- * notice, and this list of conditions, and the following disclaimer in
- * the documentation and/or other materials provided with the distribution.
- * 
- * C.  Neither the name of Image Power, Inc. nor any other contributor
- * (including, but not limited to, the University of British Columbia and
- * Michael David Adams) may be used to endorse or promote products derived
- * from this software without specific prior written permission.
- * 
- * D.  User agrees that it shall not commence any action against Image Power,
- * Inc., the University of British Columbia, Michael David Adams, or any
- * other contributors (collectively "Licensors") for infringement of any
- * intellectual property rights ("IPR") held by the User in respect of any
- * technology that User owns or has a right to license or sublicense and
- * which is an element required in order to claim compliance with ISO/IEC
- * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
- * rights worldwide arising under statutory or common law, and whether
- * or not perfected, including, without limitation, all (i) patents and
- * patent applications owned or licensable by User; (ii) rights associated
- * with works of authorship including copyrights, copyright applications,
- * copyright registrations, mask work rights, mask work applications,
- * mask work registrations; (iii) rights relating to the protection of
- * trade secrets and confidential information; (iv) any right analogous
- * to those set forth in subsections (i), (ii), or (iii) and any other
- * proprietary rights relating to intangible property (other than trademark,
- * trade dress, or service mark rights); and (v) divisions, continuations,
- * renewals, reissues and extensions of the foregoing (as and to the extent
- * applicable) now existing, hereafter filed, issued or acquired.
- * 
- * E.  If User commences an infringement action against any Licensor(s) then
- * such Licensor(s) shall have the right to terminate User's license and
- * all sublicenses that have been granted hereunder by User to other parties.
- * 
- * F.  This software is for use only in hardware or software products that
- * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
- * or right to this Software is granted for products that do not comply
- * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
- * from the ISO.
- * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
- * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
- * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
- * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
- * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
- * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
- * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
- * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
- * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
- * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
- * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
- * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
- * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
- * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
- * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
- * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
- * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
- * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
- * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
- * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
- * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
- * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
- * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
- * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
- * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
- * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
- * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
- * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
- * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
- * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
- * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
- * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
- * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
- * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
- * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
- * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
- * NOTICE SPECIFIED IN THIS SECTION.
- * 
- * __END_OF_JASPER_LICENSE__
- */
-
 #ifndef JAS_CONFIG_H
 #define JAS_CONFIG_H
 
-/* This identifies the version of JasPer. */
-#define	JAS_VERSION "1.700.2"
+#if 0
+#define _POSIX_C_SOURCE 200809L
+#endif
 
-/* The preprocessor symbol JAS_WIN_MSVC_BUILD should not be defined
-  unless the JasPer software is being built under Microsoft Windows
-  using Microsoft Visual C. */
-#define JAS_WIN_MSVC_BUILD
-#define EXCLUDE_JPG_SUPPORT
-#define EXCLUDE_MIF_SUPPORT
-#define EXCLUDE_PNM_SUPPORT
-#define EXCLUDE_RAS_SUPPORT
-#define EXCLUDE_BMP_SUPPORT
-#define EXCLUDE_PGX_SUPPORT
-//#define EXCLUDE_JPC_SUPPORT
-//#define EXCLUDE_JP2_SUPPORT
+#include "jas_compiler.h"
+#include "jas_dll.h"
 
-#ifndef	JAS_WIN_MSVC_BUILD
+/* This preprocessor symbol identifies the version of JasPer. */
 
-/* Define to empty if the keyword does not work.  */
-/* #undef const */
+/*!
+@brief
+A null-terminated string containing the JasPer library version
+*/
+#define	JAS_VERSION "4.0.0"
 
-/* Define if you don't have vprintf but do have _doprnt.  */
-/* #undef HAVE_DOPRNT */
+/*!
+@brief
+The JasPer library major version number.
+*/
+#define JAS_VERSION_MAJOR 4
 
-/* Define if you have the vprintf function.  */
-#define HAVE_VPRINTF 1
+/*!
+@brief
+The JasPer library minor version number.
+*/
+#define JAS_VERSION_MINOR 0
 
-/* Define as __inline if that's what the C compiler calls it.  */
-/* #undef inline */
+/*!
+@brief
+The JasPer library patch version number.
+*/
+#define JAS_VERSION_PATCH 0
 
-/* Define to `unsigned' if <sys/types.h> doesn't define.  */
-/* #undef size_t */
+/*
+The version of the C standard against which JasPer was built.
+*/
+#define JAS_STDC_VERSION 0L
 
-/* Define if you have the ANSI C header files.  */
-#define STDC_HEADERS 1
+#define JAS_ENABLE_32BIT 1
 
-/* Define if your processor stores words with the most significant
-   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
-/* #undef WORDS_BIGENDIAN */
+/* #undef JAS_HAVE_INT128_T */
 
-/* Define if the X Window System is missing or not being used.  */
-/* #undef X_DISPLAY_MISSING */
+#define JAS_SIZEOF_INT 4
+#define JAS_SIZEOF_LONG 4
+#define JAS_SIZEOF_LLONG 8
+#define JAS_SIZEOF_SIZE_T 8
+#define JAS_SIZEOF_SSIZE_T 
 
-#define JAS_CONFIGURE 1
-#define JAS_VERSION "1.700.2"
-/* #undef DEBUG_MEMALLOC */
-/* #undef DEBUG_OVERFLOW */
-/* #undef ushort */
-/* #undef uint */
-#define uchar unsigned char
-#define longlong long long
-#define ulonglong unsigned long long
-/* #undef ssize_t */
+#define JAS_HAVE_FCNTL_H
+#define JAS_HAVE_IO_H
+/* #undef JAS_HAVE_UNISTD_H */
+/* #undef JAS_HAVE_SYS_TIME_H */
+#define JAS_HAVE_SYS_TYPES_H
+/* #undef JAS_HAVE_SSIZE_T */
+/* #undef JAS_HAVE_MAX_ALIGN_T */
 
-/* The number of bytes in a int.  */
-#define SIZEOF_INT 4
+#if 0
+/* #undef JAS_HAVE_UINTMAX_T */
+/* #undef JAS_HAVE_INTMAX_T */
+#endif
 
-/* The number of bytes in a long.  */
-#define SIZEOF_LONG 4
+/* #undef JAS_HAVE_MKOSTEMP */
+/* #undef JAS_HAVE_GETTIMEOFDAY */
+/* #undef JAS_HAVE_GETRUSAGE */
+/* #undef JAS_HAVE_NANOSLEEP */
 
-/* The number of bytes in a long long.  */
-#define SIZEOF_LONG_LONG 8
+/* #undef JAS_HAVE_GL_GLUT_H */
+/* #undef JAS_HAVE_GLUT_GLUT_H */
+/* #undef JAS_HAVE_GLUT_H */
 
-/* The number of bytes in a short.  */
-#define SIZEOF_SHORT 2
+/* #undef JAS_INCLUDE_PNM_CODEC */
+/* #undef JAS_INCLUDE_BMP_CODEC */
+/* #undef JAS_INCLUDE_RAS_CODEC */
+#define JAS_INCLUDE_JP2_CODEC
+#define JAS_INCLUDE_JPC_CODEC
+/* #undef JAS_INCLUDE_JPG_CODEC */
+/* #undef JAS_INCLUDE_HEIC_CODEC */
+/* #undef JAS_INCLUDE_PGX_CODEC */
+/* #undef JAS_INCLUDE_MIF_CODEC */
+/* #undef JAS_ENABLE_DANGEROUS_INTERNAL_TESTING_MODE */
 
-/* The number of bytes in a unsigned int.  */
-#define SIZEOF_UNSIGNED_INT 4
+#define JAS_ENABLE_PNM_CODEC 0
+#define JAS_ENABLE_BMP_CODEC 0
+#define JAS_ENABLE_RAS_CODEC 0
+#define JAS_ENABLE_JP2_CODEC 1
+#define JAS_ENABLE_JPC_CODEC 1
+#define JAS_ENABLE_JPG_CODEC 1
+#define JAS_ENABLE_HEIC_CODEC 0
+#define JAS_ENABLE_PGX_CODEC 0
+#define JAS_ENABLE_MIF_CODEC 0
 
-/* The number of bytes in a unsigned long.  */
-#define SIZEOF_UNSIGNED_LONG 4
+#define JAS_DEFAULT_MAX_MEM_USAGE 1073741824
 
-/* The number of bytes in a unsigned long long.  */
-#define SIZEOF_UNSIGNED_LONG_LONG 8
+#define JAS_THREADS
+/* #undef JAS_THREADS_C11 */
+/* #undef JAS_THREADS_PTHREAD */
+#define JAS_THREADS_WIN32
 
-/* The number of bytes in a unsigned short.  */
-#define SIZEOF_UNSIGNED_SHORT 2
+#define JAS_HAVE_THREAD_LOCAL
 
-/* Define if you have the <dlfcn.h> header file.  */
-#define HAVE_DLFCN_H 1
+/* #undef JAS_ENABLE_NON_THREAD_SAFE_DEBUGGING */
 
-/* Define if you have the <fcntl.h> header file.  */
-#define HAVE_FCNTL_H 1
+#define JAS_HAVE_SNPRINTF
 
-/* Define if you have the <io.h> header file.  */
-/* #undef HAVE_IO_H */
+#if !defined(JAS_DEC_DEFAULT_MAX_SAMPLES)
+#define JAS_DEC_DEFAULT_MAX_SAMPLES (64 * ((size_t) 1048576))
+#endif
 
-/* Define if you have the <limits.h> header file.  */
-#define HAVE_LIMITS_H 1
+#if (JAS_DEFAULT_MAX_MEM_USAGE == 0)
+#define JAS_DEFAULT_MAX_MEM_USAGE (1024ULL * 1024ULL * 1024ULL)
+#endif
 
-/* Define if you have the <stdbool.h> header file.  */
-#define HAVE_STDBOOL_H 1
-
-/* Define if you have the <stddef.h> header file.  */
-#define HAVE_STDDEF_H 1
-
-/* Define if you have the <stdint.h> header file.  */
-#define HAVE_STDINT_H 1
-
-/* Define if you have the <stdlib.h> header file.  */
-#define HAVE_STDLIB_H 1
-
-/* Define if you have the <sys/types.h> header file.  */
-#define HAVE_SYS_TYPES_H 1
-
-/* Define if you have the <unistd.h> header file.  */
-#define HAVE_UNISTD_H 1
-
-/* Define if you have the <windows.h> header file.  */
-/* #undef HAVE_WINDOWS_H */
-
-/* Define if you have the m library (-lm).  */
-#define HAVE_LIBM 1
-
-/* Name of package */
-#define PACKAGE "jasper"
-
-/* Version number of package */
-#define VERSION "1.700.2"
-
-#else
-#include "jas_config2.h"
+#if (__STDC_VERSION__ - 0 < JAS_STDC_VERSION)
+#warning "Your code is being built against an older version of the C standard than JasPer was.  Although this is supported, this may require some extra preprocessor defines when building."
 #endif
 
 #endif
