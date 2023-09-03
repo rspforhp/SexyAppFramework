@@ -382,3 +382,7 @@ Assets/
 *.tar.gz
 *.rar
 *.7z
+
+# Sexy files
+*.exe
+crash.txt
