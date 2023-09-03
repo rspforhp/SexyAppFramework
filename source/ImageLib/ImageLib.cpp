@@ -1135,7 +1135,7 @@ Image* GetJPEGImage(const std::string& theFileName)
 	return anImage;
 }
 
-#if _USE_J2K
+#if _USE_J2K_CODEC
 
 #include "j2k-codec\j2k-codec.h"
 
@@ -1175,7 +1175,7 @@ void __stdcall Pak_close(void* data_source)
 {
 }
 
-Image* GetJPEG2000Image(const std::string& theFileName)
+Image* GetJ2KImage(const std::string& theFileName)
 {
 	if (gJ2KCodec != NULL)
 	{
@@ -1298,7 +1298,7 @@ Image* GetJPEG2000Image(const std::string& theFileName)
 	return NULL;
 }
 #else
-Image* GetJPEG2000Image(const std::string& theFileName)
+Image* GetJasJ2KImage(const std::string& theFileName)
 {
 	DWORD aTick = GetTickCount();
 
@@ -1474,7 +1474,6 @@ Image* GetJPEG2000Image(const std::string& theFileName)
 }
 #endif
 
-
 int ImageLib::gAlphaComposeColor = 0xFFFFFF;
 bool ImageLib::gAutoLoadAlpha = true;
 bool ImageLib::gIgnoreJPEG2000Alpha = true;
@@ -1512,12 +1511,17 @@ Image* ImageLib::GetImage(const std::string& theFilename, bool lookForAlphaImage
 	if ((anImage == NULL) && ((stricmp(anExt.c_str(), ".gif") == 0) || (anExt.length() == 0)))
 		anImage = GetGIFImage(aFilename + ".gif");
 
+#if _USE_J2K_CODEC
 	if (anImage == NULL && (stricmp(anExt.c_str(), ".j2k") == 0 || anExt.length() == 0))
-		anImage = GetJPEG2000Image(aFilename + ".j2k");
+		anImage = GetJ2KImage(aFilename + ".j2k");
 	if (anImage == NULL && (stricmp(anExt.c_str(), ".jp2") == 0 || anExt.length() == 0))
-		anImage = GetJPEG2000Image(aFilename + ".jp2");
-
-
+		anImage = GetJ2KImage(aFilename + ".jp2");
+#else
+	if (anImage == NULL && (stricmp(anExt.c_str(), ".j2k") == 0 || anExt.length() == 0))
+		anImage = GetJasJ2KImage(aFilename + ".j2k");
+	if (anImage == NULL && (stricmp(anExt.c_str(), ".jp2") == 0 || anExt.length() == 0))
+		anImage = GetJasJ2KImage(aFilename + ".jp2");
+#endif
 	// Check for alpha images
 	Image* anAlphaImage = NULL;
 	if (lookForAlphaImage)

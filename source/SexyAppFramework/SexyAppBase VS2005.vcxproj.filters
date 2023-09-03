@@ -1226,8 +1226,5 @@
     <CustomBuild Include="..\ImageLib\jpeg2000\jpc_tsfb.h">
       <Filter>ImageLib\JPEG2000</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\ImageLib\jpeg2000\jpc_util.h">
-      <Filter>ImageLib\JPEG2000</Filter>
-    </CustomBuild>
   </ItemGroup>
 </Project>

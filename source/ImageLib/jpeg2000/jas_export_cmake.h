@@ -6,16 +6,7 @@
 #  define JAS_EXPORT
 #  define JAS_LOCAL
 #else
-#  ifndef JAS_EXPORT
-#    ifdef libjasper_EXPORTS
-        /* We are building this library */
-#      define JAS_EXPORT __declspec(dllexport)
-#    else
-        /* We are using this library */
-#      define JAS_EXPORT __declspec(dllimport)
-#    endif
-#  endif
-
+#define JAS_EXPORT __declspec(dllexport)
 #  ifndef JAS_LOCAL
 #    define JAS_LOCAL 
 #  endif

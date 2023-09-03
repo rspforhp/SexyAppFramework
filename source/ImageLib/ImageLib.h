@@ -33,9 +33,11 @@ extern bool gIgnoreJPEG2000Alpha;  // I've noticed alpha in jpeg2000's that shou
 
 Image* GetImage(const std::string& theFileName, bool lookForAlphaImage = true);
 
+#if _USE_J2K_CODEC
 void InitJPEG2000();
 void CloseJPEG2000();
 void SetJ2KCodecKey(const std::string& theKey);
+#endif
 
 }
 

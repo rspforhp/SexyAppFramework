@@ -142,8 +142,9 @@ SexyAppBase::SexyAppBase()
 	gDSoundDLL = LoadLibraryA("dsound.dll");
 	gGetLastInputInfoFunc = (GetLastInputInfoFunc)GetProcAddress(GetModuleHandleA("user32.dll"), "GetLastInputInfo");
 
+#if _USE_J2K_CODEC
 	ImageLib::InitJPEG2000();
-
+#endif
 	mMutex = NULL;
 	mNotifyGameMessage = 0;
 
@@ -2116,7 +2117,9 @@ void SexyAppBase::Shutdown()
 		if (mReadFromRegistry)
 			WriteToRegistry();
 
+#if _USE_J2K_CODEC
 		ImageLib::CloseJPEG2000();
+#endif
 	}
 }
 
