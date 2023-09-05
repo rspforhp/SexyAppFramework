@@ -39,7 +39,6 @@ public:
 	Widget*					mWidget;
 };
 
-
 typedef std::list<WidgetSafeDeleteInfo> WidgetSafeDeleteList;
 typedef std::set<MemoryImage*> MemoryImageSet;
 typedef std::map<int, Dialog*> DialogMap;
