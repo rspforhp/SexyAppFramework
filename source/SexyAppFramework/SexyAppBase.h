@@ -45,7 +45,6 @@ typedef std::map<int, Dialog*> DialogMap;
 typedef std::list<Dialog*> DialogList;
 typedef std::list<MSG> WindowsMessageList;
 typedef std::vector<std::string> StringVector;
-//typedef std::basic_string<TCHAR> tstring; // string of TCHARs
 
 typedef std::map<std::string, SexyString> StringSexyStringMap;
 typedef std::map<std::string, std::string> StringStringMap;
