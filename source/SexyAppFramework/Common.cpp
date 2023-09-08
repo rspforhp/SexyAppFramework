@@ -97,7 +97,7 @@ std::string Sexy::GetAppDataFolder()
 
 void Sexy::SetAppDataFolder(const std::string& thePath)
 {
-	// 	if (CheckForVista())
+	if (CheckForVista())
 	{
 		std::string aPath = thePath;
 		if (!aPath.empty())
@@ -264,7 +264,7 @@ std::string Sexy::Trim(const std::string& theString)
 }
 
 std::wstring Sexy::Trim(const std::wstring& theString)
-{
+{   //0x5AFD80
 	int aStartPos = 0;
 	while (aStartPos < (int)theString.length() && iswspace(theString[aStartPos]))
 		aStartPos++;
@@ -977,7 +977,7 @@ std::wstring Sexy::vformat(const wchar_t* fmt, va_list argPtr)
 	{
 		// Try a bigger size
 		attemptedSize *= 2;
-		heapBuffer = (wchar_t*)realloc(heapBuffer, (attemptedSize + 1) * sizeof(wchar_t));
+		heapBuffer = (wchar_t*)realloc(heapBuffer, (attemptedSize + 1));
 #ifdef _WIN32
 		numChars = _vsnwprintf(heapBuffer, attemptedSize, fmt, argPtr);
 #else
@@ -987,7 +987,7 @@ std::wstring Sexy::vformat(const wchar_t* fmt, va_list argPtr)
 
 	heapBuffer[numChars] = 0;
 
-	std::wstring result(heapBuffer);
+	std::wstring result = std::wstring(heapBuffer);
 
 	free(heapBuffer);
 
@@ -1320,4 +1320,41 @@ bool Sexy::StrPrefixNoCase(const char* theStr, const char* thePrefix, int maxLen
 	}
 
 	return c2 == 0 || i == maxLength;
+}
+
+std::wstring Sexy::UTF8StringToWString(const std::string theString)
+{
+	int size = MultiByteToWideChar(CP_UTF8, 0, theString.c_str(), theString.length() + 1, nullptr, 0);
+	wchar_t* buffer = new wchar_t[size];
+	MultiByteToWideChar(CP_UTF8, 0, theString.c_str(), theString.length() + 1, buffer, size);
+	std::wstring result = buffer;
+	delete[] buffer;
+	return result;
+}
+
+void Sexy::SMemR(void*& _Src, void* _Dst, size_t _Size)
+{
+	memcpy(_Dst, _Src, _Size);
+	_Src = (void*)((unsigned int)_Src + _Size);
+}
+
+void Sexy::SMemRStr(void*& _Src, std::string& theString)
+{
+	size_t aStrLen;
+	SMemR(_Src, &aStrLen, sizeof(aStrLen));
+	theString.resize(aStrLen);
+	SMemR(_Src, (void*)theString.c_str(), aStrLen);
+}
+
+void Sexy::SMemW(void*& _Dst, const void* _Src, size_t _Size)
+{
+	memcpy(_Dst, _Src, _Size);
+	_Dst = (void*)((unsigned int)_Dst + _Size);
+}
+
+void Sexy::SMemWStr(void*& _Dst, const std::string& theString)
+{
+	size_t aStrLen = theString.size();
+	SMemW(_Dst, &aStrLen, sizeof(aStrLen));
+	SMemW(_Dst, theString.c_str(), aStrLen);
 }

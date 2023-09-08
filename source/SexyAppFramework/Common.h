@@ -37,6 +37,10 @@ typedef std::wstring		SexyString;
 #define sexysscanf			swscanf
 #define sexyatoi			_wtoi
 #define sexystrcpy			wcscpy
+#define sexystrlen			wcslen
+#define sexyisdigit			iswdigit
+#define sexyisalnum			iswalnum
+#define sexystrchr			wcschr
 
 #define SexyStringToStringFast(x)	WStringToString(x)
 #define SexyStringToWStringFast(x)	(x)
@@ -79,6 +83,10 @@ typedef std::string			SexyString;
 #define sexysscanf			sscanf
 #define sexyatoi			atoi
 #define sexystrcpy			strcpy
+#define sexystrlen			strlen
+#define sexyisdigit			isdigit
+#define sexyisalnum			isalnum
+#define sexystrchr			strchr
 
 #define SexyStringToStringFast(x)	(x)
 #define SexyStringToWStringFast(x)	StringToWString(x)
@@ -130,8 +138,8 @@ std::string			StringToUpper(const std::string& theString);
 std::wstring		StringToUpper(const std::wstring& theString);
 std::string			StringToLower(const std::string& theString);
 std::wstring		StringToLower(const std::wstring& theString);
-std::wstring		StringToWString(const std::string &theString);
-std::string			WStringToString(const std::wstring &theString);
+std::wstring		StringToWString(const std::string& theString);
+std::string			WStringToString(const std::wstring& theString);
 SexyString			StringToSexyString(const std::string& theString);
 SexyString			WStringToSexyString(const std::wstring& theString);
 std::string			SexyStringToString(const SexyString& theString);
@@ -146,16 +154,15 @@ bool				StringToInt(const std::string theString, int* theIntVal);
 bool				StringToDouble(const std::string theString, double* theDoubleVal);
 bool				StringToInt(const std::wstring theString, int* theIntVal);
 bool				StringToDouble(const std::wstring theString, double* theDoubleVal);
-int					StrFindNoCase(const char *theStr, const char *theFind);
-bool				StrPrefixNoCase(const char *theStr, const char *thePrefix, int maxLength = 10000000);
+int					StrFindNoCase(const char* theStr, const char* theFind);
+bool				StrPrefixNoCase(const char* theStr, const char* thePrefix, int maxLength = 10000000);
 SexyString			CommaSeperate(int theValue);
 std::string			Evaluate(const std::string& theString, const DefinesMap& theDefinesMap);
 std::string			XMLDecodeString(const std::string& theString);
 std::string			XMLEncodeString(const std::string& theString);
 std::wstring		XMLDecodeString(const std::wstring& theString);
 std::wstring		XMLEncodeString(const std::wstring& theString);
-
-bool				Deltree(const std::string& thePath);
+bool				Deltree(const std::string& thePath);	
 bool				FileExists(const std::string& theFileName);
 void				MkDir(const std::string& theDir);
 std::string			GetFileName(const std::string& thePath, bool noExtension = false);
@@ -167,63 +174,70 @@ std::string			GetCurDir();
 std::string			GetFullPath(const std::string& theRelPath);
 std::string			GetPathFrom(const std::string& theRelPath, const std::string& theDir);
 bool				AllowAllAccess(const std::string& theFileName);
+std::wstring		UTF8StringToWString(const std::string theString);
 
+	// Read memory and then move the pointer
+void				SMemR(void*& _Src, void* _Dst, size_t _Size);
+void				SMemRStr(void*& _Src, std::string& theString);
+	// Write memory and then move the pointer
+void				SMemW(void*& _Dst, const void* _Src, size_t _Size);
+void				SMemWStr(void*& _Dst, const std::string& theString);
 
-inline void			inlineUpper(std::string &theData)
+inline void			inlineUpper(std::string& theData)
 {
-    //std::transform(theData.begin(), theData.end(), theData.begin(), toupper);
+		//std::transform(theData.begin(), theData.end(), theData.begin(), toupper);
 
-	int aStrLen = (int) theData.length();
+	int aStrLen = (int)theData.length();
 	for (int i = 0; i < aStrLen; i++)
 	{
 		theData[i] = toupper(theData[i]);
 	}
 }
 
-inline void			inlineUpper(std::wstring &theData)
+inline void			inlineUpper(std::wstring& theData)
 {
-    //std::transform(theData.begin(), theData.end(), theData.begin(), toupper);
+	//std::transform(theData.begin(), theData.end(), theData.begin(), toupper);
 
-	int aStrLen = (int) theData.length();
+	int aStrLen = (int)theData.length();
 	for (int i = 0; i < aStrLen; i++)
 	{
 		theData[i] = towupper(theData[i]);
 	}
 }
 
-inline void			inlineLower(std::string &theData)
+inline void			inlineLower(std::string& theData)
 {
-    std::transform(theData.begin(), theData.end(), theData.begin(), tolower);
+	std::transform(theData.begin(), theData.end(), theData.begin(), tolower);
 }
 
-inline void			inlineLower(std::wstring &theData)
+inline void			inlineLower(std::wstring& theData)
 {
-    std::transform(theData.begin(), theData.end(), theData.begin(), tolower);
+	std::transform(theData.begin(), theData.end(), theData.begin(), tolower);
 }
 
-inline void			inlineLTrim(std::string &theData, const std::string& theChars = " \t\r\n")
+inline void			inlineLTrim(std::string& theData, const std::string& theChars = " \t\r\n")
 {
-    theData.erase(0, theData.find_first_not_of(theChars));
+	theData.erase(0, theData.find_first_not_of(theChars));
 }
 
-inline void			inlineLTrim(std::wstring &theData, const std::wstring& theChars = L" \t\r\n")
+inline void			inlineLTrim(std::wstring& theData, const std::wstring& theChars = L" \t\r\n")
 {
-    theData.erase(0, theData.find_first_not_of(theChars));
+	theData.erase(0, theData.find_first_not_of(theChars));
 }
 
 
-inline void			inlineRTrim(std::string &theData, const std::string& theChars = " \t\r\n")
+inline void			inlineRTrim(std::string& theData, const std::string& theChars = " \t\r\n")
 {
-    theData.resize(theData.find_last_not_of(theChars) + 1);
+	theData.resize(theData.find_last_not_of(theChars) + 1);
 }
 
-inline void			inlineTrim(std::string &theData, const std::string& theChars = " \t\r\n")
+inline void			inlineTrim(std::string& theData, const std::string& theChars = " \t\r\n")
 {
 	inlineRTrim(theData, theChars);
 	inlineLTrim(theData, theChars);
 }
 
-struct StringLessNoCase { bool operator()(const std::string &s1, const std::string &s2) const { return _stricmp(s1.c_str(),s2.c_str())<0; } };
+struct StringLessNoCase { bool operator()(const std::string& s1, const std::string& s2) const { return _stricmp(s1.c_str(), s2.c_str()) < 0; } };
 
 }
 

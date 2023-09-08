@@ -11,12 +11,14 @@ namespace Sexy
 class SexyAppBase;
 class Image;
 
+typedef std::map<SexyChar, int> CharIntMap;
+
 class CharData
 {
 public:
 	Rect					mImageRect;
 	Point					mOffset;
-	char					mKerningOffsets[256];
+	CharIntMap				mKerningOffsets;
 	int						mWidth;
 	int						mOrder;
 
@@ -25,17 +27,20 @@ public:
 };
 
 class FontData;
+typedef std::map<SexyChar, CharData> CharDataMap;
 
 class FontLayer
 {
-public:	
-	FontData*				mFontData;
+public:
+	FontData* mFontData;
+	StringStringMap			mExtendedInfo;
+	std::string				mLayerName;
 	StringVector			mRequiredTags;
-	StringVector			mExcludedTags;	
-	CharData				mCharData[256];	
+	StringVector			mExcludedTags;
+	CharDataMap				mCharDataMap;
 	Color					mColorMult;
 	Color					mColorAdd;
-	SharedImageRef			mImage;	
+	SharedImageRef			mImage;
 	int						mDrawMode;
 	Point					mOffset;
 	int						mSpacing;
@@ -48,12 +53,16 @@ public:
 	int						mDefaultHeight; // Max height of font character image rects	
 	int						mLineSpacingOffset; // This plus height should get added between lines
 	int						mBaseOrder;
+	bool					mUseAlphaCorrection;
 
 public:
 	FontLayer(FontData* theFontData);
 	FontLayer(const FontLayer& theFontLayer);
+
+	CharData* GetCharData(SexyChar theChar);
 };
 
+typedef std::map<SexyChar, SexyChar> CharMap;
 typedef std::list<FontLayer> FontLayerList;
 typedef std::map<std::string, FontLayer*> FontLayerMap;
 typedef std::list<Rect> RectList;
@@ -63,20 +72,20 @@ class FontData : public DescParser
 public:
 	bool					mInitialized;
 	int						mRefCount;
-	SexyAppBase*			mApp;		
+	SexyAppBase* mApp;
 
 	int						mDefaultPointSize;
-	uchar					mCharMap[256];	
+	CharMap					mCharMap;
 	FontLayerList			mFontLayerList;
 	FontLayerMap			mFontLayerMap;
 
 	std::string				mSourceFile;
-	std::string				mFontErrorHeader;	
+	std::string				mFontErrorHeader;
 
 public:
 	virtual bool			Error(const std::string& theError);
 
-	bool					GetColorFromDataElement(DataElement *theElement, Color &theColor);
+	bool					GetColorFromDataElement(DataElement* theElement, Color& theColor);
 	bool					DataToLayer(DataElement* theSource, FontLayer** theFontLayer);
 	virtual bool			HandleCommand(const ListDataElement& theParams);
 
@@ -91,14 +100,16 @@ public:
 	bool					LoadLegacy(Image* theFontImage, const std::string& theFontDescFileName);
 };
 
+typedef std::map<SexyChar, Rect> CharRectMap;
+
 class ActiveFontLayer
 {
 public:
-	FontLayer*				mBaseFontLayer;
+	FontLayer* mBaseFontLayer;
 
-	Image*					mScaledImage;
+	Image* mScaledImage;
 	bool					mOwnsImage;
-	Rect					mScaledCharImageRects[256];
+	CharRectMap				mScaledCharImageRects;
 
 public:
 	ActiveFontLayer();
@@ -110,21 +121,22 @@ typedef std::list<ActiveFontLayer> ActiveFontLayerList;
 
 class RenderCommand
 {
-public:
-	Image*					mImage;
+	public:
+	Image* mImage;
 	int						mDest[2];
 	int						mSrc[4];
 	int						mMode;
 	Color					mColor;
-	RenderCommand*			mNext;
+	bool					mUseAlphaCorrection;
+	RenderCommand* mNext;
 };
 
 typedef std::multimap<int, RenderCommand> RenderCommandMap;
 
 class ImageFont : public Font
 {
-public:	
-	FontData*				mFontData;
+public:
+	FontData* mFontData;
 	int						mPointSize;
 	StringVector			mTagVector;
 
@@ -139,31 +151,30 @@ public:
 
 public:
 	ImageFont(SexyAppBase* theSexyApp, const std::string& theFontDescFileName);
-	ImageFont(Image *theFontImage); // for constructing your own image font without a file descriptor
+	ImageFont(Image* theFontImage); // for constructing your own image font without a file descriptor
 	ImageFont(const ImageFont& theImageFont);
 	virtual ~ImageFont();
 
-	// Deprecated
 	ImageFont(Image* theFontImage, const std::string& theFontDescFileName);
-	//ImageFont(const ImageFont& theImageFont, Image* theImage);
-	
-	virtual int				CharWidth(char theChar);
-	virtual int				CharWidthKern(char theChar, char thePrevChar);
+
+	virtual int				CharWidth(SexyChar theChar);
+	virtual int				CharWidthKern(SexyChar theChar, SexyChar thePrevChar);
 	virtual int				StringWidth(const SexyString& theString);
 	virtual void			DrawString(Graphics* g, int theX, int theY, const SexyString& theString, const Color& theColor, const Rect& theClipRect);
 
-	virtual Font*			Duplicate();
+	virtual Font* Duplicate();
 
 	virtual void			SetPointSize(int thePointSize);
 	virtual int				GetPointSize();
 	virtual void			SetScale(double theScale);
 	virtual int				GetDefaultPointSize();
-	virtual bool			AddTag(const std::string& theTagName);	
+	virtual bool			AddTag(const std::string& theTagName);
 	virtual bool			RemoveTag(const std::string& theTagName);
 	virtual bool			HasTag(const std::string& theTagName);
 	virtual std::string		GetDefine(const std::string& theName);
 
 	virtual void			Prepare();
+	SexyChar				GetMappedChar(SexyChar theChar);
 };
 
 }
