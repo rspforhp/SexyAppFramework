@@ -5762,8 +5762,7 @@ void SexyAppBase::Init()
 
 			string aDataPath = RemoveTrailingSlash(aPath) + "\\" + mFullCompanyName + "\\" + mProdName;
 			SetAppDataFolder(aDataPath + "\\");
-			//MkDir(aDataPath);
-			//AllowAllAccess(aDataPath);
+
 			if (mDemoFileName.length() < 2 || (mDemoFileName[1] != ':' && mDemoFileName[2] != '\\'))
 			{
 				mDemoFileName = GetAppDataFolder() + mDemoFileName;

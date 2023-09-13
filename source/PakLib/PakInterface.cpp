@@ -29,7 +29,7 @@ PakInterface::PakInterface()
 		*gPakInterfaceP = this;
 
 	// Init to be the same default as the default in PopPakPWE.exe
-	mDecryptPassword = "PopCapSexyFramework";
+	mDecryptPassword = "0x7F";
 }
 
 PakInterface::~PakInterface()
@@ -82,9 +82,6 @@ bool PakInterface::AddPakFile(const std::string& theFileName)
 	FRead(&aMagic, sizeof(ulong), 1, aFP);
 	if (aMagic != 0xBAC04AC0)
 	{
-		// This next line is for debugging purposes only.  If you release a game
-		// with this enabled, then the game will be hacked
-// 		mError = "Invalid File or Invalid Password: " + mDecryptPassword;
 		mError = "Invalid File or Invalid Password.";
 		FClose(aFP);
 		return false;
