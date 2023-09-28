@@ -3110,10 +3110,9 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 	case WM_ACTIVATEAPP:
 		if ((aSexyApp != NULL) && (!aSexyApp->mPlayingDemoBuffer))
 		{
-			if (hWnd == aSexyApp->mHWnd)
-			{
-				aSexyApp->mActive = wParam != 0;
-			}
+			if (hWnd != aSexyApp->mHWnd) break;
+			
+			aSexyApp->mActive = wParam != 0;
 		}
 
 		break;
@@ -3138,171 +3137,166 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 	case WM_MOUSEWHEEL:
 	case WM_DISPLAYCHANGE:
 	case WM_SYSCOLORCHANGE:
-	{
-		if ((aSexyApp != NULL) && (!aSexyApp->mNoDefer))
+		if ((aSexyApp == NULL) || (aSexyApp->mNoDefer)) return;
+
+		bool keyDown = (uMsg == WM_KEYDOWN) || (uMsg == WM_SYSKEYDOWN);
+
+		if ((keyDown) || (uMsg == WM_KEYUP) || (uMsg == WM_SYSKEYUP))
 		{
-			bool keyDown = (uMsg == WM_KEYDOWN) || (uMsg == WM_SYSKEYDOWN);
+			if (wParam == VK_CONTROL) aSexyApp->mCtrlDown = keyDown;
+			if (wParam == VK_MENU) aSexyApp->mAltDown = keyDown;
+		}
 
-			if ((keyDown) || (uMsg == WM_KEYUP) || (uMsg == WM_SYSKEYUP))
+		if ((keyDown) && (aSexyApp->DebugKeyDownAsync(wParam, aSexyApp->mCtrlDown, aSexyApp->mAltDown)))
+			return 0;
+
+		if (aSexyApp->mPlayingDemoBuffer && uMsg == WM_CHAR)
+		{
+			switch (wParam)
 			{
-				if (wParam == VK_CONTROL)
-					aSexyApp->mCtrlDown = keyDown;
-				if (wParam == VK_MENU)
-					aSexyApp->mAltDown = keyDown;
-			}
+			case '+':
+				aSexyApp->mUpdateMultiplier *= 1.5;
+				break;
+			case '-':
+				aSexyApp->mUpdateMultiplier /= 1.5;
+				break;
+			case '=':
+				aSexyApp->mUpdateMultiplier = 1;
+				break;
+			case 'p':
+			case 'P':
+				aSexyApp->mPaused = !aSexyApp->mPaused;
+				aSexyApp->mLastTimeCheck = timeGetTime();
+				aSexyApp->mUpdateFTimeAcc = 0.0;
+				break;
 
-			if ((keyDown) && (aSexyApp->DebugKeyDownAsync(wParam, aSexyApp->mCtrlDown, aSexyApp->mAltDown)))
-				return 0;
+			case 'n':
+			case 'N':
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mUpdateCount + 1;
+				aSexyApp->mFastForwardStep = true;
+				break;
 
-			if (aSexyApp->mPlayingDemoBuffer)
-			{
-				if (uMsg == WM_CHAR)
-				{
-					switch (wParam)
-					{
-					case '+':
-						aSexyApp->mUpdateMultiplier *= 1.5;
-						break;
-					case '-':
-						aSexyApp->mUpdateMultiplier /= 1.5;
-						break;
-					case '=':
-						aSexyApp->mUpdateMultiplier = 1;
-						break;
-					case 'p':
-					case 'P':
-						aSexyApp->mPaused = !aSexyApp->mPaused;
-						aSexyApp->mLastTimeCheck = timeGetTime();
-						aSexyApp->mUpdateFTimeAcc = 0.0;
-						break;
+			case 'm':
+			case 'M':
+				aSexyApp->mFastForwardToMarker = true;
+				break;
 
-					case 'n':
-					case 'N':
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mUpdateCount + 1;
-						aSexyApp->mFastForwardStep = true;
-						break;
+			case 'l':
+			case 'L':
+				ListDemoMarkers();
+				break;
 
-					case 'm':
-					case 'M':
-						aSexyApp->mFastForwardToMarker = true;
-						break;
+			case 'j':
+			case 'J':
+				DemoJumpToTime();
+				break;
 
-					case 'l':
-					case 'L':
-						ListDemoMarkers();
-						break;
+			case 's':
+			case 'S':
+				ToggleDemoSoundVolume();
+				break;
 
-					case 'j':
-					case 'J':
-						DemoJumpToTime();
-						break;
+			case '4':
+					// Fast foward to 120 seconds before it ends
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (120000 / aSexyApp->mFrameTime);
+				break;
 
-					case 's':
-					case 'S':
-						ToggleDemoSoundVolume();
-						break;
+			case '5':
+				// Fast foward to 90 seconds before it ends
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (90000 / aSexyApp->mFrameTime);
+				break;
 
-					case '4':
-						// Fast foward to 120 seconds before it ends
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (120000 / aSexyApp->mFrameTime);
-						break;
-					case '5':
-						// Fast foward to 90 seconds before it ends
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (90000 / aSexyApp->mFrameTime);
-						break;
-					case '6':
+			case '6':
 						// Fast foward to 60 seconds before it ends
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (60000 / aSexyApp->mFrameTime);
-						break;
-					case '7':
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (60000 / aSexyApp->mFrameTime);
+				break;
+
+			case '7':
 						// Fast foward to 30 seconds before it ends
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (30000 / aSexyApp->mFrameTime);
-						break;
-					case '8':
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (30000 / aSexyApp->mFrameTime);
+				break;
+
+			case '8':
 						// Fast foward to 10 seconds before it ends
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (10000 / aSexyApp->mFrameTime);
-						break;
-					case '9':
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (10000 / aSexyApp->mFrameTime);
+				break;
+
+			case '9':
 						// Fast foward to 5 seconds before it ends
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (5000 / aSexyApp->mFrameTime);
-						break;
-					case '0':
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (5000 / aSexyApp->mFrameTime);
+				break;
+
+			case '0':
 						// Fast forward to the end
-						aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength;
-						break;
+				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength;
+				break;
 
-					}
-				}
-				else if (uMsg == WM_KEYDOWN)
-					aSexyApp->DebugKeyDown(wParam);
-			}
-
-			bool pushMessage = true;
-
-			if (aSexyApp->mDeferredMessages.size() > 0)
-			{
-				// Don't add any more messages after WM_CLOSE
-				MSG* aMsg = &aSexyApp->mDeferredMessages.back();
-
-				if (aMsg->message == WM_CLOSE)
-					pushMessage = false;
-				if ((uMsg == WM_TIMER) && (uMsg == aMsg->message))
-					pushMessage = false; // Don't need more timer messages
-
-
-				if (pushMessage && (uMsg == WM_SYSCOLORCHANGE || uMsg == WM_DISPLAYCHANGE)) // kill duplicate SysColorChange() events.
-				{
-					WindowsMessageList::iterator aMsgListItr = aSexyApp->mDeferredMessages.begin();
-					while (pushMessage && aMsgListItr != aSexyApp->mDeferredMessages.end())
-					{
-						MSG& aMsg = *aMsgListItr;
-
-						if (aMsg.message == WM_SYSCOLORCHANGE || aMsg.message == WM_DISPLAYCHANGE)
-							pushMessage = false;
-
-						++aMsgListItr;
-					}
-				}
-			}
-
-			if (pushMessage)
-			{
-				MSG msg;
-				msg.hwnd = hWnd;
-				msg.message = uMsg;
-				msg.lParam = lParam;
-				msg.wParam = wParam;
-
-				aSexyApp->mDeferredMessages.push_back(msg);
-			}
-
-			if (uMsg == WM_SIZE)
-			{
-				aSexyApp->mPhysMinimized = wParam == SIZE_MINIMIZED;
-			}
-			else if (uMsg == WM_SYSKEYDOWN)
-			{
-				if (wParam != VK_F4)
-					return 0;
-			}
-			else if (uMsg == WM_CLOSE)
-			{
-				/*char aStr[256];
-				sprintf(aStr, "CLOSED HWND: %d\r\n", hWnd);
-				OutputDebugString(aStr);*/
-
-				aSexyApp->CloseRequestAsync();
-				return 0;
 			}
 		}
-	}
+		else if (aSexyApp->mPlayingDemoBuffer && uMsg == WM_KEYDOWN)
+			aSexyApp->DebugKeyDown(wParam);
+
+		bool pushMessage = true;
+
+		if (aSexyApp->mDeferredMessages.size() > 0)
+		{
+			// Don't add any more messages after WM_CLOSE
+			MSG* aMsg = &aSexyApp->mDeferredMessages.back();
+
+			if (aMsg->message == WM_CLOSE)
+				pushMessage = false;
+			if ((uMsg == WM_TIMER) && (uMsg == aMsg->message))
+				pushMessage = false; // Don't need more timer messages
+
+
+			if (pushMessage && (uMsg == WM_SYSCOLORCHANGE || uMsg == WM_DISPLAYCHANGE)) // kill duplicate SysColorChange() events.
+			{
+				WindowsMessageList::iterator aMsgListItr = aSexyApp->mDeferredMessages.begin();
+
+				while (pushMessage && aMsgListItr != aSexyApp->mDeferredMessages.end())
+				{
+					MSG& aMsg = *aMsgListItr;
+
+					if (aMsg.message == WM_SYSCOLORCHANGE || aMsg.message == WM_DISPLAYCHANGE)
+						pushMessage = false;
+
+					++aMsgListItr;
+				}
+			}
+		}
+
+		if (pushMessage)
+		{
+			MSG msg;
+			msg.hwnd = hWnd;
+			msg.message = uMsg;
+			msg.lParam = lParam;
+			msg.wParam = wParam;
+
+			aSexyApp->mDeferredMessages.push_back(msg);
+		}
+
+		if (uMsg == WM_SIZE)
+		{
+			aSexyApp->mPhysMinimized = wParam == SIZE_MINIMIZED;
+		}
+		else if (uMsg == WM_SYSKEYDOWN)
+		{
+			if (wParam != VK_F4)
+				return 0;
+		}
+		else if (uMsg == WM_CLOSE)
+		{
+			aSexyApp->CloseRequestAsync();
+			return 0;
+		}
+
 	break;
 
 	case WM_ENABLE:
-		if (aSexyApp != NULL)
-		{
-			aSexyApp->mIsDisabled = wParam == 0;
-		}
+		if (aSexyApp == NULL) break;
+		
+		aSexyApp->mIsDisabled = wParam == 0;
 		break;
 
 	case WM_QUERYOPEN:
@@ -3316,16 +3310,12 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		break;
 
 	case WM_NCLBUTTONDOWN:
-		if (aSexyApp != NULL)
-		{
-			//			aSexyApp->mProcessInTimer = true;
-			LRESULT aResult = DefWindowProc(hWnd, uMsg, wParam, lParam);
-			//			aSexyApp->mProcessInTimer = false;
-			aSexyApp->ClearUpdateBacklog();
-			return aResult;
-		}
-		break;
+		if (aSexyApp == NULL) break;
 
+		LRESULT aResult = DefWindowProc(hWnd, uMsg, wParam, lParam);
+		aSexyApp->ClearUpdateBacklog();
+
+		return aResult;
 
 	case WM_SYSCOMMAND:
 		if (wParam == SC_MONITORPOWER)
@@ -3334,8 +3324,10 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 			if (aSexyApp != NULL && (!aSexyApp->mAllowMonitorPowersave || !aSexyApp->mLoaded))
 				return FALSE;
 		}
+
 		if (wParam == SC_SCREENSAVE && aSexyApp != NULL && (!aSexyApp->mLoaded || !aSexyApp->mIsPhysWindowed))
 			return FALSE;
+
 		if ((wParam & 0x0000FFF0) == SC_MOVE && aSexyApp != NULL)
 		{
 			aSexyApp->mPaused = true;
@@ -3345,45 +3337,46 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		}
 
 		break;
+
 	case WM_DESTROY:
-	{
 		char aStr[256];
+
 		sprintf(aStr, "DESTROYED HWND: %d\r\n", hWnd);
 		OutputDebugStringA(aStr);
-	}
-	break;
+
+		break;
+
 	case WM_SETCURSOR:
-		if (!aSexyApp->mSEHOccured)
-			aSexyApp->EnforceCursor();
+		if (!aSexyApp->mSEHOccured) aSexyApp->EnforceCursor();
 		return TRUE;
+
 	case WM_ERASEBKGND:
 		return TRUE;
+
 	case WM_ENDSESSION:
 		aSexyApp->Shutdown();
 		break;
+
 	case WM_PAINT:
-		if ((aSexyApp->mInitialized) && (!gInAssert) && (!aSexyApp->mSEHOccured))
-		{
-			RECT aClientRect;
-			GetClientRect(hWnd, &aClientRect);
+		if ((!aSexyApp->mInitialized) || (gInAssert) || (aSexyApp->mSEHOccured))
+			break;
 
-			PAINTSTRUCT ps;
-			BeginPaint(hWnd, &ps);
+		RECT aClientRect;
+		GetClientRect(hWnd, &aClientRect);
 
-			if (aSexyApp->mRunning)
-				aSexyApp->Redraw(NULL);
+		PAINTSTRUCT ps;
+		BeginPaint(hWnd, &ps);
 
-			EndPaint(hWnd, &ps);
+		if (aSexyApp->mRunning)
+			aSexyApp->Redraw(NULL);
 
-			return 0;
-		}
-		break;
+		EndPaint(hWnd, &ps);
+
+		return 0;
 	}
 
 	if ((aSexyApp != NULL) && (uMsg == aSexyApp->mNotifyGameMessage) && (hWnd == aSexyApp->mHWnd))
 	{
-		// Oh, we are trying to open another instance of ourselves.
-		// Bring up the original window instead
 		aSexyApp->HandleNotifyGameMessage(wParam, lParam);
 		return 0;
 	}
@@ -3396,63 +3389,61 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 
 void SexyAppBase::HandleNotifyGameMessage(int theType, int theParam)
 {
-	if (theType == 0) // bring to front message
-	{
-		WINDOWPLACEMENT aWindowPlacement;
-		aWindowPlacement.length = sizeof(WINDOWPLACEMENT);
-		GetWindowPlacement(mHWnd, &aWindowPlacement);
+	if (theType != 0) return;
 
-		if (aWindowPlacement.showCmd == SW_SHOWMINIMIZED)
-			ShowWindow(mHWnd, SW_RESTORE);
+	WINDOWPLACEMENT aWindowPlacement;
+	aWindowPlacement.length = sizeof(WINDOWPLACEMENT);
+	GetWindowPlacement(mHWnd, &aWindowPlacement);
 
-		::SetForegroundWindow(mHWnd);
-	}
+	if (aWindowPlacement.showCmd == SW_SHOWMINIMIZED)
+		ShowWindow(mHWnd, SW_RESTORE);
+
+	::SetForegroundWindow(mHWnd);
 }
 
 void SexyAppBase::RehupFocus()
 {
 	bool wantHasFocus = mActive && !mMinimized;
 
-	if (wantHasFocus != mHasFocus)
+	if (wantHasFocus == mHasFocus) return;
+
+	mHasFocus = wantHasFocus;
+
+	if (mHasFocus)
 	{
-		mHasFocus = wantHasFocus;
+		if (mMuteOnLostFocus)
+			Unmute(true);
 
-		if (mHasFocus)
-		{
-			if (mMuteOnLostFocus)
-				Unmute(true);
+		mWidgetManager->GotFocus();
+		GotFocus();
 
-			mWidgetManager->GotFocus();
-			GotFocus();
-		}
-		else
-		{
-			if (mMuteOnLostFocus)
-				Mute(true);
-
-			mWidgetManager->LostFocus();
-			LostFocus();
-
-			ReleaseCapture();
-			mWidgetManager->DoMouseUps();
-		}
+		return;
 	}
+
+	if (mMuteOnLostFocus)
+			Mute(true);
+
+	mWidgetManager->LostFocus();
+	LostFocus();
+
+	ReleaseCapture();
+	mWidgetManager->DoMouseUps();
 }
 
 void SexyAppBase::ClearKeysDown()
 {
-	if (mWidgetManager != NULL) // fix stuck alt-key problem
+	if (mWidgetManager != NULL)
 	{
 		for (int aKeyNum = 0; aKeyNum < 0xFF; aKeyNum++)
 			mWidgetManager->mKeyDown[aKeyNum] = false;
 	}
+
 	mCtrlDown = false;
 	mAltDown = false;
 }
 
 void SexyAppBase::WriteDemoTimingBlock()
 {
-	// Demo writing functions can only be called from the main thread and after SexyAppBase::Init
 	DBG_ASSERTE(GetCurrentThreadId() == mPrimaryThreadId);
 
 	while (mUpdateCount - mLastDemoUpdateCnt > 15)
@@ -3501,142 +3492,133 @@ bool SexyAppBase::PrepareDemoCommand(bool required)
 
 void SexyAppBase::ProcessDemo()
 {
-	if (mPlayingDemoBuffer)
+	if (!mPlayingDemoBuffer) return;
+
+	DBG_ASSERTE(!mDemoBuffer.AtEnd());
+
+	while ((!mShutdown) && (mUpdateCount == mLastDemoUpdateCnt) && (!mDemoBuffer.AtEnd()))
 	{
-		// At end of demo buffer?  How dare you!
-		DBG_ASSERTE(!mDemoBuffer.AtEnd());
+		if (!PrepareDemoCommand(false)) continue;
 
-		while ((!mShutdown) && (mUpdateCount == mLastDemoUpdateCnt) && (!mDemoBuffer.AtEnd()))
+		mDemoNeedsCommand = true;
+
+		if (mDemoIsShortCmd)
 		{
-			if (PrepareDemoCommand(false))
+			switch (mDemoCmdNum)
 			{
-				mDemoNeedsCommand = true;
+			case 0:
+				int aDeltaX = mDemoBuffer.ReadNumBits(6, true);
+				int aDeltaY = mDemoBuffer.ReadNumBits(6, true);
+				mLastDemoMouseX += aDeltaX;
+				mLastDemoMouseY += aDeltaY;
 
-				if (mDemoIsShortCmd)
-				{
-					switch (mDemoCmdNum)
-					{
-					case 0:
-					{
-						int aDeltaX = mDemoBuffer.ReadNumBits(6, true);
-						int aDeltaY = mDemoBuffer.ReadNumBits(6, true);
-						mLastDemoMouseX += aDeltaX;
-						mLastDemoMouseY += aDeltaY;
+				mWidgetManager->MouseMove(mLastDemoMouseX, mLastDemoMouseY);
+				break;
 
-						mWidgetManager->MouseMove(mLastDemoMouseX, mLastDemoMouseY);
-					}
-					break;
-					case 1:
-					{
-						bool down = mDemoBuffer.ReadNumBits(1, false) != 0;
-						int aBtnCount = mDemoBuffer.ReadNumBits(3, true);
+			case 1:
+				bool down = mDemoBuffer.ReadNumBits(1, false) != 0;
+				int aBtnCount = mDemoBuffer.ReadNumBits(3, true);
 
-						if (down)
-							mWidgetManager->MouseDown(mLastDemoMouseX, mLastDemoMouseY, aBtnCount);
-						else
-							mWidgetManager->MouseUp(mLastDemoMouseX, mLastDemoMouseY, aBtnCount);
-					}
-					break;
-					}
-				}
+				if (down)
+					mWidgetManager->MouseDown(mLastDemoMouseX, mLastDemoMouseY, aBtnCount);
 				else
-				{
-					switch (mDemoCmdNum)
-					{
-					case DEMO_MOUSE_POSITION:
-					{
-						mLastDemoMouseX = mDemoBuffer.ReadNumBits(12, false);
-						mLastDemoMouseY = mDemoBuffer.ReadNumBits(12, false);
-
-						mWidgetManager->MouseMove(mLastDemoMouseX, mLastDemoMouseY);
-					}
-					break;
-					case DEMO_ACTIVATE_APP:
-					{
-						mActive = mDemoBuffer.ReadNumBits(1, false) != 0;
-
-						RehupFocus();
-
-						if ((mActive) && (!mIsWindowed))
-							mWidgetManager->MarkAllDirty();
-
-						if ((mIsOpeningURL) && (!mActive))
-							URLOpenSucceeded(mOpeningURL);
-					}
-					break;
-					case DEMO_SIZE:
-					{
-						bool isMinimized = mDemoBuffer.ReadBoolean();
-
-						if ((!mShutdown) && (isMinimized != mMinimized))
-						{
-							mMinimized = isMinimized;
-
-							// We don't want any sounds (or music) playing while its minimized
-							if (mMinimized)
-								Mute(true);
-							else
-							{
-								Unmute(true);
-								mWidgetManager->MarkAllDirty();
-							}
-						}
-
-						RehupFocus();
-					}
-					break;
-					case DEMO_MOUSE_WHEEL:
-					{
-						int aScroll = mDemoBuffer.ReadNumBits(8, true);
-						mWidgetManager->MouseWheel(aScroll);
-					}
-					break;
-					case DEMO_KEY_DOWN:
-					{
-						KeyCode aKeyCode = (KeyCode)mDemoBuffer.ReadNumBits(8, false);
-						mWidgetManager->KeyDown(aKeyCode);
-					}
-					break;
-					case DEMO_KEY_UP:
-					{
-						KeyCode aKeyCode = (KeyCode)mDemoBuffer.ReadNumBits(8, false);
-						mWidgetManager->KeyUp(aKeyCode);
-					}
-					break;
-					case DEMO_KEY_CHAR:
-					{
-						int sizeMult = (int)mDemoBuffer.ReadNumBits(1, false) + 1; // will be 1 for single, 2 for double
-						SexyChar aChar = (SexyChar)mDemoBuffer.ReadNumBits(8 * sizeMult, false);
-						mWidgetManager->KeyChar(aChar);
-					}
-					break;
-					case DEMO_CLOSE:
-						Shutdown();
-						break;
-					case DEMO_MOUSE_ENTER:
-						mMouseIn = true;
-						EnforceCursor();
-						break;
-					case DEMO_MOUSE_EXIT:
-						mWidgetManager->MouseExit(mLastDemoMouseX, mLastDemoMouseY);
-						mMouseIn = false;
-						EnforceCursor();
-						break;
-					case DEMO_LOADING_COMPLETE:
-						mDemoLoadingComplete = true;
-						break;
-					case DEMO_VIDEO_DATA:
-						mIsWindowed = mDemoBuffer.ReadBoolean();
-						mSyncRefreshRate = mDemoBuffer.ReadByte();
-						break;
-					case DEMO_IDLE:
-						break;
-					default:
-						DBG_ASSERTE("Invalid Demo Command" == 0);
-						break;
-					}
-				}
+					mWidgetManager->MouseUp(mLastDemoMouseX, mLastDemoMouseY, aBtnCount);
+				break;
 			}
+
+			continue;
+		}
+
+		switch (mDemoCmdNum)
+		{
+		case DEMO_MOUSE_POSITION:
+			mLastDemoMouseX = mDemoBuffer.ReadNumBits(12, false);
+			mLastDemoMouseY = mDemoBuffer.ReadNumBits(12, false);
+
+			mWidgetManager->MouseMove(mLastDemoMouseX, mLastDemoMouseY);
+			break;
+
+		case DEMO_ACTIVATE_APP:
+			mActive = mDemoBuffer.ReadNumBits(1, false) != 0;
+
+			RehupFocus();
+
+			if ((mActive) && (!mIsWindowed))
+				mWidgetManager->MarkAllDirty();
+
+			if ((mIsOpeningURL) && (!mActive))
+				URLOpenSucceeded(mOpeningURL);
+			break;
+
+		case DEMO_SIZE:
+			bool isMinimized = mDemoBuffer.ReadBoolean();
+
+			if ((mShutdown) || (isMinimized == mMinimized)) break;
+
+			mMinimized = isMinimized;
+
+			if (mMinimized)
+				Mute(true);
+			else
+			{
+				Unmute(true);
+				mWidgetManager->MarkAllDirty();
+			}
+
+			RehupFocus();
+			break;
+
+		case DEMO_MOUSE_WHEEL:
+			int aScroll = mDemoBuffer.ReadNumBits(8, true);
+			mWidgetManager->MouseWheel(aScroll);
+			break;
+
+		case DEMO_KEY_DOWN:
+			KeyCode aKeyCode = (KeyCode)mDemoBuffer.ReadNumBits(8, false);
+			mWidgetManager->KeyDown(aKeyCode);
+			break;
+
+		case DEMO_KEY_UP:
+			KeyCode aKeyCode = (KeyCode)mDemoBuffer.ReadNumBits(8, false);
+			mWidgetManager->KeyUp(aKeyCode);
+			break;
+
+		case DEMO_KEY_CHAR:
+			int sizeMult = (int)mDemoBuffer.ReadNumBits(1, false) + 1;
+			SexyChar aChar = (SexyChar)mDemoBuffer.ReadNumBits(8 * sizeMult, false);
+			mWidgetManager->KeyChar(aChar);
+			break;
+
+		case DEMO_CLOSE:
+			Shutdown();
+			break;
+
+		case DEMO_MOUSE_ENTER:
+			mMouseIn = true;
+			EnforceCursor();
+			break;
+
+		case DEMO_MOUSE_EXIT:
+			mWidgetManager->MouseExit(mLastDemoMouseX, mLastDemoMouseY);
+			mMouseIn = false;
+			EnforceCursor();
+			break;
+
+		case DEMO_LOADING_COMPLETE:
+			mDemoLoadingComplete = true;
+			break;
+
+		case DEMO_VIDEO_DATA:
+			mIsWindowed = mDemoBuffer.ReadBoolean();
+			mSyncRefreshRate = mDemoBuffer.ReadByte();
+			break;
+
+		case DEMO_IDLE:
+			break;
+
+		default:
+			DBG_ASSERTE("Invalid Demo Command" == 0);
+			break;
 		}
 	}
 }
@@ -3655,22 +3637,31 @@ void SexyAppBase::ShowMemoryUsage()
 	}
 
 	MemoryImageSet::iterator anItr = mMemoryImageSet.begin();
+
 	typedef pair<int, int> FormatUsage;
 	typedef map<PixelFormat, FormatUsage> FormatMap;
+
 	FormatMap aFormatMap;
+
 	int aTextureMemory = 0;
+
+
 	while (anItr != mMemoryImageSet.end())
 	{
 		MemoryImage* aMemoryImage = *anItr;
-		if (aMemoryImage->mD3DData != NULL)
-		{
-			TextureData* aData = (TextureData*)aMemoryImage->mD3DData;
-			aTextureMemory += aData->mTexMemSize;
 
-			FormatUsage& aUsage = aFormatMap[aData->mPixelFormat];
-			aUsage.first++;
-			aUsage.second += aData->mTexMemSize;
+		if (aMemoryImage->mD3DData == NULL)
+		{
+			++anItr;
+			continue;
 		}
+
+		TextureData* aData = (TextureData*)aMemoryImage->mD3DData;
+		aTextureMemory += aData->mTexMemSize;
+
+		FormatUsage& aUsage = aFormatMap[aData->mPixelFormat];
+		aUsage.first++;
+		aUsage.second += aData->mTexMemSize;
 
 		++anItr;
 	}
@@ -3682,7 +3673,7 @@ void SexyAppBase::ShowMemoryUsage()
 		aDesc = "Recommended";
 	else if (Is3DAccelerationSupported())
 		aDesc = "Supported";
-	else
+	else 
 		aDesc = "Unsupported";
 
 	aStr += StrFormat("3D-Mode is %s (3D is %s on this system)\r\n\r\n", Is3DAccelerated() ? "On" : "Off", aDesc);
@@ -3708,9 +3699,11 @@ void SexyAppBase::ShowMemoryUsage()
 bool SexyAppBase::IsAltKeyUsed(WPARAM wParam)
 {
 	int aChar = tolower(wParam);
+
+
 	switch (aChar)
 	{
-	case 13: // alt-enter
+	case 13:
 	case 'r':
 		return true;
 	default:
@@ -3830,8 +3823,6 @@ void SexyAppBase::CloseRequestAsync()
 {
 }
 
-// Why did I defer messages?  Oh, incase a dialog comes up such as a crash
-//  it won't keep crashing and stuff
 bool SexyAppBase::ProcessDeferredMessages(bool singleMessage)
 {
 	while (mDeferredMessages.size() > 0)
@@ -3848,18 +3839,6 @@ bool SexyAppBase::ProcessDeferredMessages(bool singleMessage)
 		{
 			switch (uMsg)
 			{
-				//  TODO: switch to killfocus/setfocus?
-				//			case WM_SETFOCUS:
-				//			case WM_KILLFOCUS:
-				//				if (hWnd == mHWnd)
-				//				{					
-				//					WriteDemoTimingBlock();
-				//					mDemoBuffer.WriteNumBits(0, 1);
-				//					mDemoBuffer.WriteNumBits(DEMO_ACTIVATE_APP, 5);
-				//					mDemoBuffer.WriteNumBits(uMsg==WM_SETFOCUS ? 1 : 0, 1);
-				//				}
-				//				break;			
-
 			case WM_ACTIVATEAPP:
 				if (hWnd == mHWnd)
 				{
@@ -4022,14 +4001,9 @@ bool SexyAppBase::ProcessDeferredMessages(bool singleMessage)
 		{
 			switch (uMsg)
 			{
-				//  TODO: switch to killfocus/setfocus?
-				//			case WM_KILLFOCUS:
-				//			case WM_SETFOCUS:
 			case WM_ACTIVATEAPP:
 				if ((hWnd == mHWnd) && (!gInAssert) && (!mSEHOccured) && (!mShutdown))
 				{
-					//					mActive = uMsg==WM_SETFOCUS;
-
 					RehupFocus();
 
 					if ((mActive) && (!mIsWindowed))
@@ -4294,7 +4268,6 @@ void SexyAppBase::Done3dTesting()
 {
 }
 
-// return file name that you want to upload
 string	SexyAppBase::NotifyCrashHook()
 {
 	return "";
@@ -4302,8 +4275,6 @@ string	SexyAppBase::NotifyCrashHook()
 
 void SexyAppBase::MakeWindow()
 {
-	//OutputDebugString("MAKING WINDOW\r\n");
-
 	if (mHWnd != NULL)
 	{
 		SetWindowLongPtr(mHWnd, GWLP_USERDATA, NULL);
