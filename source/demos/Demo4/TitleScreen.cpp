@@ -184,6 +184,8 @@ void TitleScreen::LoadingComplete()
 //////////////////////////////////////////////////////////////////////////
 void TitleScreen::ButtonDepress(int theId)
 {
+	printf("Button ID: %d", theId);
+
 	if (theId == 1)
 	{
 		// Our hyperlink widget was pressed. We want to remove ourselves

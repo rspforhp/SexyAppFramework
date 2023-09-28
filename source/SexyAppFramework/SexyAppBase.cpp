@@ -3137,7 +3137,8 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 	case WM_MOUSEWHEEL:
 	case WM_DISPLAYCHANGE:
 	case WM_SYSCOLORCHANGE:
-		if ((aSexyApp == NULL) || (aSexyApp->mNoDefer)) return;
+	{
+		if ((aSexyApp == NULL) || (aSexyApp->mNoDefer)) break;
 
 		bool keyDown = (uMsg == WM_KEYDOWN) || (uMsg == WM_SYSKEYDOWN);
 
@@ -3197,7 +3198,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 				break;
 
 			case '4':
-					// Fast foward to 120 seconds before it ends
+				// Fast foward to 120 seconds before it ends
 				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (120000 / aSexyApp->mFrameTime);
 				break;
 
@@ -3207,27 +3208,27 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 				break;
 
 			case '6':
-						// Fast foward to 60 seconds before it ends
+				// Fast foward to 60 seconds before it ends
 				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (60000 / aSexyApp->mFrameTime);
 				break;
 
 			case '7':
-						// Fast foward to 30 seconds before it ends
+				// Fast foward to 30 seconds before it ends
 				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (30000 / aSexyApp->mFrameTime);
 				break;
 
 			case '8':
-						// Fast foward to 10 seconds before it ends
+				// Fast foward to 10 seconds before it ends
 				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (10000 / aSexyApp->mFrameTime);
 				break;
 
 			case '9':
-						// Fast foward to 5 seconds before it ends
+				// Fast foward to 5 seconds before it ends
 				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (5000 / aSexyApp->mFrameTime);
 				break;
 
 			case '0':
-						// Fast forward to the end
+				// Fast forward to the end
 				aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength;
 				break;
 
@@ -3291,7 +3292,8 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 			return 0;
 		}
 
-	break;
+		break;
+	}
 
 	case WM_ENABLE:
 		if (aSexyApp == NULL) break;
@@ -3310,14 +3312,17 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		break;
 
 	case WM_NCLBUTTONDOWN:
+	{
 		if (aSexyApp == NULL) break;
 
 		LRESULT aResult = DefWindowProc(hWnd, uMsg, wParam, lParam);
 		aSexyApp->ClearUpdateBacklog();
 
 		return aResult;
+	}
 
 	case WM_SYSCOMMAND:
+	{
 		if (wParam == SC_MONITORPOWER)
 		{
 			gPowerSaveTick = GetTickCount();
@@ -3337,14 +3342,17 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		}
 
 		break;
+	}
 
 	case WM_DESTROY:
+	{
 		char aStr[256];
 
 		sprintf(aStr, "DESTROYED HWND: %d\r\n", hWnd);
 		OutputDebugStringA(aStr);
 
 		break;
+	}
 
 	case WM_SETCURSOR:
 		if (!aSexyApp->mSEHOccured) aSexyApp->EnforceCursor();
@@ -3358,6 +3366,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		break;
 
 	case WM_PAINT:
+	{
 		if ((!aSexyApp->mInitialized) || (gInAssert) || (aSexyApp->mSEHOccured))
 			break;
 
@@ -3374,6 +3383,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 
 		return 0;
 	}
+	};
 
 	if ((aSexyApp != NULL) && (uMsg == aSexyApp->mNotifyGameMessage) && (hWnd == aSexyApp->mHWnd))
 	{
@@ -3507,6 +3517,7 @@ void SexyAppBase::ProcessDemo()
 			switch (mDemoCmdNum)
 			{
 			case 0:
+			{
 				int aDeltaX = mDemoBuffer.ReadNumBits(6, true);
 				int aDeltaY = mDemoBuffer.ReadNumBits(6, true);
 				mLastDemoMouseX += aDeltaX;
@@ -3514,8 +3525,10 @@ void SexyAppBase::ProcessDemo()
 
 				mWidgetManager->MouseMove(mLastDemoMouseX, mLastDemoMouseY);
 				break;
+			}
 
 			case 1:
+			{
 				bool down = mDemoBuffer.ReadNumBits(1, false) != 0;
 				int aBtnCount = mDemoBuffer.ReadNumBits(3, true);
 
@@ -3524,6 +3537,7 @@ void SexyAppBase::ProcessDemo()
 				else
 					mWidgetManager->MouseUp(mLastDemoMouseX, mLastDemoMouseY, aBtnCount);
 				break;
+			}
 			}
 
 			continue;
@@ -3551,6 +3565,7 @@ void SexyAppBase::ProcessDemo()
 			break;
 
 		case DEMO_SIZE:
+		{
 			bool isMinimized = mDemoBuffer.ReadBoolean();
 
 			if ((mShutdown) || (isMinimized == mMinimized)) break;
@@ -3567,27 +3582,36 @@ void SexyAppBase::ProcessDemo()
 
 			RehupFocus();
 			break;
+		}
 
 		case DEMO_MOUSE_WHEEL:
+		{
 			int aScroll = mDemoBuffer.ReadNumBits(8, true);
 			mWidgetManager->MouseWheel(aScroll);
 			break;
+		}
 
 		case DEMO_KEY_DOWN:
+		{
 			KeyCode aKeyCode = (KeyCode)mDemoBuffer.ReadNumBits(8, false);
 			mWidgetManager->KeyDown(aKeyCode);
 			break;
+		}
 
 		case DEMO_KEY_UP:
+		{
 			KeyCode aKeyCode = (KeyCode)mDemoBuffer.ReadNumBits(8, false);
 			mWidgetManager->KeyUp(aKeyCode);
 			break;
+		}
 
 		case DEMO_KEY_CHAR:
+		{
 			int sizeMult = (int)mDemoBuffer.ReadNumBits(1, false) + 1;
 			SexyChar aChar = (SexyChar)mDemoBuffer.ReadNumBits(8 * sizeMult, false);
 			mWidgetManager->KeyChar(aChar);
 			break;
+		}
 
 		case DEMO_CLOSE:
 			Shutdown();

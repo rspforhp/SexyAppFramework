@@ -390,3 +390,4 @@ Assets/
 # Sexy files
 *.exe
 crash.txt
+mem_leaks.txt

@@ -15,7 +15,7 @@
     <ProjectName>SexyAppBase</ProjectName>
     <ProjectGuid>{DA08CABA-92AC-40F0-B63D-6ACE7814D600}</ProjectGuid>
     <RootNamespace>SexyAppBase</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

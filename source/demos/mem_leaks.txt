@@ -1,6 +1,0 @@
-Memory Leak Report for Mon Sep  4 20:57:50 2023
-
-D:\SexyAppFramework\source\demos\Demo5\Board.cpp(82) : Leak 4 bytes
------------------------------------------------------------
-Total Unfreed: 4 bytes (0KB)
-
