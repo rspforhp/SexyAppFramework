@@ -1,0 +1,80 @@
+**THIS FILE IS FOR THE 1.40 RELEASE.  PLEASE DO NOT USE THIS GUIDE UNTIL WE ARE FINISHED WITH THAT VERSION!!**
+However, if you wish to use this under the unstable ("1.37"), thats on you...
+
+From Yalek the Lembine: This is a detailed guide on what you will need to do once you have imported this library to visual studio.  
+
+This is also an updated installation notes guide for modern Windows Operating systems from 7 and up.  
+
+Download this library (SexyAppBase) *straght* to the desktop for easy reading...
+
+!!!You will need the following once you have visual studio installer up and running:
+
+1.  MSVC v143 - VS 2022 C++ x64/86 build tools (latest).
+
+2.  C++ ATL (Active Template library) for latest build tools (x86/64).  
+
+3.  For debugging: This Library does have a debug option: --> Just-in-time-debugger.  
+
+^^For some odd reason to debug your apps Visual studio requires administrative permissions, just launch visual studio as an admin, then you can debug...
+
+4.  SexyAppBase also has its own profiler...If you wish to use that: Tick C++ profiling tools...
+
+5.  Intellicode (for intellisense..)
+
+6.  For Windows 11, there are two options for SDKs.  If you wish to target the release (10.0.22000), tick that.
+Or, use the 22h2 stuff.  (10.0.22621).  << The DirectX/D3D stuff is already included with these by default, and since were getting (almost) close to 1.40, we will be using that from now on.
+
+7. C++ MFC (microsoft foundation classes) for latest build tools (x64/86).  
+
+INIDIVIDUAL COMPONENTS:
+
+Windows Universal C runtime.
+Image and 3D model editors. << This is only if you wish to edit 3d and 2d images directly in visual studio...
+
+FOR THE EXECUTABLE/GAME SECTION:
+
+1.  Make sure you are creating another folder for your game section.  What you will need to do, is move this entire Library into your game Section.  This allows for the use of the $(UserProfile) macro, for cross-OS and user development...
+
+2.  Start Visual studio, and select C++ empty project from the project Templates. Add SexyAppBase to your Solution as well.   You will need to compare SexyAppBase's with yours.. You will need to change your game's properties:
+
+   1.  First and most importantly, please change unicode character set to Multibyte.  This library uses WSTRING and image, font manipulation, and you will need those extra bytes...
+
+   2.  change C++ language standard to C++20, and C standard to c17.  
+   3.  Leave the build tool architecture to x86.  x64 is still being worked around at the moment...
+
+   4.   for C++ directories: PLEASE DO THE FOLLOWING: Remember $(UserProfile) macro?  Please USE this along with \Desktop\, and point to your SexyAppBase Source folder [$(UserProfile)\Desktop\...].   Do the same once you build SexyAppBase for the *library* directories.  And also do the same to point to the source and headers for your exe.
+
+   5.  In the C++ section, the additional include directories can be tricked by using "..\..\..".  This includes all of windows, and yours, headers/include stuff.  
+
+   6.  For The Preprocessor defs: change the preprocessor from _CONSOLE to _WINDOWS.  What I will never understand is how people can get away with "Main" like SFML did...under a GUI app...Sorry!! But we still follow the standards over here!!
+
+   7.  DO NOT USE MULTITHREADED DLL AT ALL!! JUST MULTITHREADED ALONE!! (and under the debug variant!!)
+
+3.  LINKER SETTINGS:
+
+   1.  $(CoreLibraryDependencies);ws2_32.lib;winmm.lib;libcmt.lib << in the additional dependencies...
+
+   2.  Subsystem: Windows.   NOT CONSOLE.
+
+   3.  Target machine: x86.  << This works fine under x64 as well...Dont worry.
+
+4.  REFERENCES:
+
+PLEASE add a reference to SexyAppBase if you even ATTEMPT building your game.  Its not just "you build your project right away".  If you do not add a reference to SexyAppBase's library code you will get the commonplace LNK2019 and 2001 errors that are annoying.  To add this reference, right click on your project -> add -> reference and then select "SexyAppBase".  This will automatically reference your code to SexyAppBase's.
+
+5.  STARTUP:
+
+   1. Right click on your solution -> Properties, and checkmark both projects for startup.  Now: You may get an error saying that SexyAppBase is not a valid win32 app.  << Thats fine.   I would highly recommend building straight to your output folder instead of launching it through visual studio.  What ends up happening is that it may throw weird stuff and exceptions.
+
+If you launch the app from your desktop, the system isnt affected by additional processes from visual studio and instead relies on the *system* itself to do the work for you...
+
+Yalek the Lembine/
+
+
+
+
+
+
+
+
+
