@@ -32,6 +32,8 @@ Another HUGE change and perhaps the biggest one, is a hook to x64 build target p
 
 We have also noticed a huge vunerability in SexyAppBase.cpp.  It deals with registry entries and we are trying to mitigate that security concern...
 
+FOR THE WIDESTRING: The Widestring variant still needs to be upgraded and processed for the windows 11 OS. 
+
 This is still a WIP and it will take a while.  So please hold your jewels!! We are still making this thing!!
 
 Yalek and n2g7mutf8.
