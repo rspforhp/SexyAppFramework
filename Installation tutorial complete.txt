@@ -3,7 +3,7 @@ However, if you wish to use this under the unstable ("1.37"), thats on you...
 
 From Yalek the Lembine: This is a detailed guide on what you will need to do once you have imported this library to visual studio.  
 
-This is also an updated installation notes guide for modern Windows Operating systems from 7 and up.  
+This is also an updated installation notes guide for modern Windows Operating systems from 10 and up.  
 
 Download this library (SexyAppBase) *straght* to the desktop for easy reading...
 
