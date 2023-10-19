@@ -52,11 +52,11 @@ FOR THE EXECUTABLE/GAME SECTION:
 
 3.  LINKER SETTINGS:
 
-   1.  $(CoreLibraryDependencies);ws2_32.lib;winmm.lib;libcmt.lib << in the additional dependencies...
+   1.  $(CoreLibraryDependencies);ws2_32.lib;winmm.lib;libcmt.lib << in the additional dependencies...For debugging, you will need to use the libcmtd.lib to have debugging code available or there will be errors.  
 
    2.  Subsystem: Windows.   NOT CONSOLE.
 
-   3.  Target machine: x86.  << This works fine under x64 as well...Dont worry.
+   3.  Target machine: x86.  << This works fine under x64 as well...Dont worry.  But you will need this flag set to x86 regardless...
 
 4.  REFERENCES:
 
