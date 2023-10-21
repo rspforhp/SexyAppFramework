@@ -47,12 +47,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\DebugVS2022 1.40\</OutDir>
-    <IntDir>.\DebugVS2022 1.40\</IntDir>
+    <IntDir>$(OutDir)</IntDir>
     <TargetName>$(ProjectName) 1.40</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\ReleaseVS2022 1.40\</OutDir>
-    <IntDir>.\ReleaseVS2022 1.40\</IntDir>
+    <IntDir>$(OutDir)</IntDir>
     <TargetName>$(ProjectName) 1.40</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
