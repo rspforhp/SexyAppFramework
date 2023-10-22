@@ -13,8 +13,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
-			IntermediateDirectory=".\Debug"
+			OutputDirectory=".\Debug WSTRING"
+			IntermediateDirectory="$(OutDir)"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -28,10 +28,10 @@
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\Debug/SexyAppFramework.pch"
-				AssemblerListingLocation=".\Debug/"
+				PrecompiledHeaderFile="$(OutDir)$(Projectname).pch"
+				AssemblerListingLocation="$(OutDir)"
 				ObjectFile=".\Debug/"
-				ProgramDataBaseFileName=".\Debug/"
+				ProgramDataBaseFileName="$(OutDir)"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="3"/>
@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalOptions=""
-				OutputFile=".\Debug\SexyAppFramework.lib"
+				OutputFile="$(OutDir)$(Projectname).lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -59,8 +59,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\Release"
-			IntermediateDirectory=".\Release"
+			OutputDirectory="Release WSTRING\"
+			IntermediateDirectory="$(OutDir)"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -75,10 +75,10 @@
 				EnableFunctionLevelLinking="TRUE"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\Release/SexyAppFramework.pch"
-				AssemblerListingLocation=".\Release/"
+				PrecompiledHeaderFile="$(OutDir)$(Projectname).pch"
+				AssemblerListingLocation="$(OutDir)"
 				ObjectFile=".\Release/"
-				ProgramDataBaseFileName=".\Release/"
+				ProgramDataBaseFileName="$(OutDir)"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="3"/>
@@ -87,7 +87,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalOptions=""
-				OutputFile=".\Release\SexyAppFramework.lib"
+				OutputFile="$(OutDir)$(Projectname).lib" 
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
