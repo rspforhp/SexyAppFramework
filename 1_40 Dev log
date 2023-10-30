@@ -5,7 +5,7 @@ Current fixes from Yalek:
 9/2023 - 10/2023
 *Update every piece of documentation to 2023 standards.  The only folder that is not modified yet is docs.  Will be adding to that soon.
 
-*Add on 64 bit hooks from WINAPI by making a special call to long _stdcall with a macro known as "WINAPI64".  This similar documentation was used in the original win32 header files via winuser.h.  It hooked to int _stdcall...This means for the very firs tim you can finally use an extended address space in x86 by adding 64 bit code...
+*Add on 64 bit hooks from WINAPI by making a special call to long _stdcall with a macro known as "WINAPI64".  This similar documentation was used in the original win32 header files via winuser.h.  It hooked to int _stdcall...This means for the very first time you can finally use an extended address space in x86 by adding 64 bit code...
 
 *^^Add on a 64 bit WindowProc method known as WindowProc64 that changes UINT to ULONG for the above reasons.  While putting the WINAPI64 as an #ifdef next to these functions (both WindowProc and WindowProc64).  You MUST USE x86 still.  You cannot use the x64 config yet..
 
