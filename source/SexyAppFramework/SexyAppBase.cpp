@@ -40,6 +40,7 @@
 #include <regstr.h>
 #include <string>
 #include <shlobj.h>
+#include <chrono>
 
 #include "memmgr.h"
 
@@ -776,53 +777,49 @@ void SexyAppBase::DemoWaitForHandle(HANDLE theHandle)
 	mHandleToIntMap.erase(anItr);
 }
 
-bool SexyAppBase::DemoCheckHandle(HANDLE theHandle)
-{
-	if (mPlayingDemoBuffer)
+bool SexyAppBase::DemoCheckHandle(HANDLE theHandle) {
+	if (mPlayingDemoBuffer) 
 	{
-		// We only need to try to get the result if we think we are waiting for one	
-		if (gSexyAppBase->PrepareDemoCommand(false))
+		if (!gSexyAppBase->PrepareDemoCommand(false)) 
 		{
-			if ((!gSexyAppBase->mDemoIsShortCmd) && (gSexyAppBase->mDemoCmdNum == DEMO_HANDLE_COMPLETE))
-			{
-				// Find auto-incrementing handle num from handle
-				HandleToIntMap::iterator anItr = mHandleToIntMap.find(theHandle);
-				DBG_ASSERT(anItr != mHandleToIntMap.end());
-
-				int anOldBufferPos = gSexyAppBase->mDemoBuffer.mReadBitPos;
-
-				// Since we don't require a demo result entry to be here, we must verify
-				//  that this is referring to us
-				int aDemoHandleNum = gSexyAppBase->mDemoBuffer.ReadLong();
-
-				if (aDemoHandleNum == anItr->second)
-				{
-					// Alright, this was the handle we were waiting for!
-					gSexyAppBase->mDemoNeedsCommand = true;
-
-					// Actually wait for our local buddy to complete
-					WaitForSingleObject(theHandle, INFINITE);
-					mHandleToIntMap.erase(anItr);
-
-					return true;
-				}
-				else
-				{
-					// Not us, go back
-					gSexyAppBase->mDemoBuffer.mReadBitPos = anOldBufferPos;
-				}
-			}
+			return false;
 		}
 
+		if (gSexyAppBase->mDemoIsShortCmd && gSexyAppBase->mDemoCmdNum != DEMO_HANDLE_COMPLETE) 
+		{
+			return false;
+		}
+
+		auto anItr = mHandleToIntMap.find(theHandle);
+		if (anItr == mHandleToIntMap.end()) 
+		{
+			return false;
+		}
+
+		int anOldBufferPos = gSexyAppBase->mDemoBuffer.mReadBitPos;
+
+		if (int aDemoHandleNum = gSexyAppBase->mDemoBuffer.ReadLong(); aDemoHandleNum != anItr->second) 
+		{
+			gSexyAppBase->mDemoBuffer.mReadBitPos = anOldBufferPos;
+			return false;
+		}
+
+		gSexyAppBase->mDemoNeedsCommand = true;
+		WaitForSingleObject(theHandle, INFINITE);
+		mHandleToIntMap.erase(anItr);
+		return true;
+	}
+
+	if (WaitForSingleObject(theHandle, 0) != WAIT_OBJECT_0 || !mRecordingDemoBuffer) 
+	{
 		return false;
 	}
 
-	if (WaitForSingleObject(theHandle, 0) != WAIT_OBJECT_0) return false;
-	if (!mRecordingDemoBuffer) return false;
-
-	// Find auto-incrementing handle num from handle
-	HandleToIntMap::iterator anItr = mHandleToIntMap.find(theHandle);
-	DBG_ASSERT(anItr != mHandleToIntMap.end());
+	auto anItr = mHandleToIntMap.find(theHandle);
+	if (anItr == mHandleToIntMap.end()) 
+	{
+		return false;
+	}
 
 	gSexyAppBase->WriteDemoTimingBlock();
 	gSexyAppBase->mDemoBuffer.WriteNumBits(0, 1);
@@ -862,7 +859,7 @@ void SexyAppBase::DemoAssertIntEqual(int theInt)
 
 Dialog* SexyAppBase::NewDialog(int theDialogId, bool isModal, const SexyString& theDialogHeader, const SexyString& theDialogLines, const SexyString& theDialogFooter, int theButtonMode)
 {
-	Dialog* aDialog = new Dialog(NULL, NULL, theDialogId, isModal, theDialogHeader, theDialogLines, theDialogFooter, theButtonMode);
+	Dialog* aDialog = new Dialog(nullptr, nullptr, theDialogId, isModal, theDialogHeader, theDialogLines, theDialogFooter, theButtonMode);
 	return aDialog;
 }
 
@@ -901,8 +898,7 @@ bool SexyAppBase::KillDialog(int theDialogId, bool removeWidget, bool deleteWidg
 	if (aDialog->mResult == -1)
 		aDialog->mResult = 0;
 
-	DialogList::iterator aListItr = find(mDialogList.begin(), mDialogList.end(), aDialog);
-	if (aListItr != mDialogList.end())
+	if (DialogList::iterator aListItr = find(mDialogList.begin(), mDialogList.end(), aDialog); aListItr != mDialogList.end())
 		mDialogList.erase(aListItr);
 
 	mDialogMap.erase(anItr);
@@ -980,8 +976,12 @@ void SexyAppBase::DialogButtonPress(int theDialogId, int theButtonId)
 	case Dialog::ID_YES:
 		ButtonPress(2000 + theDialogId);
 		break;
+
 	case Dialog::ID_NO:
 		ButtonPress(3000 + theDialogId);
+		break;
+
+	default:
 		break;
 	}
 }
@@ -993,8 +993,12 @@ void SexyAppBase::DialogButtonDepress(int theDialogId, int theButtonId)
 	case Dialog::ID_YES:
 		ButtonDepress(2000 + theDialogId);
 		break;
+
 	case Dialog::ID_NO:
 		ButtonDepress(3000 + theDialogId);
+		break;
+
+	default:
 		break;
 	}
 }
@@ -1027,9 +1031,9 @@ bool SexyAppBase::OpenURL(const string& theURL, bool shutdownOnOpen)
 	mShutdownOnURLOpen = shutdownOnOpen;
 	mIsOpeningURL = true;
 	mOpeningURL = theURL;
-	mOpeningURLTime = GetTickCount();
+	mOpeningURLTime = GetTickCount64();
 
-	if ((int)ShellExecuteA(NULL, "open", theURL.c_str(), NULL, NULL, SW_SHOWNORMAL) > 32)
+	if ((int)ShellExecuteA(nullptr, "open", theURL.c_str(), nullptr, nullptr, SW_SHOWNORMAL) > 32)
 	{
 		return true;
 	}
@@ -1047,11 +1051,11 @@ string SexyAppBase::GetProductVersion(const string& thePath)
 	typedef BOOL(APIENTRY* GetFileVersionInfoFunc)(LPSTR lptstrFilename, DWORD dwHandle, DWORD dwLen, LPVOID lpData);
 	typedef BOOL(APIENTRY* VerQueryValueFunc)(const LPVOID pBlock, LPSTR lpSubBlock, LPVOID* lplpBuffer, PUINT puLen);
 
-	static GetFileVersionInfoSizeFunc aGetFileVersionInfoSizeFunc = NULL;
-	static GetFileVersionInfoFunc aGetFileVersionInfoFunc = NULL;
-	static VerQueryValueFunc aVerQueryValueFunc = NULL;
+	static GetFileVersionInfoSizeFunc aGetFileVersionInfoSizeFunc = nullptr;
+	static GetFileVersionInfoFunc aGetFileVersionInfoFunc = nullptr;
+	static VerQueryValueFunc aVerQueryValueFunc = nullptr;
 
-	if (aGetFileVersionInfoSizeFunc == NULL)
+	if (aGetFileVersionInfoSizeFunc == nullptr)
 	{
 		aGetFileVersionInfoSizeFunc = (GetFileVersionInfoSizeFunc)GetProcAddress(gVersionDLL, "GetFileVersionInfoSizeA");
 		aGetFileVersionInfoFunc = (GetFileVersionInfoFunc)GetProcAddress(gVersionDLL, "GetFileVersionInfoA");
@@ -1082,7 +1086,7 @@ string SexyAppBase::GetProductVersion(const string& thePath)
 			aProductVersion = aBuffer;
 		}
 
-		delete aVersionBuffer;
+		delete[] aVersionBuffer;
 	}
 
 	return aProductVersion;
@@ -1090,7 +1094,7 @@ string SexyAppBase::GetProductVersion(const string& thePath)
 
 void SexyAppBase::WaitForLoadingThread()
 {
-	while ((mLoadingThreadStarted) && (!mLoadingThreadCompleted))
+	while (mLoadingThreadStarted && (!mLoadingThreadCompleted))
 		Sleep(20);
 }
 
@@ -1103,59 +1107,69 @@ void SexyAppBase::SetCursorImage(int theCursorNum, Image* theImage)
 	}
 }
 
-void SexyAppBase::TakeScreenshot()
-{
-	if (mDDInterface == NULL || mDDInterface->mDrawSurface == NULL)
+void SexyAppBase::TakeScreenshot() {
+	// Check if the DDInterface exists and is valid.
+	if (!mDDInterface || !mDDInterface->mDrawSurface) {
 		return;
-
-	// Get free image name
-	string anImageDir = GetAppDataFolder() + "_screenshots";
-	MkDir(anImageDir);
-	anImageDir += "/";
-
-	WIN32_FIND_DATAA aData;
-	int aMaxId = 0;
-	string anImagePrefix = "image";
-	HANDLE aHandle = FindFirstFileA((anImageDir + "*.png").c_str(), &aData);
-	if (aHandle != INVALID_HANDLE_VALUE)
-	{
-		do {
-			int aNum = 0;
-			if (sscanf(aData.cFileName, (anImagePrefix + "%d.png").c_str(), &aNum) == 1)
-			{
-				if (aNum > aMaxId)
-					aMaxId = aNum;
-			}
-
-		} while (FindNextFileA(aHandle, &aData));
-		FindClose(aHandle);
 	}
-	string anImageName = anImageDir + anImagePrefix + StrFormat("%d.png", aMaxId + 1);
 
-	// Capture screen
-	LPDIRECTDRAWSURFACE aSurface = mDDInterface->mDrawSurface;
+	// Get the directory where screenshots are saved.
+	string aScreenShotDir = GetAppDataFolder() + "_screenshots";
+	MkDir(aScreenShotDir);
+	aScreenShotDir += "/";
 
-	// Temporarily set the mDrawSurface to NULL so DDImage::Check3D 
-	// returns false so we can lock the surface.
-	mDDInterface->mDrawSurface = NULL;
+	// Find the highest numbered screenshot so far.
+	int aMaxSSId = 0;
 
-	DDImage anImage(mDDInterface);
-	anImage.SetSurface(aSurface);
-	anImage.GetBits();
-	anImage.DeleteDDSurface();
-	mDDInterface->mDrawSurface = aSurface;
+	WIN32_FIND_DATA aFindData;
+	HANDLE aFileHandle = FindFirstFileA((aScreenShotDir + "*.png").c_str(), &aFindData);
 
-	if (anImage.mBits == NULL)
+	if (aFileHandle != INVALID_HANDLE_VALUE) {
+		do {
+			int screenshotId = 0;
+			sscanf_s(aFindData.cFileName, "image%d.png", &screenshotId);
+			if (screenshotId > aMaxSSId) {
+				aMaxSSId = screenshotId;
+			}
+		} while (FindNextFileA(aFileHandle, &aFindData));
+		FindClose(aFileHandle);
+	}
+
+	// Generate the filename for the new screenshot.
+	string screenshotFilename = aScreenShotDir + "image" + StrFormat("%d.png", aMaxSSId + 1);
+
+	// Capture the screen.
+	LPDIRECTDRAWSURFACE surface = mDDInterface->mDrawSurface;
+
+	// Temporarily set the mDrawSurface to NULL so that DDImage::Check3D returns false
+	// and we can lock the surface.
+	mDDInterface->mDrawSurface = nullptr;
+
+	DDImage aImage(mDDInterface);
+	aImage.SetSurface(surface);
+	aImage.GetBits();
+	aImage.DeleteDDSurface();
+	mDDInterface->mDrawSurface = surface;
+
+	// Check if the image data is valid.
+	if (!aImage.mBits) 
+	{
 		return;
+	}
 
-	// Write image
+	// Create an ImageLib::Image object from the DDImage data.
 	ImageLib::Image aSaveImage;
-	aSaveImage.mBits = anImage.mBits;
-	aSaveImage.mWidth = anImage.mWidth;
-	aSaveImage.mHeight = anImage.mHeight;
-	ImageLib::WritePNGImage(anImageName, &aSaveImage);
-	aSaveImage.mBits = NULL;
+	aSaveImage.mBits = aImage.mBits;
+	aSaveImage.mWidth = aImage.mWidth;
+	aSaveImage.mHeight = aImage.mHeight;
 
+	// Save the image to a PNG file.
+	ImageLib::WritePNGImage(screenshotFilename, &aSaveImage);
+
+	// Free the ImageLib::Image object.
+	aSaveImage.mBits = nullptr;
+
+	// Clear the update backlog.
 	ClearUpdateBacklog();
 }
 
@@ -1171,12 +1185,10 @@ void SexyAppBase::DumpProgramInfo()
 	}
 
 	fstream aDumpStream((GetAppDataFolder() + "_dump\\imagelist.html").c_str(), ios::out);
+	
+	auto aTime = chrono::high_resolution_clock::now();
 
-	time_t aTime;
-	time(&aTime);
-	tm* aTM = localtime(&aTime);
-
-	aDumpStream << "<HTML><BODY BGCOLOR=EEEEFF><CENTER><FONT SIZE=+2><B>" << asctime(aTM) << "</B></FONT><BR>" << endl;
+	aDumpStream << "<HTML><BODY BGCOLOR=EEEEFF><CENTER><FONT SIZE=+2><B>" << aTime.time_since_epoch() << "</B></FONT><BR>" << endl;
 
 	int anImgNum = 0;
 
@@ -1188,7 +1200,7 @@ void SexyAppBase::DumpProgramInfo()
 	anImageLibImage.mHeight = aThumbHeight;
 	anImageLibImage.mBits = new unsigned long[aThumbWidth * aThumbHeight];
 
-	typedef multimap<int, MemoryImage*, greater<int> > SortedImageMap;
+	using SortedImageMap = multimap<int, MemoryImage *, greater<int>>;
 
 	int aTotalMemory = 0;
 
@@ -1200,7 +1212,7 @@ void SexyAppBase::DumpProgramInfo()
 
 		int aNumPixels = aMemoryImage->mWidth * aMemoryImage->mHeight;
 
-		DDImage* aDDImage = dynamic_cast<DDImage*>(aMemoryImage);
+		DDImage const* aDDImage = dynamic_cast<DDImage*>(aMemoryImage);
 
 		int aBitsMemory = 0;
 		int aSurfaceMemory = 0;
@@ -1211,30 +1223,30 @@ void SexyAppBase::DumpProgramInfo()
 		int aTextureMemory = 0;
 
 		int aMemorySize = 0;
-		if (aMemoryImage->mBits != NULL)
+		if (aMemoryImage->mBits != nullptr)
 			aBitsMemory = aNumPixels * 4;
 
-		if ((aDDImage != NULL) && (aDDImage->mSurface != NULL))
+		if ((aDDImage != nullptr) && (aDDImage->mSurface != nullptr))
 			aSurfaceMemory = aNumPixels * 4; // Assume 32bit screen...
 
-		if (aMemoryImage->mColorTable != NULL)
+		if (aMemoryImage->mColorTable != nullptr)
 			aPalletizedMemory = aNumPixels + 256 * 4;
 
-		if (aMemoryImage->mNativeAlphaData != NULL)
+		if (aMemoryImage->mNativeAlphaData != nullptr)
 		{
-			if (aMemoryImage->mColorTable != NULL)
+			if (aMemoryImage->mColorTable != nullptr)
 				aNativeAlphaMemory = 256 * 4;
 			else
 				aNativeAlphaMemory = aNumPixels * 4;
 		}
 
-		if (aMemoryImage->mRLAlphaData != NULL)
+		if (aMemoryImage->mRLAlphaData != nullptr)
 			aRLAlphaMemory = aNumPixels;
 
-		if (aMemoryImage->mRLAdditiveData != NULL)
+		if (aMemoryImage->mRLAdditiveData != nullptr)
 			aRLAdditiveMemory = aNumPixels;
 
-		if (aMemoryImage->mD3DData != NULL)
+		if (aMemoryImage->mD3DData != nullptr)
 			aTextureMemory += ((TextureData*)aMemoryImage->mD3DData)->mTexMemSize;
 
 		aMemorySize = aBitsMemory + aSurfaceMemory + aPalletizedMemory + aNativeAlphaMemory + aRLAlphaMemory + aRLAdditiveMemory + aTextureMemory;
@@ -1287,30 +1299,30 @@ void SexyAppBase::DumpProgramInfo()
 		int aTextureMemory = 0;
 		string aTextureFormatName;
 
-		if (aMemoryImage->mBits != NULL)
+		if (aMemoryImage->mBits != nullptr)
 			aBitsMemory = aNumPixels * 4;
 
-		if ((aDDImage != NULL) && (aDDImage->mSurface != NULL))
+		if ((aDDImage != nullptr) && (aDDImage->mSurface != nullptr))
 			aSurfaceMemory = aNumPixels * 4; // Assume 32bit screen...
 
-		if (aMemoryImage->mColorTable != NULL)
+		if (aMemoryImage->mColorTable != nullptr)
 			aPalletizedMemory = aNumPixels + 256 * 4;
 
-		if (aMemoryImage->mNativeAlphaData != NULL)
+		if (aMemoryImage->mNativeAlphaData != nullptr)
 		{
-			if (aMemoryImage->mColorTable != NULL)
+			if (aMemoryImage->mColorTable != nullptr)
 				aNativeAlphaMemory = 256 * 4;
 			else
 				aNativeAlphaMemory = aNumPixels * 4;
 		}
 
-		if (aMemoryImage->mRLAlphaData != NULL)
+		if (aMemoryImage->mRLAlphaData != nullptr)
 			aRLAlphaMemory = aNumPixels;
 
-		if (aMemoryImage->mRLAdditiveData != NULL)
+		if (aMemoryImage->mRLAdditiveData != nullptr)
 			aRLAdditiveMemory = aNumPixels;
 
-		if (aMemoryImage->mD3DData != NULL)
+		if (aMemoryImage->mD3DData != nullptr)
 		{
 			aTextureMemory += ((TextureData*)aMemoryImage->mD3DData)->mTexMemSize;
 
@@ -1336,8 +1348,6 @@ void SexyAppBase::DumpProgramInfo()
 		aTotalRLAlphaMemory += aRLAlphaMemory;
 		aTotalRLAdditiveMemory += aRLAdditiveMemory;
 
-
-
 		char aStr[256];
 		sprintf(aStr, "%d x %d<BR>%s bytes", aMemoryImage->mWidth, aMemoryImage->mHeight, CommaSeperate(aMemorySize).c_str());
 		aDumpStream << "<TD ALIGN=RIGHT>" << aStr << "</TD>" << endl;
@@ -1345,7 +1355,7 @@ void SexyAppBase::DumpProgramInfo()
 		aDumpStream << "<TD>" << SexyStringToString(((aBitsMemory != 0) ? _S("mBits<BR>") + CommaSeperate(aBitsMemory) : _S("&nbsp;"))) << "</TD>" << endl;
 		aDumpStream << "<TD>" << SexyStringToString(((aPalletizedMemory != 0) ? _S("Palletized<BR>") + CommaSeperate(aPalletizedMemory) : _S("&nbsp;"))) << "</TD>" << endl;
 		aDumpStream << "<TD>" << SexyStringToString(((aSurfaceMemory != 0) ? _S("DDSurface<BR>") + CommaSeperate(aSurfaceMemory) : _S("&nbsp;"))) << "</TD>" << endl;
-		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mD3DData != NULL) ? _S("Texture<BR>") + StringToSexyString(aTextureFormatName) + _S("<BR>") + CommaSeperate(aTextureMemory) : _S("&nbsp;"))) << "</TD>" << endl;
+		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mD3DData != nullptr) ? _S("Texture<BR>") + StringToSexyString(aTextureFormatName) + _S("<BR>") + CommaSeperate(aTextureMemory) : _S("&nbsp;"))) << "</TD>" << endl;
 
 		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mIsVolatile) ? _S("Volatile") : _S("&nbsp;"))) << "</TD>" << endl;
 		aDumpStream << "<TD>" << SexyStringToString(((aMemoryImage->mForcedMode) ? _S("Forced") : _S("&nbsp;"))) << "</TD>" << endl;
@@ -1362,7 +1372,7 @@ void SexyAppBase::DumpProgramInfo()
 
 		MemoryImage aCopiedImage(*aMemoryImage);
 
-		ulong* aBits = aCopiedImage.GetBits();
+		ulong const* aBits = aCopiedImage.GetBits();
 
 		ulong* aThumbBitsPtr = anImageLibImage.mBits;
 
@@ -1386,7 +1396,7 @@ void SexyAppBase::DumpProgramInfo()
 
 		ImageLib::WritePNGImage((GetAppDataFolder() + string("_dump\\") + anImageName).c_str(), &anFullImage);
 
-		anFullImage.mBits = NULL;
+		anFullImage.mBits = nullptr;
 
 		anImgNum++;
 
@@ -1449,8 +1459,7 @@ bool SexyAppBase::RegistryWrite(const string& theValueName, ulong theType, const
 	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
 	string aValueName;
 
-	int aSlashPos = (int)theValueName.rfind('\\');
-	if (aSlashPos != -1)
+	if (int aSlashPos = (int)theValueName.rfind('\\'); aSlashPos != -1)
 	{
 		aKeyName += "\\" + theValueName.substr(0, aSlashPos);
 		aValueName = theValueName.substr(aSlashPos + 1);
@@ -1465,7 +1474,7 @@ bool SexyAppBase::RegistryWrite(const string& theValueName, ulong theType, const
 	{
 		ulong aDisp;
 		aResult = RegCreateKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, const_cast<LPSTR>("Key"), REG_OPTION_NON_VOLATILE,
-			KEY_ALL_ACCESS, NULL, &aGameKey, &aDisp);
+			KEY_ALL_ACCESS, nullptr, &aGameKey, &aDisp);
 	}
 
 	if (aResult != ERROR_SUCCESS)
@@ -1548,8 +1557,7 @@ bool SexyAppBase::RegistryEraseKey(const SexyString& _theKeyName)
 
 	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey) + "\\" + theKeyName;
 
-	int aResult = RegDeleteKeyA(HKEY_CURRENT_USER, aKeyName.c_str());
-	if (aResult != ERROR_SUCCESS)
+	if (int aResult = RegDeleteKeyA(HKEY_CURRENT_USER, aKeyName.c_str()); aResult != ERROR_SUCCESS)
 	{
 		if (!mRecordingDemoBuffer) return false;
 
@@ -1580,8 +1588,7 @@ void SexyAppBase::RegistryEraseValue(const SexyString& _theValueName)
 	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
 	string aValueName;
 
-	int aSlashPos = (int)theValueName.rfind('\\');
-	if (aSlashPos != -1)
+	if (int aSlashPos = (int)theValueName.rfind('\\'); aSlashPos != -1)
 	{
 		aKeyName += "\\" + theValueName.substr(0, aSlashPos);
 		aValueName = theValueName.substr(aSlashPos + 1);
@@ -1617,8 +1624,7 @@ bool SexyAppBase::RegistryGetSubKeys(const string& theKeyName, StringVector* the
 		DBG_ASSERTE(!mDemoIsShortCmd);
 		DBG_ASSERTE(mDemoCmdNum == DEMO_REGISTRY_GETSUBKEYS);
 
-		bool success = mDemoBuffer.ReadNumBits(1, false) != 0;
-		if (!success)
+		if (bool success = mDemoBuffer.ReadNumBits(1, false) != 0; !success)
 			return false;
 
 		int aNumKeys = mDemoBuffer.ReadLong();
@@ -1632,9 +1638,8 @@ bool SexyAppBase::RegistryGetSubKeys(const string& theKeyName, StringVector* the
 	HKEY aKey;
 
 	string aKeyName = RemoveTrailingSlash(RemoveTrailingSlash("SOFTWARE\\" + mRegKey) + "\\" + theKeyName);
-	int aResult = RegOpenKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, KEY_READ, &aKey);
 
-	if (aResult == ERROR_SUCCESS)
+	if (int aResult = RegOpenKeyExA(HKEY_CURRENT_USER, aKeyName.c_str(), 0, KEY_READ, &aKey); aResult == ERROR_SUCCESS)
 	{
 		for (int anIdx = 0; ; anIdx++)
 		{
@@ -1680,83 +1685,81 @@ bool SexyAppBase::RegistryRead(const string& theValueName, ulong* theType, uchar
 	return RegistryReadKey(theValueName, theType, theValue, theLength, HKEY_CURRENT_USER);
 }
 
-bool SexyAppBase::RegistryReadKey(const string& theValueName, ulong* theType, uchar* theValue, ulong* theLength, HKEY theKey)
-{
-	if (mRegKey.length() == 0)
-		return false;
-
-	if (mPlayingDemoBuffer)
+bool SexyAppBase::RegistryReadKey(const string& theValueName, ulong* theType, uchar* theValue, ulong* theLength, HKEY theKey) {
+	// Check if the registry key is empty.
+	if (mRegKey.empty()) 
 	{
-		if (mManualShutdown)
+		return false;
+	}
+
+	// If we are playing back a demo buffer, read the value from the buffer.
+	if (mPlayingDemoBuffer) 
+	{
+		// Check if the manual shutdown flag is set.
+		if (mManualShutdown) 
 			return false;
 
+		// Prepare the next demo command.
 		PrepareDemoCommand(true);
 		mDemoNeedsCommand = true;
 
+		// Assert that the current demo command is a registry read command.
 		DBG_ASSERTE(!mDemoIsShortCmd);
 		DBG_ASSERTE(mDemoCmdNum == DEMO_REGISTRY_READ);
 
-		bool success = mDemoBuffer.ReadNumBits(1, false) != 0;
-		if (!success)
+		// Read the success flag from the demo buffer.
+		if (bool success = mDemoBuffer.ReadNumBits(1, false) != 0; !success)
+		{
 			return false;
+		}
 
+		// Read the value type from the demo buffer.
 		*theType = mDemoBuffer.ReadLong();
 
+		// Read the value length from the demo buffer.
 		ulong aLen = mDemoBuffer.ReadLong();
 		*theLength = aLen;
 
-		if (*theLength >= aLen)
+		// Check if the provided value buffer is large enough.
+		if (*theLength >= aLen) 
 		{
+			// Read the value data from the demo buffer.
 			mDemoBuffer.ReadBytes(theValue, aLen);
 			return true;
 		}
-		else
+		else 
 		{
-			for (int i = 0; i < (int)aLen; i++)
+			// Skip the value data in the demo buffer.
+			for (int i = 0; i < (int)aLen; i++) {
 				mDemoBuffer.ReadByte();
+			}
 			return false;
 		}
 	}
-	else
+
+	// Open the registry key.
+	HKEY aGameKey;
+	string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
+	string aValueName;
+
+	// Split the value name into the key name and the value name.
+	if (int aSlashPos = (int)theValueName.rfind('\\'); aSlashPos != -1) 
 	{
-		HKEY aGameKey;
+		aKeyName += "\\" + theValueName.substr(0, aSlashPos);
+		aValueName = theValueName.substr(aSlashPos + 1);
+	}
+	else 
+	{
+		aValueName = theValueName;
+	}
 
-		string aKeyName = RemoveTrailingSlash("SOFTWARE\\" + mRegKey);
-		string aValueName;
+	// Check if the registry key can be opened.
+	if (RegOpenKeyExA(theKey, aKeyName.c_str(), 0, KEY_READ, &aGameKey) != ERROR_SUCCESS) return false;
 
-		int aSlashPos = (int)theValueName.rfind('\\');
-		if (aSlashPos != -1)
-		{
-			aKeyName += "\\" + theValueName.substr(0, aSlashPos);
-			aValueName = theValueName.substr(aSlashPos + 1);
-		}
-		else
-		{
-			aValueName = theValueName;
-		}
-
-		if (RegOpenKeyExA(theKey, aKeyName.c_str(), 0, KEY_READ, &aGameKey) == ERROR_SUCCESS)
-		{
-			if (RegQueryValueExA(aGameKey, aValueName.c_str(), 0, theType, (uchar*)theValue, theLength) == ERROR_SUCCESS)
-			{
-				if (mRecordingDemoBuffer)
-				{
-					WriteDemoTimingBlock();
-					mDemoBuffer.WriteNumBits(0, 1);
-					mDemoBuffer.WriteNumBits(DEMO_REGISTRY_READ, 5);
-					mDemoBuffer.WriteNumBits(1, 1); // success
-					mDemoBuffer.WriteLong(*theType);
-					mDemoBuffer.WriteLong(*theLength);
-					mDemoBuffer.WriteBytes(theValue, *theLength);
-				}
-
-				RegCloseKey(aGameKey);
-				return true;
-			}
-
-			RegCloseKey(aGameKey);
-		}
-
+		// Query the value from the registry key.
+	if (RegQueryValueExA(aGameKey, aValueName.c_str(), nullptr, theType, theValue, theLength) != ERROR_SUCCESS)
+	{
+		RegCloseKey(aGameKey);
 		if (mRecordingDemoBuffer)
 		{
 			WriteDemoTimingBlock();
@@ -1767,6 +1770,21 @@ bool SexyAppBase::RegistryReadKey(const string& theValueName, ulong* theType, uc
 
 		return false;
 	}
+		
+	if (mRecordingDemoBuffer) 
+	{
+		WriteDemoTimingBlock();
+		mDemoBuffer.WriteNumBits(0, 1);
+		mDemoBuffer.WriteNumBits(DEMO_REGISTRY_READ, 5);
+		mDemoBuffer.WriteNumBits(1, 1); // success
+		mDemoBuffer.WriteLong(*theType);
+		mDemoBuffer.WriteLong(*theLength);
+		mDemoBuffer.WriteBytes(theValue, *theLength);
+	}
+
+	// Close the registry key.
+	RegCloseKey(aGameKey);
+	return true;
 }
 
 bool SexyAppBase::RegistryReadString(const string& theKey, string* theString)
