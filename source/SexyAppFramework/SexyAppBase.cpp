@@ -49,22 +49,21 @@ using namespace Sexy;
 const int DEMO_FILE_ID = 0x42BEEF78;
 const int DEMO_VERSION = 2;
 
-SexyAppBase* Sexy::gSexyAppBase = NULL;
+SexyAppBase* Sexy::gSexyAppBase = nullptr;
 
 SEHCatcher Sexy::gSEHCatcher;
 
-HMODULE gDDrawDLL = NULL;
-HMODULE gDSoundDLL = NULL;
-HMODULE gVersionDLL = NULL;
+HMODULE gDDrawDLL = nullptr;
+HMODULE gDSoundDLL = nullptr;
+HMODULE gVersionDLL = nullptr;
 
 typedef BOOL(WINAPI* GetLastInputInfoFunc)(LASTINPUTINFO* plii);
-GetLastInputInfoFunc gGetLastInputInfoFunc = NULL;
+GetLastInputInfoFunc gGetLastInputInfoFunc = nullptr;
 static bool gScreenSaverActive = false;
 
 #ifndef SPI_GETSCREENSAVERRUNNING
 #define SPI_GETSCREENSAVERRUNNING 114
 #endif
-
 
 //HotSpot: 11 4
 //Size: 32 32
@@ -111,21 +110,21 @@ unsigned char gDraggingCursorData[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00
 };
-static DDImage* gFPSImage = NULL;
+static DDImage* gFPSImage = nullptr;
 
 typedef HRESULT(WINAPI* SHGetFolderPathFunc)(HWND, int, HANDLE, DWORD, LPTSTR);
-void* GetSHGetFolderPath(const char* theDLL, HMODULE* theMod)
+SHGetFolderPathFunc GetSHGetFolderPath(const char* theDLL, HMODULE* theMod)
 {
 	HMODULE aMod = LoadLibrary(theDLL);
-	SHGetFolderPathFunc aFunc = NULL;
+	SHGetFolderPathFunc aFunc = nullptr;
 
-	if (aMod != NULL)
+	if (aMod != nullptr)
 	{
 		*((void**)&aFunc) = (void*)GetProcAddress(aMod, "SHGetFolderPathA");
-		if (aFunc == NULL)
+		if (aFunc == nullptr)
 		{
 			FreeLibrary(aMod);
-			aMod = NULL;
+			aMod = nullptr;
 		}
 	}
 
@@ -145,7 +144,8 @@ SexyAppBase::SexyAppBase()
 #if _USE_J2K_CODEC
 	ImageLib::InitJPEG2000();
 #endif
-	mMutex = NULL;
+
+	mMutex = nullptr;
 	mNotifyGameMessage = 0;
 
 #ifdef _DEBUG
@@ -156,13 +156,13 @@ SexyAppBase::SexyAppBase()
 
 	// Extract product version
 	char aPath[_MAX_PATH];
-	GetModuleFileNameA(NULL, aPath, 256);
+	GetModuleFileNameA(nullptr, aPath, 256);
 	mProductVersion = GetProductVersion(aPath);
 	mChangeDirTo = GetFileDir(aPath);
 
 	mNoDefer = false;
-	mFullScreenPageFlip = true; // should we page flip in fullscreen?
-	mTimeLoaded = GetTickCount();
+	mFullScreenPageFlip = true;
+	mTimeLoaded = GetTickCount64();
 	mSEHOccured = false;
 	mProdName = "Product";
 	mTitle = _S("SexyApp");
@@ -178,10 +178,10 @@ SexyAppBase::SexyAppBase()
 	mPreferredY = -1;
 	mIsScreenSaver = false;
 	mAllowMonitorPowersave = true;
-	mHWnd = NULL;
-	mDDInterface = NULL;
-	mMusicInterface = NULL;
-	mInvisHWnd = NULL;
+	mHWnd = nullptr;
+	mDDInterface = nullptr;
+	mMusicInterface = nullptr;
+	mInvisHWnd = nullptr;
 	mFrameTime = 10;
 	mNonDrawCount = 0;
 	mDrawCount = 0;
@@ -200,7 +200,7 @@ SexyAppBase::SexyAppBase()
 	mFastForwardToUpdateNum = 0;
 	mFastForwardToMarker = false;
 	mFastForwardStep = false;
-	mSoundManager = NULL;
+	mSoundManager = nullptr;
 	mCursorNum = CURSOR_POINTER;
 	mMouseIn = false;
 	mRunning = false;
@@ -226,7 +226,7 @@ SexyAppBase::SexyAppBase()
 	mHasFocus = true;
 	mCustomCursorsEnabled = false;
 	mCustomCursorDirty = false;
-	mOverrideCursor = NULL;
+	mOverrideCursor = nullptr;
 	mIsOpeningURL = false;
 	mInitialized = false;
 	mLastShutdownWasGraceful = true;
@@ -250,7 +250,7 @@ SexyAppBase::SexyAppBase()
 	mMuteOnLostFocus = true;
 	mCurHandleNum = 0;
 	mFPSTime = 0;
-	mFPSStartTick = GetTickCount();
+	mFPSStartTick = GetTickCount64();
 	mFPSFlipCount = 0;
 	mFPSCount = 0;
 	mFPSDirtyCount = 0;
@@ -335,7 +335,7 @@ SexyAppBase::SexyAppBase()
 	else
 		mTabletPC = false;
 
-	gSEHCatcher.mApp = this;
+	SEHCatcher::mApp = this;
 }
 
 SexyAppBase::~SexyAppBase()
@@ -378,10 +378,9 @@ SexyAppBase::~SexyAppBase()
 			RegistryWriteBoolean("Is3D", mDDInterface->mIs3D);
 	}
 
-	extern bool gD3DInterfacePreDrawError;
-	if (!showedMsgBox && gD3DInterfacePreDrawError && !IsScreenSaver())
+	if (extern bool gD3DInterfacePreDrawError; !showedMsgBox && gD3DInterfacePreDrawError && !IsScreenSaver())
 	{
-		int aResult = MessageBox(NULL,
+		int aResult = MessageBox(nullptr,
 			GetString("HARDWARE_ACCEL_NOT_WORKING",
 				_S("Hardware Acceleration may not have been working correctly during this session.\r\n")
 				_S("If you noticed graphics problems, you may want to turn off Hardware Acceleration.\r\n")
@@ -405,10 +404,10 @@ SexyAppBase::~SexyAppBase()
 	mDialogMap.clear();
 	mDialogList.clear();
 
-	if (mInvisHWnd != NULL)
+	if (mInvisHWnd != nullptr)
 	{
 		HWND aWindow = mInvisHWnd;
-		mInvisHWnd = NULL;
+		mInvisHWnd = nullptr;
 		SetWindowLong(aWindow, GWL_USERDATA, NULL);
 		DestroyWindow(aWindow);
 	}
@@ -416,7 +415,7 @@ SexyAppBase::~SexyAppBase()
 	delete mWidgetManager;
 	delete mResourceManager;
 	delete gFPSImage;
-	gFPSImage = NULL;
+	gFPSImage = nullptr;
 
 	SharedImageMap::iterator aSharedImageItr = mSharedImageMap.begin();
 	while (aSharedImageItr != mSharedImageMap.end())
@@ -430,10 +429,10 @@ SexyAppBase::~SexyAppBase()
 	delete mMusicInterface;
 	delete mSoundManager;
 
-	if (mHWnd != NULL)
+	if (mHWnd != nullptr)
 	{
 		HWND aWindow = mHWnd;
-		mHWnd = NULL;
+		mHWnd = nullptr;
 
 		SetWindowLong(aWindow, GWL_USERDATA, NULL);
 
@@ -445,11 +444,11 @@ SexyAppBase::~SexyAppBase()
 	DestroyCursor(mHandCursor);
 	DestroyCursor(mDraggingCursor);
 
-	gSexyAppBase = NULL;
+	gSexyAppBase = nullptr;
 
 	WriteDemoBuffer();
 
-	if (mMutex != NULL)
+	if (mMutex != nullptr)
 		::CloseHandle(mMutex);
 
 	FreeLibrary(gDDrawDLL);
@@ -459,29 +458,28 @@ SexyAppBase::~SexyAppBase()
 
 static BOOL CALLBACK ChangeDisplayWindowEnumProc(HWND hwnd, LPARAM lParam)
 {
-	typedef map<HWND, RECT> WindowMap;
-	static WindowMap aMap;
+	using WindowMap = map<HWND, RECT>;
+	WindowMap aMap;
 
-	if (lParam == 0 && aMap.find(hwnd) == aMap.end()) // record
+	if (lParam == 0 && !aMap.contains(hwnd))
 	{
 		RECT aRect;
-		if (!IsIconic(hwnd) && IsWindowVisible(hwnd))
+		if (IsIconic(hwnd) || !IsWindowVisible(hwnd)) return TRUE;
+		
+		if (GetWindowRect(hwnd, &aRect))
 		{
-			if (GetWindowRect(hwnd, &aRect))
-			{
 				aMap[hwnd] = aRect;
-			}
 		}
+
+		return TRUE;
 	}
-	else
+
+	if (WindowMap::iterator anItr = aMap.find(hwnd); anItr != aMap.end())
 	{
-		WindowMap::iterator anItr = aMap.find(hwnd);
-		if (anItr != aMap.end())
-		{
-			RECT& r = anItr->second;
-			MoveWindow(hwnd, r.left, r.top, abs(r.right - r.left), abs(r.bottom - r.top), TRUE);
-		}
+		RECT const& r = anItr->second;
+		MoveWindow(hwnd, r.left, r.top, abs(r.right - r.left), abs(r.bottom - r.top), TRUE);
 	}
+
 	return TRUE;
 }
 
@@ -506,19 +504,20 @@ bool SexyAppBase::AppCanRestore()
 
 bool SexyAppBase::ReadDemoBuffer(string& theError)
 {
-	FILE* aFP = fopen(mDemoFileName.c_str(), "rb");
+	FILE** aFP = nullptr;
+	fopen_s(aFP, mDemoFileName.c_str(), "rb");
 
-	if (aFP == NULL)
+	if (*aFP == nullptr)
 	{
 		theError = "Demo file not found: " + mDemoFileName;
 		return false;
 	}
 
 	struct AutoFile { FILE* f; AutoFile(FILE* file) : f(file) {} ~AutoFile() { fclose(f); } };
-	AutoFile aCloseFile(aFP);
+	AutoFile aCloseFile(*aFP);
 
 	ulong aFileID;
-	fread(&aFileID, 4, 1, aFP);
+	fread(&aFileID, 4, 1, *aFP);
 
 	DBG_ASSERTE(aFileID == DEMO_FILE_ID);
 	if (aFileID != DEMO_FILE_ID)
@@ -528,19 +527,19 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 	}
 
 	ulong aVersion;
-	fread(&aVersion, 4, 1, aFP);
+	fread(&aVersion, 4, 1, *aFP);
 
-	fread(&mRandSeed, 4, 1, aFP);
+	fread(&mRandSeed, 4, 1, *aFP);
 	SRand(mRandSeed);
 
 	ushort aStrLen = 4;
-	fread(&aStrLen, 2, 1, aFP);
+	fread(&aStrLen, 2, 1, *aFP);
 
 	if (aStrLen > 255)
 		aStrLen = 255;
 
 	char aStr[256];
-	fread(aStr, 1, aStrLen, aFP);
+	fread(aStr, 1, aStrLen, *aFP);
 	aStr[aStrLen] = '\0';
 
 	DBG_ASSERTE(mProductVersion == aStr);
@@ -550,18 +549,17 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		return false;
 	}
 
-	int aFilePos = ftell(aFP);
-	fseek(aFP, 0, SEEK_END);
+	int aFilePos = ftell(*aFP);
+	fseek(*aFP, 0, SEEK_END);
 
-	int aBytesLeft = ftell(aFP) - aFilePos;
-	fseek(aFP, aFilePos, SEEK_SET);
+	int aBytesLeft = ftell(*aFP) - aFilePos;
+	fseek(*aFP, aFilePos, SEEK_SET);
 
 	uchar* aBuffer;
-	// read marker list
 	if (aVersion >= 2)
 	{
 		int aSize;
-		fread(&aSize, 4, 1, aFP);
+		fread(&aSize, 4, 1, *aFP);
 		aBytesLeft -= 4;
 
 		if (aSize >= aBytesLeft)
@@ -573,7 +571,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		Buffer aMarkerBuffer;
 
 		aBuffer = new uchar[aSize];
-		fread(aBuffer, 1, aSize, aFP);
+		fread(aBuffer, 1, aSize, *aFP);
 		aMarkerBuffer.WriteBytes(aBuffer, aSize);
 		aMarkerBuffer.SeekFront();
 
@@ -581,7 +579,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		int i;
 		for (i = 0; i < aNumItems && !aMarkerBuffer.AtEnd(); i++)
 		{
-			mDemoMarkerList.push_back(DemoMarker());
+			mDemoMarkerList.emplace_back();
 			DemoMarker& aMarker = mDemoMarkerList.back();
 			aMarker.first = aMarkerBuffer.ReadString();
 			aMarker.second = aMarkerBuffer.ReadLong();
@@ -598,8 +596,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		delete[] aBuffer;
 	}
 
-	// Read demo commands
-	fread(&mDemoLength, 4, 1, aFP);
+	fread(&mDemoLength, 4, 1, *aFP);
 	aBytesLeft -= 4;
 
 	if (aBytesLeft <= 0)
@@ -610,7 +607,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 
 
 	aBuffer = new uchar[aBytesLeft];
-	fread(aBuffer, 1, aBytesLeft, aFP);
+	fread(aBuffer, 1, aBytesLeft, *aFP);
 
 	mDemoBuffer.WriteBytes(aBuffer, aBytesLeft);
 	mDemoBuffer.SeekFront();
@@ -623,21 +620,22 @@ void SexyAppBase::WriteDemoBuffer()
 {
 	if (!mRecordingDemoBuffer) return;
 
-	FILE* aFP = fopen(mDemoFileName.c_str(), "w+b");
+	FILE** aFP = nullptr;
+	fopen_s(aFP, mDemoFileName.c_str(), "w+b");
 
-	if (aFP == NULL) return;
+	if (*aFP == nullptr) return;
 
 	ulong aFileID = DEMO_FILE_ID;
-	fwrite(&aFileID, 4, 1, aFP);
+	fwrite(&aFileID, 4, 1, *aFP);
 
 	ulong aVersion = DEMO_VERSION;
-	fwrite(&aVersion, 4, 1, aFP);
+	fwrite(&aVersion, 4, 1, *aFP);
 
-	fwrite(&mRandSeed, 4, 1, aFP);
+	fwrite(&mRandSeed, 4, 1, *aFP);
 
 	ushort aStrLen = mProductVersion.length();
-	fwrite(&aStrLen, 2, 1, aFP);
-	fwrite(mProductVersion.c_str(), 1, mProductVersion.length(), aFP);
+	fwrite(&aStrLen, 2, 1, *aFP);
+	fwrite(mProductVersion.c_str(), 1, mProductVersion.length(), *aFP);
 
 	Buffer aMarkerBuffer;
 	aMarkerBuffer.WriteLong(mDemoMarkerList.size());
@@ -649,14 +647,14 @@ void SexyAppBase::WriteDemoBuffer()
 	}
 
 	int aMarkerBufferSize = aMarkerBuffer.GetDataLen();
-	fwrite(&aMarkerBufferSize, 4, 1, aFP);
-	fwrite(aMarkerBuffer.GetDataPtr(), aMarkerBufferSize, 1, aFP);
+	fwrite(&aMarkerBufferSize, 4, 1, *aFP);
+	fwrite(aMarkerBuffer.GetDataPtr(), aMarkerBufferSize, 1, *aFP);
 
 	ulong aDemoLength = mUpdateCount;
-	fwrite(&aDemoLength, 4, 1, aFP);
+	fwrite(&aDemoLength, 4, 1, *aFP);
 
-	fwrite(mDemoBuffer.GetDataPtr(), 1, mDemoBuffer.GetDataLen(), aFP);
-	fclose(aFP);
+	fwrite(mDemoBuffer.GetDataPtr(), 1, mDemoBuffer.GetDataLen(), *aFP);
+	fclose(*aFP);
 }
 
 void SexyAppBase::DemoSyncBuffer(Buffer* theBuffer)
@@ -749,7 +747,7 @@ void SexyAppBase::DemoAddMarker(const string& theString)
 	}
 	else if (mRecordingDemoBuffer)
 	{
-		mDemoMarkerList.push_back(DemoMarker(theString, mUpdateCount));
+		mDemoMarkerList.emplace_back(theString, mUpdateCount);
 	}
 }
 

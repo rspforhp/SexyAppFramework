@@ -8,9 +8,11 @@
 #undef WIN32_LEAN_AND_MEAN
 
 #define WIN32_LEAN_AND_MEAN
-#define _WIN32_WINNT 0x0500
+#define _WIN32_WINNT 0x0600
 #undef _UNICODE
 #undef UNICODE
+
+#include "ModVal.h"
 
 #include <string>
 #include <vector>
@@ -20,10 +22,9 @@
 #include <algorithm>
 #include <cstdlib>
 
-#include <windows.h>
+#include <Windows.h>
 #include <shellapi.h> 
 #include <mmsystem.h>
-#include "ModVal.h"
 
 #ifdef _USE_WIDE_STRING
 
