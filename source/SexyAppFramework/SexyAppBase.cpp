@@ -505,20 +505,20 @@ bool SexyAppBase::AppCanRestore()
 
 bool SexyAppBase::ReadDemoBuffer(string& theError)
 {
-	FILE** aFP = nullptr;
-	fopen_s(aFP, mDemoFileName.c_str(), "rb");
+	FILE* aFP{};
+	fopen_s(&aFP, mDemoFileName.c_str(), "rb");
 
-	if (*aFP == nullptr)
+	if (aFP == nullptr)
 	{
 		theError = "Demo file not found: " + mDemoFileName;
 		return false;
 	}
 
 	struct AutoFile { FILE* f; AutoFile(FILE* file) : f(file) {} ~AutoFile() { fclose(f); } };
-	AutoFile aCloseFile(*aFP);
+	AutoFile aCloseFile(aFP);
 
 	ulong aFileID;
-	fread(&aFileID, 4, 1, *aFP);
+	fread(&aFileID, 4, 1, aFP);
 
 	DBG_ASSERTE(aFileID == DEMO_FILE_ID);
 	if (aFileID != DEMO_FILE_ID)
@@ -528,19 +528,19 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 	}
 
 	ulong aVersion;
-	fread(&aVersion, 4, 1, *aFP);
+	fread(&aVersion, 4, 1, aFP);
 
-	fread(&mRandSeed, 4, 1, *aFP);
+	fread(&mRandSeed, 4, 1, aFP);
 	SRand(mRandSeed);
 
 	ushort aStrLen = 4;
-	fread(&aStrLen, 2, 1, *aFP);
+	fread(&aStrLen, 2, 1, aFP);
 
 	if (aStrLen > 255)
 		aStrLen = 255;
 
 	char aStr[256];
-	fread(aStr, 1, aStrLen, *aFP);
+	fread(aStr, 1, aStrLen, aFP);
 	aStr[aStrLen] = '\0';
 
 	DBG_ASSERTE(mProductVersion == aStr);
@@ -550,17 +550,17 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		return false;
 	}
 
-	int aFilePos = ftell(*aFP);
-	fseek(*aFP, 0, SEEK_END);
+	int aFilePos = ftell(aFP);
+	fseek(aFP, 0, SEEK_END);
 
-	int aBytesLeft = ftell(*aFP) - aFilePos;
-	fseek(*aFP, aFilePos, SEEK_SET);
+	int aBytesLeft = ftell(aFP) - aFilePos;
+	fseek(aFP, aFilePos, SEEK_SET);
 
 	uchar* aBuffer;
 	if (aVersion >= 2)
 	{
 		int aSize;
-		fread(&aSize, 4, 1, *aFP);
+		fread(&aSize, 4, 1, aFP);
 		aBytesLeft -= 4;
 
 		if (aSize >= aBytesLeft)
@@ -572,7 +572,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		Buffer aMarkerBuffer;
 
 		aBuffer = new uchar[aSize];
-		fread(aBuffer, 1, aSize, *aFP);
+		fread(aBuffer, 1, aSize, aFP);
 		aMarkerBuffer.WriteBytes(aBuffer, aSize);
 		aMarkerBuffer.SeekFront();
 
@@ -597,7 +597,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 		delete[] aBuffer;
 	}
 
-	fread(&mDemoLength, 4, 1, *aFP);
+	fread(&mDemoLength, 4, 1, aFP);
 	aBytesLeft -= 4;
 
 	if (aBytesLeft <= 0)
@@ -608,7 +608,7 @@ bool SexyAppBase::ReadDemoBuffer(string& theError)
 
 
 	aBuffer = new uchar[aBytesLeft];
-	fread(aBuffer, 1, aBytesLeft, *aFP);
+	fread(aBuffer, 1, aBytesLeft, aFP);
 
 	mDemoBuffer.WriteBytes(aBuffer, aBytesLeft);
 	mDemoBuffer.SeekFront();
@@ -621,22 +621,22 @@ void SexyAppBase::WriteDemoBuffer()
 {
 	if (!mRecordingDemoBuffer) return;
 
-	FILE** aFP = nullptr;
-	fopen_s(aFP, mDemoFileName.c_str(), "w+b");
+	FILE* aFP{};
+	fopen_s(&aFP, mDemoFileName.c_str(), "w+b");
 
-	if (*aFP == nullptr) return;
+	if (aFP == nullptr) return;
 
 	ulong aFileID = DEMO_FILE_ID;
-	fwrite(&aFileID, 4, 1, *aFP);
+	fwrite(&aFileID, 4, 1, aFP);
 
 	ulong aVersion = DEMO_VERSION;
-	fwrite(&aVersion, 4, 1, *aFP);
+	fwrite(&aVersion, 4, 1, aFP);
 
-	fwrite(&mRandSeed, 4, 1, *aFP);
+	fwrite(&mRandSeed, 4, 1, aFP);
 
 	ushort aStrLen = mProductVersion.length();
-	fwrite(&aStrLen, 2, 1, *aFP);
-	fwrite(mProductVersion.c_str(), 1, mProductVersion.length(), *aFP);
+	fwrite(&aStrLen, 2, 1, aFP);
+	fwrite(mProductVersion.c_str(), 1, mProductVersion.length(), aFP);
 
 	Buffer aMarkerBuffer;
 	aMarkerBuffer.WriteLong(mDemoMarkerList.size());
@@ -648,14 +648,14 @@ void SexyAppBase::WriteDemoBuffer()
 	}
 
 	int aMarkerBufferSize = aMarkerBuffer.GetDataLen();
-	fwrite(&aMarkerBufferSize, 4, 1, *aFP);
-	fwrite(aMarkerBuffer.GetDataPtr(), aMarkerBufferSize, 1, *aFP);
+	fwrite(&aMarkerBufferSize, 4, 1, aFP);
+	fwrite(aMarkerBuffer.GetDataPtr(), aMarkerBufferSize, 1, aFP);
 
 	ulong aDemoLength = mUpdateCount;
-	fwrite(&aDemoLength, 4, 1, *aFP);
+	fwrite(&aDemoLength, 4, 1, aFP);
 
-	fwrite(mDemoBuffer.GetDataPtr(), 1, mDemoBuffer.GetDataLen(), *aFP);
-	fclose(*aFP);
+	fwrite(mDemoBuffer.GetDataPtr(), 1, mDemoBuffer.GetDataLen(), aFP);
+	fclose(aFP);
 }
 
 void SexyAppBase::DemoSyncBuffer(Buffer* theBuffer)
@@ -1809,8 +1809,7 @@ bool SexyAppBase::RegistryReadInteger(const string& theKey, int* theValue)
 {
 	ulong aType;
 	ulong aLong;
-	ulong aLen = 4;
-	if (!RegistryRead(theKey, &aType, (uchar*)&aLong, &aLen))
+	if (ulong aLen = 4; !RegistryRead(theKey, &aType, (uchar*)&aLong, &aLen))
 		return false;
 
 	if (aType != REG_DWORD)
@@ -1833,8 +1832,7 @@ bool SexyAppBase::RegistryReadBoolean(const string& theKey, bool* theValue)
 bool SexyAppBase::RegistryReadData(const string& theKey, uchar* theValue, ulong* theLength)
 {
 	ulong aType;
-	ulong aLen = *theLength;
-	if (!RegistryRead(theKey, &aType, (uchar*)theValue, theLength))
+	if (!RegistryRead(theKey, &aType, theValue, theLength))
 		return false;
 
 	if (aType != REG_BINARY)
@@ -1892,17 +1890,17 @@ bool SexyAppBase::WriteBytesToFile(const string& theFileName, const void* theDat
 		DBG_ASSERTE(!mDemoIsShortCmd);
 		DBG_ASSERTE(mDemoCmdNum == DEMO_FILE_WRITE);
 
-		bool success = mDemoBuffer.ReadNumBits(1, false) != 0;
-		if (!success)
+		if (bool success = mDemoBuffer.ReadNumBits(1, false) != 0; !success)
 			return false;
 
 		return true;
 	}
 
 	MkDir(GetFileDir(theFileName));
-	FILE* aFP = fopen(theFileName.c_str(), "w+b");
+	FILE* aFP{};
+	fopen_s(&aFP, theFileName.c_str(), "w+b");
 
-	if (aFP == NULL)
+	if (aFP == nullptr)
 	{
 		if (mRecordingDemoBuffer)
 		{
@@ -1948,8 +1946,7 @@ bool SexyAppBase::ReadBufferFromFile(const string& theFileName, Buffer* theBuffe
 		DBG_ASSERTE(!mDemoIsShortCmd);
 		DBG_ASSERTE(mDemoCmdNum == DEMO_FILE_READ);
 
-		bool success = mDemoBuffer.ReadNumBits(1, false) != 0;
-		if (!success)
+		if (bool success = mDemoBuffer.ReadNumBits(1, false) != 0; !success)
 			return false;
 
 		ulong aLen = mDemoBuffer.ReadLong();
@@ -1960,49 +1957,46 @@ bool SexyAppBase::ReadBufferFromFile(const string& theFileName, Buffer* theBuffe
 
 		return true;
 	}
-	else
+
+	PFILE* aFP = p_fopen(theFileName.c_str(), "rb");
+
+	if (aFP == nullptr)
 	{
-		PFILE* aFP = p_fopen(theFileName.c_str(), "rb");
-
-		if (aFP == NULL)
+		if (mRecordingDemoBuffer && (!dontWriteToDemo))
 		{
-			if ((mRecordingDemoBuffer) && (!dontWriteToDemo))
-			{
-				WriteDemoTimingBlock();
-				mDemoBuffer.WriteNumBits(0, 1);
-				mDemoBuffer.WriteNumBits(DEMO_FILE_READ, 5);
-				mDemoBuffer.WriteNumBits(0, 1); // failure				
-			}
-
-			return false;
+			WriteDemoTimingBlock();
+			mDemoBuffer.WriteNumBits(0, 1);
+			mDemoBuffer.WriteNumBits(DEMO_FILE_READ, 5);
+			mDemoBuffer.WriteNumBits(0, 1); // failure				
 		}
 
-		p_fseek(aFP, 0, SEEK_END);
-		int aFileSize = p_ftell(aFP);
-		p_fseek(aFP, 0, SEEK_SET);
+		return false;
+	}
 
-		uchar* aData = new uchar[aFileSize];
+	p_fseek(aFP, 0, SEEK_END);
+	int aFileSize = p_ftell(aFP);
+	p_fseek(aFP, 0, SEEK_SET);
 
-		p_fread(aData, 1, aFileSize, aFP);
-		p_fclose(aFP);
+	uchar* aData = new uchar[aFileSize];
 
-		theBuffer->Clear();
-		theBuffer->SetData(aData, aFileSize);
+	p_fread(aData, 1, aFileSize, aFP);
+	p_fclose(aFP);
 
-		if ((mRecordingDemoBuffer) && (!dontWriteToDemo))
-		{
+	theBuffer->Clear();
+	theBuffer->SetData(aData, aFileSize);
+
+	if (mRecordingDemoBuffer && (!dontWriteToDemo))
+	{
 			WriteDemoTimingBlock();
 			mDemoBuffer.WriteNumBits(0, 1);
 			mDemoBuffer.WriteNumBits(DEMO_FILE_READ, 5);
 			mDemoBuffer.WriteNumBits(1, 1); // success			
 			mDemoBuffer.WriteLong(aFileSize);
 			mDemoBuffer.WriteBytes(aData, aFileSize);
-		}
-
-		delete[] aData;
-
-		return true;
 	}
+
+	delete[] aData;
+	return true;
 }
 
 bool SexyAppBase::FileExists(const string& theFileName)
@@ -2021,24 +2015,22 @@ bool SexyAppBase::FileExists(const string& theFileName)
 		bool success = mDemoBuffer.ReadNumBits(1, false) != 0;
 		return success;
 	}
-	else
+
+	PFILE* aFP = p_fopen(theFileName.c_str(), "rb");
+
+	if (mRecordingDemoBuffer)
 	{
-		PFILE* aFP = p_fopen(theFileName.c_str(), "rb");
-
-		if (mRecordingDemoBuffer)
-		{
-			WriteDemoTimingBlock();
-			mDemoBuffer.WriteNumBits(0, 1);
-			mDemoBuffer.WriteNumBits(DEMO_FILE_EXISTS, 5);
-			mDemoBuffer.WriteNumBits((aFP != NULL) ? 1 : 0, 1);
-		}
-
-		if (aFP == NULL)
-			return false;
-
-		p_fclose(aFP);
-		return true;
+		WriteDemoTimingBlock();
+		mDemoBuffer.WriteNumBits(0, 1);
+		mDemoBuffer.WriteNumBits(DEMO_FILE_EXISTS, 5);
+		mDemoBuffer.WriteNumBits((aFP != nullptr) ? 1 : 0, 1);
 	}
+
+	if (aFP == nullptr)
+		return false;
+
+	p_fclose(aFP);
+	return true;
 }
 
 bool SexyAppBase::EraseFile(const string& theFileName)
@@ -2059,7 +2051,7 @@ void SexyAppBase::SEHOccured()
 
 string SexyAppBase::GetGameSEHInfo()
 {
-	int aSecLoaded = (GetTickCount() - mTimeLoaded) / 1000;
+	int aSecLoaded = (GetTickCount64() - mTimeLoaded) / 1000;
 
 	char aTimeStr[16];
 	sprintf(aTimeStr, "%02d:%02d:%02d", (aSecLoaded / 60 / 60), (aSecLoaded / 60) % 60, aSecLoaded % 60);
@@ -2115,15 +2107,15 @@ void SexyAppBase::Shutdown()
 			Sleep(10);
 		}
 
-		if (mMusicInterface != NULL)
+		if (mMusicInterface != nullptr)
 			mMusicInterface->StopAllMusic();
 
-		if ((!mIsPhysWindowed) && (mDDInterface != NULL) && (mDDInterface->mDD != NULL))
+		if ((!mIsPhysWindowed) && (mDDInterface != nullptr) && (mDDInterface->mDD != nullptr))
 		{
 			mDDInterface->mDD->RestoreDisplayMode();
 		}
 
-		if (mHWnd != NULL)
+		if (mHWnd != nullptr)
 		{
 			ShowWindow(mHWnd, SW_HIDE);
 		}
