@@ -362,7 +362,7 @@ DECLARE_INTERFACE_(IDirect3D9, IUnknown)
     STDMETHOD(CheckDepthStencilMatch)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat) PURE;
     STDMETHOD(GetDeviceCaps)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 * pCaps) PURE;
     STDMETHOD_(HMONITOR, GetAdapterMonitor)(THIS_ UINT Adapter) PURE;
-    STDMETHOD(CreateDevice)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS * pPresentationParameters, IDirect3DDevice8 * *ppReturnedDeviceInterface) PURE;
+    STDMETHOD(CreateDevice)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS * pPresentationParameters, IDirect3DDevice9 * *ppReturnedDeviceInterface) PURE;
 };
 DECLARE_INTERFACE_(IDirect3D10, IUnknown)
 {
@@ -384,7 +384,7 @@ DECLARE_INTERFACE_(IDirect3D10, IUnknown)
     STDMETHOD(CheckDepthStencilMatch)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat) PURE;
     STDMETHOD(GetDeviceCaps)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 * pCaps) PURE;
     STDMETHOD_(HMONITOR, GetAdapterMonitor)(THIS_ UINT Adapter) PURE;
-    STDMETHOD(CreateDevice)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS * pPresentationParameters, IDirect3DDevice8 * *ppReturnedDeviceInterface) PURE;
+    STDMETHOD(CreateDevice)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS * pPresentationParameters, IDirect3DDevice10 * *ppReturnedDeviceInterface) PURE;
 
 
 };
@@ -515,7 +515,7 @@ DECLARE_INTERFACE_(IDirect3D11, IUnknown)
     STDMETHOD(CheckDepthStencilMatch)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat) PURE;
     STDMETHOD(GetDeviceCaps)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 * pCaps) PURE;
     STDMETHOD_(HMONITOR, GetAdapterMonitor)(THIS_ UINT Adapter) PURE;
-    STDMETHOD(CreateDevice)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS * pPresentationParameters, IDirect3DDevice8 * *ppReturnedDeviceInterface) PURE;
+    STDMETHOD(CreateDevice)(THIS_ UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS * pPresentationParameters, IDirect3DDevice11 * *ppReturnedDeviceInterface) PURE;
 };
 /*-----------------------------------------------------------------------------------------------------------------*/
 
@@ -547,14 +547,14 @@ static bool GetD3D8AdapterLibInfo(GUID &theGUID, std::string &theDriver, std::st
 		return false;
 
 	D3DADAPTER_IDENTIFIER8 aV11Id;
-	ZeroMemory(&aV11Id,sizeof(aV11Id));
+	ZeroMemory(&aV8Id,sizeof(aV8Id));
 	HRESULT aResult = gD3D8->GetAdapterIdentifier(D3DADAPTER_DEFAULT,D3DENUM_NO_WHQL_LEVEL,&aV11Id);
 	if (!SUCCEEDED(aResult))
 		return false;
 
-	theGUID = aV11Id.DeviceIdentifier;
-	theDriver = aV11Id.Driver;
-	theDescription= aV11Id.Description;
+	theGUID = aV8Id.DeviceIdentifier;
+	theDriver = aV8Id.Driver;
+	theDescription= aV8Id.Description;
 	return true;
 }
 
