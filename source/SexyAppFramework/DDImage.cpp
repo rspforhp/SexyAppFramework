@@ -33,7 +33,7 @@ DDImage::DDImage() :
 
 DDImage::~DDImage()
 {
-	if (mSurface != NULL)
+	if (mSurface != nullptr)
 		mSurface->Release();
 	mDDInterface->RemoveDDImage(this);
 
@@ -42,7 +42,7 @@ DDImage::~DDImage()
 
 void DDImage::Init()
 {
-	mSurface = NULL;
+	mSurface = nullptr;
 	mDDInterface->AddDDImage(this);
 	
 	mNoLock = false;
@@ -58,7 +58,7 @@ void DDImage::Init()
 bool DDImage::Check3D(Image *theImage)
 {
 	DDImage *anImage = dynamic_cast<DDImage*>(theImage);
-	if (anImage!=NULL)
+	if (anImage!=nullptr)
 		return Check3D(anImage);
 	else
 		return false;
@@ -80,7 +80,7 @@ bool DDImage::LockSurface()
 		mLockedSurfaceDesc.dwSize = sizeof(mLockedSurfaceDesc);
 		int aResult = S_FALSE;
 		if(GetSurface())
-			aResult = GetSurface()->Lock(NULL, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, NULL);
+			aResult = GetSurface()->Lock(nullptr, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, nullptr);
 
 		if (aResult != DD_OK)
 			return false;
@@ -102,7 +102,7 @@ bool DDImage::UnlockSurface()
 
 	if (mLockCount == 0)
 	{
-		mSurface->Unlock(NULL);
+		mSurface->Unlock(nullptr);
 	}
 
 	DBG_ASSERTE(mLockCount >= 0);
@@ -131,7 +131,7 @@ void DDImage::SetSurface(LPDIRECTDRAWSURFACE theSurface)
 
 bool DDImage::GenerateDDSurface()
 {
-	if (mSurface != NULL)
+	if (mSurface != nullptr)
 		return true;	
 
 	CommitBits();
@@ -142,7 +142,7 @@ bool DDImage::GenerateDDSurface()
 	mWantDDSurface = true;
 
 	// Force into non-palletized mode for this
-	if (mColorTable != NULL)
+	if (mColorTable != nullptr)
 		GetBits();
 
 	HRESULT aResult;
@@ -158,7 +158,7 @@ bool DDImage::GenerateDDSurface()
 		
 	AutoCrit aCrit(mDDInterface->mCritSect); // prevent mSurface from being released while we're in this code
 
-	aResult = mDDInterface->CreateSurface(&aDesc, &mSurface, NULL);
+	aResult = mDDInterface->CreateSurface(&aDesc, &mSurface, nullptr);
 	if (aResult != DD_OK)
 		return false;
 
@@ -183,15 +183,15 @@ bool DDImage::GenerateDDSurface()
 	{
 		ushort* mSurfaceBits = (ushort*) mLockedSurfaceDesc.lpSurface;
 
-		if (mSurfaceBits != NULL)
+		if (mSurfaceBits != nullptr)
 		{
 			int i;
 			bool firstTrans = true;			
 						
-			ushort* a16Bits = NULL;
+			ushort* a16Bits = nullptr;
 			ushort aTransColor = 0;
 			
-			if (mBits != NULL)
+			if (mBits != nullptr)
 			{
 				a16Bits = new ushort[mWidth*mHeight];
 				ulong* aSrcPtr = mBits;	
@@ -216,13 +216,13 @@ bool DDImage::GenerateDDSurface()
 				}
 			}
 			
-			if ((mHasTrans) && (mBits != NULL))
+			if ((mHasTrans) && (mBits != nullptr))
 			{
 				if (mFirstPixelTrans)
 				{
 					aTransColor = *a16Bits;
 
-					if (a16Bits != NULL)
+					if (a16Bits != nullptr)
 					{
 						ushort* aDestPtr = mSurfaceBits;						
 						ushort* a16SrcPtr = a16Bits;
@@ -296,7 +296,7 @@ bool DDImage::GenerateDDSurface()
 						delete aUsedColorArray;
 					}
 
-					if (mBits != NULL)
+					if (mBits != nullptr)
 					{
 						ushort* aDestPtr = mSurfaceBits;
 						ulong* aSrcPtr = mBits;
@@ -325,7 +325,7 @@ bool DDImage::GenerateDDSurface()
 			}
 			else
 			{
-				if (a16Bits != NULL)
+				if (a16Bits != nullptr)
 				{
 					ushort* aDestPtr = mSurfaceBits;						
 					ushort* a16SrcPtr = a16Bits;
@@ -355,14 +355,14 @@ bool DDImage::GenerateDDSurface()
 	{
 		ulong* mSurfaceBits = (ulong*) mLockedSurfaceDesc.lpSurface;		
 
-		if (mSurfaceBits != NULL)
+		if (mSurfaceBits != nullptr)
 		{
 			int i;
 			bool firstTrans = true;						
 			
 			ulong aTransColor = 0;
 
-			if ((mHasTrans) && (mBits != NULL))
+			if ((mHasTrans) && (mBits != nullptr))
 			{
 				if (mFirstPixelTrans)
 				{
@@ -372,7 +372,7 @@ bool DDImage::GenerateDDSurface()
 								  (((val>>gRightShift)<<gLeftShift)&gMask) |
 								  (((val>>bRightShift)<<bLeftShift)&bMask);
 
-					if (mBits != NULL)
+					if (mBits != nullptr)
 					{
 						ulong* aDestPtr = mSurfaceBits;
 						ulong* aSrcPtr = mBits;
@@ -461,7 +461,7 @@ bool DDImage::GenerateDDSurface()
 						delete aUsedColorArray;
 					}
 
-					if (mBits != NULL)
+					if (mBits != nullptr)
 					{
 						ulong* aDestPtr = mSurfaceBits;
 						ulong* aSrcPtr = mBits;
@@ -495,7 +495,7 @@ bool DDImage::GenerateDDSurface()
 			}
 			else
 			{
-				if (mBits != NULL)
+				if (mBits != nullptr)
 				{
 					ulong* aDestPtr = mSurfaceBits;
 					ulong* aSrcPtr = mBits;
@@ -529,13 +529,13 @@ bool DDImage::GenerateDDSurface()
 
 void DDImage::DeleteDDSurface()
 {
-	if (mSurface != NULL)
+	if (mSurface != nullptr)
 	{
-		if ((mColorTable == NULL) && (mBits == NULL) && (mD3DData == NULL))
+		if ((mColorTable == nullptr) && (mBits == nullptr) && (mD3DData == nullptr))
 			GetBits();
 
 		mSurface->Release();
-		mSurface = NULL;
+		mSurface = nullptr;
 	}
 }
 
@@ -561,20 +561,20 @@ void DDImage::PurgeBits()
 		if ((mWantDDSurface) && (GenerateDDSurface()))
 		{                        
 			delete [] mBits;
-			mBits = NULL;
+			mBits = nullptr;
 
 			delete [] mColorIndices;
-			mColorIndices = NULL;
+			mColorIndices = nullptr;
 
 			delete [] mColorTable;
-			mColorTable = NULL;                        
+			mColorTable = nullptr;                        
 
 			return;
 		}	
 	}
 	else // Accelerated
 	{
-		if (mSurface != NULL)
+		if (mSurface != nullptr)
 		{
 			GetBits();
 			DeleteDDSurface();
@@ -587,22 +587,22 @@ void DDImage::PurgeBits()
 void DDImage::DeleteAllNonSurfaceData()
 {
 	delete [] mBits;
-	mBits = NULL;
+	mBits = nullptr;
 
 	delete [] mNativeAlphaData;
-	mNativeAlphaData = NULL;
+	mNativeAlphaData = nullptr;
 
 	delete [] mRLAdditiveData;
-	mRLAdditiveData = NULL;
+	mRLAdditiveData = nullptr;
 
 	delete [] mRLAlphaData;
-	mRLAlphaData = NULL;
+	mRLAlphaData = nullptr;
 
 	delete [] mColorTable;
-	mColorTable = NULL;
+	mColorTable = nullptr;
 
 	delete [] mColorIndices;
-	mColorIndices = NULL;
+	mColorIndices = nullptr;
 }
 
 void DDImage::DeleteNativeData()
@@ -690,7 +690,7 @@ LPDIRECTDRAWSURFACE DDImage::GetSurface()
 {
 	//TODO: Log if generate surface fails
 
-	if (mSurface == NULL)
+	if (mSurface == nullptr)
 		GenerateDDSurface();
 
 	return mSurface;
@@ -1973,7 +1973,7 @@ void DDImage::DrawLineAA(double theStartX, double theStartY, double theEndX, dou
 
 void DDImage::CommitBits()
 {
-	if (mSurface == NULL)
+	if (mSurface == nullptr)
 	{
 		MemoryImage::CommitBits();
 		return;
@@ -1987,7 +1987,7 @@ void DDImage::Create(int theWidth, int theHeight)
 	mWidth = theWidth;
 	mHeight = theHeight;
 
-	mBits = NULL;
+	mBits = nullptr;
 
 	BitsChanged();	
 }
@@ -1996,25 +1996,25 @@ void DDImage::BitsChanged()
 {
 	MemoryImage::BitsChanged();
 
-	if (mSurface != NULL)
+	if (mSurface != nullptr)
 		mSurface->Release();
-	mSurface = NULL;
+	mSurface = nullptr;
 }
 
 ulong* DDImage::GetBits()
 {
-	if (mBits == NULL)
+	if (mBits == nullptr)
 	{
-		if (mSurface == NULL)
+		if (mSurface == nullptr)
 			return MemoryImage::GetBits();
 
 		if (mNoLock)
-			return NULL;
+			return nullptr;
 
 		LPDIRECTDRAWSURFACE aSurface = mSurface;		
 
 		if (!LockSurface())
-			return NULL;
+			return nullptr;
 
 		mBits = new ulong[mWidth*mHeight + 1];
 		mBits[mWidth*mHeight] = MEMORYCHECK_ID;
@@ -2291,7 +2291,7 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 	MemoryImage* aMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 	DDImage* aDDImage = dynamic_cast<DDImage*>(theImage);	
 
-	if (aMemoryImage != NULL)
+	if (aMemoryImage != nullptr)
 	{
 		aMemoryImage->CommitBits();		
 
@@ -2299,10 +2299,10 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 		RECT aSrcRect = {theSrcRect.mX, theSrcRect.mY, theSrcRect.mX + theSrcRect.mWidth, theSrcRect.mY + theSrcRect.mHeight};	
 
 		//TODO:
-		if ((aMemoryImage->mIsVolatile) && ((aDDImage == NULL) || (aDDImage->mSurface == NULL)) && 
+		if ((aMemoryImage->mIsVolatile) && ((aDDImage == nullptr) || (aDDImage->mSurface == nullptr)) && 
 			(!mNoLock) && (theColor == Color::White))
 		{
-			if (aMemoryImage->mColorTable == NULL)
+			if (aMemoryImage->mColorTable == nullptr)
 			{
 				ulong* aSrcBits = aMemoryImage->GetBits();			
 
@@ -2344,7 +2344,7 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 
 			#define _PLUSPLUS ++
 			#define _PLUSEQUALS +=
-			if (aMemoryImage->mColorTable == NULL)
+			if (aMemoryImage->mColorTable == nullptr)
 			{
 				ulong* aSrcPixelsRow = ((ulong*) aNativeData) + (theSrcRect.mY * theImage->mWidth) + theSrcRect.mX;
 				ulong* aSrcPixels;
@@ -2377,7 +2377,7 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 			#undef _PLUSEQUALS 
 			UnlockSurface();
 		}		
-		else if ((aDDImage == NULL) || (aDDImage->mSurface == NULL) || ((!mVideoMemory) && (aDDImage->mVideoMemory)))
+		else if ((aDDImage == nullptr) || (aDDImage->mSurface == nullptr) || ((!mVideoMemory) && (aDDImage->mVideoMemory)))
 		{
 			if (mNoLock)
 				return;
@@ -2390,7 +2390,7 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 
 			void* aNativeAlphaData = aMemoryImage->GetNativeAlphaData(mDDInterface);
 
-			if (aMemoryImage->mColorTable == NULL)
+			if (aMemoryImage->mColorTable == nullptr)
 			{
 				ulong* aSrcPixelsRow = ((ulong*) aNativeAlphaData) + (theSrcRect.mY * theImage->mWidth) + theSrcRect.mX;
 				ulong* aSrcPixels;
@@ -2422,7 +2422,7 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 		else
 		{
 			if (mLockCount > 0)
-				mSurface->Unlock(NULL);
+				mSurface->Unlock(nullptr);
 
 			DDBLTFX aBltFX;
 			ZeroMemory(&aBltFX, sizeof(aBltFX));
@@ -2437,7 +2437,7 @@ void DDImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& theSrcR
 		
 			if (mLockCount > 0)
 			{
-				if (mSurface->Lock(NULL, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, NULL) != DD_OK)
+				if (mSurface->Lock(nullptr, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, nullptr) != DD_OK)
 					return;
 			}
 		}
@@ -2455,7 +2455,7 @@ void DDImage::NormalBltMirror(Image* theImage, int theX, int theY, const Rect& t
 	MemoryImage* aMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 	DDImage* aDDImage = dynamic_cast<DDImage*>(theImage);	
 
-	if (aMemoryImage != NULL)
+	if (aMemoryImage != nullptr)
 	{
 		aMemoryImage->CommitBits();		
 
@@ -2475,7 +2475,7 @@ void DDImage::NormalBltMirror(Image* theImage, int theX, int theY, const Rect& t
 
 		#define _PLUSPLUS --
 		#define _PLUSEQUALS -=
-		if (aMemoryImage->mColorTable == NULL)
+		if (aMemoryImage->mColorTable == nullptr)
 		{
 			ulong* aSrcPixelsRow = ((ulong*) aNativeData) + (theSrcRect.mY * theImage->mWidth) + theSrcRect.mX;
 			ulong* aSrcPixels;
@@ -2521,7 +2521,7 @@ void DDImage::AdditiveBlt(Image* theImage, int theX, int theY, const Rect& theSr
 	MemoryImage* aMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 	DDImage* aDDImage = dynamic_cast<DDImage*>(theImage);
 
-	if (aMemoryImage != NULL)
+	if (aMemoryImage != nullptr)
 	{
 		if (!LockSurface())
 			return;
@@ -2531,7 +2531,7 @@ void DDImage::AdditiveBlt(Image* theImage, int theX, int theY, const Rect& theSr
 
 		#define _PLUSPLUS ++
 		#define _PLUSEQUALS +=
-		if (aMemoryImage->mColorTable == NULL)
+		if (aMemoryImage->mColorTable == nullptr)
 		{
 			ulong* aSrcPixelsRow = ((ulong*) aNativeAlphaData) + (theSrcRect.mY * theImage->mWidth) + theSrcRect.mX;
 			ulong* aSrcPixels;
@@ -2580,7 +2580,7 @@ void DDImage::AdditiveBltMirror(Image* theImage, int theX, int theY, const Rect&
 	MemoryImage* aMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 	DDImage* aDDImage = dynamic_cast<DDImage*>(theImage);
 
-	if (aMemoryImage != NULL)
+	if (aMemoryImage != nullptr)
 	{
 		if (!LockSurface())
 			return;
@@ -2590,7 +2590,7 @@ void DDImage::AdditiveBltMirror(Image* theImage, int theX, int theY, const Rect&
 
 		#define _PLUSPLUS --
 		#define _PLUSEQUALS -=
-		if (aMemoryImage->mColorTable == NULL)
+		if (aMemoryImage->mColorTable == nullptr)
 		{
 			ulong* aSrcPixelsRow = ((ulong*) aNativeAlphaData) + (theSrcRect.mY * theImage->mWidth) + theSrcRect.mX;
 			ulong* aSrcPixels;
@@ -2644,13 +2644,13 @@ void DDImage::Blt(Image* theImage, int theX, int theY, const Rect& theSrcRect, c
 		DDImage* aDDImage = dynamic_cast<DDImage*>(theImage);	
 
 		// Special short-circuit 
-		if ((aDDImage != NULL) && (aDDImage->mSurface != NULL) &&
+		if ((aDDImage != nullptr) && (aDDImage->mSurface != nullptr) &&
 			(mDDInterface->mD3DInterface->mTransformStack.empty()) && 
 			(theDrawMode == Graphics::DRAWMODE_NORMAL) && 
 			(theColor == Color::White) && (!aDDImage->mHasAlpha))
 		{
 			if (mLockCount > 0)
-				mSurface->Unlock(NULL);
+				mSurface->Unlock(nullptr);
 
 			DDBLTFX aBltFX;
 			ZeroMemory(&aBltFX, sizeof(aBltFX));
@@ -2668,7 +2668,7 @@ void DDImage::Blt(Image* theImage, int theX, int theY, const Rect& theSrcRect, c
 		
 			if (mLockCount > 0)
 			{
-				if (mSurface->Lock(NULL, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, NULL) != DD_OK)
+				if (mSurface->Lock(nullptr, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, nullptr) != DD_OK)
 					return;
 			}
 
@@ -2779,13 +2779,13 @@ void DDImage::BltRotated(Image* theImage, float theX, float theY, const Rect &th
 	MemoryImage* aMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 	DDImage* aDDImage = dynamic_cast<DDImage*>(theImage);
 
-	if (aMemoryImage != NULL)
+	if (aMemoryImage != nullptr)
 	{
 		aMemoryImage->CommitBits();
 
 		if (theDrawMode == Graphics::DRAWMODE_NORMAL)
 		{
-			if (aMemoryImage->mColorTable == NULL)
+			if (aMemoryImage->mColorTable == nullptr)
 			{
 				ulong* aSrcBits = aMemoryImage->GetBits() + theSrcRect.mX + theSrcRect.mY*aMemoryImage->GetWidth();			
 
@@ -2814,7 +2814,7 @@ void DDImage::BltRotated(Image* theImage, float theX, float theY, const Rect &th
 		}
 		else
 		{
-			if (aMemoryImage->mColorTable == NULL)
+			if (aMemoryImage->mColorTable == nullptr)
 			{
 				ulong* aSrcBits = aMemoryImage->GetBits() + theSrcRect.mX + theSrcRect.mY*aMemoryImage->GetWidth();			
 
@@ -2868,8 +2868,8 @@ void DDImage::StretchBlt(Image* theImage, const Rect& theDestRectOrig, const Rec
 
 	if (fastStretch)
 	{
-		if ((aSrcDDImage != NULL) && (theColor == Color::White) && (theDrawMode == Graphics::DRAWMODE_NORMAL) && 
-			(!aSrcDDImage->mHasAlpha) && (aSrcDDImage->GetSurface() != NULL))
+		if ((aSrcDDImage != nullptr) && (theColor == Color::White) && (theDrawMode == Graphics::DRAWMODE_NORMAL) && 
+			(!aSrcDDImage->mHasAlpha) && (aSrcDDImage->GetSurface() != nullptr))
 		{
 			LPDIRECTDRAWSURFACE aSrcSurface = aSrcDDImage->GetSurface();
 			LPDIRECTDRAWSURFACE aDestSurface = GetSurface();
@@ -2888,20 +2888,20 @@ void DDImage::StretchBlt(Image* theImage, const Rect& theDestRectOrig, const Rec
 			
 			if (mLockCount > 0)
 			{
-				mSurface->Unlock(NULL);
+				mSurface->Unlock(nullptr);
 			}
 			
 			HRESULT aResult = GetSurface()->Blt(&aDestRect, aSrcDDImage->GetSurface(), &aSrcRect, aFlags, &aBltFX);	
 		
 			if (mLockCount > 0)
 			{
-				if (mSurface->Lock(NULL, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, NULL) != DD_OK)
+				if (mSurface->Lock(nullptr, &mLockedSurfaceDesc, DDLOCK_SURFACEMEMORYPTR | DDLOCK_WAIT, nullptr) != DD_OK)
 					return;
 			}			
 		}
 		else
 		{
-			if (aSrcMemoryImage != NULL)
+			if (aSrcMemoryImage != nullptr)
 			{
 				aSrcMemoryImage->CommitBits();
 
@@ -2911,7 +2911,7 @@ void DDImage::StretchBlt(Image* theImage, const Rect& theDestRectOrig, const Rec
 				#define _PLUSPLUS ++
 				if (theDrawMode == Graphics::DRAWMODE_NORMAL)
 				{
-					if (aSrcMemoryImage->mColorTable == NULL)
+					if (aSrcMemoryImage->mColorTable == nullptr)
 					{
 						//ulong* aSrcBits = aSrcMemoryImage->GetBits();		
 						ulong* aSrcBits = ((ulong*) aNativeAlphaData);	
@@ -2940,7 +2940,7 @@ void DDImage::StretchBlt(Image* theImage, const Rect& theDestRectOrig, const Rec
 				}
 				else
 				{
-					if (aSrcMemoryImage->mColorTable == NULL)
+					if (aSrcMemoryImage->mColorTable == nullptr)
 					{
 						//ulong* aSrcBits = aSrcMemoryImage->GetBits();		
 						ulong* aSrcBits = ((ulong*) aNativeAlphaData);	
@@ -3019,7 +3019,7 @@ void DDImage::StretchBltMirror(Image* theImage, const Rect& theDestRectOrig, con
 	theDestRect.mX += theDestRect.mWidth-1;
 
 
-	if (aSrcMemoryImage != NULL)
+	if (aSrcMemoryImage != nullptr)
 	{
 		aSrcMemoryImage->CommitBits();
 
@@ -3029,7 +3029,7 @@ void DDImage::StretchBltMirror(Image* theImage, const Rect& theDestRectOrig, con
 		#define _PLUSPLUS --
 		if (theDrawMode == Graphics::DRAWMODE_NORMAL)
 		{
-			if (aSrcMemoryImage->mColorTable == NULL)
+			if (aSrcMemoryImage->mColorTable == nullptr)
 			{
 				//ulong* aSrcBits = aSrcMemoryImage->GetBits();		
 				ulong* aSrcBits = ((ulong*) aNativeAlphaData);	
@@ -3058,7 +3058,7 @@ void DDImage::StretchBltMirror(Image* theImage, const Rect& theDestRectOrig, con
 		}
 		else
 		{
-			if (aSrcMemoryImage->mColorTable == NULL)
+			if (aSrcMemoryImage->mColorTable == nullptr)
 			{
 				//ulong* aSrcBits = aSrcMemoryImage->GetBits();		
 				ulong* aSrcBits = ((ulong*) aNativeAlphaData);	

@@ -18,7 +18,7 @@
 #define CLASS_SCRNSAVE TEXT("WindowsScreenSaverClass")
 
 /* globals */
-HWND            hMainWindow = NULL;
+HWND            hMainWindow = nullptr;
 BOOL            fChildPreview = FALSE;
 HINSTANCE       hMainInstance;
 TCHAR           szName[TITLEBARNAMELEN];
@@ -30,7 +30,7 @@ TCHAR           szNoHelpMemory[BUFFLEN];
 UINT            MyHelpMessage;
 
 /* local house keeping */
-static HINSTANCE hPwdLib = NULL;
+static HINSTANCE hPwdLib = nullptr;
 static POINT pt_orig;
 static BOOL checking_pwd = FALSE;
 static BOOL closing = FALSE;
@@ -38,7 +38,7 @@ static BOOL w95 = FALSE;
 
 typedef BOOL (WINAPI *VERIFYPWDPROC)(HWND);
 typedef DWORD (WINAPI *CHPWDPROC)(LPCTSTR, HWND, DWORD, PVOID);
-static VERIFYPWDPROC VerifyScreenSavePwd = NULL;
+static VERIFYPWDPROC VerifyScreenSavePwd = nullptr;
 
 /* function names */
 #define szVerifyPassword "VerifyScreenSavePwd"
@@ -100,7 +100,7 @@ int APIENTRY ScreenSaverWinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR CmdL
           DWORD type;
           LONG res;
           res = RegQueryValueEx(hKey, REGSTR_VALUE_USESCRPASSWORD,
-                                NULL, &type, (PBYTE) &check_pwd, &size);
+                                nullptr, &type, (PBYTE) &check_pwd, &size);
           if (check_pwd && res == ERROR_SUCCESS)
             {
               hPwdLib = LoadLibrary(TEXT("PASSWORD.CPL"));
@@ -119,7 +119,7 @@ int APIENTRY ScreenSaverWinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR CmdL
         case 'S':
         case 's':
           /* start screen saver */
-          return LaunchScreenSaver(NULL);
+          return LaunchScreenSaver(nullptr);
           
         case 'P':
         case 'p':
@@ -192,7 +192,7 @@ static int LaunchScreenSaver(HWND hParent)
      library */
   if (!RegisterClasses())
     {
-      MessageBox(NULL, TEXT("RegisterClasses() failed"), NULL, MB_ICONHAND);
+      MessageBox(nullptr, TEXT("RegisterClasses() failed"), nullptr, MB_ICONHAND);
       goto restore;
     }
 
@@ -214,8 +214,8 @@ static int LaunchScreenSaver(HWND hParent)
   /* create main screen saver window */
   hMainWindow = CreateWindowEx(hParent ? 0 : WS_EX_TOPMOST, CLASS_SCRNSAVE,
                                TEXT("SCREENSAVER"), style,
-                               0, 0, rc.right, rc.bottom, hParent, NULL,
-                               hMainInstance, NULL);
+                               0, 0, rc.right, rc.bottom, hParent, nullptr,
+                               hMainInstance, nullptr);
 
   /* display window and start pumping messages */
   if (hMainWindow)
@@ -223,7 +223,7 @@ static int LaunchScreenSaver(HWND hParent)
       UpdateWindow(hMainWindow);
       ShowWindow(hMainWindow, SW_SHOW);
 
-      while (GetMessage(&msg, NULL, 0, 0) == TRUE)
+      while (GetMessage(&msg, nullptr, 0, 0) == TRUE)
         {
           TranslateMessage(&msg);
           DispatchMessage(&msg);
@@ -247,7 +247,7 @@ static LRESULT WINAPI SysScreenSaverProc(HWND hWnd, UINT msg,
     {
     case WM_CREATE:
       if (!fChildPreview)
-        SetCursor(NULL);
+        SetCursor(nullptr);
       /* mouse is not supposed to move from this position */
       GetCursorPos(&pt_orig);
       break;
@@ -313,7 +313,7 @@ LONG WINAPI DefScreenSaverProc(HWND hWnd, UINT msg,
     case WM_SETCURSOR:
       if (checking_pwd)
         break;
-      SetCursor(NULL);
+      SetCursor(nullptr);
       return TRUE;
     case WM_NCACTIVATE:
     case WM_ACTIVATE:
@@ -375,9 +375,9 @@ static BOOL RegisterClasses(void)
 {
   WNDCLASS cls;
   
-  cls.hCursor = NULL; 
+  cls.hCursor = nullptr; 
   cls.hIcon = LoadIcon(hMainInstance, MAKEINTATOM(ID_APP)); 
-  cls.lpszMenuName = NULL;
+  cls.lpszMenuName = nullptr;
   cls.lpszClassName = CLASS_SCRNSAVE;
   cls.hbrBackground = GetStockObject(BLACK_BRUSH);
   cls.hInstance = hMainInstance;
@@ -404,7 +404,7 @@ void WINAPI ScreenSaverChangePassword(HWND hParent)
 
       /* change password for screen saver provider */
       if (ChangePassword)
-        ChangePassword(TEXT("SCRSAVE"), hParent, 0, NULL);
+        ChangePassword(TEXT("SCRSAVE"), hParent, 0, nullptr);
 
       FreeLibrary(hMpr);
     }

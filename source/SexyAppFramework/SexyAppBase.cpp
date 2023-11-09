@@ -40,26 +40,31 @@
 #include <regstr.h>
 #include <string>
 #include <shlobj.h>
+#include <rpcndr.h>
 #include <chrono>
-
+#include <Windows.h>
 #include "memmgr.h"
+
+
 
 using namespace std;
 using namespace Sexy;
 
+
+
 const int DEMO_FILE_ID = 0x42BEEF78;
 const int DEMO_VERSION = 2;
 
-SexyAppBase* Sexy::gSexyAppBase = nullptr;
+SexyAppBase* Sexy::gSexyAppBase = NULL;
 
 SEHCatcher Sexy::gSEHCatcher;
 
-HMODULE gDDrawDLL = nullptr;
-HMODULE gDSoundDLL = nullptr;
-HMODULE gVersionDLL = nullptr;
+HMODULE gDDrawDLL = NULL;
+HMODULE gDSoundDLL = NULL;
+HMODULE gVersionDLL = NULL;
 
 typedef BOOL(WINAPI* GetLastInputInfoFunc)(LASTINPUTINFO* plii);
-GetLastInputInfoFunc gGetLastInputInfoFunc = nullptr;
+GetLastInputInfoFunc gGetLastInputInfoFunc = NULL;
 static bool gScreenSaverActive = false;
 
 #ifndef SPI_GETSCREENSAVERRUNNING
@@ -287,7 +292,7 @@ SexyAppBase::SexyAppBase()
 	int i;
 
 	for (i = 0; i < NUM_CURSORS; i++)
-		mCursorImages[i] = NULL;
+		mCursorImages[i] = nullptr;
 
 	for (i = 0; i < 256; i++)
 		mAdd8BitMaxTable[i] = i;
@@ -357,7 +362,7 @@ SexyAppBase::~SexyAppBase()
 				if (Is3DAccelerated())
 				{
 					showedMsgBox = true;
-					int aResult = MessageBox(NULL,
+					int aResult = MessageBox(nullptr,
 						GetString("HARDWARE_ACCEL_SWITCHED_ON",
 							_S("Hardware Acceleration was switched on during this session.\r\n")
 							_S("If this resulted in slower performance, it should be switched off.\r\n")
@@ -882,7 +887,7 @@ Dialog* SexyAppBase::GetDialog(int theDialogId)
 	if (anItr != mDialogMap.end())
 		return anItr->second;
 
-	return NULL;
+	return nullptr;
 }
 
 bool SexyAppBase::KillDialog(int theDialogId, bool removeWidget, bool deleteWidget)
@@ -1143,6 +1148,7 @@ void SexyAppBase::TakeScreenshot() {
 
 	// Temporarily set the mDrawSurface to NULL so that DDImage::Check3D returns false
 	// and we can lock the surface.
+
 	mDDInterface->mDrawSurface = nullptr;
 
 	DDImage aImage(mDDInterface);
@@ -2136,7 +2142,7 @@ void SexyAppBase::RestoreScreenResolution()
 	if (mFullScreenWindow)
 	{
 		EnumWindows(ChangeDisplayWindowEnumProc, 0); // get any windows that appeared while we were running
-		ChangeDisplaySettings(NULL, 0);
+		ChangeDisplaySettings(nullptr, 0);
 		EnumWindows(ChangeDisplayWindowEnumProc, 1); // restore window pos
 		mFullScreenWindow = false;
 	}
@@ -2237,7 +2243,7 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 		gD3DInterfacePreDrawError = false; // this predraw error happens naturally when ddraw is failing
 		if (!gIsFailing)
 		{
-			//gDebugStream << GetTickCount() << " Redraw failed!" << endl;
+			//gDebugStream << GetTickCount64() << " Redraw failed!" << endl;
 			gIsFailing = true;
 		}
 
@@ -2246,20 +2252,20 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 		aWindowPlacement.length = sizeof(aWindowPlacement);
 		::GetWindowPlacement(mHWnd, &aWindowPlacement);
 
-		DWORD aTick = GetTickCount();
+		DWORD aTick = GetTickCount64();
 		if ((mActive || (aTick - aRetryTick > 1000 && mIsPhysWindowed)) && (aWindowPlacement.showCmd != SW_SHOWMINIMIZED) && (!mMinimized))
 		{
 			aRetryTick = aTick;
 
-			mWidgetManager->mImage = NULL;
+			mWidgetManager->mImage = nullptr;
 
 			int aResult = InitDDInterface();
 
-			//gDebugStream << GetTickCount() << " ReInit..." << endl;
+			//gDebugStream << GetTickCount64() << " ReInit..." << endl;
 
 			if ((mIsWindowed) && (aResult == DDInterface::RESULT_INVALID_COLORDEPTH))
 			{
-				//gDebugStream << GetTickCount() << "ReInit Invalid Colordepth" << endl;
+				//gDebugStream << GetTickCount64() << "ReInit Invalid Colordepth" << endl;
 				if (!mActive) // don't switch to full screen if not active app
 					return;
 
@@ -2274,7 +2280,7 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 			}
 			else if (aResult != DDInterface::RESULT_OK)
 			{
-				//gDebugStream << GetTickCount() << " ReInit Failed" << endl;
+				//gDebugStream << GetTickCount64() << " ReInit Failed" << endl;
 				//Fail("Failed to initialize DirectDraw");
 				//Sleep(1000);				
 
@@ -2293,7 +2299,7 @@ void SexyAppBase::Redraw(Rect* theClipRect)
 	{
 		if (gIsFailing)
 		{
-			//gDebugStream << GetTickCount() << " Redraw succeeded" << endl;
+			//gDebugStream << GetTickCount64() << " Redraw succeeded" << endl;
 			gIsFailing = false;
 			aRetryTick = 0;
 		}
@@ -2312,7 +2318,7 @@ static void CalculateFPS()
 	gFrameCount++;
 
 	static SysFont aFont(gSexyAppBase, "Tahoma", 8);
-	if (gFPSImage == NULL)
+	if (gFPSImage == nullptr)
 	{
 		gFPSImage = new DDImage(gSexyAppBase->mDDInterface);
 		gFPSImage->Create(50, aFont.GetHeight() + 4);
@@ -2354,7 +2360,7 @@ static void CalculateFPS()
 static void FPSDrawCoords(int theX, int theY)
 {
 	static SysFont aFont(gSexyAppBase, "Tahoma", 8);
-	if (gFPSImage == NULL)
+	if (gFPSImage == nullptr)
 	{
 		gFPSImage = new DDImage(gSexyAppBase->mDDInterface);
 		gFPSImage->Create(50, aFont.GetHeight() + 4);
@@ -2376,13 +2382,13 @@ static void FPSDrawCoords(int theX, int theY)
 }
 
 ///////////////////////////// Demo TimeLeft Stuff
-static DDImage* gDemoTimeLeftImage = NULL;
+static DDImage* gDemoTimeLeftImage = nullptr;
 static void CalculateDemoTimeLeft()
 {
 	static SysFont aFont(gSexyAppBase, "Tahoma", 8);
 	static DWORD aLastTick = 0;
 
-	if (gDemoTimeLeftImage == NULL)
+	if (gDemoTimeLeftImage == nullptr)
 	{
 		gDemoTimeLeftImage = new DDImage(gSexyAppBase->mDDInterface);
 		gDemoTimeLeftImage->Create(50, aFont.GetHeight() + 4);
@@ -2393,7 +2399,7 @@ static void CalculateDemoTimeLeft()
 		gDemoTimeLeftImage->PurgeBits();
 	}
 
-	DWORD aTick = GetTickCount();
+	DWORD aTick = GetTickCount64();
 	if (aTick - aLastTick < 1000 / gSexyAppBase->mUpdateMultiplier)
 		return;
 
@@ -2489,7 +2495,7 @@ bool SexyAppBase::DrawDirtyStuff()
 
 	if (gIsFailing) // just try to reinit
 	{
-		Redraw(NULL);
+		Redraw(nullptr);
 		mHasPendingDraw = false;
 		mLastDrawWasEmpty = true;
 		return false;
@@ -2501,7 +2507,7 @@ bool SexyAppBase::DrawDirtyStuff()
 		{
 		case FPS_ShowFPS: CalculateFPS(); break;
 		case FPS_ShowCoords:
-			if (mWidgetManager != NULL)
+			if (mWidgetManager != nullptr)
 				FPSDrawCoords(mWidgetManager->mLastMouseX, mWidgetManager->mLastMouseY);
 			break;
 		}
@@ -2564,7 +2570,7 @@ bool SexyAppBase::DrawDirtyStuff()
 		DWORD aPreScreenBltTime = timeGetTime();
 		mLastDrawTick = aPreScreenBltTime;
 
-		Redraw(NULL);
+		Redraw(nullptr);
 
 		// This is our one UpdateFTimeAcc if we are vsynched
 		UpdateFTimeAcc();
@@ -2576,7 +2582,7 @@ bool SexyAppBase::DrawDirtyStuff()
 #ifdef _DEBUG
 		/*if (mFPSTime >= 5000) // Show FPS about every 5 seconds
 		{
-			ulong aTickNow = GetTickCount();
+			ulong aTickNow = GetTickCount64();
 
 			OutputDebugString(StrFormat(_S("Theoretical FPS: %d\r\n"), (int) (mFPSCount * 1000 / mFPSTime)).c_str());
 			OutputDebugString(StrFormat(_S("Actual      FPS: %d\r\n"), (mFPSFlipCount * 1000) / max((aTickNow - mFPSStartTick), 1)).c_str());
@@ -2623,15 +2629,16 @@ void SexyAppBase::LogScreenSaverError(const string& theError)
 {
 	static bool firstTime = true;
 	char aBuf[512];
+	FILE** aFilePtr;
 
 	const char* aFlag = firstTime ? "w" : "a+";
 	firstTime = false;
 
-	FILE* aFile = fopen("ScrError.txt", aFlag);
-	if (aFile != NULL)
+	fopen_s(aFilePtr, "ScrError.txt", aFlag);
+	if (aFilePtr != nullptr)
 	{
-		fprintf(aFile, "%s %s %u\n", theError.c_str(), _strtime(aBuf), GetTickCount());
-		fclose(aFile);
+		fprintf(*aFilePtr, "%s %s %u\n", theError.c_str(), _strtime(aBuf), GetTickCount64());
+		fclose(*aFilePtr);
 	}
 }
 
@@ -3214,7 +3221,7 @@ static bool ScreenSaverWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
 	if (gSexyAppBase != NULL && gSexyAppBase->mHWnd != hWnd) // wrong window
 		return false;
 
-	if (GetTickCount() - gPowerSaveTick < 1000) // powersave just went on so ignore certain messages that seem to come on certain os's at that time
+	if (GetTickCount64() - gPowerSaveTick < 1000) // powersave just went on so ignore certain messages that seem to come on certain os's at that time
 	{
 		switch (uMsg)
 		{
@@ -3295,7 +3302,7 @@ static bool ScreenSaverWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
 
 LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (gSexyAppBase != NULL && gSexyAppBase->IsScreenSaver())
+	if (gSexyAppBase != nullptr && gSexyAppBase->IsScreenSaver())
 	{
 		LRESULT aResult;
 		if (ScreenSaverWindowProc(hWnd, uMsg, wParam, lParam, aResult))
@@ -3308,7 +3315,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		//  TODO: switch to killfocus/setfocus?
 		//	case WM_KILLFOCUS:
 		//	case WM_SETFOCUS:
-		//	if ((aSexyApp != NULL) && (!aSexyApp->mPlayingDemoBuffer))
+		//	if ((aSexyApp != nullptr) && (!aSexyApp->mPlayingDemoBuffer))
 		//	{
 		//		if (hWnd == aSexyApp->mHWnd)
 		//			aSexyApp->mActive = uMsg==WM_SETFOCUS;
@@ -3316,7 +3323,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		//	//Fallthrough
 
 	case WM_ACTIVATEAPP:
-		if ((aSexyApp != NULL) && (!aSexyApp->mPlayingDemoBuffer))
+		if ((aSexyApp != nullptr) && (!aSexyApp->mPlayingDemoBuffer))
 		{
 			if (hWnd == aSexyApp->mHWnd)
 			{
@@ -3538,24 +3545,24 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 	break;
 
 	case WM_ENABLE:
-		if (aSexyApp != NULL)
+		if (aSexyApp != nullptr)
 		{
 			aSexyApp->mIsDisabled = wParam == 0;
 		}
 		break;
 
 	case WM_QUERYOPEN:
-		if ((aSexyApp != NULL) && (!aSexyApp->AppCanRestore()))
+		if ((aSexyApp != nullptr) && (!aSexyApp->AppCanRestore()))
 			return 0;
 		break;
 
 	case WM_SYSCHAR:
-		if ((aSexyApp != NULL) && (aSexyApp->IsAltKeyUsed(wParam)))
+		if ((aSexyApp != nullptr) && (aSexyApp->IsAltKeyUsed(wParam)))
 			return 0;
 		break;
 
 	case WM_NCLBUTTONDOWN:
-		if (aSexyApp != NULL)
+		if (aSexyApp != nullptr)
 		{
 			//			aSexyApp->mProcessInTimer = true;
 			LRESULT aResult = DefWindowProc(hWnd, uMsg, wParam, lParam);
@@ -3569,13 +3576,13 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 	case WM_SYSCOMMAND:
 		if (wParam == SC_MONITORPOWER)
 		{
-			gPowerSaveTick = GetTickCount();
-			if (aSexyApp != NULL && (!aSexyApp->mAllowMonitorPowersave || !aSexyApp->mLoaded))
+			gPowerSaveTick = GetTickCount64();
+			if (aSexyApp != nullptr && (!aSexyApp->mAllowMonitorPowersave || !aSexyApp->mLoaded))
 				return FALSE;
 		}
-		if (wParam == SC_SCREENSAVE && aSexyApp != NULL && (!aSexyApp->mLoaded || !aSexyApp->mIsPhysWindowed))
+		if (wParam == SC_SCREENSAVE && aSexyApp != nullptr && (!aSexyApp->mLoaded || !aSexyApp->mIsPhysWindowed))
 			return FALSE;
-		if ((wParam & 0x0000FFF0) == SC_MOVE && aSexyApp != NULL)
+		if ((wParam & 0x0000FFF0) == SC_MOVE && aSexyApp != nullptr)
 		{
 			aSexyApp->mPaused = true;
 			aSexyApp->mWidgetManager->MarkAllDirty();
@@ -3622,7 +3629,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 			BeginPaint(hWnd, &ps);
 
 			if (aSexyApp->mRunning)
-				aSexyApp->Redraw(NULL);
+				aSexyApp->Redraw(nullptr);
 
 			EndPaint(hWnd, &ps);
 
@@ -3631,7 +3638,7 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		break;
 	}
 
-	if ((aSexyApp != NULL) && (uMsg == aSexyApp->mNotifyGameMessage) && (hWnd == aSexyApp->mHWnd))
+	if ((aSexyApp != nullptr) && (uMsg == aSexyApp->mNotifyGameMessage) && (hWnd == aSexyApp->mHWnd))
 	{
 		// Oh, we are trying to open another instance of ourselves.
 		// Bring up the original window instead
@@ -3644,6 +3651,359 @@ LRESULT CALLBACK SexyAppBase::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 	else
 		return DefWindowProcA(hWnd, uMsg, wParam, lParam);
 }
+LRESULT CALLBACK SexyAppBase::WindowProc64(HWND hWnd, ULONG uLMsg, WPARAM wParam, LPARAM lParam)
+{
+
+		if (gSexyAppBase != nullptr && gSexyAppBase->IsScreenSaver())
+		{
+			LRESULT aResult;
+			if (ScreenSaverWindowProc(hWnd, uLMsg, wParam, lParam, aResult))
+				return aResult;
+		}
+
+		SexyAppBase* aSexyApp = (SexyAppBase*)GetWindowLong(hWnd, GWL_USERDATA);
+		switch (uLMsg)
+		{
+			//  TODO: switch to killfocus/setfocus?
+			//	case WM_KILLFOCUS:
+			//	case WM_SETFOCUS:
+			//	if ((aSexyApp != NULL) && (!aSexyApp->mPlayingDemoBuffer))
+			//	{
+			//		if (hWnd == aSexyApp->mHWnd)
+			//			aSexyApp->mActive = uLMsg==WM_SETFOCUS;
+			//	}
+			//	//Fallthrough
+
+		case WM_ACTIVATEAPP:
+			if ((aSexyApp != nullptr) && (!aSexyApp->mPlayingDemoBuffer))
+			{
+				if (hWnd == aSexyApp->mHWnd)
+				{
+					aSexyApp->mActive = wParam != 0;
+				}
+			}
+			//Fallthrough	
+
+		case WM_SIZE:
+		case WM_MOVE:
+		case WM_TIMER:
+		case WM_LBUTTONDOWN:
+		case WM_RBUTTONDOWN:
+		case WM_MBUTTONDOWN:
+		case WM_LBUTTONDBLCLK:
+		case WM_RBUTTONDBLCLK:
+		case WM_LBUTTONUP:
+		case WM_RBUTTONUP:
+		case WM_MBUTTONUP:
+		case WM_MOUSEMOVE:
+		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
+		case WM_KEYUP:
+		case WM_SYSKEYUP:
+		case WM_CHAR:
+		case WM_CLOSE:
+		case WM_MOUSEWHEEL:
+		case WM_DISPLAYCHANGE:
+		case WM_SYSCOLORCHANGE:
+		{
+			/*			if (aSexyApp!=NULL && aSexyApp->mProcessInTimer && !aSexyApp->mShutdown && aSexyApp->mRunning)
+						{
+							if (uLMsg==WM_TIMER && wParam==101)
+							{
+								for (int i=0; i<5; i++)
+								{
+									if (GetQueueStatus(QS_INPUT | QS_PAINT))
+										break;
+
+									if (!aSexyApp->Process(false))
+										break;
+								}
+							}
+
+							break;
+						}*/
+
+						/*if ((aSexyApp != NULL) && (aSexyApp->mNoDefer))
+						{
+							// Check to see if we should be windowed
+							WINDOWPLACEMENT aWindowPlacement;
+							aWindowPlacement.length = sizeof(aWindowPlacement);
+							if (GetWindowPlacement(aSexyApp->mHWnd, &aWindowPlacement))
+							{
+								if (aWindowPlacement.showCmd == SW_SHOWMINIMIZED)
+								{
+									aSexyApp->Redraw(NULL);
+								}
+							}
+						}*/
+
+			if ((aSexyApp != nullptr) && (!aSexyApp->mNoDefer))
+			{
+				bool keyDown = (uLMsg == WM_KEYDOWN) || (uLMsg == WM_SYSKEYDOWN);
+
+				if ((keyDown) || (uLMsg == WM_KEYUP) || (uLMsg == WM_SYSKEYUP))
+				{
+					if (wParam == VK_CONTROL)
+						aSexyApp->mCtrlDown = keyDown;
+					if (wParam == VK_MENU)
+						aSexyApp->mAltDown = keyDown;
+				}
+
+				if ((keyDown) && (aSexyApp->DebugKeyDownAsync(wParam, aSexyApp->mCtrlDown, aSexyApp->mAltDown)))
+					return 0;
+
+				if (aSexyApp->mPlayingDemoBuffer)
+				{
+					if (uLMsg == WM_CHAR)
+					{
+						switch (wParam)
+						{
+						case '+':
+							aSexyApp->mUpdateMultiplier *= 1.5;
+							break;
+						case '-':
+							aSexyApp->mUpdateMultiplier /= 1.5;
+							break;
+						case '=':
+							aSexyApp->mUpdateMultiplier = 1;
+							break;
+						case 'p':
+						case 'P':
+							aSexyApp->mPaused = !aSexyApp->mPaused;
+							aSexyApp->mLastTimeCheck = timeGetTime();
+							aSexyApp->mUpdateFTimeAcc = 0.0;
+							break;
+
+						case 'n':
+						case 'N':
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mUpdateCount + 1;
+							aSexyApp->mFastForwardStep = true;
+							break;
+
+						case 'm':
+						case 'M':
+							aSexyApp->mFastForwardToMarker = true;
+							break;
+
+						case 'l':
+						case 'L':
+							ListDemoMarkers();
+							break;
+
+						case 'j':
+						case 'J':
+							DemoJumpToTime();
+							break;
+
+						case 's':
+						case 'S':
+							ToggleDemoSoundVolume();
+							break;
+
+						case '4':
+							// Fast foward to 120 seconds before it ends
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (120000 / aSexyApp->mFrameTime);
+							break;
+						case '5':
+							// Fast foward to 90 seconds before it ends
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (90000 / aSexyApp->mFrameTime);
+							break;
+						case '6':
+							// Fast foward to 60 seconds before it ends
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (60000 / aSexyApp->mFrameTime);
+							break;
+						case '7':
+							// Fast foward to 30 seconds before it ends
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (30000 / aSexyApp->mFrameTime);
+							break;
+						case '8':
+							// Fast foward to 10 seconds before it ends
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (10000 / aSexyApp->mFrameTime);
+							break;
+						case '9':
+							// Fast foward to 5 seconds before it ends
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength - (5000 / aSexyApp->mFrameTime);
+							break;
+						case '0':
+							// Fast forward to the end
+							aSexyApp->mFastForwardToUpdateNum = aSexyApp->mDemoLength;
+							break;
+
+						}
+					}
+					else if (uLMsg == WM_KEYDOWN)
+						aSexyApp->DebugKeyDown(wParam);
+				}
+
+				bool pushMessage = true;
+
+				if (aSexyApp->mDeferredMessages.size() > 0)
+				{
+					// Don't add any more messages after WM_CLOSE
+					MSG* aMsg = &aSexyApp->mDeferredMessages.back();
+
+					if (aMsg->message == WM_CLOSE)
+						pushMessage = false;
+					if ((uLMsg == WM_TIMER) && (uLMsg == aMsg->message))
+						pushMessage = false; // Don't need more timer messages
+
+
+					if (pushMessage && (uLMsg == WM_SYSCOLORCHANGE || uLMsg == WM_DISPLAYCHANGE)) // kill duplicate SysColorChange() events.
+					{
+						WindowsMessageList::iterator aMsgListItr = aSexyApp->mDeferredMessages.begin();
+						while (pushMessage && aMsgListItr != aSexyApp->mDeferredMessages.end())
+						{
+							MSG& aMsg = *aMsgListItr;
+
+							if (aMsg.message == WM_SYSCOLORCHANGE || aMsg.message == WM_DISPLAYCHANGE)
+								pushMessage = false;
+
+							++aMsgListItr;
+						}
+					}
+				}
+
+				if (pushMessage)
+				{
+					MSG msg;
+					msg.hwnd = hWnd;
+					msg.message = uLMsg;
+					msg.lParam = lParam;
+					msg.wParam = wParam;
+
+					aSexyApp->mDeferredMessages.push_back(msg);
+				}
+
+				if (uLMsg == WM_SIZE)
+				{
+					aSexyApp->mPhysMinimized = wParam == SIZE_MINIMIZED;
+				}
+				else if (uLMsg == WM_SYSKEYDOWN)
+				{
+					if (wParam != VK_F4)
+						return 0;
+				}
+				else if (uLMsg == WM_CLOSE)
+				{
+					/*char aStr[256];
+					sprintf(aStr, "CLOSED HWND: %d\r\n", hWnd);
+					OutputDebugString(aStr);*/
+
+					aSexyApp->CloseRequestAsync();
+					return 0;
+				}
+			}
+		}
+		break;
+
+		case WM_ENABLE:
+			if (aSexyApp != nullptr)
+			{
+				aSexyApp->mIsDisabled = wParam == 0;
+			}
+			break;
+
+		case WM_QUERYOPEN:
+			if ((aSexyApp != nullptr) && (!aSexyApp->AppCanRestore()))
+				return 0;
+			break;
+
+		case WM_SYSCHAR:
+			if ((aSexyApp != nullptr) && (aSexyApp->IsAltKeyUsed(wParam)))
+				return 0;
+			break;
+
+		case WM_NCLBUTTONDOWN:
+			if (aSexyApp != nullptr)
+			{
+				//			aSexyApp->mProcessInTimer = true;
+				LRESULT aResult = DefWindowProc(hWnd, uLMsg, wParam, lParam);
+				//			aSexyApp->mProcessInTimer = false;
+				aSexyApp->ClearUpdateBacklog();
+				return aResult;
+			}
+			break;
+
+
+		case WM_SYSCOMMAND:
+			if (wParam == SC_MONITORPOWER)
+			{
+				gPowerSaveTick = GetTickCount64();
+				if (aSexyApp != nullptr && (!aSexyApp->mAllowMonitorPowersave || !aSexyApp->mLoaded))
+					return FALSE;
+			}
+			if (wParam == SC_SCREENSAVE && aSexyApp != nullptr && (!aSexyApp->mLoaded || !aSexyApp->mIsPhysWindowed))
+				return FALSE;
+			if ((wParam & 0x0000FFF0) == SC_MOVE && aSexyApp != nullptr)
+			{
+				aSexyApp->mPaused = true;
+				aSexyApp->mWidgetManager->MarkAllDirty();
+				aSexyApp->DrawDirtyStuff();
+				aSexyApp->mPaused = false;
+			}
+
+			break;
+
+			/*	case WM_DISPLAYCHANGE:
+					SEXY_TRACE("WM_DISPLAYCHANGE 1");
+					if (aSexyApp!=NULL && aSexyApp->mIsWindowed && aSexyApp->mDDInterface!=NULL && aSexyApp->mHWnd==hWnd && aSexyApp->mLoaded)
+					{
+						SEXY_TRACE("WM_DISPLAYCHANGE 2");
+						aSexyApp->mDDInterface->Init(aSexyApp->mHWnd,aSexyApp->mIsWindowed);
+						aSexyApp->mWidgetManager->mImage = aSexyApp->mDDInterface->GetScreenImage();
+						aSexyApp->mWidgetManager->MarkAllDirty();
+					}
+					break;*/
+
+		case WM_DESTROY:
+		{
+			char aStr[256];
+			sprintf(aStr, "DESTROYED HWND: %d\r\n", hWnd);
+			OutputDebugStringA(aStr);
+		}
+		break;
+		case WM_SETCURSOR:
+			if (!aSexyApp->mSEHOccured)
+				aSexyApp->EnforceCursor();
+			return TRUE;
+		case WM_ERASEBKGND:
+			return TRUE;
+		case WM_ENDSESSION:
+			aSexyApp->Shutdown();
+			break;
+		case WM_PAINT:
+			if ((aSexyApp->mInitialized) && (!gInAssert) && (!aSexyApp->mSEHOccured))
+			{
+				RECT aClientRect;
+				GetClientRect(hWnd, &aClientRect);
+
+				PAINTSTRUCT ps;
+				BeginPaint(hWnd, &ps);
+
+				if (aSexyApp->mRunning)
+					aSexyApp->Redraw(NULL);
+
+				EndPaint(hWnd, &ps);
+
+				return 0;
+			}
+			break;
+		}
+
+		if ((aSexyApp != NULL) && (uLMsg == aSexyApp->mNotifyGameMessage) && (hWnd == aSexyApp->mHWnd))
+		{
+			// Oh, we are trying to open another instance of ourselves.
+			// Bring up the original window instead
+			aSexyApp->HandleNotifyGameMessage(wParam, lParam);
+			return 0;
+		}
+
+		if (gSexyAppBase->mIsWideWindow)
+			return DefWindowProcW(hWnd, uLMsg, wParam, lParam);
+		else
+			return DefWindowProcA(hWnd, uLMsg, wParam, lParam);
+	}
+
 
 void SexyAppBase::HandleNotifyGameMessage(int theType, int theParam)
 {
@@ -4450,7 +4810,7 @@ bool SexyAppBase::ProcessDeferredMessages(bool singleMessage)
 			case WM_TIMER:
 				if ((!gInAssert) && (!mSEHOccured) && (mRunning))
 				{
-					DWORD aTimeNow = GetTickCount();
+					DWORD aTimeNow = GetTickCount64();
 					if (aTimeNow - mLastTimerTime > 500)
 						mLastBigDelayTime = aTimeNow;
 
@@ -4609,7 +4969,7 @@ void SexyAppBase::MakeWindow()
 				aPlaceY = aDesktopRect.bottom - aHeight;
 		}
 
-		if (CheckFor98Mill())
+		if (CheckFor11())
 		{
 			mHWnd = CreateWindowExA(
 				0,
@@ -4654,7 +5014,7 @@ void SexyAppBase::MakeWindow()
 	}
 	else
 	{
-		if (CheckFor98Mill())
+		if (CheckFor11())
 		{
 			mHWnd = CreateWindowExA(
 				WS_EX_TOPMOST,
@@ -4838,7 +5198,7 @@ void SexyAppBase::LoadingThreadProcStub(void* theArg)
 	aSexyApp->LoadingThreadProc();
 
 	char aStr[256];
-	sprintf(aStr, "Resource Loading Time: %d\r\n", (GetTickCount() - aSexyApp->mTimeLoaded));
+	sprintf(aStr, "Resource Loading Time: %d\r\n", (GetTickCount64() - aSexyApp->mTimeLoaded));
 	OutputDebugStringA(aStr);
 
 	aSexyApp->mLoadingThreadCompleted = true;
@@ -5132,7 +5492,7 @@ void SexyAppBase::UpdateFTimeAcc()
 
 bool SexyAppBase::Process(bool allowSleep)
 {
-	/*DWORD aTimeNow = GetTickCount();
+	/*DWORD aTimeNow = GetTickCount64();
 	if (aTimeNow - aLastCheck >= 10000)
 	{
 		OutputDebugString(StrFormat(_S("FUpdates: %d\n"), aNumCalls).c_str());
@@ -5170,7 +5530,7 @@ bool SexyAppBase::Process(bool allowSleep)
 				Mute(true);
 			}
 
-			static DWORD aTick = GetTickCount();
+			static DWORD aTick = GetTickCount64();
 			while (mUpdateCount < mFastForwardToUpdateNum || mFastForwardToMarker)
 			{
 				ClearUpdateBacklog();
@@ -5214,11 +5574,11 @@ bool SexyAppBase::Process(bool allowSleep)
 				if (aLastUpdateCount == mUpdateCount)
 					return true;
 
-				DWORD aNewTick = GetTickCount();
+				DWORD aNewTick = GetTickCount64();
 				if (aNewTick - aTick >= 1000 || mFastForwardStep) // let the app draw some
 				{
 					mFastForwardStep = false;
-					aTick = GetTickCount();
+					aTick = GetTickCount64();
 					DrawDirtyStuff();
 					return true;
 				}
@@ -6048,7 +6408,7 @@ void SexyAppBase::Init()
 	if (::GetLastError() == ERROR_ALREADY_EXISTS)
 		HandleGameAlreadyRunning();
 
-	mRandSeed = GetTickCount();
+	mRandSeed = GetTickCount64();
 	SRand(mRandSeed);
 
 	// Set up demo recording stuff
@@ -6064,9 +6424,9 @@ void SexyAppBase::Init()
 	}
 
 
-	srand(GetTickCount());
+	srand(GetTickCount64());
 
-	if (CheckFor98Mill())
+	if (CheckFor11())
 	{
 		mIsWideWindow = false;
 

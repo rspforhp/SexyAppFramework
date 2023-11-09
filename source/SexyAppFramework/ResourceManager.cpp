@@ -35,10 +35,10 @@ void ResourceManager::SoundRes::DeleteResource()
 void ResourceManager::FontRes::DeleteResource()
 {
 	delete mFont;
-	mFont = NULL;
+	mFont = nullptr;
 
 	delete mImage;
-	mImage = NULL;
+	mImage = nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -47,11 +47,11 @@ ResourceManager::ResourceManager(SexyAppBase* theApp)
 {
 	mApp = theApp;
 	mHasFailed = false;
-	mXMLParser = NULL;
+	mXMLParser = nullptr;
 
 	mAllowMissingProgramResources = false;
 	mAllowAlreadyDefinedResources = false;
-	mCurResGroupList = NULL;
+	mCurResGroupList = nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ void ResourceManager::DeleteExtraImageBuffers(const std::string& theGroup)
 		{
 			ImageRes* aRes = (ImageRes*)anItr->second;
 			MemoryImage* anImage = (MemoryImage*)aRes->mImage;
-			if (anImage != NULL)
+			if (anImage != nullptr)
 				anImage->DeleteExtraBuffers();
 		}
 	}
@@ -141,7 +141,7 @@ bool ResourceManager::Fail(const std::string& theErrorText)
 	if (!mHasFailed)
 	{
 		mHasFailed = true;
-		if (mXMLParser == NULL)
+		if (mXMLParser == nullptr)
 		{
 			mError = theErrorText;
 			return false;
@@ -384,8 +384,8 @@ bool ResourceManager::ParseImageResource(XMLElement& theElement)
 bool ResourceManager::ParseFontResource(XMLElement& theElement)
 {
 	FontRes* aRes = new FontRes;
-	aRes->mFont = NULL;
-	aRes->mImage = NULL;
+	aRes->mFont = nullptr;
+	aRes->mImage = nullptr;
 
 	if (!ParseCommonResource(theElement, aRes, mFontMap))
 	{
@@ -576,7 +576,7 @@ bool ResourceManager::DoParseResources()
 		Fail(SexyStringToStringFast(mXMLParser->GetErrorText()));
 
 	delete mXMLParser;
-	mXMLParser = NULL;
+	mXMLParser = nullptr;
 
 	return !mHasFailed;
 }
@@ -628,7 +628,7 @@ bool ResourceManager::ReparseResourcesFile(const std::string& theFilename)
 bool ResourceManager::LoadAlphaGridImage(ImageRes* theRes, DDImage* theImage)
 {
 	ImageLib::Image* anAlphaImage = ImageLib::GetImage(theRes->mAlphaGridImage, true);
-	if (anAlphaImage == NULL)
+	if (anAlphaImage == nullptr)
 		return Fail(StrFormat("Failed to load image: %s", theRes->mAlphaGridImage.c_str()));
 
 	std::unique_ptr<ImageLib::Image> aDelAlphaImage(anAlphaImage);
@@ -680,7 +680,7 @@ bool ResourceManager::LoadAlphaImage(ImageRes* theRes, DDImage* theImage)
 	ImageLib::Image* anAlphaImage = ImageLib::GetImage(theRes->mAlphaImage, true);
 	SEXY_PERF_END("ResourceManager::GetImage");
 
-	if (anAlphaImage == NULL)
+	if (anAlphaImage == nullptr)
 		return Fail(StrFormat("Failed to load image: %s", theRes->mAlphaImage.c_str()));
 
 	std::unique_ptr<ImageLib::Image> aDelAlphaImage(anAlphaImage);
@@ -721,7 +721,7 @@ bool ResourceManager::DoLoadImage(ImageRes* theRes)
 
 	DDImage* aDDImage = (DDImage*)aSharedImageRef;
 
-	if (aDDImage == NULL)
+	if (aDDImage == nullptr)
 		return Fail(StrFormat("Failed to load image: %s", theRes->mPath.c_str()));
 
 	if (isNew)
@@ -761,7 +761,7 @@ bool ResourceManager::DoLoadImage(ImageRes* theRes)
 	if (theRes->mPalletize)
 	{
 		SEXY_PERF_BEGIN("ResourceManager:Palletize");
-		if (aDDImage->mSurface == NULL)
+		if (aDDImage->mSurface == nullptr)
 			aDDImage->Palletize();
 		else
 			aDDImage->mWantPal = true;
@@ -794,7 +794,7 @@ bool ResourceManager::DoLoadImage(ImageRes* theRes)
 ///////////////////////////////////////////////////////////////////////////////
 void ResourceManager::DeleteImage(const std::string& theName)
 {
-	ReplaceImage(theName, NULL);
+	ReplaceImage(theName, nullptr);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -803,17 +803,17 @@ SharedImageRef ResourceManager::LoadImage(const std::string& theName)
 {
 	ResMap::iterator anItr = mImageMap.find(theName);
 	if (anItr == mImageMap.end())
-		return NULL;
+		return nullptr;
 
 	ImageRes* aRes = (ImageRes*)anItr->second;
-	if ((DDImage*)aRes->mImage != NULL)
+	if ((DDImage*)aRes->mImage != nullptr)
 		return aRes->mImage;
 
 	if (aRes->mFromProgram)
-		return NULL;
+		return nullptr;
 
 	if (!DoLoadImage(aRes))
-		return NULL;
+		return nullptr;
 
 	return aRes->mImage;
 }
@@ -849,14 +849,14 @@ bool ResourceManager::DoLoadSound(SoundRes* theRes)
 ///////////////////////////////////////////////////////////////////////////////
 bool ResourceManager::DoLoadFont(FontRes* theRes)
 {
-	Font* aFont = NULL;
+	Font* aFont = nullptr;
 
 	SEXY_PERF_BEGIN("ResourceManager:DoLoadFont");
 
 	if (theRes->mSysFont)
 	{
 		bool bold = theRes->mBold, simulateBold = false;
-		if (Sexy::CheckFor98Mill())
+		if (Sexy::CheckForVista())//no more win98/ME!!
 		{
 			simulateBold = bold;
 			bold = false;
@@ -872,7 +872,7 @@ bool ResourceManager::DoLoadFont(FontRes* theRes)
 		{
 			std::string aRefName = theRes->mPath.substr(5);
 			Font* aRefFont = GetFont(aRefName);
-			if (aRefFont == NULL)
+			if (aRefFont == nullptr)
 				return Fail("Ref font not found: " + aRefName);
 
 			aFont = aRefFont->Duplicate();
@@ -883,7 +883,7 @@ bool ResourceManager::DoLoadFont(FontRes* theRes)
 	else
 	{
 		Image* anImage = mApp->GetImage(theRes->mImagePath);
-		if (anImage == NULL)
+		if (anImage == nullptr)
 			return Fail(StrFormat("Failed to load image: %s", theRes->mImagePath.c_str()));
 
 		theRes->mImage = anImage;
@@ -891,9 +891,9 @@ bool ResourceManager::DoLoadFont(FontRes* theRes)
 	}
 
 	ImageFont* anImageFont = dynamic_cast<ImageFont*>(aFont);
-	if (anImageFont != NULL)
+	if (anImageFont != nullptr)
 	{
-		if (anImageFont->mFontData == NULL || !anImageFont->mFontData->mInitialized)
+		if (anImageFont->mFontData == nullptr || !anImageFont->mFontData->mInitialized)
 		{
 			delete aFont;
 			return Fail(StrFormat("Failed to load font: %s", theRes->mPath.c_str()));
@@ -904,10 +904,10 @@ bool ResourceManager::DoLoadFont(FontRes* theRes)
 			char aBuf[1024];
 			strcpy(aBuf, theRes->mTags.c_str());
 			const char* aPtr = strtok(aBuf, ", \r\n\t");
-			while (aPtr != NULL)
+			while (aPtr != nullptr)
 			{
 				anImageFont->AddTag(aPtr);
-				aPtr = strtok(NULL, ", \r\n\t");
+				aPtr = strtok(nullptr, ", \r\n\t");
 			}
 			anImageFont->Prepare();
 		}
@@ -927,17 +927,17 @@ Font* ResourceManager::LoadFont(const std::string& theName)
 {
 	ResMap::iterator anItr = mFontMap.find(theName);
 	if (anItr == mFontMap.end())
-		return NULL;
+		return nullptr;
 
 	FontRes* aRes = (FontRes*)anItr->second;
-	if (aRes->mFont != NULL)
+	if (aRes->mFont != nullptr)
 		return aRes->mFont;
 
 	if (aRes->mFromProgram)
-		return NULL;
+		return nullptr;
 
 	if (!DoLoadFont(aRes))
-		return NULL;
+		return nullptr;
 
 	return aRes->mFont;
 }
@@ -946,7 +946,7 @@ Font* ResourceManager::LoadFont(const std::string& theName)
 ///////////////////////////////////////////////////////////////////////////////
 void ResourceManager::DeleteFont(const std::string& theName)
 {
-	ReplaceFont(theName, NULL);
+	ReplaceFont(theName, nullptr);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -956,7 +956,7 @@ bool ResourceManager::LoadNextResource()
 	if (HadError())
 		return false;
 
-	if (mCurResGroupList == NULL)
+	if (mCurResGroupList == nullptr)
 		return false;
 
 	while (mCurResGroupListItr != mCurResGroupList->end())
@@ -970,7 +970,7 @@ bool ResourceManager::LoadNextResource()
 		case ResType_Image:
 		{
 			ImageRes* anImageRes = (ImageRes*)aRes;
-			if ((DDImage*)anImageRes->mImage != NULL)
+			if ((DDImage*)anImageRes->mImage != nullptr)
 				continue;
 
 			return DoLoadImage(anImageRes);
@@ -988,7 +988,7 @@ bool ResourceManager::LoadNextResource()
 		case ResType_Font:
 		{
 			FontRes* aFontRes = (FontRes*)aRes;
-			if (aFontRes->mFont != NULL)
+			if (aFontRes->mFont != nullptr)
 				continue;
 
 			return DoLoadFont(aFontRes);
@@ -1122,7 +1122,7 @@ SharedImageRef ResourceManager::GetImage(const std::string& theId)
 	if (anItr != mImageMap.end())
 		return ((ImageRes*)anItr->second)->mImage;
 	else
-		return NULL;
+		return nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1144,7 +1144,7 @@ Font* ResourceManager::GetFont(const std::string& theId)
 	if (anItr != mFontMap.end())
 		return ((FontRes*)anItr->second)->mFont;
 	else
-		return NULL;
+		return nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1155,11 +1155,11 @@ SharedImageRef ResourceManager::GetImageThrow(const std::string& theId)
 	if (anItr != mImageMap.end())
 	{
 		ImageRes* aRes = (ImageRes*)anItr->second;
-		if ((MemoryImage*)aRes->mImage != NULL)
+		if ((MemoryImage*)aRes->mImage != nullptr)
 			return aRes->mImage;
 
 		if (mAllowMissingProgramResources && aRes->mFromProgram)
-			return NULL;
+			return nullptr;
 	}
 
 
@@ -1195,11 +1195,11 @@ Font* ResourceManager::GetFontThrow(const std::string& theId)
 	if (anItr != mFontMap.end())
 	{
 		FontRes* aRes = (FontRes*)anItr->second;
-		if (aRes->mFont != NULL)
+		if (aRes->mFont != nullptr)
 			return aRes->mFont;
 
 		if (mAllowMissingProgramResources && aRes->mFromProgram)
-			return NULL;
+			return nullptr;
 	}
 
 	Fail(StrFormat("Font resource not found: %s", theId.c_str()));

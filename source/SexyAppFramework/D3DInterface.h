@@ -22,8 +22,21 @@ enum D3DImageFlags
 	D3DImageFlag_MinimizeNumSubdivisions	=			0x0001,		// subdivide image into fewest possible textures (may use more memory)
 	D3DImageFlag_Use64By64Subdivisions		=			0x0002,		// good to use with image strips so the entire texture isn't pulled in when drawing just a piece
 	D3DImageFlag_UseA4R4G4B4				=			0x0004,		// images with not too many color gradients work well in this format
-	D3DImageFlag_UseA8R8G8B8				=			0x0008		// non-alpha images will be stored as R5G6B5 by default so use this option if you want a 32-bit non-alpha image
+	D3DImageFlag_UseA8R8G8B8				=			0x0008,		// non-alpha images will be stored as R5G6B5 by default so use this option if you want a 32-bit non-alpha image
+	D3DImageFlag_UseA8R8G8B8 = 0x0010,
+	//some other optional flags to use in case if we want to use expanded bits...however this will cause more memory usage...
+	//while these values arent official we'll just use anyways, since they represent the flags set...
+	D3DImageFlag_UseA16R16G16B16 = 0x0020,
+	D3DImageFlag_UseA24R24G24B24 = 0x0030,
+	D3DImageFlag_UseA32R32G32B32 = 0x0040,
+	D3DImageFlag_UseR8G8B8A8 = 0x0048,
+	D3DImageFlag_UseR16G16B16A16 = 0x0050,
+	D3DImageFlag_UseR24G24B24A24 = 0x0060,
+	D3DImageFlag_UseR32G32B32A32 = 0x0080
+
+
 };
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,7 +54,18 @@ enum PixelFormat
 	PixelFormat_A8R8G8B8			=			0x0001,
 	PixelFormat_A4R4G4B4			=			0x0002,
 	PixelFormat_R5G6B5				=			0x0004,
-	PixelFormat_Palette8			=			0x0008
+	PixelFormat_Palette8			=			0x0008,
+	//add some additional pixel formats for higher bits...
+	PixelFormat_A16R16G16B16		=			0x0010,
+	PixelFormat_A24R24G24B24		=			0x0018,
+	PixelFormat_A32R32G32B32		=			0x0020,
+
+	//and then add some additional color formats for these same pixels..
+	PixelFormat_R8G8B8A8 = 0x0022,
+	PixelFormat_R16G16B16A16 = 0x0024,
+	PixelFormat_R24G24B24A24 = 0x0026,
+	PixelFormat_R32G32B32A32 = 0x0028,
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////

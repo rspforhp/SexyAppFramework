@@ -46,54 +46,54 @@ MemoryImage::MemoryImage(const MemoryImage& theMemoryImage) :
 	mWantPal(theMemoryImage.mWantPal),
 	mD3DFlags(theMemoryImage.mD3DFlags),
 	mBitsChangedCount(theMemoryImage.mBitsChangedCount),
-	mD3DData(NULL)
+	mD3DData(nullptr)
 {
 	bool deleteBits = false;
 
 	MemoryImage* aNonConstMemoryImage = (MemoryImage*) &theMemoryImage;
 
-	if ((theMemoryImage.mBits == NULL) && (theMemoryImage.mColorTable == NULL))
+	if ((theMemoryImage.mBits == nullptr) && (theMemoryImage.mColorTable == nullptr))
 	{
 		// Must be a DDImage with only a DDSurface
 		aNonConstMemoryImage->GetBits();
 		deleteBits = true;
 	}
 
-	if (theMemoryImage.mBits != NULL)
+	if (theMemoryImage.mBits != nullptr)
 	{
 		mBits = new ulong[mWidth*mHeight + 1];
 		mBits[mWidth*mHeight] = MEMORYCHECK_ID;
 		memcpy(mBits, theMemoryImage.mBits, (mWidth*mHeight + 1)*sizeof(ulong));
 	}
 	else
-		mBits = NULL;
+		mBits = nullptr;
 
 	if (deleteBits)
 	{
 		// Remove the temporary source bits
 		delete [] aNonConstMemoryImage->mBits;
-		aNonConstMemoryImage->mBits = NULL;
+		aNonConstMemoryImage->mBits = nullptr;
 	}
 
-	if (theMemoryImage.mColorTable != NULL)
+	if (theMemoryImage.mColorTable != nullptr)
 	{
 		mColorTable = new ulong[256];
 		memcpy(mColorTable, theMemoryImage.mColorTable, 256*sizeof(ulong));
 	}
 	else
-		mColorTable = NULL;
+		mColorTable = nullptr;
 
-	if (theMemoryImage.mColorIndices != NULL)
+	if (theMemoryImage.mColorIndices != nullptr)
 	{
 		mColorIndices = new uchar[mWidth*mHeight];
 		memcpy(mColorIndices, theMemoryImage.mColorIndices, mWidth*mHeight*sizeof(uchar));
 	}
 	else
-		mColorIndices = NULL;
+		mColorIndices = nullptr;
 
-	if (theMemoryImage.mNativeAlphaData != NULL)
+	if (theMemoryImage.mNativeAlphaData != nullptr)
 	{
-		if (theMemoryImage.mColorTable == NULL)
+		if (theMemoryImage.mColorTable == nullptr)
 		{
 			mNativeAlphaData = new ulong[mWidth*mHeight];
 			memcpy(mNativeAlphaData, theMemoryImage.mNativeAlphaData, mWidth*mHeight*sizeof(ulong));
@@ -105,23 +105,23 @@ MemoryImage::MemoryImage(const MemoryImage& theMemoryImage) :
 		}
 	}
 	else
-		mNativeAlphaData = NULL;
+		mNativeAlphaData = nullptr;
 
-	if (theMemoryImage.mRLAlphaData != NULL)
+	if (theMemoryImage.mRLAlphaData != nullptr)
 	{
 		mRLAlphaData = new uchar[mWidth*mHeight];
 		memcpy(mRLAlphaData, theMemoryImage.mRLAlphaData, mWidth*mHeight);
 	}
 	else
-		mRLAlphaData = NULL;
+		mRLAlphaData = nullptr;
 
-	if (theMemoryImage.mRLAdditiveData != NULL)
+	if (theMemoryImage.mRLAdditiveData != nullptr)
 	{
 		mRLAdditiveData = new uchar[mWidth*mHeight];
 		memcpy(mRLAdditiveData, theMemoryImage.mRLAdditiveData, mWidth*mHeight);
 	}
 	else
-		mRLAdditiveData = NULL;	
+		mRLAdditiveData = nullptr;	
 
 	mApp->AddMemoryImage(this);
 }
@@ -140,20 +140,20 @@ MemoryImage::~MemoryImage()
 
 void MemoryImage::Init()
 {
-	mBits = NULL;
-	mColorTable = NULL;
-	mColorIndices = NULL;
+	mBits = nullptr;
+	mColorTable = nullptr;
+	mColorIndices = nullptr;
 
-	mNativeAlphaData = NULL;
-	mRLAlphaData = NULL;
-	mRLAdditiveData = NULL;
+	mNativeAlphaData = nullptr;
+	mRLAlphaData = nullptr;
+	mRLAdditiveData = nullptr;
 	mHasTrans = false;
 	mHasAlpha = false;	
 	mBitsChanged = false;
 	mForcedMode = false;
 	mIsVolatile = false;
 
-	mD3DData = NULL;
+	mD3DData = nullptr;
 	mD3DFlags = 0;
 	mBitsChangedCount = 0;
 
@@ -169,16 +169,16 @@ void MemoryImage::BitsChanged()
 	mBitsChangedCount++;
 
 	delete [] mNativeAlphaData;
-	mNativeAlphaData = NULL;
+	mNativeAlphaData = nullptr;
 
 	delete [] mRLAlphaData;
-	mRLAlphaData = NULL;
+	mRLAlphaData = nullptr;
 
 	delete [] mRLAdditiveData;
-	mRLAdditiveData = NULL;
+	mRLAdditiveData = nullptr;
 
 	// Verify secret value at end to protect against overwrite
-	if (mBits != NULL)
+	if (mBits != nullptr)
 	{
 		DBG_ASSERTE(mBits[mWidth*mHeight] == MEMORYCHECK_ID);
 	}
@@ -817,7 +817,7 @@ void MemoryImage::CommitBits()
 	if ((mBitsChanged) && (!mForcedMode))
 	{			
 		// Analyze 
-		if (mBits != NULL)
+		if (mBits != nullptr)
 		{
 			mHasTrans = false;
 			mHasAlpha = false;
@@ -835,7 +835,7 @@ void MemoryImage::CommitBits()
 					mHasAlpha = true;
 			}
 		}
-		else if (mColorTable != NULL)
+		else if (mColorTable != nullptr)
 		{
 			mHasTrans = false;
 			mHasAlpha = false;
@@ -880,7 +880,7 @@ void MemoryImage::SetVolatile(bool isVolatile)
 
 void* MemoryImage::GetNativeAlphaData(NativeDisplay *theDisplay)
 {
-	if (mNativeAlphaData != NULL)
+	if (mNativeAlphaData != nullptr)
 		return mNativeAlphaData;
 
 	CommitBits();
@@ -897,7 +897,7 @@ void* MemoryImage::GetNativeAlphaData(NativeDisplay *theDisplay)
 	const int gMask = theDisplay->mGreenMask;
 	const int bMask = theDisplay->mBlueMask;
 
-	if (mColorTable == NULL)
+	if (mColorTable == nullptr)
 	{
 		ulong* aSrcPtr = GetBits();
 
@@ -959,14 +959,14 @@ uchar* MemoryImage::GetRLAlphaData()
 {
 	CommitBits();
 
-	if (mRLAlphaData == NULL)
+	if (mRLAlphaData == nullptr)
 	{		
 		mRLAlphaData = new uchar[mWidth*mHeight];
 
-		if (mColorTable == NULL)
+		if (mColorTable == nullptr)
 		{
 			ulong* aSrcPtr;
-			if (mNativeAlphaData != NULL)
+			if (mNativeAlphaData != nullptr)
 				aSrcPtr = (ulong*) mNativeAlphaData;
 			else
 				aSrcPtr = GetBits();
@@ -995,9 +995,9 @@ uchar* MemoryImage::GetRLAlphaData()
 
 uchar* MemoryImage::GetRLAdditiveData(NativeDisplay *theNative)
 {
-	if (mRLAdditiveData == NULL)
+	if (mRLAdditiveData == nullptr)
 	{
-		if (mColorTable == NULL)
+		if (mColorTable == nullptr)
 		{
 			ulong* aBits = (ulong*) GetNativeAlphaData(theNative);
 
@@ -1120,43 +1120,43 @@ void MemoryImage::PurgeBits()
 	{
 		// Due to potential D3D threading issues we have to defer the texture creation
 		//  and therefore the actual purging
-		if (mD3DData == NULL)
+		if (mD3DData == nullptr)
 			return;
 	}
 	else
 	{
-		if ((mBits == NULL) && (mColorIndices == NULL))
+		if ((mBits == nullptr) && (mColorIndices == nullptr))
 			return;
 		
 		GetNativeAlphaData(gSexyAppBase->mDDInterface);		
 	}		
 	
 	delete [] mBits;
-	mBits = NULL;
+	mBits = nullptr;
 	
-	if (mD3DData != NULL)
+	if (mD3DData != nullptr)
 	{
 		delete [] mColorIndices;
-		mColorIndices = NULL;
+		mColorIndices = nullptr;
 
 		delete [] mColorTable;
-		mColorTable = NULL;
+		mColorTable = nullptr;
 	}	
 }
 
 void MemoryImage::DeleteSWBuffers()
 {
-	if ((mBits == NULL) && (mColorIndices == NULL))
+	if ((mBits == nullptr) && (mColorIndices == nullptr))
 		GetBits();
 	
 	delete [] mNativeAlphaData;
-	mNativeAlphaData = NULL;
+	mNativeAlphaData = nullptr;
 
 	delete [] mRLAdditiveData;
-	mRLAdditiveData = NULL;
+	mRLAdditiveData = nullptr;
 
 	delete [] mRLAlphaData;
-	mRLAlphaData = NULL;
+	mRLAlphaData = nullptr;
 }
 
 void MemoryImage::Delete3DBuffers()
@@ -1182,14 +1182,14 @@ void MemoryImage::ReInit()
 
 void MemoryImage::DeleteNativeData()
 {
-	if ((mBits == NULL) && (mColorIndices == NULL))
+	if ((mBits == nullptr) && (mColorIndices == nullptr))
 		GetBits(); // We need to keep the bits around
 	
 	delete [] mNativeAlphaData;
-	mNativeAlphaData = NULL;
+	mNativeAlphaData = nullptr;
 
 	delete [] mRLAdditiveData;
-	mRLAdditiveData = NULL;	
+	mRLAdditiveData = nullptr;	
 }
 
 void MemoryImage::SetBits(ulong* theBits, int theWidth, int theHeight, bool commitBits)
@@ -1197,10 +1197,10 @@ void MemoryImage::SetBits(ulong* theBits, int theWidth, int theHeight, bool comm
 	if (theBits != mBits)
 	{
 		delete [] mColorIndices;
-		mColorIndices = NULL;
+		mColorIndices = nullptr;
 
 		delete [] mColorTable;
-		mColorTable = NULL;
+		mColorTable = nullptr;
 
 		if (theWidth != mWidth || theHeight != mHeight)
 		{
@@ -1221,7 +1221,7 @@ void MemoryImage::SetBits(ulong* theBits, int theWidth, int theHeight, bool comm
 void MemoryImage::Create(int theWidth, int theHeight)
 {
 	delete [] mBits;
-	mBits = NULL;
+	mBits = nullptr;
 
 	mWidth = theWidth;
 	mHeight = theHeight;	
@@ -1235,28 +1235,28 @@ void MemoryImage::Create(int theWidth, int theHeight)
 
 ulong* MemoryImage::GetBits()
 {
-	if (mBits == NULL)
+	if (mBits == nullptr)
 	{
 		int aSize = mWidth*mHeight;
 
 		mBits = new ulong[aSize+1];		
 		mBits[aSize] = MEMORYCHECK_ID;		
 
-		if (mColorTable != NULL)
+		if (mColorTable != nullptr)
 		{
 			for (int i = 0; i < aSize; i++)
 				mBits[i] = mColorTable[mColorIndices[i]];
 
 			delete [] mColorIndices;
-			mColorIndices = NULL;
+			mColorIndices = nullptr;
 
 			delete [] mColorTable;
-			mColorTable = NULL;
+			mColorTable = nullptr;
 
 			delete [] mNativeAlphaData;
-			mNativeAlphaData = NULL;
+			mNativeAlphaData = nullptr;
 		}
-		else if (mNativeAlphaData != NULL)
+		else if (mNativeAlphaData != nullptr)
 		{
 			NativeDisplay* aDisplay = gSexyAppBase->mDDInterface;
 
@@ -1285,7 +1285,7 @@ ulong* MemoryImage::GetBits()
 				*(aDestPtr++) = (r << 16) | (g << 8) | (b) | (anAlpha << 24);
 			}
 		}
-		else if ((mD3DData == NULL) || (!mApp->mDDInterface->mD3DInterface->RecoverBits(this)))
+		else if ((mD3DData == nullptr) || (!mApp->mDDInterface->mD3DInterface->RecoverBits(this)))
 		{
 			ZeroMemory(mBits, aSize*sizeof(ulong));
 		}
@@ -1364,7 +1364,7 @@ void MemoryImage::ClearRect(const Rect& theRect)
 void MemoryImage::Clear()
 {
 	ulong* ptr = GetBits();
-	if (ptr != NULL)
+	if (ptr != nullptr)
 	{
 		for (int i = 0; i < mWidth*mHeight; i++)
 			*ptr++ = 0;
@@ -1381,9 +1381,9 @@ void MemoryImage::AdditiveBlt(Image* theImage, int theX, int theY, const Rect& t
 
 	uchar* aMaxTable = mApp->mAdd8BitMaxTable;
 
-	if (aSrcMemoryImage != NULL)
+	if (aSrcMemoryImage != nullptr)
 	{
-		if (aSrcMemoryImage->mColorTable == NULL)
+		if (aSrcMemoryImage->mColorTable == nullptr)
 		{			
 			ulong* aSrcBits = aSrcMemoryImage->GetBits();
 
@@ -1419,9 +1419,9 @@ void MemoryImage::NormalBlt(Image* theImage, int theX, int theY, const Rect& the
 
 	MemoryImage* aSrcMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 
-	if (aSrcMemoryImage != NULL)
+	if (aSrcMemoryImage != nullptr)
 	{
-		if (aSrcMemoryImage->mColorTable == NULL)
+		if (aSrcMemoryImage->mColorTable == nullptr)
 		{			
 			ulong* aSrcPixelsRow = ((ulong*) aSrcMemoryImage->GetBits()) + (theSrcRect.mY * theImage->mWidth) + theSrcRect.mX;
 
@@ -1582,9 +1582,9 @@ void MemoryImage::BltRotated(Image* theImage, float theX, float theY, const Rect
 	MemoryImage* aMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 	uchar* aMaxTable = mApp->mAdd8BitMaxTable;
 
-	if (aMemoryImage != NULL)
+	if (aMemoryImage != nullptr)
 	{	
-		if (aMemoryImage->mColorTable == NULL)
+		if (aMemoryImage->mColorTable == nullptr)
 		{			
 			ulong* aSrcBits = aMemoryImage->GetBits() + theSrcRect.mX + theSrcRect.mY*theSrcRect.mWidth;			
 
@@ -1639,9 +1639,9 @@ void MemoryImage::SlowStretchBlt(Image* theImage, const Rect& theDestRect, const
 
 	MemoryImage* aSrcMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 
-	if (aSrcMemoryImage != NULL)
+	if (aSrcMemoryImage != nullptr)
 	{
-		if (aSrcMemoryImage->mColorTable == NULL)
+		if (aSrcMemoryImage->mColorTable == nullptr)
 		{			
 			ulong* aSrcBits = aSrcMemoryImage->GetBits();
 
@@ -1678,7 +1678,7 @@ void MemoryImage::FastStretchBlt(Image* theImage, const Rect& theDestRect, const
 
 	MemoryImage* aSrcMemoryImage = dynamic_cast<MemoryImage*>(theImage);
 
-	if (aSrcMemoryImage != NULL)
+	if (aSrcMemoryImage != nullptr)
 	{
 		ulong* aDestPixelsRow = ((ulong*) GetBits()) + (theDestRect.mY * mWidth) + theDestRect.mX;
 		ulong* aSrcPixelsRow = (ulong*) aSrcMemoryImage->GetBits();;
@@ -1756,7 +1756,7 @@ void MemoryImage::StretchBlt(Image* theImage, const Rect& theDestRect, const Rec
 void MemoryImage::BltMatrixHelper(Image* theImage, float x, float y, const SexyMatrix3 &theMatrix, const Rect& theClipRect, const Color& theColor, int theDrawMode, const Rect &theSrcRect, void *theSurface, int theBytePitch, int thePixelFormat, bool blend)
 {
 	MemoryImage *anImage = dynamic_cast<MemoryImage*>(theImage);
-	if (anImage==NULL)
+	if (anImage==nullptr)
 		return;
  
 	float w2 = theSrcRect.mWidth/2.0f;
@@ -1803,7 +1803,7 @@ void MemoryImage::BltMatrix(Image* theImage, float x, float y, const SexyMatrix3
 void MemoryImage::BltTrianglesTexHelper(Image *theTexture, const TriVertex theVertices[][3], int theNumTriangles, const Rect &theClipRect, const Color &theColor, int theDrawMode, void *theSurface, int theBytePitch, int thePixelFormat, float tx, float ty, bool blend)
 {
 	MemoryImage *anImage = dynamic_cast<MemoryImage*>(theTexture);
-//	if (anImage==NULL)
+//	if (anImage==nullptr)
 //		return;
 
 	int aColor = theColor.ToInt();
@@ -1884,12 +1884,12 @@ bool MemoryImage::Palletize()
 {
 	CommitBits();
 	
-	if (mColorTable != NULL)
+	if (mColorTable != nullptr)
 		return true;
 
 	GetBits();
 
-	if (mBits == NULL)
+	if (mBits == nullptr)
 		return false;
 
 	mColorIndices = new uchar[mWidth*mHeight];
@@ -1898,10 +1898,10 @@ bool MemoryImage::Palletize()
 	if (!Quantize8Bit(mBits, mWidth, mHeight, mColorIndices, mColorTable))
 	{
 		delete [] mColorIndices;
-		mColorIndices = NULL;
+		mColorIndices = nullptr;
 
 		delete [] mColorTable;
-		mColorTable = NULL;
+		mColorTable = nullptr;
 
 		mWantPal = false;
 
@@ -1909,10 +1909,10 @@ bool MemoryImage::Palletize()
 	}
 	
 	delete [] mBits;
-	mBits = NULL;
+	mBits = nullptr;
 
 	delete [] mNativeAlphaData;
-	mNativeAlphaData = NULL;
+	mNativeAlphaData = nullptr;
 
 	mWantPal = true;
 

@@ -8,7 +8,7 @@ PropertiesParser::PropertiesParser(SexyAppBase* theApp)
 {
 	mApp = theApp;
 	mHasFailed = false;
-	mXMLParser = NULL;
+	mXMLParser = nullptr;
 }
 
 void PropertiesParser::Fail(const SexyString& theErrorText)
@@ -239,7 +239,7 @@ bool PropertiesParser::DoParseProperties()
 		Fail(mXMLParser->GetErrorText());
 
 	delete mXMLParser;
-	mXMLParser = NULL;
+	mXMLParser = nullptr;
 
 	return !mHasFailed;
 }
