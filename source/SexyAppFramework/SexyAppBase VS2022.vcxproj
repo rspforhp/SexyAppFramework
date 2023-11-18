@@ -15,7 +15,6 @@
     <ProjectName>SexyAppBase</ProjectName>
     <ProjectGuid>{DA08CABA-92AC-40F0-B63D-6ACE7814D600}</ProjectGuid>
     <RootNamespace>SexyAppBase</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -121,6 +120,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\CryptLib\md5.c" />
+    <ClCompile Include="..\CryptLib\RegKey.cpp" />
     <ClCompile Include="..\ImageLib\ImageLib.cpp" />
     <ClCompile Include="..\ImageLib\jpeg2000\jas_cm.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -264,7 +265,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\ansi2knr.c" />
     <ClCompile Include="..\ImageLib\jpeg\cdjpeg.c" />
+    <ClCompile Include="..\ImageLib\jpeg\cjpeg.c" />
+    <ClCompile Include="..\ImageLib\jpeg\ckconfig.c" />
+    <ClCompile Include="..\ImageLib\jpeg\djpeg.c" />
+    <ClCompile Include="..\ImageLib\jpeg\example.c" />
     <ClCompile Include="..\ImageLib\jpeg\jaricom.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcapimin.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcapistd.c" />
@@ -279,6 +285,7 @@
     <ClCompile Include="..\ImageLib\jpeg\jcmaster.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcomapi.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcparam.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jcphuff.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcprepct.c" />
     <ClCompile Include="..\ImageLib\jpeg\jcsample.c" />
     <ClCompile Include="..\ImageLib\jpeg\jctrans.c" />
@@ -296,6 +303,7 @@
     <ClCompile Include="..\ImageLib\jpeg\jdmarker.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdmaster.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdmerge.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jdphuff.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdpostct.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdsample.c" />
     <ClCompile Include="..\ImageLib\jpeg\jdtrans.c" />
@@ -306,14 +314,21 @@
     <ClCompile Include="..\ImageLib\jpeg\jidctflt.c" />
     <ClCompile Include="..\ImageLib\jpeg\jidctfst.c" />
     <ClCompile Include="..\ImageLib\jpeg\jidctint.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jidctred.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jmemansi.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jmemdos.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jmemmac.c" />
     <ClCompile Include="..\ImageLib\jpeg\jmemmgr.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jmemname.c" />
     <ClCompile Include="..\ImageLib\jpeg\jmemnobs.c" />
+    <ClCompile Include="..\ImageLib\jpeg\jpegtran.c" />
     <ClCompile Include="..\ImageLib\jpeg\jquant1.c" />
     <ClCompile Include="..\ImageLib\jpeg\jquant2.c" />
     <ClCompile Include="..\ImageLib\jpeg\jutils.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdbmp.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdcolmap.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdgif.c" />
+    <ClCompile Include="..\ImageLib\jpeg\rdjpgcom.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdppm.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdrle.c" />
     <ClCompile Include="..\ImageLib\jpeg\rdswitch.c" />
@@ -325,6 +340,7 @@
     <ClCompile Include="..\ImageLib\jpeg\wrppm.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrrle.c" />
     <ClCompile Include="..\ImageLib\jpeg\wrtarga.c" />
+    <ClCompile Include="..\ImageLib\png\example.c" />
     <ClCompile Include="..\ImageLib\png\png.c" />
     <ClCompile Include="..\ImageLib\png\pngerror.c" />
     <ClCompile Include="..\ImageLib\png\pngget.c" />
@@ -335,7 +351,9 @@
     <ClCompile Include="..\ImageLib\png\pngrtran.c" />
     <ClCompile Include="..\ImageLib\png\pngrutil.c" />
     <ClCompile Include="..\ImageLib\png\pngset.c" />
+    <ClCompile Include="..\ImageLib\png\pngtest.c" />
     <ClCompile Include="..\ImageLib\png\pngtrans.c" />
+    <ClCompile Include="..\ImageLib\png\pngvcrd.c" />
     <ClCompile Include="..\ImageLib\png\pngwio.c" />
     <ClCompile Include="..\ImageLib\png\pngwrite.c" />
     <ClCompile Include="..\ImageLib\png\pngwtran.c" />
@@ -344,18 +362,38 @@
     <ClCompile Include="..\ImageLib\zlib\compress.c" />
     <ClCompile Include="..\ImageLib\zlib\crc32.c" />
     <ClCompile Include="..\ImageLib\zlib\deflate.c" />
+    <ClCompile Include="..\ImageLib\zlib\example.c" />
     <ClCompile Include="..\ImageLib\zlib\gzclose.c" />
+    <ClCompile Include="..\ImageLib\zlib\gzio.c" />
     <ClCompile Include="..\ImageLib\zlib\gzlib.c" />
     <ClCompile Include="..\ImageLib\zlib\gzread.c" />
     <ClCompile Include="..\ImageLib\zlib\gzwrite.c" />
     <ClCompile Include="..\ImageLib\zlib\infback.c" />
+    <ClCompile Include="..\ImageLib\zlib\infblock.c" />
+    <ClCompile Include="..\ImageLib\zlib\infcodes.c" />
     <ClCompile Include="..\ImageLib\zlib\inffast.c" />
     <ClCompile Include="..\ImageLib\zlib\inflate.c" />
     <ClCompile Include="..\ImageLib\zlib\inftrees.c" />
+    <ClCompile Include="..\ImageLib\zlib\infutil.c" />
+    <ClCompile Include="..\ImageLib\zlib\maketree.c" />
+    <ClCompile Include="..\ImageLib\zlib\minigzip.c" />
     <ClCompile Include="..\ImageLib\zlib\trees.c" />
     <ClCompile Include="..\ImageLib\zlib\uncompr.c" />
     <ClCompile Include="..\ImageLib\zlib\zutil.c" />
     <ClCompile Include="..\PakLib\PakInterface.cpp" />
+    <ClCompile Include="..\TodLib\Attachment.cpp" />
+    <ClCompile Include="..\TodLib\Definition.cpp" />
+    <ClCompile Include="..\TodLib\EffectSystem.cpp" />
+    <ClCompile Include="..\TodLib\FilterEffect.cpp" />
+    <ClCompile Include="..\TodLib\ReanimAtlas.cpp" />
+    <ClCompile Include="..\TodLib\Reanimator.cpp" />
+    <ClCompile Include="..\TodLib\TodCommon.cpp" />
+    <ClCompile Include="..\TodLib\TodDebug.cpp" />
+    <ClCompile Include="..\TodLib\TodFoley.cpp" />
+    <ClCompile Include="..\TodLib\TodList.cpp" />
+    <ClCompile Include="..\TodLib\TodParticle.cpp" />
+    <ClCompile Include="..\TodLib\TodStringFile.cpp" />
+    <ClCompile Include="..\TodLib\Trail.cpp" />
     <ClCompile Include="BassLoader.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -604,6 +642,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\CryptLib\BigInt.hpp" />
+    <ClInclude Include="..\CryptLib\md5.h" />
+    <ClInclude Include="..\CryptLib\RegKey.h" />
     <ClInclude Include="..\ImageLib\ImageLib.h" />
     <CustomBuild Include="..\ImageLib\jpeg2000\jasper.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -766,15 +807,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </CustomBuild>
     <ClInclude Include="..\ImageLib\jpeg2000\jas_compiler.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_config2.h" />
     <ClInclude Include="..\ImageLib\jpeg2000\jas_dll.h" />
     <ClInclude Include="..\ImageLib\jpeg2000\jas_export_cmake.h" />
     <ClInclude Include="..\ImageLib\jpeg2000\jas_log.h" />
     <ClInclude Include="..\ImageLib\jpeg2000\jas_thread.h" />
     <ClInclude Include="..\ImageLib\jpeg2000\jas_tmr.h" />
+    <ClInclude Include="..\ImageLib\jpeg2000\jpc_util.h" />
     <ClInclude Include="..\ImageLib\jpeg\cderror.h" />
     <ClInclude Include="..\ImageLib\jpeg\cdjpeg.h" />
+    <ClInclude Include="..\ImageLib\jpeg\jchuff.h" />
     <ClInclude Include="..\ImageLib\jpeg\jconfig.h" />
     <ClInclude Include="..\ImageLib\jpeg\jdct.h" />
+    <ClInclude Include="..\ImageLib\jpeg\jdhuff.h" />
     <ClInclude Include="..\ImageLib\jpeg\jerror.h" />
     <ClInclude Include="..\ImageLib\jpeg\jinclude.h" />
     <ClInclude Include="..\ImageLib\jpeg\jmemsys.h" />
@@ -784,6 +829,7 @@
     <ClInclude Include="..\ImageLib\jpeg\jversion.h" />
     <ClInclude Include="..\ImageLib\jpeg\transupp.h" />
     <ClInclude Include="..\ImageLib\png\png.h" />
+    <ClInclude Include="..\ImageLib\png\pngasmrd.h" />
     <ClInclude Include="..\ImageLib\png\pngconf.h" />
     <ClInclude Include="..\ImageLib\png\pngdebug.h" />
     <ClInclude Include="..\ImageLib\png\pnginfo.h" />
@@ -793,15 +839,33 @@
     <ClInclude Include="..\ImageLib\zlib\crc32.h" />
     <ClInclude Include="..\ImageLib\zlib\deflate.h" />
     <ClInclude Include="..\ImageLib\zlib\gzguts.h" />
+    <ClInclude Include="..\ImageLib\zlib\infblock.h" />
+    <ClInclude Include="..\ImageLib\zlib\infcodes.h" />
     <ClInclude Include="..\ImageLib\zlib\inffast.h" />
     <ClInclude Include="..\ImageLib\zlib\inffixed.h" />
     <ClInclude Include="..\ImageLib\zlib\inflate.h" />
     <ClInclude Include="..\ImageLib\zlib\inftrees.h" />
+    <ClInclude Include="..\ImageLib\zlib\infutil.h" />
     <ClInclude Include="..\ImageLib\zlib\trees.h" />
     <ClInclude Include="..\ImageLib\zlib\zconf.h" />
     <ClInclude Include="..\ImageLib\zlib\zlib.h" />
     <ClInclude Include="..\ImageLib\zlib\zutil.h" />
     <ClInclude Include="..\PakLib\PakInterface.h" />
+    <ClInclude Include="..\TodLib\Attachment.h" />
+    <ClInclude Include="..\TodLib\DataArray.h" />
+    <ClInclude Include="..\TodLib\Definition.h" />
+    <ClInclude Include="..\TodLib\EffectSystem.h" />
+    <ClInclude Include="..\TodLib\Enums.h" />
+    <ClInclude Include="..\TodLib\FilterEffect.h" />
+    <ClInclude Include="..\TodLib\ReanimAtlas.h" />
+    <ClInclude Include="..\TodLib\Reanimator.h" />
+    <ClInclude Include="..\TodLib\TodCommon.h" />
+    <ClInclude Include="..\TodLib\TodDebug.h" />
+    <ClInclude Include="..\TodLib\TodFoley.h" />
+    <ClInclude Include="..\TodLib\TodList.h" />
+    <ClInclude Include="..\TodLib\TodParticle.h" />
+    <ClInclude Include="..\TodLib\TodStringFile.h" />
+    <ClInclude Include="..\TodLib\Trail.h" />
     <ClInclude Include="AutoCrit.h" />
     <ClInclude Include="bass.h" />
     <ClInclude Include="BassLoader.h" />
@@ -897,6 +961,78 @@
     <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\ImageLib\jpeg2000\COPYRIGHT" />
+    <None Include="..\ImageLib\jpeg2000\INSTALL" />
+    <None Include="..\ImageLib\jpeg2000\LICENSE" />
+    <None Include="..\ImageLib\jpeg2000\NEWS" />
+    <None Include="..\ImageLib\jpeg2000\README" />
+    <None Include="..\ImageLib\jpeg\ansi2knr.1" />
+    <None Include="..\ImageLib\jpeg\cjpeg.1" />
+    <None Include="..\ImageLib\jpeg\coderules.doc" />
+    <None Include="..\ImageLib\jpeg\config.guess" />
+    <None Include="..\ImageLib\jpeg\config.sub" />
+    <None Include="..\ImageLib\jpeg\configure" />
+    <None Include="..\ImageLib\jpeg\djpeg.1" />
+    <None Include="..\ImageLib\jpeg\install-sh" />
+    <None Include="..\ImageLib\jpeg\jconfig.bcc" />
+    <None Include="..\ImageLib\jpeg\jconfig.cfg" />
+    <None Include="..\ImageLib\jpeg\jconfig.dj" />
+    <None Include="..\ImageLib\jpeg\jconfig.mac" />
+    <None Include="..\ImageLib\jpeg\jconfig.manx" />
+    <None Include="..\ImageLib\jpeg\jconfig.mc6" />
+    <None Include="..\ImageLib\jpeg\jconfig.sas" />
+    <None Include="..\ImageLib\jpeg\jconfig.st" />
+    <None Include="..\ImageLib\jpeg\jconfig.vc" />
+    <None Include="..\ImageLib\jpeg\jconfig.vms" />
+    <None Include="..\ImageLib\jpeg\jconfig.wat" />
+    <None Include="..\ImageLib\jpeg\jmemdosa.asm" />
+    <None Include="..\ImageLib\jpeg\jpegtran.1" />
+    <None Include="..\ImageLib\jpeg\ltconfig" />
+    <None Include="..\ImageLib\jpeg\ltmain.sh" />
+    <None Include="..\ImageLib\jpeg\makcjpeg.st" />
+    <None Include="..\ImageLib\jpeg\makdjpeg.st" />
+    <None Include="..\ImageLib\jpeg\makeapps.ds" />
+    <None Include="..\ImageLib\jpeg\makefile.ansi" />
+    <None Include="..\ImageLib\jpeg\makefile.bcc" />
+    <None Include="..\ImageLib\jpeg\makefile.cfg" />
+    <None Include="..\ImageLib\jpeg\makefile.dj" />
+    <None Include="..\ImageLib\jpeg\makefile.manx" />
+    <None Include="..\ImageLib\jpeg\makefile.mc6" />
+    <None Include="..\ImageLib\jpeg\makefile.mms" />
+    <None Include="..\ImageLib\jpeg\makefile.sas" />
+    <None Include="..\ImageLib\jpeg\makefile.unix" />
+    <None Include="..\ImageLib\jpeg\makefile.vc" />
+    <None Include="..\ImageLib\jpeg\makefile.vms" />
+    <None Include="..\ImageLib\jpeg\makefile.wat" />
+    <None Include="..\ImageLib\jpeg\makelib.ds" />
+    <None Include="..\ImageLib\jpeg\makeproj.mac" />
+    <None Include="..\ImageLib\jpeg\makljpeg.st" />
+    <None Include="..\ImageLib\jpeg\maktjpeg.st" />
+    <None Include="..\ImageLib\jpeg\rdjpgcom.1" />
+    <None Include="..\ImageLib\jpeg\readme" />
+    <None Include="..\ImageLib\jpeg\wrjpgcom.1" />
+    <None Include="..\ImageLib\png\announce" />
+    <None Include="..\ImageLib\png\changes" />
+    <None Include="..\ImageLib\png\install" />
+    <None Include="..\ImageLib\png\knownbug" />
+    <None Include="..\ImageLib\png\libpng.3" />
+    <None Include="..\ImageLib\png\libpngpf.3" />
+    <None Include="..\ImageLib\png\license" />
+    <None Include="..\ImageLib\png\png.5" />
+    <None Include="..\ImageLib\png\readme" />
+    <None Include="..\ImageLib\png\todo" />
+    <None Include="..\ImageLib\png\y2kinfo" />
+    <None Include="..\ImageLib\zlib\ChangeLog" />
+    <None Include="..\ImageLib\zlib\configure" />
+    <None Include="..\ImageLib\zlib\descrip.mms" />
+    <None Include="..\ImageLib\zlib\faq" />
+    <None Include="..\ImageLib\zlib\index" />
+    <None Include="..\ImageLib\zlib\Makefile" />
+    <None Include="..\ImageLib\zlib\Makefile.in" />
+    <None Include="..\ImageLib\zlib\Makefile.riscos" />
+    <None Include="..\ImageLib\zlib\Make_vms.com" />
+    <None Include="..\ImageLib\zlib\readme" />
+    <None Include="..\ImageLib\zlib\zlib.3" />
     <None Include="BltRotatedHelper.inc" />
     <None Include="DDI_Additive.inc" />
     <None Include="DDI_AlphaBlt.inc" />
@@ -913,6 +1049,22 @@
     <None Include="MI_GetRLAlphaData.inc" />
     <None Include="MI_NormalBlt.inc" />
     <None Include="MI_SlowStretchBlt.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\CryptLib\Crypt.vcxproj" />
+    <Content Include="..\CryptLib\Crypt.vcxproj.filters" />
+    <Content Include="..\CryptLib\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\ImageLib\png\libpng.txt" />
+    <Text Include="..\ImageLib\zlib\algorithm.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ImageLib\png\pngnow.png" />
+    <Image Include="..\ImageLib\png\pngtest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\ImageLib\zlib\treebuild.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

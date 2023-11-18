@@ -7,64 +7,113 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
 
-
-/*!
- * @file jas_malloc.h
- * @brief JasPer Memory Allocator
+/*
+ * Memory Allocator
+ *
+ * $Id: jas_malloc.h,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 #ifndef JAS_MALLOC_H
@@ -74,287 +123,48 @@
 * Includes.
 \******************************************************************************/
 
-/* The configuration header file should be included first. */
 #include "jas_config.h"
 
-#include "jas_types.h"
-#include "jas_thread.h"
-
+#include <stdlib.h>
 #include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*!
- * @addtogroup module_alloc
- * @{
- */
-
 /******************************************************************************\
-* Types.
+* Hack follows...
 \******************************************************************************/
 
-/*!
-@brief A memory allocator.
-*/
-typedef struct jas_allocator_s {
-
-	/*!
-	Function to clean up the allocator when no longer needed.
-	The allocator cannot be used after the clean-up operation is performed.
-	This function pointer may be null, in which case the clean-up operation
-	is treated as a no-op.
-	*/
-	void (*cleanup)(struct jas_allocator_s *allocator);
-
-	/*!
-	Function to allocate memory.
-	This function should have behavior similar to malloc.
-	*/
-	void *(*alloc)(struct jas_allocator_s *allocator, size_t size);
-
-	/*!
-	Function to deallocate memory.
-	This function should have behavior similar to free.
-	*/
-	void (*free)(struct jas_allocator_s *allocator, void *pointer);
-
-	/*!
-	Function to reallocate memory.
-	This function should have behavior similar to realloc.
-	*/
-	void *(*realloc)(struct jas_allocator_s *allocator, void *pointer,
-	  size_t new_size);
-
-	/*! For future use. */
-	void (*(reserved[4]))(void);
-
-} jas_allocator_t;
-
-/*!
-@brief The standard library allocator (i.e., a wrapper for malloc and friends).
-
-@details
-Essentially, jas_std_allocator_t can be thought of as having an inheritance
-relationship with jas_allocator_t.
-In particular, jas_std_allocator_t is derived from jas_allocator_t.
-*/
-typedef struct {
-
-	/* The base class. */
-	jas_allocator_t base;
-
-} jas_std_allocator_t;
-
-#if defined(JAS_FOR_INTERNAL_USE_ONLY)
-/*
-The allocator wrapper type.
-This type is an allocator that adds memory usage tracking to another
-allocator.
-The allocator wrapper does not directly perform memory allocation itself.
-Instead, it delegate to another allocator.
-*/
-typedef struct {
-
-	/* The base class. */
-	jas_allocator_t base;
-
-	/* The delegated-to allocator. */
-	jas_allocator_t *delegate;
-
-	/* The maximum amount of memory that can be used by the allocator. */
-	size_t max_mem;
-
-	/* The current amount of memory in use by the allocator. */
-	size_t mem;
-
-#if defined(JAS_THREADS)
-	/* A mutex for synchronized access to the allocator. */
-	jas_mutex_t mutex;
-#endif
-
-} jas_basic_allocator_t;
-#endif
-
-/******************************************************************************\
-* Data.
-\******************************************************************************/
-
-#if defined(JAS_FOR_INTERNAL_USE_ONLY)
-extern jas_allocator_t *jas_allocator;
-extern jas_std_allocator_t jas_std_allocator;
-extern jas_basic_allocator_t jas_basic_allocator;
+#if defined(DEBUG_MEMALLOC)
+/* This is somewhat of a hack, but it's a useful hack. :-) */
+/* Use my own custom memory allocator for debugging. */
+#include "../../../../local/src/memalloc.h"
+#define jas_malloc	MEMALLOC
+#define	jas_free	MEMFREE
+#define	jas_realloc	MEMREALLOC
+#define	jas_calloc	MEMCALLOC
 #endif
 
 /******************************************************************************\
 * Functions.
 \******************************************************************************/
 
-/*!
-@brief
-Allocate memory.
+#if !defined(DEBUG_MEMALLOC)
 
-@details
-This function has an identical behavior as malloc (from the C standard
-library), except that a zero-sized allocation returns a non-null pointer
-(assuming no out-of-memory error occurs).
-*/
-JAS_EXPORT
+/* Allocate memory. */
 void *jas_malloc(size_t size);
 
-/*!
-@brief
-Free memory.
-
-@details
-This function has an identical behavior as free (from the C standard library).
-*/
-JAS_EXPORT
+/* Free memory. */
 void jas_free(void *ptr);
 
-/*!
-@brief
-Resize a block of allocated memory.
-
-@details
-This function has an identical behavior as realloc (from the C standard
-library).
-*/
-JAS_EXPORT
+/* Resize a block of allocated memory. */
 void *jas_realloc(void *ptr, size_t size);
 
-/*!
-@brief
-Allocate a block of memory and initialize the contents to zero.
-
-@details
-This function has an identical behavior as calloc (from the C standard
-library).
-*/
-JAS_EXPORT
-void *jas_calloc(size_t num_elements, size_t element_size);
-
-/*!
-@brief
-Allocate array (with overflow checking).
-*/
-JAS_EXPORT
-void *jas_alloc2(size_t num_elements, size_t element_size);
-
-/*!
-@brief
-Allocate array of arrays (with overflow checking).
-*/
-JAS_EXPORT
-void *jas_alloc3(size_t num_arrays, size_t array_size, size_t element_size);
-
-/*!
-@brief
-Resize a block of allocated memory (with overflow checking).
-*/
-JAS_EXPORT
-void *jas_realloc2(void *ptr, size_t num_elements, size_t element_size);
-
-/*!
-@brief
-Set the maximum memory usage allowed by the allocator wrapper.
-
-@param max_mem
-The maximum amount of memory (in bytes) that the allocator can use.
-
-
-@details
-This function sets the maximum amount of memory (in bytes) that the
-allocator wrapper is permitted to use to @c max_mem.
-If @c max_mem is zero, no limit is imposed on the amount of memory used by
-allocator.
-This function can only be called if the use of the allocator wrapper
-is enabled.
-Calling this function if the allocator wrapper is not enabled results
-in undefined behavior.
-The limit on the amount of memory that the allocator can use should
-never be set to a value less than the amount of memory currently being
-used by the allocator (as doing so results in undefined behavior).
-*/
-JAS_EXPORT
-void jas_set_max_mem_usage(size_t max_mem);
-
-/*!
-@brief
-Get the current memory usage from the allocator wrapper.
-
-@details
-This function queries the amount of memory currently in use by the allocator
-wrapper.
-This function can only be called if the use of the allocator wrapper
-is enabled.
-Calling this function if the allocator wrapper is not enabled results
-in undefined behavior.
-*/
-JAS_EXPORT
-size_t jas_get_mem_usage(void);
-
-/*!
-@brief
-Initialize a memory allocator that uses malloc and related functions
-for managing memory.
-
-@param allocator
-A pointer to the storage in memory that will hold the state associated
-with the allocator.
-
-@details
-The object referenced by @c allocator must have a lifetime that extends
-until @c jas_allocator_cleanup is called for the allocator.
-*/
-JAS_EXPORT
-void jas_std_allocator_init(jas_std_allocator_t *allocator);
-
-/*!
-@brief
-Clean up an allocator that is no longer needed.
-
-@details
-This function cleans up an allocator, releasing any resources associated
-with the allocator.
-After clean up is performed, the allocator can no longer be used.
-*/
-JAS_EXPORT
-void jas_allocator_cleanup(jas_allocator_t *allocator);
-
-#if defined(JAS_FOR_INTERNAL_USE_ONLY)
-
-/* This function is for internal library use only. */
-void jas_set_allocator(jas_allocator_t* allocator);
-
-/* This function is for internal library use only. */
-void jas_basic_allocator_init(jas_basic_allocator_t *allocator,
-  jas_allocator_t *delegate, size_t max_mem);
+/* Allocate a block of memory and initialize the contents to zero. */
+void *jas_calloc(size_t nmemb, size_t size);
 
 #endif
-
-/*!
-@brief
-Get the total amount of memory available on the system.
-
-@details
-This function may be called prior to the library being initialized.
-In fact, this function may be useful for determining a reasonable value
-for the memory limit setting to be used during (run-time) library
-configuration.
-
-@returns
-The total amount of memory available (in bytes) is returned, if this can
-be determined.
-Otherwise, zero is returned.
-*/
-JAS_EXPORT
-size_t jas_get_total_mem_size(void);
-
-/*!
- * @}
- */
 
 #ifdef __cplusplus
 }

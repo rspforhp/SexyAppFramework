@@ -7,56 +7,105 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
@@ -64,26 +113,28 @@
 /*
  * Tier 2 Encoder
  *
- * $Id$
+ * $Id: jpc_t2enc.c,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 /******************************************************************************\
 * Includes.
 \******************************************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+#include "jas_fix.h"
+#include "jas_malloc.h"
+#include "jas_math.h"
+#include "jas_debug.h"
+
+#include "jpc_flt.h"
 #include "jpc_t2enc.h"
 #include "jpc_t2cod.h"
 #include "jpc_tagtree.h"
 #include "jpc_enc.h"
 #include "jpc_math.h"
-
-#include "jas_malloc.h"
-#include "jas_math.h"
-#include "jas_debug.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
 
 /******************************************************************************\
 * Code.
@@ -137,7 +188,7 @@ int jpc_enc_encpkts(jpc_enc_t *enc, jas_stream_t *out)
 
 	tile = enc->curtile;
 
-	jpc_init_t2state(enc, false);
+	jpc_init_t2state(enc, 0);
 	pi = tile->pi;
 	jpc_pi_init(pi);
 
@@ -156,7 +207,7 @@ int jpc_enc_encpkts(jpc_enc_t *enc, jas_stream_t *out)
 	return 0;
 }
 
-int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned lvlno, unsigned prcno, unsigned lyrno)
+int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, int compno, int lvlno, int prcno, int lyrno)
 {
 	jpc_enc_tcmpt_t *comp;
 	jpc_enc_rlvl_t *lvl;
@@ -171,17 +222,21 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 	jpc_enc_pass_t *endpass;
 	jpc_enc_pass_t *endpasses;
 	int i;
+	int included;
 	int ret;
 	jpc_tagtreenode_t *leaf;
+	int n;
 	int t1;
 	int t2;
+	int adjust;
+	int maxadjust;
+	int datalen;
+	int numnewpasses;
+	int passcount;
 	jpc_enc_tile_t *tile;
 	jpc_enc_prc_t *prc;
 	jpc_enc_cp_t *cp;
 	jpc_ms_t *ms;
-
-	JAS_LOGDEBUGF(10, "encoding packet begin %d %d %d %d\n", compno, lvlno,
-	  prcno, lyrno);
 
 	tile = enc->curtile;
 	cp = enc->cp;
@@ -197,14 +252,14 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 		jpc_ms_destroy(ms);
 	}
 
-	if (!(outb = jpc_bitstream_sopen(out, "w+"))) {
-		return -1;
-	}
+	outb = jpc_bitstream_sopen(out, "w+");
+	assert(outb);
 
 	if (jpc_bitstream_putbit(outb, 1) == EOF) {
-		goto error_close;
+		return -1;
 	}
-	JAS_LOGDEBUGF(10, "present.\n");
+	JAS_DBGLOG(10, ("\n"));
+	JAS_DBGLOG(10, ("present. "));
 
 	comp = &tile->tcmpts[compno];
 	lvl = &comp->rlvls[lvlno];
@@ -225,7 +280,7 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 				jpc_tagtree_setvalue(prc->nlibtree, leaf, cblk->numimsbs);
 			}
 			pass = cblk->curpass;
-			const bool included = (pass && pass->lyrno == lyrno);
+			included = (pass && pass->lyrno == lyrno);
 			if (included && (!cblk->numencpasses)) {
 				assert(pass->lyrno == lyrno);
 				leaf = jpc_tagtree_getleaf(prc->incltree,
@@ -237,20 +292,20 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 		endcblks = &prc->cblks[prc->numcblks];
 		for (cblk = prc->cblks; cblk != endcblks; ++cblk) {
 			pass = cblk->curpass;
-			const bool included = (pass && pass->lyrno == lyrno);
+			included = (pass && pass->lyrno == lyrno);
 			if (!cblk->numencpasses) {
 				leaf = jpc_tagtree_getleaf(prc->incltree,
 				  cblk - prc->cblks);
-				if (jpc_tagtree_encode(prc->incltree, leaf, lyrno + 1, outb) <
-				  0) {
-					goto error_close;
+				if (jpc_tagtree_encode(prc->incltree, leaf, lyrno
+				  + 1, outb) < 0) {
+					return -1;
 				}
 			} else {
 				if (jpc_bitstream_putbit(outb, included) == EOF) {
-					goto error_close;
+					return -1;
 				}
 			}
-			JAS_LOGDEBUGF(10, "included=%d ", included);
+			JAS_DBGLOG(10, ("included=%d ", included));
 			if (!included) {
 				continue;
 			}
@@ -258,9 +313,8 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 				i = 1;
 				leaf = jpc_tagtree_getleaf(prc->nlibtree, cblk - prc->cblks);
 				for (;;) {
-					if ((ret = jpc_tagtree_encode(prc->nlibtree, leaf, i,
-					  outb)) < 0) {
-						goto error_close;
+					if ((ret = jpc_tagtree_encode(prc->nlibtree, leaf, i, outb)) < 0) {
+						return -1;
 					}
 					if (ret) {
 						break;
@@ -276,22 +330,22 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 			while (endpass != endpasses && endpass->lyrno == lyrno){
 				++endpass;
 			}
-			const unsigned numnewpasses = endpass - startpass;
+			numnewpasses = endpass - startpass;
 			if (jpc_putnumnewpasses(outb, numnewpasses)) {
-				goto error_close;
+				return -1;
 			}
-			JAS_LOGDEBUGF(10, "numnewpasses=%d ", numnewpasses);
+			JAS_DBGLOG(10, ("numnewpasses=%d ", numnewpasses));
 
 			lastpass = endpass - 1;
-			unsigned n = startpass->start;
-			unsigned passcount = 1;
-			unsigned maxadjust = 0;
+			n = startpass->start;
+			passcount = 1;
+			maxadjust = 0;
 			for (pass = startpass; pass != endpass; ++pass) {
 				if (pass->term || pass == lastpass) {
-					unsigned datalen = pass->end - n;
-					t1 = jpc_int_firstone(datalen) + 1;
+					datalen = pass->end - n;
+					t1 = jpc_firstone(datalen) + 1;
 					t2 = cblk->numlenbits + jpc_floorlog2(passcount);
-					const unsigned adjust = JAS_MAX(t1 - t2, 0);
+					adjust = JAS_MAX(t1 - t2, 0);
 					maxadjust = JAS_MAX(adjust, maxadjust);
 					n += datalen;
 					passcount = 1;
@@ -300,7 +354,7 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 				}
 			}
 			if (jpc_putcommacode(outb, maxadjust)) {
-				goto error_close;
+				return -1;
 			}
 			cblk->numlenbits += maxadjust;
 
@@ -309,12 +363,10 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 			passcount = 1;
 			for (pass = startpass; pass != endpass; ++pass) {
 				if (pass->term || pass == lastpass) {
-					unsigned datalen = pass->end - n;
-					assert(jpc_int_firstone(datalen) < cblk->numlenbits +
-					  (int)jpc_floorlog2(passcount));
-					if (jpc_bitstream_putbits(outb, cblk->numlenbits +
-					  jpc_floorlog2(passcount), datalen) == EOF) {
-						goto error_close;
+					datalen = pass->end - n;
+assert(jpc_firstone(datalen) < cblk->numlenbits + jpc_floorlog2(passcount));
+					if (jpc_bitstream_putbits(outb, cblk->numlenbits + jpc_floorlog2(passcount), datalen) == EOF) {
+						return -1;
 					}
 					n += datalen;
 					passcount = 1;
@@ -332,9 +384,7 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 		if (!(ms = jpc_ms_create(JPC_MS_EPH))) {
 			return -1;
 		}
-		if (jpc_putms(out, enc->cstate, ms)) {
-			return -1;
-		}
+		jpc_putms(out, enc->cstate, ms);
 		jpc_ms_destroy(ms);
 	}
 
@@ -357,7 +407,7 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 				continue;
 			}
 			if (pass->lyrno != lyrno) {
-				assert(pass->lyrno > lyrno);
+				assert(pass->lyrno < 0 || pass->lyrno > lyrno);
 				continue;
 			}
 
@@ -368,12 +418,11 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 				++endpass;
 			}
 			lastpass = endpass - 1;
-			const unsigned numnewpasses = endpass - startpass;
+			numnewpasses = endpass - startpass;
 
 			jas_stream_seek(cblk->stream, startpass->start, SEEK_SET);
 			assert(jas_stream_tell(cblk->stream) == startpass->start);
-			if (jas_stream_copy(out, cblk->stream, lastpass->end -
-			  startpass->start)) {
+			if (jas_stream_copy(out, cblk->stream, lastpass->end - startpass->start)) {
 				return -1;
 			}
 			cblk->curpass = (endpass != endpasses) ? endpass : 0;
@@ -382,13 +431,7 @@ int jpc_enc_encpkt(jpc_enc_t *enc, jas_stream_t *out, unsigned compno, unsigned 
 		}
 	}
 
-	JAS_LOGDEBUGF(10, "encoding packet end\n");
-
 	return 0;
-
-error_close:
-	jpc_bitstream_close(outb);
-	return -1;
 }
 
 void jpc_save_t2state(jpc_enc_t *enc)
@@ -404,7 +447,7 @@ void jpc_save_t2state(jpc_enc_t *enc)
 	jpc_enc_cblk_t *cblk;
 	jpc_enc_cblk_t *endcblks;
 	jpc_enc_tile_t *tile;
-	unsigned prcno;
+	int prcno;
 	jpc_enc_prc_t *prc;
 
 	tile = enc->curtile;
@@ -452,7 +495,7 @@ void jpc_restore_t2state(jpc_enc_t *enc)
 	jpc_enc_cblk_t *cblk;
 	jpc_enc_cblk_t *endcblks;
 	jpc_enc_tile_t *tile;
-	unsigned prcno;
+	int prcno;
 	jpc_enc_prc_t *prc;
 
 	tile = enc->curtile;
@@ -487,7 +530,7 @@ void jpc_restore_t2state(jpc_enc_t *enc)
 	}
 }
 
-void jpc_init_t2state(jpc_enc_t *enc, bool raflag)
+void jpc_init_t2state(jpc_enc_t *enc, int raflag)
 {
 /* It is assumed that band->numbps and cblk->numbps precomputed */
 
@@ -503,7 +546,7 @@ void jpc_init_t2state(jpc_enc_t *enc, bool raflag)
 	jpc_enc_pass_t *endpasses;
 	jpc_tagtreenode_t *leaf;
 	jpc_enc_tile_t *tile;
-	unsigned prcno;
+	int prcno;
 	jpc_enc_prc_t *prc;
 
 	tile = enc->curtile;
@@ -542,6 +585,7 @@ void jpc_init_t2state(jpc_enc_t *enc, bool raflag)
 						if (raflag) {
 							endpasses = &cblk->passes[cblk->numpasses];
 							for (pass = cblk->passes; pass != endpasses; ++pass) {
+								pass->lyrno = -1;
 								pass->lyrno = 0;
 							}
 						}
@@ -556,21 +600,21 @@ void jpc_init_t2state(jpc_enc_t *enc, bool raflag)
 jpc_pi_t *jpc_enc_pi_create(jpc_enc_cp_t *cp, jpc_enc_tile_t *tile)
 {
 	jpc_pi_t *pi;
-	unsigned compno;
+	int compno;
 	jpc_picomp_t *picomp;
 	jpc_pirlvl_t *pirlvl;
 	jpc_enc_tcmpt_t *tcomp;
-	unsigned rlvlno;
+	int rlvlno;
 	jpc_enc_rlvl_t *rlvl;
-	unsigned prcno;
-	unsigned *prclyrno;
+	int prcno;
+	int *prclyrno;
 
 	if (!(pi = jpc_pi_create0())) {
 		return 0;
 	}
 	pi->pktno = -1;
 	pi->numcomps = cp->numcmpts;
-	if (!(pi->picomps = jas_alloc2(pi->numcomps, sizeof(jpc_picomp_t)))) {
+	if (!(pi->picomps = jas_malloc(pi->numcomps * sizeof(jpc_picomp_t)))) {
 		jpc_pi_destroy(pi);
 		return 0;
 	}
@@ -582,7 +626,7 @@ jpc_pi_t *jpc_enc_pi_create(jpc_enc_cp_t *cp, jpc_enc_tile_t *tile)
 	for (compno = 0, tcomp = tile->tcmpts, picomp = pi->picomps;
 	  compno < pi->numcomps; ++compno, ++tcomp, ++picomp) {
 		picomp->numrlvls = tcomp->numrlvls;
-		if (!(picomp->pirlvls = jas_alloc2(picomp->numrlvls,
+		if (!(picomp->pirlvls = jas_malloc(picomp->numrlvls *
 		  sizeof(jpc_pirlvl_t)))) {
 			jpc_pi_destroy(pi);
 			return 0;
@@ -596,7 +640,7 @@ jpc_pi_t *jpc_enc_pi_create(jpc_enc_cp_t *cp, jpc_enc_tile_t *tile)
 /* XXX sizeof(long) should be sizeof different type */
 			pirlvl->numprcs = rlvl->numprcs;
 			if (rlvl->numprcs) {
-				if (!(pirlvl->prclyrnos = jas_alloc2(pirlvl->numprcs,
+				if (!(pirlvl->prclyrnos = jas_malloc(pirlvl->numprcs *
 				  sizeof(long)))) {
 					jpc_pi_destroy(pi);
 					return 0;

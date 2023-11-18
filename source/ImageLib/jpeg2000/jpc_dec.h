@@ -7,56 +7,105 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
@@ -64,7 +113,7 @@
 /*
  * JPEG-2000 Decoder
  *
- * $Id$
+ * $Id: jpc_dec.h,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 #ifndef JPC_DEC_H
@@ -75,13 +124,13 @@
 \******************************************************************************/
 
 #include "jas_stream.h"
-#include "jas_image.h"
 
-#include "jpc_cod.h"
 #include "jpc_tsfb.h"
+#include "jpc_bs.h"
 #include "jpc_tagtree.h"
 #include "jpc_cs.h"
-#include "jpc_t1cod.h"
+#include "jpc_cod.h"
+#include "jpc_mqdec.h"
 #include "jpc_t2cod.h"
 
 /******************************************************************************\
@@ -99,7 +148,7 @@ typedef struct {
 	uint_fast32_t len;
 
 	/* The data. */
-	jas_uchar *data;
+	uchar *data;
 
 } jpc_ppxstabent_t;
 
@@ -108,11 +157,11 @@ typedef struct {
 typedef struct {
 
 	/* The number of entries. */
-	unsigned numents;
+	int numents;
 
 	/* The maximum number of entries (i.e., the allocated size of the array
 	  below). */
-	unsigned maxents;
+	int maxents;
 
 	/* The table entries. */
 	jpc_ppxstabent_t **ents;
@@ -124,11 +173,11 @@ typedef struct {
 typedef struct {
 
 	/* The number of streams in this list. */
-	unsigned numstreams;
+	int numstreams;
 
 	/* The maximum number of streams that can be accomodated without
 	  growing the streams array. */
-	unsigned maxstreams;
+	int maxstreams;
 
 	/* The streams. */
 	jas_stream_t **streams;
@@ -144,7 +193,7 @@ typedef struct {
 typedef struct {
 
 	/* How were various coding parameters set? */
-	unsigned flags;
+	int flags;
 
 	/* Per-component coding style parameters (e.g., explicit precinct sizes) */
 	uint_fast8_t csty;
@@ -192,7 +241,7 @@ typedef struct {
 typedef struct {
 
 	/* How were these coding parameters set? */
-	unsigned flags;
+	int flags;
 
 	/* Progression change list. */
 	jpc_pchglist_t *pchglist;
@@ -210,7 +259,7 @@ typedef struct {
 	uint_fast8_t csty;
 
 	/* The number of components. */
-	unsigned numcomps;
+	int numcomps;
 
 	/* The per-component coding parameters. */
 	jpc_dec_ccp_t *ccps;
@@ -232,23 +281,23 @@ typedef struct jpc_dec_seg_s {
 	struct jpc_dec_seg_s *prev;
 
 	/* The starting pass number for this segment. */
-	unsigned passno;
+	int passno;
 
 	/* The number of passes in this segment. */
-	unsigned numpasses;
+	int numpasses;
 
 	/* The maximum number of passes in this segment. */
-	unsigned maxpasses;
+	int maxpasses;
 
 	/* The type of data in this segment (i.e., MQ or raw). */
-	enum jpc_segtype type;
+	int type;
 
 	/* A stream containing the data for this segment. */
 	jas_stream_t *stream;
 
 	/* The number of bytes destined for this segment from the packet
 	  currently being decoded. */
-	unsigned cnt;
+	int cnt;
 
 	/* A flag indicating if this segment has been terminated. */
 	int complete;
@@ -256,7 +305,7 @@ typedef struct jpc_dec_seg_s {
 	/* The layer number to which this segment belongs. */
 	/* If the segment spans multiple layers, then the largest layer number
 	  spanned by the segment is used. */
-	unsigned lyrno;
+	int lyrno;
 
 } jpc_dec_seg_t;
 
@@ -277,7 +326,7 @@ typedef struct {
 typedef struct {
 
 	/* The number of passes. */
-	unsigned numpasses;
+	int numpasses;
 
 	/* A list of segments that still need to be decoded. */
 	jpc_dec_seglist_t segs;
@@ -286,13 +335,22 @@ typedef struct {
 	jpc_dec_seg_t *curseg;
 
 	/* The number of leading insignificant bit planes for this code block. */
-	unsigned numimsbs;
+	int numimsbs;
 
 	/* The number of bits used to encode pass data lengths. */
-	unsigned numlenbits;
+	int numlenbits;
 
 	/* The first pass number containing data for this code block. */
-	unsigned firstpassno;
+	int firstpassno;
+
+	/* The MQ decoder. */
+	jpc_mqdec_t *mqdec;
+
+	/* The raw bit stream decoder. */
+	jpc_bitstream_t *nulldec;
+
+	/* The per-sample state information for this code block. */
+	jas_matrix_t *flags;
 
 	/* The sample data associated with this code block. */
 	jas_matrix_t *data;
@@ -319,14 +377,14 @@ typedef struct {
 
 	/* The number of code blocks spanning this precinct in the horizontal
 	  direction. */
-	unsigned numhcblks;
+	int numhcblks;
 
 	/* The number of code blocks spanning this precinct in the vertical
 	  direction. */
-	unsigned numvcblks;
+	int numvcblks;
 
 	/* The total number of code blocks in this precinct. */
-	unsigned numcblks;
+	int numcblks;
 
 	/* The per code block information. */
 	jpc_dec_cblk_t *cblks;
@@ -350,16 +408,16 @@ typedef struct {
 	jas_matrix_t *data;
 
 	/* The orientation of this band (i.e., LL, LH, HL, or HH). */
-	enum jpc_tsfb_orient orient;
+	int orient;
 
 	/* The encoded quantizer step size. */
-	unsigned stepsize;
+	int stepsize;
 
 	/* The absolute quantizer step size. */
 	jpc_fix_t absstepsize;
 
 	/* The number of bit planes for this band. */
-	unsigned numbps;
+	int numbps;
 
 	/* The analysis gain associated with this band. */
 	int analgain;
@@ -374,7 +432,7 @@ typedef struct {
 typedef struct {
 
 	/* The number of bands associated with this resolution level. */
-	unsigned numbands;
+	int numbands;
 
 	/* The per-band information. */
 	jpc_dec_band_t *bands;
@@ -397,30 +455,30 @@ typedef struct {
 
 	/* The exponent value for the nominal precinct width measured
 	  relative to the associated LL band. */
-	unsigned prcwidthexpn;
+	int prcwidthexpn;
 
 	/* The exponent value for the nominal precinct height measured
 	  relative to the associated LL band. */
-	unsigned prcheightexpn;
+	int prcheightexpn;
 
 	/* The number of precincts in the horizontal direction. */
-	unsigned numhprcs;
+	int numhprcs;
 
 	/* The number of precincts in the vertical direction. */
-	unsigned numvprcs;
+	int numvprcs;
 
 	/* The total number of precincts. */
-	unsigned numprcs;
+	int numprcs;
 
 	/* The exponent value for the nominal code block group width.
 	  This quantity is associated with the next lower resolution level
 	  (assuming that there is one). */
-	unsigned cbgwidthexpn;
+	int cbgwidthexpn;
 
 	/* The exponent value for the nominal code block group height
 	  This quantity is associated with the next lower resolution level
 	  (assuming that there is one). */
-	unsigned cbgheightexpn;
+	int cbgheightexpn;
 
 	/* The exponent value for the code block width. */
 	uint_fast16_t cblkwidthexpn;
@@ -454,7 +512,7 @@ typedef struct {
 	jas_matrix_t *data;
 
 	/* The number of resolution levels. */
-	unsigned numrlvls;
+	int numrlvls;
 
 	/* The per resolution level information. */
 	jpc_dec_rlvl_t *rlvls;
@@ -502,6 +560,9 @@ typedef struct {
 	/* A stream containing the packed packet header data for this tile. */
 	jas_stream_t *pkthdrstream;
 
+	/* The current position within the packed packet header stream. */
+	long pkthdrstreampos;
+
 	/* The coding parameters for this tile. */
 	jpc_dec_cp_t *cp;
 
@@ -509,10 +570,10 @@ typedef struct {
 	jpc_dec_tcomp_t *tcomps;
 
 	/* The next expected tile-part number. */
-	unsigned partno;
+	int partno;
 
 	/* The number of tile-parts. */
-	unsigned numparts;
+	int numparts;
 
 	/* The coding mode. */
 	int realmode;
@@ -591,14 +652,14 @@ typedef struct {
 
 	/* The number of tiles spanning the image area in the vertical
 	  direction. */
-	unsigned numhtiles;
+	int numhtiles;
 
 	/* The number of tiles spanning the image area in the horizontal
 	  direction. */
-	unsigned numvtiles;
+	int numvtiles;
 
 	/* The total number of tiles. */
-	unsigned numtiles;
+	int numtiles;
 
 	/* The per-tile information. */
 	jpc_dec_tile_t *tiles;
@@ -607,7 +668,7 @@ typedef struct {
 	jpc_dec_tile_t *curtile;
 
 	/* The number of components. */
-	unsigned numcomps;
+	int numcomps;
 
 	/* The stream containing the input JPEG-2000 code stream data. */
 	jas_stream_t *in;
@@ -616,17 +677,17 @@ typedef struct {
 	jpc_dec_cp_t *cp;
 
 	/* The maximum number of layers that may be decoded. */
-	unsigned maxlyrs;
+	int maxlyrs;
 
 	/* The maximum number of packets that may be decoded. */
 	int maxpkts;
 
 	/* The number of packets decoded so far in the processing of the entire
 	  code stream. */
-	unsigned numpkts;
+	int numpkts;
 
 	/* The next expected PPM marker segment sequence number. */
-	unsigned ppmseqno;
+	int ppmseqno;
 
 	/* The current state for code stream processing. */
 	int state;
@@ -647,8 +708,6 @@ typedef struct {
 	/* This is required by the tier-2 decoder. */
 	jpc_cstate_t *cstate;
 
-	size_t max_samples;
-
 } jpc_dec_t;
 
 /* Decoder options. */
@@ -659,12 +718,10 @@ typedef struct {
 	int debug;
 
 	/* The maximum number of layers to decode. */
-	unsigned maxlyrs;
+	int maxlyrs;
 
 	/* The maximum number of packets to decode. */
 	int maxpkts;
-
-	size_t max_samples;
 
 } jpc_dec_importopts_t;
 

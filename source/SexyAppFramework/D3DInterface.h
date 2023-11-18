@@ -23,7 +23,7 @@ enum D3DImageFlags
 	D3DImageFlag_Use64By64Subdivisions		=			0x0002,		// good to use with image strips so the entire texture isn't pulled in when drawing just a piece
 	D3DImageFlag_UseA4R4G4B4				=			0x0004,		// images with not too many color gradients work well in this format
 	D3DImageFlag_UseA8R8G8B8				=			0x0008,		// non-alpha images will be stored as R5G6B5 by default so use this option if you want a 32-bit non-alpha image
-	D3DImageFlag_UseA8R8G8B8 = 0x0010,
+	//D3DImageFlag_UseA8R8G8B8 = 0x0010, Miya: not sure who put this here? but its conflicting
 	//some other optional flags to use in case if we want to use expanded bits...however this will cause more memory usage...
 	//while these values arent official we'll just use anyways, since they represent the flags set...
 	D3DImageFlag_UseA16R16G16B16 = 0x0020,

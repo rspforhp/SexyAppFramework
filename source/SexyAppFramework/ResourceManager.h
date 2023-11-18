@@ -24,6 +24,7 @@ class Font;
 
 typedef std::map<std::string, std::string>	StringToStringMap;
 typedef std::map<SexyString, SexyString>	XMLParamMap;
+	bool (*gExtractResourcesByName)(Sexy::ResourceManager* theResourceManager, const char* theName);
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////

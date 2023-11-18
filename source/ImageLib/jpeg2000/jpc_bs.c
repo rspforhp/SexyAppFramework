@@ -7,56 +7,105 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
@@ -64,21 +113,22 @@
 /*
  * Bit Stream Class
  *
- * $Id$
+ * $Id: jpc_bs.c,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 /******************************************************************************\
 * Includes.
 \******************************************************************************/
 
-#include "jpc_bs.h"
+#include <assert.h>
+#include <stdlib.h>
+#include <stdarg.h>
 
 #include "jas_malloc.h"
 #include "jas_math.h"
 #include "jas_debug.h"
 
-#include <assert.h>
-#include <stdlib.h>
+#include "jpc_bs.h"
 
 /******************************************************************************\
 * Local function prototypes.
@@ -91,15 +141,13 @@ static jpc_bitstream_t *jpc_bitstream_alloc(void);
 \******************************************************************************/
 
 /* Open a bit stream from a stream. */
-jpc_bitstream_t *jpc_bitstream_sopen(jas_stream_t *stream, const char *mode)
+jpc_bitstream_t *jpc_bitstream_sopen(jas_stream_t *stream, char *mode)
 {
 	jpc_bitstream_t *bitstream;
 
 	/* Ensure that the open mode is valid. */
-#if 0 /* This causes a string literal too long error (with c99 pedantic mode).  Why is this so? */
 	assert(!strcmp(mode, "r") || !strcmp(mode, "w") || !strcmp(mode, "r+")
 	  || !strcmp(mode, "w+"));
-#endif
 
 	if (!(bitstream = jpc_bitstream_alloc())) {
 		return 0;
@@ -169,9 +217,9 @@ static jpc_bitstream_t *jpc_bitstream_alloc()
 int jpc_bitstream_getbit_func(jpc_bitstream_t *bitstream)
 {
 	int ret;
-	JAS_LOGDEBUGF(1000, "jpc_bitstream_getbit_func(%p)\n", bitstream);
+	JAS_DBGLOG(1000, ("jpc_bitstream_getbit_func(%p)\n", bitstream));
 	ret = jpc_bitstream_getbit_macro(bitstream);
-	JAS_LOGDEBUGF(1000, "jpc_bitstream_getbit_func -> %d\n", ret);
+	JAS_DBGLOG(1000, ("jpc_bitstream_getbit_func -> %d\n", ret));
 	return ret;
 }
 
@@ -179,9 +227,9 @@ int jpc_bitstream_getbit_func(jpc_bitstream_t *bitstream)
 int jpc_bitstream_putbit_func(jpc_bitstream_t *bitstream, int b)
 {
 	int ret;
-	JAS_LOGDEBUGF(1000, "jpc_bitstream_putbit_func(%p, %d)\n", bitstream, b);
+	JAS_DBGLOG(1000, ("jpc_bitstream_putbit_func(%p, %d)\n", bitstream, b));
 	ret = jpc_bitstream_putbit_macro(bitstream, b);
-	JAS_LOGDEBUGF(1000, "jpc_bitstream_putbit_func() -> %d\n", ret);
+	JAS_DBGLOG(1000, ("jpc_bitstream_putbit_func() -> %d\n", ret));
 	return ret;
 }
 
@@ -193,10 +241,7 @@ long jpc_bitstream_getbits(jpc_bitstream_t *bitstream, int n)
 
 	/* We can reliably get at most 31 bits since ISO/IEC 9899 only
 	  guarantees that a long can represent values up to 2^31-1. */
-	//assert(n >= 0 && n < 32);
-	if (n < 0 || n >= 32) {
-		return -1;
-	}
+	assert(n >= 0 && n < 32);
 
 	/* Get the number of bits requested from the specified bit stream. */
 	v = 0;
@@ -216,10 +261,7 @@ int jpc_bitstream_putbits(jpc_bitstream_t *bitstream, int n, long v)
 
 	/* We can reliably put at most 31 bits since ISO/IEC 9899 only
 	  guarantees that a long can represent values up to 2^31-1. */
-	//assert(n >= 0 && n < 32);
-	if (n < 0 || n >= 32) {
-		return EOF;
-	}
+	assert(n >= 0 && n < 32);
 	/* Ensure that only the bits to be output are nonzero. */
 	assert(!(v & (~JAS_ONES(n))));
 
@@ -274,7 +316,7 @@ int jpc_bitstream_fillbuf(jpc_bitstream_t *bitstream)
 
 /* Does the bit stream need to be aligned to a byte boundary (considering
   the effects of bit stuffing)? */
-int jpc_bitstream_needalign(const jpc_bitstream_t *bitstream)
+int jpc_bitstream_needalign(jpc_bitstream_t *bitstream)
 {
 	if (bitstream->openmode_ & JPC_BITSTREAM_READ) {
 		/* The bit stream is open for reading. */
@@ -303,7 +345,7 @@ int jpc_bitstream_needalign(const jpc_bitstream_t *bitstream)
 }
 
 /* How many additional bytes would be output if we align the bit stream? */
-int jpc_bitstream_pending(const jpc_bitstream_t *bitstream)
+int jpc_bitstream_pending(jpc_bitstream_t *bitstream)
 {
 	if (bitstream->openmode_ & JPC_BITSTREAM_WRITE) {
 		/* The bit stream is being used for writing. */
@@ -337,8 +379,7 @@ int jpc_bitstream_align(jpc_bitstream_t *bitstream)
 	} else if (bitstream->openmode_ & JPC_BITSTREAM_WRITE) {
 		ret = jpc_bitstream_outalign(bitstream, 0);
 	} else {
-		assert(false);
-		JAS_UNREACHABLE();
+		abort();
 	}
 	return ret;
 }
@@ -365,7 +406,6 @@ int jpc_bitstream_inalign(jpc_bitstream_t *bitstream, int fillmask,
 	}
 	if (n > 0) {
 		if ((u = jpc_bitstream_getbits(bitstream, n)) < 0) {
-			JAS_LOGDEBUGF(1, "jpc_bitstream_inalign failed\n");
 			return -1;
 		}
 		m += n;
@@ -373,7 +413,6 @@ int jpc_bitstream_inalign(jpc_bitstream_t *bitstream, int fillmask,
 	}
 	if ((bitstream->buf_ & 0xff) == 0xff) {
 		if ((u = jpc_bitstream_getbits(bitstream, 7)) < 0) {
-			JAS_LOGDEBUGF(1, "jpc_bitstream_inalign failed\n");
 			return -1;
 		}
 		v = (v << 7) | u;
@@ -387,7 +426,6 @@ int jpc_bitstream_inalign(jpc_bitstream_t *bitstream, int fillmask,
 	}
 	if (((~(v ^ filldata)) & fillmask) != fillmask) {
 		/* The actual fill pattern does not match the expected one. */
-		JAS_LOGDEBUGF(1, "jpc_bitstream_inalign failed (mismatch)\n");
 		return 1;
 	}
 

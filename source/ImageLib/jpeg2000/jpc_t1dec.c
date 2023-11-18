@@ -7,56 +7,105 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
@@ -64,85 +113,77 @@
 /*
  * Tier 1 Decoder
  *
- * $Id$
+ * $Id: jpc_t1dec.c,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 /******************************************************************************\
 * Includes.
 \******************************************************************************/
 
-#include "jpc_t1dec.h"
-#include "jpc_bs.h"
-#include "jpc_mqdec.h"
-#include "jpc_t1cod.h"
-#include "jpc_dec.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
-#include "jas_thread.h"
+#include "jas_fix.h"
 #include "jas_stream.h"
 #include "jas_math.h"
-#include "jas_debug.h"
 
-#include <assert.h>
+#include "jpc_bs.h"
+#include "jpc_mqdec.h"
+#include "jpc_t1dec.h"
+#include "jpc_t1cod.h"
+#include "jpc_dec.h"
 
 /******************************************************************************\
 *
 \******************************************************************************/
 
-static int jpc_dec_decodecblk(jpc_dec_tile_t *tile, jpc_dec_tcomp_t *tcomp, jpc_dec_band_t *band,
+static int jpc_dec_decodecblk(jpc_dec_t *dec, jpc_dec_tile_t *tile, jpc_dec_tcomp_t *tcomp, jpc_dec_band_t *band,
   jpc_dec_cblk_t *cblk, int dopartial, int maxlyrs);
-static int dec_sigpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient orient,
-  bool vcausalflag, jas_matrix_t *flags, jas_matrix_t *data);
-static int dec_rawsigpass(jpc_bitstream_t *in, unsigned bitpos,
-  bool vcausalflag, jas_matrix_t *flags, jas_matrix_t *data);
-static int dec_refpass(jpc_mqdec_t *mqdec, unsigned bitpos,
+static int dec_sigpass(jpc_dec_t *dec, jpc_mqdec_t *mqdec, int bitpos, int orient,
+  int vcausalflag, jas_matrix_t *flags, jas_matrix_t *data);
+static int dec_rawsigpass(jpc_dec_t *dec, jpc_bitstream_t *in, int bitpos,
+  int vcausalflag, jas_matrix_t *flags, jas_matrix_t *data);
+static int dec_refpass(jpc_dec_t *dec, jpc_mqdec_t *mqdec, int bitpos, int vcausalflag,
   jas_matrix_t *flags, jas_matrix_t *data);
-static int dec_rawrefpass(jpc_bitstream_t *in, unsigned bitpos,
-  jas_matrix_t *flags, jas_matrix_t *data);
-static int dec_clnpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient orient,
-  bool vcausalflag, bool segsymflag, jas_matrix_t *flags, jas_matrix_t *data);
+static int dec_rawrefpass(jpc_dec_t *dec, jpc_bitstream_t *in, int bitpos,
+  int vcausalflag, jas_matrix_t *flags, jas_matrix_t *data);
+static int dec_clnpass(jpc_dec_t *dec, jpc_mqdec_t *mqdec, int bitpos, int orient,
+  int vcausalflag, int segsymflag, jas_matrix_t *flags, jas_matrix_t *data);
 
-#if defined(JAS_ENABLE_NON_THREAD_SAFE_DEBUGGING)
-static size_t t1dec_cnt = 0;
+#if defined(DEBUG)
+static long t1dec_cnt = 0;
 #endif
 
-JAS_FORCE_INLINE
-static bool JPC_T1D_GETBIT(jpc_mqdec_t *mqdec, const char *passtypename, const char *symtypename)
-{
-	bool v = jpc_mqdec_getbit(mqdec);
-#if defined(JAS_ENABLE_NON_THREAD_SAFE_DEBUGGING)
-	if (jas_get_debug_level() >= 100) {
-		jas_logdebugf(100, "index = %zu; passtype = %s; symtype = %s; sym = %d\n",
-		  t1dec_cnt, passtypename, symtypename, v);
-		++t1dec_cnt;
-	}
+#if !defined(DEBUG)
+#define	JPC_T1D_GETBIT(mqdec, v, passtypename, symtypename) \
+	((v) = jpc_mqdec_getbit(mqdec))
 #else
-	JAS_UNUSED(passtypename);
-	JAS_UNUSED(symtypename);
+#define	JPC_T1D_GETBIT(mqdec, v, passtypename, symtypename) \
+{ \
+	(v) = jpc_mqdec_getbit(mqdec); \
+	if (jas_getdbglevel() >= 100) { \
+		fprintf(stderr, "index = %ld; passtype = %s; symtype = %s; sym = %d\n", t1dec_cnt, passtypename, symtypename, v); \
+		++t1dec_cnt; \
+	} \
+}
 #endif
-	return v;
-}
+#define	JPC_T1D_GETBITNOSKEW(mqdec, v, passtypename, symtypename) \
+	JPC_T1D_GETBIT(mqdec, v, passtypename, symtypename)
 
-JAS_FORCE_INLINE
-static bool JPC_T1D_GETBITNOSKEW(jpc_mqdec_t *mqdec, const char *passtypename, const char *symtypename)
-{
-	return JPC_T1D_GETBIT(mqdec, passtypename, symtypename);
-}
-
-JAS_FORCE_INLINE
-static int JPC_T1D_RAWGETBIT(jpc_bitstream_t *bitstream, const char *passtypename, const char *symtypename)
-{
-	int v = jpc_bitstream_getbit(bitstream);
-#if defined(JAS_ENABLE_NON_THREAD_SAFE_DEBUGGING)
-	if (jas_get_debug_level() >= 100) {
-		jas_logdebugf(100, "index = %ld; passtype = %s; symtype = %s; sym = %d\n", t1dec_cnt, passtypename, symtypename, v);
-		++t1dec_cnt;
-	}
+#if !defined(DEBUG)
+#define	JPC_T1D_RAWGETBIT(bitstream, v, passtypename, symtypename) \
+	((v) = jpc_bitstream_getbit(bitstream))
 #else
-	JAS_UNUSED(passtypename);
-	JAS_UNUSED(symtypename);
-#endif
-	return v;
+#define	JPC_T1D_RAWGETBIT(bitstream, v, passtypename, symtypename) \
+{ \
+	(v) = jpc_bitstream_getbit(bitstream); \
+	if (jas_getdbglevel() >= 100) { \
+		fprintf(stderr, "index = %ld; passtype = %s; symtype = %s; sym = %d\n", t1dec_cnt, passtypename, symtypename, v); \
+		++t1dec_cnt; \
+	} \
 }
+#endif
 
 /******************************************************************************\
 * Code.
@@ -151,37 +192,37 @@ static int JPC_T1D_RAWGETBIT(jpc_bitstream_t *bitstream, const char *passtypenam
 int jpc_dec_decodecblks(jpc_dec_t *dec, jpc_dec_tile_t *tile)
 {
 	jpc_dec_tcomp_t *tcomp;
+	int compcnt;
 	jpc_dec_rlvl_t *rlvl;
+	int rlvlcnt;
 	jpc_dec_band_t *band;
+	int bandcnt;
 	jpc_dec_prc_t *prc;
+	int prccnt;
 	jpc_dec_cblk_t *cblk;
+	int cblkcnt;
 
-	unsigned compcnt;
 	for (compcnt = dec->numcomps, tcomp = tile->tcomps; compcnt > 0;
 	  --compcnt, ++tcomp) {
-		unsigned rlvlcnt;
 		for (rlvlcnt = tcomp->numrlvls, rlvl = tcomp->rlvls;
 		  rlvlcnt > 0; --rlvlcnt, ++rlvl) {
 			if (!rlvl->bands) {
 				continue;
 			}
-			unsigned bandcnt;
 			for (bandcnt = rlvl->numbands, band = rlvl->bands;
 			  bandcnt > 0; --bandcnt, ++band) {
 				if (!band->data) {
 					continue;
 				}
-				unsigned prccnt;
 				for (prccnt = rlvl->numprcs, prc = band->prcs;
 				  prccnt > 0; --prccnt, ++prc) {
 					if (!prc->cblks) {
 						continue;
 					}
-					unsigned cblkcnt;
 					for (cblkcnt = prc->numcblks,
 					  cblk = prc->cblks; cblkcnt > 0;
 					  --cblkcnt, ++cblk) {
-						if (jpc_dec_decodecblk(tile, tcomp,
+						if (jpc_dec_decodecblk(dec, tile, tcomp,
 						  band, cblk, 1, JPC_MAXLYRS)) {
 							return -1;
 						}
@@ -195,63 +236,63 @@ int jpc_dec_decodecblks(jpc_dec_t *dec, jpc_dec_tile_t *tile)
 	return 0;
 }
 
-static int jpc_dec_decodecblk(jpc_dec_tile_t *tile, jpc_dec_tcomp_t *tcomp, jpc_dec_band_t *band,
+static int jpc_dec_decodecblk(jpc_dec_t *dec, jpc_dec_tile_t *tile, jpc_dec_tcomp_t *tcomp, jpc_dec_band_t *band,
   jpc_dec_cblk_t *cblk, int dopartial, int maxlyrs)
 {
 	jpc_dec_seg_t *seg;
+	int i;
 	int bpno;
+	int passtype;
 	int ret;
+	int compno;
 	int filldata;
 	int fillmask;
+	jpc_dec_ccp_t *ccp;
 
-	const size_t compno = tcomp - tile->tcomps;
-	const jpc_dec_ccp_t *const ccp = &tile->cp->ccps[compno];
+	compno = tcomp - tile->tcomps;
 
-	/* The MQ decoder. */
-	jpc_mqdec_t *mqdec = NULL;
-
-	/* The raw bit stream decoder. */
-	jpc_bitstream_t *nulldec = NULL;
-
-	/* The per-sample state information for this code block. */
-	/* Note: matrix is assumed to be zeroed */
-	jas_matrix_t *const flags = jas_matrix_create(jas_matrix_numrows(cblk->data) + 2, jas_matrix_numcols(cblk->data) + 2);
-	if (!flags)
-		goto error;
+	if (!cblk->flags) {
+		/* Note: matrix is assumed to be zeroed */
+		if (!(cblk->flags = jas_matrix_create(jas_matrix_numrows(cblk->data) +
+		  2, jas_matrix_numcols(cblk->data) + 2))) {
+			return -1;
+		}
+	}
 
 	seg = cblk->segs.head;
 	while (seg && (seg != cblk->curseg || dopartial) && (maxlyrs < 0 ||
-	  seg->lyrno < (unsigned)maxlyrs)) {
+	  seg->lyrno < maxlyrs)) {
 		assert(seg->numpasses >= seg->maxpasses || dopartial);
 		assert(seg->stream);
 		jas_stream_rewind(seg->stream);
 		jas_stream_setrwcount(seg->stream, 0);
 		if (seg->type == JPC_SEG_MQ) {
-			if (!mqdec) {
-				if (!(mqdec = jpc_mqdec_create(JPC_NUMCTXS, 0))) {
-					goto error;
+			if (!cblk->mqdec) {
+				if (!(cblk->mqdec = jpc_mqdec_create(JPC_NUMCTXS, 0))) {
+					return -1;
 				}
-				jpc_mqdec_setctxs(mqdec, JPC_NUMCTXS, jpc_mqctxs);
+				jpc_mqdec_setctxs(cblk->mqdec, JPC_NUMCTXS, jpc_mqctxs);
 			}
-			jpc_mqdec_setinput(mqdec, seg->stream);
-			jpc_mqdec_init(mqdec);
+			jpc_mqdec_setinput(cblk->mqdec, seg->stream);
+			jpc_mqdec_init(cblk->mqdec);
 		} else {
 			assert(seg->type == JPC_SEG_RAW);
-			if (!nulldec) {
-				if (!(nulldec = jpc_bitstream_sopen(seg->stream, "r"))) {
-					goto error;
+			if (!cblk->nulldec) {
+				if (!(cblk->nulldec = jpc_bitstream_sopen(seg->stream, "r"))) {
+					assert(0);
 				}
 			}
 		}
 
 
-		for (unsigned i = 0; i < seg->numpasses; ++i) {
+		for (i = 0; i < seg->numpasses; ++i) {
 			if (cblk->numimsbs > band->numbps) {
+				ccp = &tile->cp->ccps[compno];
 				if (ccp->roishift <= 0) {
-					jas_logwarnf("warning: corrupt code stream\n");
+					fprintf(stderr, "warning: corrupt code stream\n");
 				} else {
 					if (cblk->numimsbs < ccp->roishift - band->numbps) {
-						jas_logwarnf("warning: corrupt code stream\n");
+						fprintf(stderr, "warning: corrupt code stream\n");
 					}
 				}
 			}
@@ -260,44 +301,51 @@ static int jpc_dec_decodecblk(jpc_dec_tile_t *tile, jpc_dec_tcomp_t *tcomp, jpc_
 if (bpno < 0) {
 	goto premature_exit;
 }
-			enum jpc_passtype passtype = JPC_PASSTYPE(seg->passno + i);
+#if 1
+			passtype = (seg->passno + i + 2) % 3;
+#else
+			passtype = JPC_PASSTYPE(seg->passno + i + 2);
+#endif
 			assert(bpno >= 0 && bpno < 31);
 			switch (passtype) {
 			case JPC_SIGPASS:
-				ret = (seg->type == JPC_SEG_MQ) ? dec_sigpass(mqdec, bpno, band->orient,
-				  (ccp->cblkctx & JPC_COX_VSC) != 0,
-				  flags, cblk->data) :
-				  dec_rawsigpass(nulldec, bpno,
-				  (ccp->cblkctx & JPC_COX_VSC) != 0,
-				  flags, cblk->data);
+				ret = (seg->type == JPC_SEG_MQ) ? dec_sigpass(dec,
+				  cblk->mqdec, bpno, band->orient,
+				  (tile->cp->ccps[compno].cblkctx & JPC_COX_VSC) != 0,
+				  cblk->flags, cblk->data) :
+				  dec_rawsigpass(dec, cblk->nulldec, bpno,
+				  (tile->cp->ccps[compno].cblkctx & JPC_COX_VSC) != 0,
+				  cblk->flags, cblk->data);
 				break;
 			case JPC_REFPASS:
 				ret = (seg->type == JPC_SEG_MQ) ?
-				  dec_refpass(mqdec, bpno,
-				  flags, cblk->data) :
-				  dec_rawrefpass(nulldec, bpno,
-				  flags, cblk->data);
+				  dec_refpass(dec, cblk->mqdec, bpno,
+				  (tile->cp->ccps[compno].cblkctx & JPC_COX_VSC) != 0,
+				  cblk->flags, cblk->data) :
+				  dec_rawrefpass(dec, cblk->nulldec, bpno,
+				  (tile->cp->ccps[compno].cblkctx & JPC_COX_VSC) != 0,
+				  cblk->flags, cblk->data);
 				break;
 			case JPC_CLNPASS:
 				assert(seg->type == JPC_SEG_MQ);
-				ret = dec_clnpass(mqdec, bpno,
-				  band->orient, (ccp->cblkctx &
-				  JPC_COX_VSC) != 0, (ccp->cblkctx &
-				  JPC_COX_SEGSYM) != 0, flags,
+				ret = dec_clnpass(dec, cblk->mqdec, bpno,
+				  band->orient, (tile->cp->ccps[compno].cblkctx &
+				  JPC_COX_VSC) != 0, (tile->cp->ccps[compno].cblkctx &
+				  JPC_COX_SEGSYM) != 0, cblk->flags,
 				  cblk->data);
 				break;
 			default:
-				assert(false);
-				JAS_UNREACHABLE();
+				ret = -1;
+				break;
 			}
 			/* Do we need to reset after each coding pass? */
-			if ((ccp->cblkctx & JPC_COX_RESET) && mqdec) {
-				jpc_mqdec_setctxs(mqdec, JPC_NUMCTXS, jpc_mqctxs);
+			if (tile->cp->ccps[compno].cblkctx & JPC_COX_RESET) {
+				jpc_mqdec_setctxs(cblk->mqdec, JPC_NUMCTXS, jpc_mqctxs);
 			}
 
 			if (ret) {
-				jas_logerrorf("coding pass failed passtype=%d segtype=%d\n", passtype, seg->type);
-				goto error;
+				fprintf(stderr, "coding pass failed passtype=%d segtype=%d\n", passtype, seg->type);
+				return -1;
 			}
 
 		}
@@ -306,21 +354,21 @@ if (bpno < 0) {
 /* Note: dont destroy mq decoder because context info will be lost */
 		} else {
 			assert(seg->type == JPC_SEG_RAW);
-			if (ccp->cblkctx & JPC_COX_PTERM) {
+			if (tile->cp->ccps[compno].cblkctx & JPC_COX_PTERM) {
 				fillmask = 0x7f;
 				filldata = 0x2a;
 			} else {
 				fillmask = 0;
 				filldata = 0;
 			}
-			if ((ret = jpc_bitstream_inalign(nulldec, fillmask,
+			if ((ret = jpc_bitstream_inalign(cblk->nulldec, fillmask,
 			  filldata)) < 0) {
-				goto error;
+				return -1;
 			} else if (ret > 0) {
-				jas_logwarnf("warning: bad termination pattern detected\n");
+				fprintf(stderr, "warning: bad termination pattern detected\n");
 			}
-			jpc_bitstream_close(nulldec);
-			nulldec = 0;
+			jpc_bitstream_close(cblk->nulldec);
+			cblk->nulldec = 0;
 		}
 
 		cblk->curseg = seg->next;
@@ -332,68 +380,69 @@ if (bpno < 0) {
 	assert(dopartial ? (!cblk->curseg) : 1);
 
 premature_exit:
-	if (mqdec)
-		jpc_mqdec_destroy(mqdec);
-	if (nulldec)
-		jpc_bitstream_close(nulldec);
-	if (flags)
-		jas_matrix_destroy(flags);
 	return 0;
-
-error:
-	if (mqdec)
-		jpc_mqdec_destroy(mqdec);
-	if (nulldec)
-		jpc_bitstream_close(nulldec);
-	if (flags)
-		jas_matrix_destroy(flags);
-	return -1;
 }
 
 /******************************************************************************\
 * Code for significance pass.
 \******************************************************************************/
 
-JAS_FORCE_INLINE
-static void jpc_sigpass_step(jpc_fix_t *fp, size_t frowstep, jpc_fix_t *dp, jpc_fix_t oneplushalf, enum jpc_tsfb_orient orient, jpc_mqdec_t *mqdec, bool vcausalflag)
-{
-	const jpc_fix_t f = *(fp);
-	if ((f & JPC_OTHSIGMSK) && !(f & (JPC_SIG | JPC_VISIT))) {
-		jpc_mqdec_setcurctx(mqdec, JPC_GETZCCTXNO(f, orient));
-
-		if (JPC_T1D_GETBIT(mqdec, "SIG", "ZC")) {
-			jpc_mqdec_setcurctx(mqdec, JPC_GETSCCTXNO(f));
-			bool v = JPC_T1D_GETBIT(mqdec, "SIG", "SC");
-			v ^= JPC_GETSPB(f);
-			JPC_UPDATEFLAGS4(fp, frowstep, v, vcausalflag);
-			*fp |= JPC_SIG;
-			*dp = v ? -oneplushalf : oneplushalf;
-		}
-		*fp |= JPC_VISIT;
-	}
+#define	jpc_sigpass_step(fp, frowstep, dp, bitpos, oneplushalf, orient, mqdec, vcausalflag) \
+{ \
+	int f; \
+	int v; \
+	f = *(fp); \
+	if ((f & JPC_OTHSIGMSK) && !(f & (JPC_SIG | JPC_VISIT))) { \
+		jpc_mqdec_setcurctx((mqdec), JPC_GETZCCTXNO(f, (orient))); \
+		JPC_T1D_GETBIT((mqdec), v, "SIG", "ZC"); \
+		if (v) { \
+			jpc_mqdec_setcurctx((mqdec), JPC_GETSCCTXNO(f)); \
+			JPC_T1D_GETBIT((mqdec), v, "SIG", "SC"); \
+			v ^= JPC_GETSPB(f); \
+			JPC_UPDATEFLAGS4((fp), (frowstep), v, (vcausalflag)); \
+			*(fp) |= JPC_SIG; \
+			*(dp) = (v) ? (-(oneplushalf)) : (oneplushalf); \
+		} \
+		*(fp) |= JPC_VISIT; \
+	} \
 }
 
-static int dec_sigpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient orient,
-  bool vcausalflag, jas_matrix_t *flags, jas_matrix_t *data)
+static int dec_sigpass(jpc_dec_t *dec, register jpc_mqdec_t *mqdec, int bitpos, int orient,
+  int vcausalflag, jas_matrix_t *flags, jas_matrix_t *data)
 {
 	int i;
+	int j;
+	int one;
+	int half;
+	int oneplushalf;
+	int vscanlen;
+	int width;
+	int height;
 	jpc_fix_t *fp;
+	int frowstep;
+	int fstripestep;
 	jpc_fix_t *fstripestart;
 	jpc_fix_t *fvscanstart;
 	jpc_fix_t *dp;
+	int drowstep;
+	int dstripestep;
 	jpc_fix_t *dstripestart;
 	jpc_fix_t *dvscanstart;
+	int k;
 
-	const unsigned width = jas_matrix_numcols(data);
-	const unsigned height = jas_matrix_numrows(data);
-	const unsigned frowstep = jas_matrix_rowstep(flags);
-	const unsigned drowstep = jas_matrix_rowstep(data);
-	const unsigned fstripestep = frowstep << 2;
-	const unsigned dstripestep = drowstep << 2;
+	/* Avoid compiler warning about unused parameters. */
+	dec = 0;
 
-	const jpc_fix_t one = (jpc_fix_t)1 << bitpos;
-	const jpc_fix_t half = one >> 1;
-	const jpc_fix_t oneplushalf = one | half;
+	width = jas_matrix_numcols(data);
+	height = jas_matrix_numrows(data);
+	frowstep = jas_matrix_rowstep(flags);
+	drowstep = jas_matrix_rowstep(data);
+	fstripestep = frowstep << 2;
+	dstripestep = drowstep << 2;
+
+	one = 1 << bitpos;
+	half = one >> 1;
+	oneplushalf = one | half;
 
 	fstripestart = jas_matrix_getref(flags, 1, 1);
 	dstripestart = jas_matrix_getref(data, 0, 0);
@@ -401,14 +450,14 @@ static int dec_sigpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient
 	  dstripestart += dstripestep) {
 		fvscanstart = fstripestart;
 		dvscanstart = dstripestart;
-		const unsigned vscanlen = JAS_MIN(i, 4);
-		for (unsigned j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
+		vscanlen = JAS_MIN(i, 4);
+		for (j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
 			fp = fvscanstart;
 			dp = dvscanstart;
-			unsigned k = vscanlen;
+			k = vscanlen;
 
 			/* Process first sample in vertical scan. */
-			jpc_sigpass_step(fp, frowstep, dp, oneplushalf,
+			jpc_sigpass_step(fp, frowstep, dp, bitpos, oneplushalf,
 			  orient, mqdec, vcausalflag);
 			if (--k <= 0) {
 				continue;
@@ -417,7 +466,7 @@ static int dec_sigpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient
 			dp += drowstep;
 
 			/* Process second sample in vertical scan. */
-			jpc_sigpass_step(fp, frowstep, dp, oneplushalf,
+			jpc_sigpass_step(fp, frowstep, dp, bitpos, oneplushalf,
 			  orient, mqdec, 0);
 			if (--k <= 0) {
 				continue;
@@ -426,7 +475,7 @@ static int dec_sigpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient
 			dp += drowstep;
 
 			/* Process third sample in vertical scan. */
-			jpc_sigpass_step(fp, frowstep, dp, oneplushalf,
+			jpc_sigpass_step(fp, frowstep, dp, bitpos, oneplushalf,
 			  orient, mqdec, 0);
 			if (--k <= 0) {
 				continue;
@@ -435,58 +484,71 @@ static int dec_sigpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient
 			dp += drowstep;
 
 			/* Process fourth sample in vertical scan. */
-			jpc_sigpass_step(fp, frowstep, dp, oneplushalf,
+			jpc_sigpass_step(fp, frowstep, dp, bitpos, oneplushalf,
 			  orient, mqdec, 0);
 		}
 	}
 	return 0;
 }
 
-JAS_FORCE_INLINE
-static int jpc_rawsigpass_step(jpc_fix_t *fp, size_t frowstep, jpc_fix_t *dp, jpc_fix_t oneplushalf, jpc_bitstream_t *in, bool vcausalflag)
-{
-	const jpc_fix_t f = *fp;
-	if ((f & JPC_OTHSIGMSK) && !(f & (JPC_SIG | JPC_VISIT))) {
-		int v = JPC_T1D_RAWGETBIT(in, "SIG", "ZC");
-		if (v < 0) {
-			return -1;
-		}
-		if (v) {
-			v = JPC_T1D_RAWGETBIT(in, "SIG", "SC");
-			if (v < 0) {
-				return -1;
-			}
-			JPC_UPDATEFLAGS4(fp, frowstep, v, vcausalflag);
-			*fp |= JPC_SIG;
-			*dp = v ? -oneplushalf : oneplushalf;
-		}
-		*fp |= JPC_VISIT;
-	}
-
-	return 0;
+#define	jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf, in, vcausalflag) \
+{ \
+	jpc_fix_t f = *(fp); \
+	jpc_fix_t v; \
+	if ((f & JPC_OTHSIGMSK) && !(f & (JPC_SIG | JPC_VISIT))) { \
+		JPC_T1D_RAWGETBIT(in, v, "SIG", "ZC"); \
+		if (v < 0) { \
+			return -1; \
+		} \
+		if (v) { \
+			JPC_T1D_RAWGETBIT(in, v, "SIG", "SC"); \
+			if (v < 0) { \
+				return -1; \
+			} \
+			JPC_UPDATEFLAGS4((fp), (frowstep), v, (vcausalflag)); \
+			*(fp) |= JPC_SIG; \
+			*(dp) = v ? (-oneplushalf) : (oneplushalf); \
+		} \
+		*(fp) |= JPC_VISIT; \
+	} \
 }
 
-static int dec_rawsigpass(jpc_bitstream_t *in, unsigned bitpos, bool vcausalflag,
+static int dec_rawsigpass(jpc_dec_t *dec, jpc_bitstream_t *in, int bitpos, int vcausalflag,
   jas_matrix_t *flags, jas_matrix_t *data)
 {
 	int i;
+	int j;
+	int k;
+	int one;
+	int half;
+	int oneplushalf;
+	int vscanlen;
+	int width;
+	int height;
 	jpc_fix_t *fp;
+	int frowstep;
+	int fstripestep;
 	jpc_fix_t *fstripestart;
 	jpc_fix_t *fvscanstart;
 	jpc_fix_t *dp;
+	int drowstep;
+	int dstripestep;
 	jpc_fix_t *dstripestart;
 	jpc_fix_t *dvscanstart;
 
-	const unsigned width = jas_matrix_numcols(data);
-	const unsigned height = jas_matrix_numrows(data);
-	const unsigned frowstep = jas_matrix_rowstep(flags);
-	const unsigned drowstep = jas_matrix_rowstep(data);
-	const unsigned fstripestep = frowstep << 2;
-	const unsigned dstripestep = drowstep << 2;
+	/* Avoid compiler warning about unused parameters. */
+	dec = 0;
 
-	const jpc_fix_t one = (jpc_fix_t)1 << bitpos;
-	const jpc_fix_t half = one >> 1;
-	const jpc_fix_t oneplushalf = one | half;
+	width = jas_matrix_numcols(data);
+	height = jas_matrix_numrows(data);
+	frowstep = jas_matrix_rowstep(flags);
+	drowstep = jas_matrix_rowstep(data);
+	fstripestep = frowstep << 2;
+	dstripestep = drowstep << 2;
+
+	one = 1 << bitpos;
+	half = one >> 1;
+	oneplushalf = one | half;
 
 	fstripestart = jas_matrix_getref(flags, 1, 1);
 	dstripestart = jas_matrix_getref(data, 0, 0);
@@ -494,16 +556,15 @@ static int dec_rawsigpass(jpc_bitstream_t *in, unsigned bitpos, bool vcausalflag
 	  dstripestart += dstripestep) {
 		fvscanstart = fstripestart;
 		dvscanstart = dstripestart;
-		const unsigned vscanlen = JAS_MIN(i, 4);
-		for (unsigned j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
+		vscanlen = JAS_MIN(i, 4);
+		for (j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
 			fp = fvscanstart;
 			dp = dvscanstart;
-			unsigned k = vscanlen;
+			k = vscanlen;
 
 			/* Process first sample in vertical scan. */
-			if (jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf, in, vcausalflag))
-				return -1;
-
+			jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf,
+			  in, vcausalflag);
 			if (--k <= 0) {
 				continue;
 			}
@@ -511,9 +572,8 @@ static int dec_rawsigpass(jpc_bitstream_t *in, unsigned bitpos, bool vcausalflag
 			dp += drowstep;
 
 			/* Process second sample in vertical scan. */
-			if (jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf, in, 0))
-				return -1;
-
+			jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf,
+			  in, 0);
 			if (--k <= 0) {
 				continue;
 			}
@@ -521,9 +581,8 @@ static int dec_rawsigpass(jpc_bitstream_t *in, unsigned bitpos, bool vcausalflag
 			dp += drowstep;
 
 			/* Process third sample in vertical scan. */
-			if (jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf, in, 0))
-				return -1;
-
+			jpc_rawsigpass_step(fp, frowstep, dp, oneplushalf,
+			  in, 0);
 			if (--k <= 0) {
 				continue;
 			}
@@ -543,39 +602,56 @@ static int dec_rawsigpass(jpc_bitstream_t *in, unsigned bitpos, bool vcausalflag
 * Code for refinement pass.
 \******************************************************************************/
 
-JAS_FORCE_INLINE
-static void jpc_refpass_step(jpc_fix_t *fp, jpc_fix_t *dp, jpc_fix_t poshalf, jpc_fix_t neghalf, jpc_mqdec_t *mqdec)
-{
+#define	jpc_refpass_step(fp, dp, poshalf, neghalf, mqdec, vcausalflag) \
+{ \
+	int v; \
+	int t; \
 	if (((*(fp)) & (JPC_SIG | JPC_VISIT)) == JPC_SIG) { \
-		jpc_mqdec_setcurctx(mqdec, JPC_GETMAGCTXNO(*fp));
-		const bool v = JPC_T1D_GETBITNOSKEW(mqdec, "REF", "MR");
-		const jpc_fix_t t = v ? poshalf : neghalf;
-		*dp += *dp < 0 ? -t : t;
-		*fp |= JPC_REFINE;
-	}
+		jpc_mqdec_setcurctx((mqdec), JPC_GETMAGCTXNO(*(fp))); \
+		JPC_T1D_GETBITNOSKEW((mqdec), v, "REF", "MR"); \
+		t = (v ? (poshalf) : (neghalf)); \
+		*(dp) += (*(dp) < 0) ? (-t) : t; \
+		*(fp) |= JPC_REFINE; \
+	} \
 }
 
-static int dec_refpass(jpc_mqdec_t *mqdec, unsigned bitpos,
-  jas_matrix_t *flags, jas_matrix_t *data)
+static int dec_refpass(jpc_dec_t *dec, register jpc_mqdec_t *mqdec, int bitpos,
+  int vcausalflag, jas_matrix_t *flags, jas_matrix_t *data)
 {
 	int i;
+	int j;
+	int vscanlen;
+	int width;
+	int height;
+	int one;
+	int poshalf;
+	int neghalf;
 	jpc_fix_t *fp;
+	int frowstep;
+	int fstripestep;
 	jpc_fix_t *fstripestart;
 	jpc_fix_t *fvscanstart;
 	jpc_fix_t *dp;
+	int drowstep;
+	int dstripestep;
 	jpc_fix_t *dstripestart;
 	jpc_fix_t *dvscanstart;
+	int k;
 
-	const unsigned width = jas_matrix_numcols(data);
-	const unsigned height = jas_matrix_numrows(data);
-	const unsigned frowstep = jas_matrix_rowstep(flags);
-	const unsigned drowstep = jas_matrix_rowstep(data);
-	const unsigned fstripestep = frowstep << 2;
-	const unsigned dstripestep = drowstep << 2;
+	/* Avoid compiler warning about unused parameters. */
+	dec = 0;
+	vcausalflag = 0;
 
-	const jpc_fix_t one = (jpc_fix_t)1 << bitpos;
-	const jpc_fix_t poshalf = one >> 1;
-	const jpc_fix_t neghalf = bitpos > 0 ? -poshalf : -1;
+	width = jas_matrix_numcols(data);
+	height = jas_matrix_numrows(data);
+	frowstep = jas_matrix_rowstep(flags);
+	drowstep = jas_matrix_rowstep(data);
+	fstripestep = frowstep << 2;
+	dstripestep = drowstep << 2;
+
+	one = 1 << bitpos;
+	poshalf = one >> 1;
+	neghalf = (bitpos > 0) ? (-poshalf) : (-1);
 
 	fstripestart = jas_matrix_getref(flags, 1, 1);
 	dstripestart = jas_matrix_getref(data, 0, 0);
@@ -583,58 +659,97 @@ static int dec_refpass(jpc_mqdec_t *mqdec, unsigned bitpos,
 	  dstripestart += dstripestep) {
 		fvscanstart = fstripestart;
 		dvscanstart = dstripestart;
-		const unsigned vscanlen = JAS_MIN(i, 4);
-		for (unsigned j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
+		vscanlen = JAS_MIN(i, 4);
+		for (j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
 			fp = fvscanstart;
 			dp = dvscanstart;
+			k = vscanlen;
 
-			for (unsigned k = 0; k < vscanlen; ++k) {
-				jpc_refpass_step(fp, dp, poshalf, neghalf, mqdec);
-				fp += frowstep;
-				dp += drowstep;
+			/* Process first sample in vertical scan. */
+			jpc_refpass_step(fp, dp, poshalf, neghalf, mqdec,
+			  vcausalflag);
+			if (--k <= 0) {
+				continue;
 			}
+			fp += frowstep;
+			dp += drowstep;
+
+			/* Process second sample in vertical scan. */
+			jpc_refpass_step(fp, dp, poshalf, neghalf, mqdec, 0);
+			if (--k <= 0) {
+				continue;
+			}
+			fp += frowstep;
+			dp += drowstep;
+
+			/* Process third sample in vertical scan. */
+			jpc_refpass_step(fp, dp, poshalf, neghalf, mqdec, 0);
+			if (--k <= 0) {
+				continue;
+			}
+			fp += frowstep;
+			dp += drowstep;
+
+			/* Process fourth sample in vertical scan. */
+			jpc_refpass_step(fp, dp, poshalf, neghalf, mqdec, 0);
 		}
 	}
 
 	return 0;
 }
 
-static int jpc_rawrefpass_step(jpc_fix_t *fp, jpc_fix_t *dp, jpc_fix_t poshalf, jpc_fix_t neghalf, jpc_bitstream_t *in)
-{
-	if ((*fp & (JPC_SIG | JPC_VISIT)) == JPC_SIG) {
-		int v = JPC_T1D_RAWGETBIT(in, "REF", "MAGREF");
-		if (v < 0) {
-			return -1;
-		}
-		jpc_fix_t t = v ? poshalf : neghalf;
-		*dp += *dp < 0 ? -t : t;
-		*fp |= JPC_REFINE;
-	}
-
-	return 0;
+#define	jpc_rawrefpass_step(fp, dp, poshalf, neghalf, in, vcausalflag) \
+{ \
+	jpc_fix_t v; \
+	jpc_fix_t t; \
+	if (((*(fp)) & (JPC_SIG | JPC_VISIT)) == JPC_SIG) { \
+		JPC_T1D_RAWGETBIT(in, v, "REF", "MAGREF"); \
+		if (v < 0) { \
+			return -1; \
+		} \
+		t = (v ? poshalf : neghalf); \
+		*(dp) += (*(dp) < 0) ? (-t) : t; \
+		*(fp) |= JPC_REFINE; \
+	} \
 }
 
-static int dec_rawrefpass(jpc_bitstream_t *in, unsigned bitpos,
+static int dec_rawrefpass(jpc_dec_t *dec, jpc_bitstream_t *in, int bitpos, int vcausalflag,
   jas_matrix_t *flags, jas_matrix_t *data)
 {
 	int i;
+	int j;
+	int k;
+	int vscanlen;
+	int width;
+	int height;
+	int one;
+	int poshalf;
+	int neghalf;
 	jpc_fix_t *fp;
+	int frowstep;
+	int fstripestep;
 	jpc_fix_t *fstripestart;
 	jpc_fix_t *fvscanstart;
 	jpc_fix_t *dp;
+	int drowstep;
+	int dstripestep;
 	jpc_fix_t *dstripestart;
 	jpc_fix_t *dvscanstart;
 
-	const unsigned width = jas_matrix_numcols(data);
-	const unsigned height = jas_matrix_numrows(data);
-	const unsigned frowstep = jas_matrix_rowstep(flags);
-	const unsigned drowstep = jas_matrix_rowstep(data);
-	const unsigned fstripestep = frowstep << 2;
-	const unsigned dstripestep = drowstep << 2;
+	/* Avoid compiler warning about unused parameters. */
+	dec = 0;
+	vcausalflag = 0;
 
-	const jpc_fix_t one = (jpc_fix_t)1 << bitpos;
-	const jpc_fix_t poshalf = one >> 1;
-	const jpc_fix_t neghalf = bitpos > 0 ? -poshalf : -1;
+	width = jas_matrix_numcols(data);
+	height = jas_matrix_numrows(data);
+	frowstep = jas_matrix_rowstep(flags);
+	drowstep = jas_matrix_rowstep(data);
+	fstripestep = frowstep << 2;
+	dstripestep = drowstep << 2;
+
+	one = 1 << bitpos;
+	poshalf = one >> 1;
+	neghalf = (bitpos > 0) ? (-poshalf) : (-1);
 
 	fstripestart = jas_matrix_getref(flags, 1, 1);
 	dstripestart = jas_matrix_getref(data, 0, 0);
@@ -642,17 +757,39 @@ static int dec_rawrefpass(jpc_bitstream_t *in, unsigned bitpos,
 	  dstripestart += dstripestep) {
 		fvscanstart = fstripestart;
 		dvscanstart = dstripestart;
-		const unsigned vscanlen = JAS_MIN(i, 4);
-		for (unsigned j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
+		vscanlen = JAS_MIN(i, 4);
+		for (j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
 			fp = fvscanstart;
 			dp = dvscanstart;
+			k = vscanlen;
 
-			for (unsigned k = 0; k < vscanlen; ++k) {
-				if (jpc_rawrefpass_step(fp, dp, poshalf, neghalf, in))
-					return -1;
-				fp += frowstep;
-				dp += drowstep;
+			/* Process first sample in vertical scan. */
+			jpc_rawrefpass_step(fp, dp, poshalf, neghalf, in,
+			  vcausalflag);
+			if (--k <= 0) {
+				continue;
 			}
+			fp += frowstep;
+			dp += drowstep;
+
+			/* Process second sample in vertical scan. */
+			jpc_rawrefpass_step(fp, dp, poshalf, neghalf, in, 0);
+			if (--k <= 0) {
+				continue;
+			}
+			fp += frowstep;
+			dp += drowstep;
+
+			/* Process third sample in vertical scan. */
+			jpc_rawrefpass_step(fp, dp, poshalf, neghalf, in, 0);
+			if (--k <= 0) {
+				continue;
+			}
+			fp += frowstep;
+			dp += drowstep;
+
+			/* Process fourth sample in vertical scan. */
+			jpc_rawrefpass_step(fp, dp, poshalf, neghalf, in, 0);
 		}
 	}
 	return 0;
@@ -664,16 +801,18 @@ static int dec_rawrefpass(jpc_bitstream_t *in, unsigned bitpos,
 
 #define	jpc_clnpass_step(f, fp, frowstep, dp, oneplushalf, orient, mqdec, flabel, plabel, vcausalflag) \
 { \
+	int v; \
 flabel \
 	if (!((f) & (JPC_SIG | JPC_VISIT))) { \
 		jpc_mqdec_setcurctx((mqdec), JPC_GETZCCTXNO((f), (orient))); \
-		if (JPC_T1D_GETBIT((mqdec), "CLN", "ZC")) { \
+		JPC_T1D_GETBIT((mqdec), v, "CLN", "ZC"); \
+		if (v) { \
 plabel \
 			/* Coefficient is significant. */ \
 			jpc_mqdec_setcurctx((mqdec), JPC_GETSCCTXNO(f)); \
-			bool v = JPC_T1D_GETBIT((mqdec), "CLN", "SC"); \
+			JPC_T1D_GETBIT((mqdec), v, "CLN", "SC"); \
 			v ^= JPC_GETSPB(f); \
-			*(dp) = (v) ? (-(jpc_fix_t)(oneplushalf)) : (jpc_fix_t)(oneplushalf); \
+			*(dp) = (v) ? (-(oneplushalf)) : (oneplushalf); \
 			JPC_UPDATEFLAGS4((fp), (frowstep), v, (vcausalflag)); \
 			*(fp) |= JPC_SIG; \
 		} \
@@ -682,41 +821,58 @@ plabel \
 	*(fp) &= ~JPC_VISIT; \
 }
 
-static int dec_clnpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient orient,
-  bool vcausalflag, bool segsymflag, jas_matrix_t *flags, jas_matrix_t *data)
+static int dec_clnpass(jpc_dec_t *dec, register jpc_mqdec_t *mqdec, int bitpos, int orient,
+  int vcausalflag, int segsymflag, jas_matrix_t *flags, jas_matrix_t *data)
 {
+	int i;
+	int j;
+	int k;
+	int vscanlen;
+	int v;
+	int half;
+	int runlen;
 	int f;
+	int width;
+	int height;
+	int one;
+	int oneplushalf;
 
 	jpc_fix_t *fp;
+	int frowstep;
+	int fstripestep;
 	jpc_fix_t *fstripestart;
 	jpc_fix_t *fvscanstart;
 
 	jpc_fix_t *dp;
+	int drowstep;
+	int dstripestep;
 	jpc_fix_t *dstripestart;
 	jpc_fix_t *dvscanstart;
 
-	const jpc_fix_t one = (jpc_fix_t)1 << bitpos;
-	const jpc_fix_t half = one >> 1;
-	const jpc_fix_t oneplushalf = one | half;
+	/* Avoid compiler warning about unused parameters. */
+	dec = 0;
 
-	const unsigned width = jas_matrix_numcols(data);
-	const unsigned height = jas_matrix_numrows(data);
+	one = 1 << bitpos;
+	half = one >> 1;
+	oneplushalf = one | half;
 
-	const unsigned frowstep = jas_matrix_rowstep(flags);
-	const unsigned drowstep = jas_matrix_rowstep(data);
-	const unsigned fstripestep = frowstep << 2;
-	const unsigned dstripestep = drowstep << 2;
+	width = jas_matrix_numcols(data);
+	height = jas_matrix_numrows(data);
+
+	frowstep = jas_matrix_rowstep(flags);
+	drowstep = jas_matrix_rowstep(data);
+	fstripestep = frowstep << 2;
+	dstripestep = drowstep << 2;
 
 	fstripestart = jas_matrix_getref(flags, 1, 1);
 	dstripestart = jas_matrix_getref(data, 0, 0);
-	for (unsigned i = 0; i < height; i += 4, fstripestart += fstripestep,
+	for (i = 0; i < height; i += 4, fstripestart += fstripestep,
 	  dstripestart += dstripestep) {
 		fvscanstart = fstripestart;
 		dvscanstart = dstripestart;
-		const unsigned vscanlen = JAS_MIN(4, height - i);
-		for (unsigned j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
+		vscanlen = JAS_MIN(4, height - i);
+		for (j = width; j > 0; --j, ++fvscanstart, ++dvscanstart) {
 			fp = fvscanstart;
-			unsigned k;
 			if (vscanlen >= 4 && (!((*fp) & (JPC_SIG | JPC_VISIT |
 			  JPC_OTHSIGMSK))) && (fp += frowstep, !((*fp) & (JPC_SIG |
 			  JPC_VISIT | JPC_OTHSIGMSK))) && (fp += frowstep, !((*fp) &
@@ -724,24 +880,31 @@ static int dec_clnpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient
 			  !((*fp) & (JPC_SIG | JPC_VISIT | JPC_OTHSIGMSK)))) {
 
 				jpc_mqdec_setcurctx(mqdec, JPC_AGGCTXNO);
-				if (!JPC_T1D_GETBIT(mqdec, "CLN", "AGG")) {
+				JPC_T1D_GETBIT(mqdec, v, "CLN", "AGG");
+				if (!v) {
 					continue;
 				}
 				jpc_mqdec_setcurctx(mqdec, JPC_UCTXNO);
-				unsigned runlen = JPC_T1D_GETBITNOSKEW(mqdec, "CLN", "RL");
-				runlen = (runlen << 1) | JPC_T1D_GETBITNOSKEW(mqdec, "CLN", "RL");
+				JPC_T1D_GETBITNOSKEW(mqdec, v, "CLN", "RL");
+				runlen = v;
+				JPC_T1D_GETBITNOSKEW(mqdec, v, "CLN", "RL");
+				runlen = (runlen << 1) | v;
 				f = *(fp = fvscanstart + frowstep * runlen);
 				dp = dvscanstart + drowstep * runlen;
 				k = vscanlen - runlen;
 				switch (runlen) {
 				case 0:
 					goto clnpass_partial0;
+					break;
 				case 1:
 					goto clnpass_partial1;
+					break;
 				case 2:
 					goto clnpass_partial2;
+					break;
 				case 3:
 					goto clnpass_partial3;
+					break;
 				}
 			} else {
 				f = *(fp = fvscanstart);
@@ -788,14 +951,19 @@ static int dec_clnpass(jpc_mqdec_t *mqdec, unsigned bitpos, enum jpc_tsfb_orient
 	}
 
 	if (segsymflag) {
-		unsigned segsymval = 0;
+		int segsymval;
+		segsymval = 0;
 		jpc_mqdec_setcurctx(mqdec, JPC_UCTXNO);
-		segsymval = (segsymval << 1) | JPC_T1D_GETBITNOSKEW(mqdec, "CLN", "SEGSYM");
-		segsymval = (segsymval << 1) | JPC_T1D_GETBITNOSKEW(mqdec, "CLN", "SEGSYM");
-		segsymval = (segsymval << 1) | JPC_T1D_GETBITNOSKEW(mqdec, "CLN", "SEGSYM");
-		segsymval = (segsymval << 1) | JPC_T1D_GETBITNOSKEW(mqdec, "CLN", "SEGSYM");
+		JPC_T1D_GETBITNOSKEW(mqdec, v, "CLN", "SEGSYM");
+		segsymval = (segsymval << 1) | (v & 1);
+		JPC_T1D_GETBITNOSKEW(mqdec, v, "CLN", "SEGSYM");
+		segsymval = (segsymval << 1) | (v & 1);
+		JPC_T1D_GETBITNOSKEW(mqdec, v, "CLN", "SEGSYM");
+		segsymval = (segsymval << 1) | (v & 1);
+		JPC_T1D_GETBITNOSKEW(mqdec, v, "CLN", "SEGSYM");
+		segsymval = (segsymval << 1) | (v & 1);
 		if (segsymval != 0xa) {
-			jas_logwarnf("warning: bad segmentation symbol\n");
+			fprintf(stderr, "warning: bad segmentation symbol\n");
 		}
 	}
 

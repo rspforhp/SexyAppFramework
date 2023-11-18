@@ -7,56 +7,105 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
@@ -64,7 +113,7 @@
 /*
  * JPEG-2000 Code Stream Library
  *
- * $Id$
+ * $Id: jpc_cs.h,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 #ifndef JPC_CS_H
@@ -74,10 +123,10 @@
 * Includes.
 \******************************************************************************/
 
+#include "jas_image.h"
 #include "jas_stream.h"
 
-#include <assert.h>
-#include <stdio.h>
+#include "jpc_cod.h"
 
 /******************************************************************************\
 * Constants and Types.
@@ -270,18 +319,9 @@ typedef struct {
 #define	JPC_COD_MCT		0x01 /* Multicomponent transform. */
 
 /* Get the code block size value from the code block size exponent. */
-JAS_ATTRIBUTE_CONST
-static inline unsigned JPC_COX_CBLKSIZEEXPN(unsigned x)
-{
-	return x - 2;
-}
-
+#define	JPC_COX_CBLKSIZEEXPN(x)		((x) - 2)
 /* Get the code block size exponent from the code block size value. */
-JAS_ATTRIBUTE_CONST
-static inline unsigned JPC_COX_GETCBLKSIZEEXPN(unsigned x)
-{
-	return x + 2;
-}
+#define	JPC_COX_GETCBLKSIZEEXPN(x)	((x) + 2)
 
 /* Per resolution-level information. */
 
@@ -394,33 +434,10 @@ typedef struct {
  * Stepsize manipulation macros.
  */
 
-JAS_ATTRIBUTE_CONST
-static inline unsigned JPC_QCX_GETEXPN(unsigned x)
-{
-	return x >> 11;
-}
-
-JAS_ATTRIBUTE_CONST
-static inline unsigned JPC_QCX_GETMANT(unsigned x)
-{
-	return x & 0x7ff;
-}
-
-JAS_ATTRIBUTE_CONST
-static inline uint_fast16_t JPC_QCX_EXPN(unsigned x)
-{
-	assert(!(x & (~0x1f)));
-
-	return (x & 0x1f) << 11;
-}
-
-JAS_ATTRIBUTE_CONST
-static inline uint_fast16_t JPC_QCX_MANT(unsigned x)
-{
-	assert(!(x & (~0x7ff)));
-
-	return x & 0x7ff;
-}
+#define	JPC_QCX_GETEXPN(x)	((x) >> 11)
+#define	JPC_QCX_GETMANT(x)	((x) & 0x07ff)
+#define	JPC_QCX_EXPN(x)		(assert(!((x) & (~0x1f))), (((x) & 0x1f) << 11))
+#define	JPC_QCX_MANT(x)		(assert(!((x) & (~0x7ff))), ((x) & 0x7ff))
 
 /* Per component information. */
 
@@ -522,7 +539,7 @@ typedef struct {
 	uint_fast16_t len;
 
 	/* The data. */
-	jas_uchar *data;
+	uchar *data;
 
 } jpc_ppm_t;
 
@@ -561,7 +578,7 @@ typedef struct {
 	uint_fast16_t len;
 
 	/* The data. */
-	jas_uchar *data;
+	uchar *data;
 
 } jpc_com_t;
 
@@ -609,7 +626,7 @@ typedef struct {
 typedef struct {
 
 	/* The data. */
-	jas_uchar *data;
+	uchar *data;
 
 	/* The length. */
 	uint_fast16_t len;
@@ -712,7 +729,7 @@ typedef struct {
 	jpc_msparms_t parms;
 
 	/* The marker segment operations. */
-	const struct jpc_msops_s *ops;
+	struct jpc_msops_s *ops;
 
 } jpc_ms_t;
 
@@ -730,7 +747,7 @@ typedef struct jpc_msops_s {
 	int (*putparms)(jpc_ms_t *ms, jpc_cstate_t *cstate, jas_stream_t *out);
 
 	/* Dump the marker segment parameters (for debugging). */
-	int (*dumpparms)(jpc_ms_t *ms);
+	int (*dumpparms)(jpc_ms_t *ms, FILE *out);
 
 } jpc_msops_t;
 
@@ -751,19 +768,13 @@ jpc_ms_t *jpc_ms_create(int type);
 void jpc_ms_destroy(jpc_ms_t *ms);
 
 /* Does a marker segment have parameters? */
-JAS_ATTRIBUTE_CONST
-static inline bool JPC_MS_HASPARMS(unsigned x)
-{
-	return !(x == JPC_MS_SOC || x == JPC_MS_SOD || x == JPC_MS_EOC ||
-		 x == JPC_MS_EPH || (x >= 0xff30 && x <= 0xff3f));
-}
+#define	JPC_MS_HASPARMS(x) \
+	(!((x) == JPC_MS_SOC || (x) == JPC_MS_SOD || (x) == JPC_MS_EOC || \
+	  (x) == JPC_MS_EPH || ((x) >= 0xff30 && (x) <= 0xff3f)))
 
 /* Get the marker segment type. */
-JAS_ATTRIBUTE_PURE
-static inline unsigned jpc_ms_gettype(const jpc_ms_t *ms)
-{
-	return ms->id;
-}
+#define	jpc_ms_gettype(ms) \
+	((ms)->id)
 
 /* Read a marker segment from a stream. */
 jpc_ms_t *jpc_getms(jas_stream_t *in, jpc_cstate_t *cstate);
@@ -778,7 +789,7 @@ int jpc_getdata(jas_stream_t *in, jas_stream_t *out, long n);
 int jpc_putdata(jas_stream_t *out, jas_stream_t *in, long n);
 
 /* Dump a marker segment (for debugging). */
-void jpc_ms_dump(jpc_ms_t *ms);
+void jpc_ms_dump(jpc_ms_t *ms, FILE *out);
 
 /* Read a 8-bit unsigned integer from a stream. */
 int jpc_getuint8(jas_stream_t *in, uint_fast8_t *val);

@@ -2,7 +2,6 @@
  * cdjpeg.h
  *
  * Copyright (C) 1994-1997, Thomas G. Lane.
- * Modified 2019 by Guido Vollbeding.
  * This file is part of the Independent JPEG Group's software.
  * For conditions of distribution and use, see the accompanying README file.
  *
@@ -105,7 +104,6 @@ typedef struct cdjpeg_progress_mgr * cd_progress_ptr;
 #define jinit_write_targa	jIWrTarga
 #define read_quant_tables	RdQTables
 #define read_scan_script	RdScnScript
-#define set_quality_ratings     SetQRates
 #define set_quant_slots		SetQSlots
 #define set_sample_factors	SetSFacts
 #define read_color_map		RdCMap
@@ -122,8 +120,7 @@ EXTERN(cjpeg_source_ptr) jinit_read_bmp JPP((j_compress_ptr cinfo));
 EXTERN(djpeg_dest_ptr) jinit_write_bmp JPP((j_decompress_ptr cinfo,
 					    boolean is_os2));
 EXTERN(cjpeg_source_ptr) jinit_read_gif JPP((j_compress_ptr cinfo));
-EXTERN(djpeg_dest_ptr) jinit_write_gif JPP((j_decompress_ptr cinfo,
-					    boolean is_lzw));
+EXTERN(djpeg_dest_ptr) jinit_write_gif JPP((j_decompress_ptr cinfo));
 EXTERN(cjpeg_source_ptr) jinit_read_ppm JPP((j_compress_ptr cinfo));
 EXTERN(djpeg_dest_ptr) jinit_write_ppm JPP((j_decompress_ptr cinfo));
 EXTERN(cjpeg_source_ptr) jinit_read_rle JPP((j_compress_ptr cinfo));
@@ -134,10 +131,8 @@ EXTERN(djpeg_dest_ptr) jinit_write_targa JPP((j_decompress_ptr cinfo));
 /* cjpeg support routines (in rdswitch.c) */
 
 EXTERN(boolean) read_quant_tables JPP((j_compress_ptr cinfo, char * filename,
-				       boolean force_baseline));
+				    int scale_factor, boolean force_baseline));
 EXTERN(boolean) read_scan_script JPP((j_compress_ptr cinfo, char * filename));
-EXTERN(boolean) set_quality_ratings JPP((j_compress_ptr cinfo, char *arg,
-					 boolean force_baseline));
 EXTERN(boolean) set_quant_slots JPP((j_compress_ptr cinfo, char *arg));
 EXTERN(boolean) set_sample_factors JPP((j_compress_ptr cinfo, char *arg));
 

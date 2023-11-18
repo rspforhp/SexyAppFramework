@@ -1,6 +1,4 @@
-#ifndef __SEXYAPPBASE_H_
-#define __SEXYAPPBASE_H_
-
+#pragma once
 
 #include "Common.h"
 #include "Rect.h"
@@ -595,7 +593,6 @@ namespace Sexy
 	long WINAPI64 Win64Main(HINSTANCE HInstance, HINSTANCE PreviousInstance, LPSTR LongCommandLine, long showcommand64);
 #endif
 
-#endif
 
 
 //call this first in this library and explicity call this in your gameapp only for x64 builds...we already minimalized

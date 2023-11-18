@@ -61,6 +61,12 @@
     <Filter Include="PakLib">
       <UniqueIdentifier>{f3985013-be09-4139-8f9f-e33574e58dbd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TodLib">
+      <UniqueIdentifier>{09d027f5-76b5-4dd3-a267-98cd45ecf610}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CryptLib">
+      <UniqueIdentifier>{558409c6-a4fb-49b2-bc32-96dcd63bb85d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp">
@@ -685,6 +691,123 @@
     <ClCompile Include="Ratio.cpp">
       <Filter>Misc\Misc Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\TodLib\Attachment.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\Definition.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\EffectSystem.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\FilterEffect.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CryptLib\md5.c">
+      <Filter>CryptLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\ReanimAtlas.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\Reanimator.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CryptLib\RegKey.cpp">
+      <Filter>CryptLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\TodCommon.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\TodDebug.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\TodFoley.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\TodList.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\TodParticle.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\TodStringFile.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TodLib\Trail.cpp">
+      <Filter>TodLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\ansi2knr.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\cjpeg.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\ckconfig.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\djpeg.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\example.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jcphuff.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jdphuff.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jidctred.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jmemansi.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jmemdos.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jmemmac.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jmemname.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\jpegtran.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\jpeg\rdjpgcom.c">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\png\example.c">
+      <Filter>ImageLib\PNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\png\pngtest.c">
+      <Filter>ImageLib\PNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\png\pngvcrd.c">
+      <Filter>ImageLib\PNG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\example.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\gzio.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\infblock.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\infcodes.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\infutil.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\maketree.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImageLib\zlib\minigzip.c">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h">
@@ -1078,6 +1201,84 @@
     <ClInclude Include="Ratio.h">
       <Filter>Misc\Misc Include</Filter>
     </ClInclude>
+    <ClInclude Include="..\TodLib\Attachment.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\DataArray.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\Definition.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\EffectSystem.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\FilterEffect.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CryptLib\BigInt.hpp">
+      <Filter>CryptLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CryptLib\md5.h">
+      <Filter>CryptLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\ReanimAtlas.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\Reanimator.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CryptLib\RegKey.h">
+      <Filter>CryptLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\TodCommon.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\TodDebug.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\TodFoley.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\TodList.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\TodParticle.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\TodStringFile.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\Trail.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TodLib\Enums.h">
+      <Filter>TodLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg\jchuff.h">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg\jdhuff.h">
+      <Filter>ImageLib\JPEG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jas_config2.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\jpeg2000\jpc_util.h">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\png\pngasmrd.h">
+      <Filter>ImageLib\PNG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\zlib\infblock.h">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\zlib\infcodes.h">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ImageLib\zlib\infutil.h">
+      <Filter>ImageLib\ZLIB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BltRotatedHelper.inc">
@@ -1127,6 +1328,222 @@
     </None>
     <None Include="MI_SlowStretchBlt.inc">
       <Filter>Graphics\Inc Routines</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\ansi2knr.1">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\cjpeg.1">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\coderules.doc">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\config.guess">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\config.sub">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\configure">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\djpeg.1">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\install-sh">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.bcc">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.cfg">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.dj">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.mac">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.manx">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.mc6">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.sas">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.st">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.vc">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.vms">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jconfig.wat">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jmemdosa.asm">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\jpegtran.1">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\ltconfig">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\ltmain.sh">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makcjpeg.st">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makdjpeg.st">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makeapps.ds">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.ansi">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.bcc">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.cfg">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.dj">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.manx">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.mc6">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.mms">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.sas">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.unix">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.vc">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.vms">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makefile.wat">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makelib.ds">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makeproj.mac">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\makljpeg.st">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\maktjpeg.st">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\rdjpgcom.1">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\readme">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg\wrjpgcom.1">
+      <Filter>ImageLib\JPEG</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg2000\COPYRIGHT">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg2000\INSTALL">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg2000\LICENSE">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg2000\NEWS">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </None>
+    <None Include="..\ImageLib\jpeg2000\README">
+      <Filter>ImageLib\JPEG2000</Filter>
+    </None>
+    <None Include="..\ImageLib\png\announce">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\changes">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\install">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\knownbug">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\libpng.3">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\libpngpf.3">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\license">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\png.5">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\readme">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\todo">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\png\y2kinfo">
+      <Filter>ImageLib\PNG</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\ChangeLog">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\configure">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\descrip.mms">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\faq">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\index">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\Make_vms.com">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\Makefile">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\Makefile.in">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\Makefile.riscos">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\readme">
+      <Filter>ImageLib\ZLIB</Filter>
+    </None>
+    <None Include="..\ImageLib\zlib\zlib.3">
+      <Filter>ImageLib\ZLIB</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1250,5 +1667,26 @@
     <CustomBuild Include="..\ImageLib\jpeg2000\jpc_tsfb.h">
       <Filter>ImageLib\JPEG2000</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\ImageLib\png\libpng.txt">
+      <Filter>ImageLib\PNG</Filter>
+    </Text>
+    <Text Include="..\ImageLib\zlib\algorithm.txt">
+      <Filter>ImageLib\ZLIB</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ImageLib\png\pngnow.png">
+      <Filter>ImageLib\PNG</Filter>
+    </Image>
+    <Image Include="..\ImageLib\png\pngtest.png">
+      <Filter>ImageLib\PNG</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\ImageLib\zlib\treebuild.xml">
+      <Filter>ImageLib\ZLIB</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

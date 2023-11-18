@@ -4969,7 +4969,7 @@ void SexyAppBase::MakeWindow()
 				aPlaceY = aDesktopRect.bottom - aHeight;
 		}
 
-		if (CheckFor11())
+		if (CheckForVista())
 		{
 			mHWnd = CreateWindowExA(
 				0,
@@ -5014,7 +5014,7 @@ void SexyAppBase::MakeWindow()
 	}
 	else
 	{
-		if (CheckFor11())
+		if (CheckForVista())
 		{
 			mHWnd = CreateWindowExA(
 				WS_EX_TOPMOST,
@@ -6425,8 +6425,8 @@ void SexyAppBase::Init()
 
 
 	srand(GetTickCount64());
-
-	if (CheckFor11())
+	
+	if (CheckForVista())
 	{
 		mIsWideWindow = false;
 

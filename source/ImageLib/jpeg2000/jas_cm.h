@@ -5,171 +5,154 @@
 
 /* __START_OF_JASPER_LICENSE__
  * 
- * JasPer License Version 2.0
+ * JasPer Software License
  * 
- * Copyright (c) 2001-2006 Michael David Adams
- * Copyright (c) 1999-2000 Image Power, Inc.
- * Copyright (c) 1999-2000 The University of British Columbia
+ * IMAGE POWER JPEG-2000 PUBLIC LICENSE
+ * ************************************
  * 
- * All rights reserved.
+ * GRANT:
  * 
- * Permission is hereby granted, free of charge, to any person (the
- * "User") obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge,
- * publish, distribute, and/or sell copies of the Software, and to permit
- * persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Permission is hereby granted, free of charge, to any person (the "User")
+ * obtaining a copy of this software and associated documentation, to deal
+ * in the JasPer Software without restriction, including without limitation
+ * the right to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the JasPer Software (in source and binary forms),
+ * and to permit persons to whom the JasPer Software is furnished to do so,
+ * provided further that the License Conditions below are met.
  * 
- * 1.  The above copyright notices and this permission notice (which
- * includes the disclaimer below) shall be included in all copies or
- * substantial portions of the Software.
+ * License Conditions
+ * ******************
  * 
- * 2.  The name of a copyright holder shall not be used to endorse or
- * promote products derived from the Software without specific prior
- * written permission.
+ * A.  Redistributions of source code must retain the above copyright notice,
+ * and this list of conditions, and the following disclaimer.
  * 
- * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
- * LICENSE.  NO USE OF THE SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- * THIS DISCLAIMER.  THE SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS
- * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
- * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS.  IN NO
- * EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL
- * INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING
- * FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
- * NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.  NO ASSURANCES ARE
- * PROVIDED BY THE COPYRIGHT HOLDERS THAT THE SOFTWARE DOES NOT INFRINGE
- * THE PATENT OR OTHER INTELLECTUAL PROPERTY RIGHTS OF ANY OTHER ENTITY.
- * EACH COPYRIGHT HOLDER DISCLAIMS ANY LIABILITY TO THE USER FOR CLAIMS
- * BROUGHT BY ANY OTHER ENTITY BASED ON INFRINGEMENT OF INTELLECTUAL
- * PROPERTY RIGHTS OR OTHERWISE.  AS A CONDITION TO EXERCISING THE RIGHTS
- * GRANTED HEREUNDER, EACH USER HEREBY ASSUMES SOLE RESPONSIBILITY TO SECURE
- * ANY OTHER INTELLECTUAL PROPERTY RIGHTS NEEDED, IF ANY.  THE SOFTWARE
- * IS NOT FAULT-TOLERANT AND IS NOT INTENDED FOR USE IN MISSION-CRITICAL
- * SYSTEMS, SUCH AS THOSE USED IN THE OPERATION OF NUCLEAR FACILITIES,
- * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL
- * SYSTEMS, DIRECT LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH
- * THE FAILURE OF THE SOFTWARE OR SYSTEM COULD LEAD DIRECTLY TO DEATH,
- * PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE ("HIGH
- * RISK ACTIVITIES").  THE COPYRIGHT HOLDERS SPECIFICALLY DISCLAIM ANY
- * EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.
+ * B.  Redistributions in binary form must reproduce the above copyright
+ * notice, and this list of conditions, and the following disclaimer in
+ * the documentation and/or other materials provided with the distribution.
+ * 
+ * C.  Neither the name of Image Power, Inc. nor any other contributor
+ * (including, but not limited to, the University of British Columbia and
+ * Michael David Adams) may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * 
+ * D.  User agrees that it shall not commence any action against Image Power,
+ * Inc., the University of British Columbia, Michael David Adams, or any
+ * other contributors (collectively "Licensors") for infringement of any
+ * intellectual property rights ("IPR") held by the User in respect of any
+ * technology that User owns or has a right to license or sublicense and
+ * which is an element required in order to claim compliance with ISO/IEC
+ * 15444-1 (i.e., JPEG-2000 Part 1).  "IPR" means all intellectual property
+ * rights worldwide arising under statutory or common law, and whether
+ * or not perfected, including, without limitation, all (i) patents and
+ * patent applications owned or licensable by User; (ii) rights associated
+ * with works of authorship including copyrights, copyright applications,
+ * copyright registrations, mask work rights, mask work applications,
+ * mask work registrations; (iii) rights relating to the protection of
+ * trade secrets and confidential information; (iv) any right analogous
+ * to those set forth in subsections (i), (ii), or (iii) and any other
+ * proprietary rights relating to intangible property (other than trademark,
+ * trade dress, or service mark rights); and (v) divisions, continuations,
+ * renewals, reissues and extensions of the foregoing (as and to the extent
+ * applicable) now existing, hereafter filed, issued or acquired.
+ * 
+ * E.  If User commences an infringement action against any Licensor(s) then
+ * such Licensor(s) shall have the right to terminate User's license and
+ * all sublicenses that have been granted hereunder by User to other parties.
+ * 
+ * F.  This software is for use only in hardware or software products that
+ * are compliant with ISO/IEC 15444-1 (i.e., JPEG-2000 Part 1).  No license
+ * or right to this Software is granted for products that do not comply
+ * with ISO/IEC 15444-1.  The JPEG-2000 Part 1 standard can be purchased
+ * from the ISO.
+ * 
+ * THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE.
+ * NO USE OF THE JASPER SOFTWARE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.  THE JASPER SOFTWARE IS PROVIDED BY THE LICENSORS AND
+ * CONTRIBUTORS UNDER THIS LICENSE ON AN ``AS-IS'' BASIS, WITHOUT WARRANTY
+ * OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+ * WARRANTIES THAT THE JASPER SOFTWARE IS FREE OF DEFECTS, IS MERCHANTABLE,
+ * IS FIT FOR A PARTICULAR PURPOSE OR IS NON-INFRINGING.  THOSE INTENDING
+ * TO USE THE JASPER SOFTWARE OR MODIFICATIONS THEREOF FOR USE IN HARDWARE
+ * OR SOFTWARE PRODUCTS ARE ADVISED THAT THEIR USE MAY INFRINGE EXISTING
+ * PATENTS, COPYRIGHTS, TRADEMARKS, OR OTHER INTELLECTUAL PROPERTY RIGHTS.
+ * THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE JASPER SOFTWARE
+ * IS WITH THE USER.  SHOULD ANY PART OF THE JASPER SOFTWARE PROVE DEFECTIVE
+ * IN ANY RESPECT, THE USER (AND NOT THE INITIAL DEVELOPERS, THE UNIVERSITY
+ * OF BRITISH COLUMBIA, IMAGE POWER, INC., MICHAEL DAVID ADAMS, OR ANY
+ * OTHER CONTRIBUTOR) SHALL ASSUME THE COST OF ANY NECESSARY SERVICING,
+ * REPAIR OR CORRECTION.  UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY,
+ * WHETHER TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE
+ * INITIAL DEVELOPER, THE UNIVERSITY OF BRITISH COLUMBIA, IMAGE POWER, INC.,
+ * MICHAEL DAVID ADAMS, ANY OTHER CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE
+ * JASPER SOFTWARE, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO
+ * THE USER OR ANY OTHER PERSON FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR
+ * CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION,
+ * DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+ * MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF
+ * SUCH PARTY HAD BEEN INFORMED, OR OUGHT TO HAVE KNOWN, OF THE POSSIBILITY
+ * OF SUCH DAMAGES.  THE JASPER SOFTWARE AND UNDERLYING TECHNOLOGY ARE NOT
+ * FAULT-TOLERANT AND ARE NOT DESIGNED, MANUFACTURED OR INTENDED FOR USE OR
+ * RESALE AS ON-LINE CONTROL EQUIPMENT IN HAZARDOUS ENVIRONMENTS REQUIRING
+ * FAIL-SAFE PERFORMANCE, SUCH AS IN THE OPERATION OF NUCLEAR FACILITIES,
+ * AIRCRAFT NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, DIRECT
+ * LIFE SUPPORT MACHINES, OR WEAPONS SYSTEMS, IN WHICH THE FAILURE OF THE
+ * JASPER SOFTWARE OR UNDERLYING TECHNOLOGY OR PRODUCT COULD LEAD DIRECTLY
+ * TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE
+ * ("HIGH RISK ACTIVITIES").  LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS
+ * OR IMPLIED WARRANTY OF FITNESS FOR HIGH RISK ACTIVITIES.  USER WILL NOT
+ * KNOWINGLY USE, DISTRIBUTE OR RESELL THE JASPER SOFTWARE OR UNDERLYING
+ * TECHNOLOGY OR PRODUCTS FOR HIGH RISK ACTIVITIES AND WILL ENSURE THAT ITS
+ * CUSTOMERS AND END-USERS OF ITS PRODUCTS ARE PROVIDED WITH A COPY OF THE
+ * NOTICE SPECIFIED IN THIS SECTION.
  * 
  * __END_OF_JASPER_LICENSE__
  */
 
-/*!
- * @file jas_cm.h
- * @brief JasPer Color Management
+/*
+ * Color Management
+ *
+ * $Id: jas_cm.h,v 1.1 2003/05/15 01:30:32 ace Exp $
  */
 
 #ifndef JAS_CM_H
 #define JAS_CM_H
 
-/******************************************************************************\
-*
-\******************************************************************************/
-
-/* The configuration header file should be included first. */
 #include "jas_config.h"
-
-#include "jas_types.h"
 #include "jas_icc.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*!
- * @addtogroup module_cm
- * @{
- */
+typedef int jas_clrspc_t;
 
-/******************************************************************************\
-* Types and Macros.
-\******************************************************************************/
+/* transform operations */
+#define	JAS_CMXFORM_OP_FWD	0
+#define	JAS_CMXFORM_OP_REV	1
+#define	JAS_CMXFORM_OP_PROOF	2
+#define	JAS_CMXFORM_OP_GAMUT	3
 
-/*!
-@brief
-Color space.
-*/
-typedef unsigned jas_clrspc_t;
-
-/*!
-@brief
-Transform operations
-*/
-typedef enum {
-	JAS_CMXFORM_OP_FWD = 0,
-	JAS_CMXFORM_OP_REV = 1,
-	JAS_CMXFORM_OP_PROOF = 2,
-	JAS_CMXFORM_OP_GAMUT = 3,
-} jas_cmxform_op_t;
-
-/*!
-@brief
-Rendering intents.
-*/
-typedef enum {
-	JAS_CMXFORM_INTENT_PER = 0,
-	JAS_CMXFORM_INTENT_RELCLR = 1,
-	JAS_CMXFORM_INTENT_ABSCLR = 2,
-	JAS_CMXFORM_INTENT_SAT = 3,
-} jas_cmxform_intent_t;
-
-/*!
-@brief
-Number of rendering intents.
-*/
+/* rendering intents */
+#define	JAS_CMXFORM_INTENT_PER		0
+#define	JAS_CMXFORM_INTENT_RELCLR	1
+#define	JAS_CMXFORM_INTENT_ABSCLR	2
+#define	JAS_CMXFORM_INTENT_SAT		3
 #define	JAS_CMXFORM_NUMINTENTS		4
 
-/*!
-@brief
-Transform optimization.
-*/
-typedef enum {
-	JAS_CMXFORM_OPTM_SPEED = 0,
-	JAS_CMXFORM_OPTM_SIZE = 1,
-	JAS_CMXFORM_OPTM_ACC = 2,
-} jas_cmxform_optm_t;
+#define	JAS_CMXFORM_OPTM_SPEED	0
+#define JAS_CMXFORM_OPTM_SIZE	1
+#define	JAS_CMXFORM_OPTM_ACC	2
 
-/*!
-@brief
-Create a color space.
-*/
+
 #define	jas_clrspc_create(fam, mbr)	(((fam) << 8) | (mbr))
-
-/*!
-@brief
-Get the family of a color space.
-*/
-
 #define	jas_clrspc_fam(clrspc)	((clrspc) >> 8)
-
-/*!
-@brief
-Get the (family) member of a color space.
-*/
 #define	jas_clrspc_mbr(clrspc)	((clrspc) & 0xff)
-
-/*!
-@brief
-Test if a color space is generic.
-*/
 #define	jas_clrspc_isgeneric(clrspc)	(!jas_clrspc_mbr(clrspc))
-
-/*!
-@brief
-Test if a color space is unknown.
-*/
 #define	jas_clrspc_isunknown(clrspc)	((clrspc) & JAS_CLRSPC_UNKNOWNMASK)
 
 #define	JAS_CLRSPC_UNKNOWNMASK	0x4000
 
-/*!
-@brief Color space families.
-*/
+/* color space families */
 #define	JAS_CLRSPC_FAM_UNKNOWN	0
 #define	JAS_CLRSPC_FAM_XYZ	1
 #define	JAS_CLRSPC_FAM_LAB	2
@@ -177,9 +160,7 @@ Test if a color space is unknown.
 #define	JAS_CLRSPC_FAM_RGB	4
 #define	JAS_CLRSPC_FAM_YCBCR	5
 
-/*!
-@brief Specific color spaces.
-*/
+/* specific color spaces */
 #define	JAS_CLRSPC_UNKNOWN	JAS_CLRSPC_UNKNOWNMASK
 #define	JAS_CLRSPC_CIEXYZ	jas_clrspc_create(JAS_CLRSPC_FAM_XYZ, 1)
 #define	JAS_CLRSPC_CIELAB	jas_clrspc_create(JAS_CLRSPC_FAM_LAB, 1)
@@ -187,9 +168,7 @@ Test if a color space is unknown.
 #define	JAS_CLRSPC_SRGB		jas_clrspc_create(JAS_CLRSPC_FAM_RGB, 1)
 #define	JAS_CLRSPC_SYCBCR	jas_clrspc_create(JAS_CLRSPC_FAM_YCBCR, 1)
 
-/*!
-@brief Generic color spaces.
-*/
+/* generic color spaces */
 #define	JAS_CLRSPC_GENRGB	jas_clrspc_create(JAS_CLRSPC_FAM_RGB, 0)
 #define	JAS_CLRSPC_GENGRAY	jas_clrspc_create(JAS_CLRSPC_FAM_GRAY, 0)
 #define	JAS_CLRSPC_GENYCBCR	jas_clrspc_create(JAS_CLRSPC_FAM_YCBCR, 0)
@@ -204,57 +183,34 @@ Test if a color space is unknown.
 
 #define	JAS_CLRSPC_CHANIND_GRAY_Y	0
 
-/*!
-Real-number type.
-*/
 typedef double jas_cmreal_t;
 
 struct jas_cmpxform_s;
 
-/*!
-@brief
-Component format.
-*/
 typedef struct {
 	long *buf;
-	unsigned prec;
+	int prec;
 	int sgnd;
-	unsigned width;
-	unsigned height;
+	int width;
+	int height;
 } jas_cmcmptfmt_t;
 
-/*!
-@brief
-Pixmap (i.e., multicomponent) format.
-*/
 typedef struct {
-	unsigned numcmpts;
+	int numcmpts;
 	jas_cmcmptfmt_t *cmptfmts;
 } jas_cmpixmap_t;
 
-/*!
-@brief
-Transform operations.
-*/
 typedef struct {
 	void (*destroy)(struct jas_cmpxform_s *pxform);
-	int (*apply)(const struct jas_cmpxform_s *pxform, const jas_cmreal_t *in, jas_cmreal_t *out, unsigned  cnt);
+	int (*apply)(struct jas_cmpxform_s *pxform, jas_cmreal_t *in, jas_cmreal_t *out, int cnt);
 	void (*dump)(struct jas_cmpxform_s *pxform);
 } jas_cmpxformops_t;
 
-/*!
-@brief
-Shaper matrix look-up table (LUT).
-*/
 typedef struct {
 	jas_cmreal_t *data;
-	unsigned size;
+	int size;
 } jas_cmshapmatlut_t;
 
-/*!
-@brief
-Shaper matrix.
-*/
 typedef struct {
 	int mono;
 	int order;
@@ -264,57 +220,39 @@ typedef struct {
 	jas_cmreal_t mat[3][4];
 } jas_cmshapmat_t;
 
-/*!
-@brief
-Shaper look-up table (LUT).
-*/
 typedef struct {
 	int order;
 } jas_cmshaplut_t;
 
-/*!
-@brief
-Color space conversion.
-*/
 typedef struct {
-	unsigned inclrspc;
-	unsigned outclrspc;
+	int inclrspc;
+	int outclrspc;
 } jas_cmclrspcconv_t;
 
-/*!
-@brief
-Transform class.
-*/
+#define	jas_align_t	double
+
 typedef struct jas_cmpxform_s {
-	unsigned refcnt;
-	const jas_cmpxformops_t *ops;
-	unsigned numinchans;
-	unsigned numoutchans;
+	int refcnt;
+	jas_cmpxformops_t *ops;
+	int numinchans;
+	int numoutchans;
 	union {
-		max_align_t dummy;
+		jas_align_t dummy;
 		jas_cmshapmat_t shapmat;
 		jas_cmshaplut_t shaplut;
 		jas_cmclrspcconv_t clrspcconv;
 	} data;
 } jas_cmpxform_t;
 
-/*!
-@brief
-Primitive transform sequence class.
-*/
 typedef struct {
-	unsigned numpxforms;
-	unsigned maxpxforms;
+	int numpxforms;
+	int maxpxforms;
 	jas_cmpxform_t **pxforms;
 } jas_cmpxformseq_t;
 
-/*!
-@brief
-Primitive transform class.
-*/
 typedef struct {
-	unsigned numinchans;
-	unsigned numoutchans;
+	int numinchans;
+	int numoutchans;
 	jas_cmpxformseq_t *pxformseq;
 } jas_cmxform_t;
 
@@ -323,174 +261,52 @@ typedef struct {
 
 #define	JAS_CMPROF_NUMPXFORMSEQS	13
 
-/*!
-Color-management (CM) profile.
-*/
 typedef struct {
-	jas_clrspc_t clrspc;
-	unsigned numchans;
-	unsigned refclrspc;
-	unsigned numrefchans;
+	int clrspc;
+	int numchans;
+	int refclrspc;
+	int numrefchans;
 	jas_iccprof_t *iccprof;
 	jas_cmpxformseq_t *pxformseqs[JAS_CMPROF_NUMPXFORMSEQS];
 } jas_cmprof_t;
 
-/******************************************************************************\
-*
-\******************************************************************************/
+/* Create a profile. */
+
+/* Destroy a profile. */
+void jas_cmprof_destroy(jas_cmprof_t *prof);
 
 #if 0
 typedef int_fast32_t jas_cmattrname_t;
 typedef int_fast32_t jas_cmattrval_t;
 typedef int_fast32_t jas_cmattrtype_t;
 /* Load a profile. */
-int jas_cmprof_load(jas_cmprof_t *prof, jas_stream_t *in, unsigned fmt);
+int jas_cmprof_load(jas_cmprof_t *prof, jas_stream_t *in, int fmt);
 /* Save a profile. */
-int jas_cmprof_save(jas_cmprof_t *prof, jas_stream_t *out, unsigned fmt);
+int jas_cmprof_save(jas_cmprof_t *prof, jas_stream_t *out, int fmt);
 /* Set an attribute of a profile. */
 int jas_cm_prof_setattr(jas_cm_prof_t *prof, jas_cm_attrname_t name, void *val);
 /* Get an attribute of a profile. */
 void *jas_cm_prof_getattr(jas_cm_prof_t *prof, jas_cm_attrname_t name);
 #endif
 
-/******************************************************************************\
-* Color-management (CM) profile class.
-\******************************************************************************/
+jas_cmxform_t *jas_cmxform_create(jas_cmprof_t *inprof, jas_cmprof_t *outprof,
+  jas_cmprof_t *proofprof, int op, int intent, int optimize);
 
-/*!
-@brief
-Create a color-management profile from an ICC profile.
-
-@details
-This function creates a CM profile from an ICC profile.
-
-@returns
-If successful, a pointer to the created CM profile is returned.
-Otherwise, a null pointer is returned.
-*/
-JAS_EXPORT
-jas_cmprof_t *jas_cmprof_createfromiccprof(const jas_iccprof_t *iccprof);
-
-/*!
-@brief
-Create a color-management profile from a color space.
-
-@details
-The function creates a CM profile from a color space.
-
-@returns
-If successful, a pointer to the created CM profile is returned.
-Otherwise, a null pointer is returned.
-*/
-JAS_EXPORT
-jas_cmprof_t *jas_cmprof_createfromclrspc(jas_clrspc_t clrspc);
-
-/*!
-@brief Destroy a color-management profile.
-
-@details
-*/
-JAS_EXPORT
-void jas_cmprof_destroy(jas_cmprof_t *prof);
-
-/*!
-@brief
-Copy a color-management profile.
-
-@details
-This function creates a clone (i.e., copy) of a CM profile.
-
-@returns
-If successful, a pointer to the newly created CM profile is returned.
-Otherwise, a null pointer is returned.
-*/
-JAS_EXPORT
-jas_cmprof_t *jas_cmprof_copy(const jas_cmprof_t *prof);
-
-/*!
-@brief
-Create a ICC profile from a CM profile.
-
-@details
-This function creates an ICC profile from a CM profile.
-
-@returns
-If successful, a pointer to the created ICC profile is returned.
-Otherwise, a null pointer is returned.
-*/
-JAS_EXPORT
-jas_iccprof_t *jas_iccprof_createfromcmprof(const jas_cmprof_t *prof);
-
-/******************************************************************************\
-* Color-Management (CM) Transform.
-\******************************************************************************/
-
-/*!
-@brief
-Create a transform from a CM profile.
-
-@details
-
-@returns
-If successful, a pointer to the created transform is returned.
-Otherwise, a null pointer is returned.
-*/
-JAS_EXPORT
-jas_cmxform_t *jas_cmxform_create(const jas_cmprof_t *inprof,
-  const jas_cmprof_t *outprof, const jas_cmprof_t *proofprof,
-  jas_cmxform_op_t op, jas_cmxform_intent_t intent,
-  jas_cmxform_optm_t optimize);
-
-/*!
-@brief
-Destroy a transform.
-
-@details
-*/
-JAS_EXPORT
 void jas_cmxform_destroy(jas_cmxform_t *xform);
 
-/*!
-@brief
-Apply a transform to data.
-
-@details
-
-@returns
-If successful, zero is returned.
-Otherwise, a nonzero value is returned.
-*/
-JAS_EXPORT
-int jas_cmxform_apply(const jas_cmxform_t *xform, const jas_cmpixmap_t *in,
+/* Apply a transform to data. */
+int jas_cmxform_apply(jas_cmxform_t *xform, jas_cmpixmap_t *in,
   jas_cmpixmap_t *out);
 
-/******************************************************************************\
-* Miscellany.
-\******************************************************************************/
+int jas_cxform_optimize(jas_cmxform_t *xform, int optimize);
 
-/*!
-@brief
-Get the number of channels associated with a particular color space.
+int jas_clrspc_numchans(int clrspc);
+jas_cmprof_t *jas_cmprof_createfromiccprof(jas_iccprof_t *iccprof);
+jas_cmprof_t *jas_cmprof_createfromclrspc(int clrspc);
+jas_iccprof_t *jas_iccprof_createfromcmprof(jas_cmprof_t *prof);
 
-@details
-
-@returns
-*/
-unsigned jas_clrspc_numchans(jas_clrspc_t clrspc);
-
-/*!
-@brief
-Get the color space associated with a color-management profile.
-
-@details
-
-@returns
-*/
 #define	jas_cmprof_clrspc(prof) ((prof)->clrspc)
-
-/*!
- * @}
- */
+jas_cmprof_t *jas_cmprof_copy(jas_cmprof_t *prof);
 
 #ifdef __cplusplus
 }

@@ -7,7 +7,13 @@
 
 namespace Sexy
 {
-
+	static int FixedFloor(int x)
+	{
+		if (x>0)
+			return x&0xFFFF0000;
+		else
+			return (x&0xFFFF0000)-0x10000;
+	}
 class SWHelper
 {
 public:
