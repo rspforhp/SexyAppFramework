@@ -5,8 +5,13 @@ So, some stuff may appear "unstable".
 We have also made the official step in making this repository public.  This way the entire face of github can improve it and make it better.  It is no longer proprietary.
 As a side note: email rspforhp if you want push access. We would also rather have your contributions pushed to this repository instead of branching it out, this way it keeps to the popcap coding philosophy.  
 
-We are currently looking for community members to help improve this library and make it a lot better.  As this is a Windows-based static library, we are primarily keeping the focus
-on later versions of Windows.  Until we (and you) can figure out cross-platform, feel free to add on to this library.  
+We are currently looking for community members to help improve this library and make it a lot better.  As this is a Windows-based DLL, we are primarily keeping the focus
+on later versions of Windows, primarily Windows 10 and up.  Until we (and you) can figure out cross-platform, feel free to add on to this library.  We may do this sooner than expected...
 
-All otherSexyApp branches require configuration changes and "one-way upgrades" to the project properties and they do not conform to the most recent versions.  Please use this repo if you want to develop games under windows 11.  
+All otherSexyApp branches require configuration changes and "one-way upgrades" to the project properties and they do not conform to the most recent versions.  
+However, if you wish to build under a specific target version, do so wisely and match up the platform toolsets...
+
+Please use this repo if you want to develop games under windows 11.  
 we are also currently fixing a LOT of things with this library to add on OpenGL and TodLib to sync with later builds with this library.  
+
+This library will now be built as a DLL instead of a LIB file...
