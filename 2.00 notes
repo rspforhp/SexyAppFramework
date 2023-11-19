@@ -1,0 +1,6 @@
+**THIS APPLIES TO THIS UPCOMING RELEASE ONLY**
+
+** A MAJOR ANNOUNCEMENT:**
+This new DLL originally was 1.40, as a LIB,  but there is actually a 1.70 available but has NOT been leaked to github yet.  So what we are doing is making this v2.00 for this reason...
+For the very first time you will no longer need to include this library via the linker settings inside your executable project...HOWEVER:
+You will still need to specify the headers to be included in your C++ include directories...so this way the WinMain entry point is minimized to the "construct only" philosophy, instead of busting ass in 
