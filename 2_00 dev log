@@ -1,0 +1,23 @@
+**THIS IS A DEV LOG FOR ALL WHO DECIDE TO EDIT THIS LIBRARY.  THIS WILL BE ADDED ON BY THE HEAD DEVELOPERS FOR INFORMATIONAL PURPOSES ONLY...**
+
+Current fixes from Yalek and rspforhp:
+
+Hopefully make some sense into this library by removing the LIB support.  We are no longer having this as a static library as there dynamic allocations taking place here...
+the DLL standard will be used, so this way you *do not* have to include this alongside your project.  
+
+Update ALL jpeg/j2k stuff to the latest standards and update ALL Image related functionality. 
+
+Add TODLib and OpenGL/vulcan support instead of using the DirectX/D3D related nonsense.  DirectX and D3D related files will be renamed to the "Graphics" prefix... 
+For example:
+The name of the D3DInterface, D3Dtester, will instead be named "GraphicsInterface", "GraphicsTester" with the respective h and cpp files...
+
+Update all headers to use "#pragma once" instead of respective #ifndef preprocessors...
+
+
+
+
+
+
+
+
+
